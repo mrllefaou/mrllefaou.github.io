@@ -1,0 +1,450 @@
+@charset "iso-8859-1";
+	
+body {
+    font: 100% verdana, arial, sans-serif;
+	background-image: url("img/images2.jpg");
+    margin: 50px;
+	padding-left: 250px;
+	padding-right: 260px;
+}
+
+
+h1
+{
+    color: white;
+	text-align: center;
+	text-shadow: 2px 2px 2px black, -2px -2px 2px white;
+}
+
+h2
+{
+    color: white;
+	font-family: Georgia;
+	font-style: italic;
+	text-align: center;
+	text-shadow: 2px 2px 2px black;
+}
+
+titre1
+{
+	background-color: white;
+    color: rgb(45,159,234);
+	font-size: 20px;
+	font-family: Georgia;
+    border-radius: 50% 20% / 10% 40%;
+	border-top: 2px solid rgb(34,159,234);
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+	margin: 75px;
+}
+
+p
+{
+	background-color: white;
+	color: black;
+	width: 90%;
+	font-size: 16px;
+	font-family: Georgia;
+	border-top: 2px solid rgb(34,159,234);
+	border-left: 10px solid rgb(34,159,234);
+    border-radius: 5px;
+	text-align: justify;
+	padding: 10px;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	margin-right: 50px;
+	margin-left: 50px;
+}
+
+nav
+{
+	background-color: white;
+    color: rgb(45,159,234);
+	font-size: 30px;
+	font-family: Georgia;
+	border-radius: 10% / 50%;
+	border: 2px solid rgb(34,159,234);
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	padding-right: 100px;
+	padding-left: 220px;
+	margin: 20px;
+}
+
+space{
+	margin-left: 30px;
+}
+
+#puce {
+	background-color: white;
+	color: black;
+	width: 90%;
+	font-size: 16px;
+	font-family: Georgia;
+	border-top: 2px solid rgb(34,159,234);
+	border-left: 10px solid rgb(34,159,234);
+    border-radius: 5px;
+	list-style: circle;
+	text-align: left ;
+	padding: 10px;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	margin-right: 50px;
+	margin-left: 50px;
+}
+
+#puce li {
+	margin: 0;
+	padding: 10px;
+	margin-left: 30px;
+	text-align: left;
+	list-style-type: circle;
+	}
+
+#puce2 {
+	background-color: white;
+	color: black;
+	width: 90%;
+	font-size: 14px;
+	font-family: Georgia;
+	list-style: circle;
+	text-align: left ;
+	padding: 10px;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	margin-right: 50px;
+	margin-left: 50px;
+}
+
+#puce2 li {
+	margin: 0;
+	padding: 10px;
+	margin-left: 30px;
+	text-align: left;
+	list-style-type: circle;
+	}	
+
+#tabnav {
+	position: relative;
+	list-style: none ;
+	text-align: center ;
+	padding-top: 0px;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+
+#tabnav li {
+	margin: 0;
+	padding: 0;
+	display: inline;
+	text-align:center;
+	list-style-type: none;
+	}
+
+#tabnav a:link, #tabnav a:visited {
+	display:inline-block;
+	float: left;
+	text-align: center ;
+	font-size: 16px;
+	line-height: 10px;
+	font-weight: bold;
+	margin: 0px 10px 4px 10px;
+	text-decoration: none;
+	text-shadow: 2px 2px 2px rgb(45,159,234);
+	color: black;
+	}
+
+#tabnav li.active a:link, #tabnav li.active a:visited, #tabnav a:hover {
+	display:inline-block;
+	border-bottom: 4px solid black;
+	padding-bottom: 2px;
+	background: rgb(45,159,234);
+	color: black;
+	}
+
+#tabnav a:hover {
+	display:inline-block;
+	color: black;
+	}
+
+footer{
+	border-top: 1px solid black;
+	font-family: Courier New;
+	text-align: center;
+	font-size: 12px;
+}
+
+/* Sur les écrans, quand la largeur de la fenêtre fait au maximum 1280px */
+@media screen and (max-width: 1280px)
+{
+		
+body {
+    font: 100% verdana, arial, sans-serif;
+	background-image: url("img/images2.jpg");
+    margin: 50px;
+	padding-left: 150px;
+	padding-right: 160px;
+}
+
+
+h1
+{
+    color: white;
+	text-align: center;
+	text-shadow: 2px 2px 2px black, -2px -2px 2px white;
+}
+
+h2
+{
+    color: white;
+	font-family: Georgia;
+	font-style: italic;
+	text-align: center;
+	text-shadow: 2px 2px 2px black;
+}
+
+titre1
+{
+	background-color: white;
+    color: rgb(45,159,234);
+	font-size: 20px;
+	font-family: Georgia;
+    border-radius: 50% 20% / 10% 40%;
+	border-top: 2px solid rgb(34,159,234);
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+	margin: 75px;
+}
+
+p
+{
+	background-color: white;
+	color: black;
+	width: 90%;
+	font-size: 14px;
+	font-family: Georgia;
+	border-top: 2px solid rgb(34,159,234);
+	border-left: 10px solid rgb(34,159,234);
+    border-radius: 5px;
+	text-align: justify;
+	padding: 10px;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	margin-right: 50px;
+	margin-left: 50px;
+}
+
+nav
+{
+	background-color: white;
+    color: rgb(45,159,234);
+	font-size: 20px;
+	font-family: Georgia;
+	border-radius: 10% / 50%;
+	border: 2px solid rgb(34,159,234);
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	padding-right: 50px;
+	padding-left: 50px;
+	margin: 10px;
+}
+
+#tabnav {
+	position: relative;
+	list-style: none ;
+	text-align: center ;
+	padding-top: 0px;
+	padding-bottom: 5px;
+	margin-bottom: 15px;
+}
+
+#tabnav li {
+	margin: 0;
+	padding: 0;
+	display: inline;
+	text-align:center;
+	list-style-type: none;
+	}
+
+#tabnav a:link, #tabnav a:visited {
+	display:inline-block;
+	float: left;
+	text-align: center;
+	font-size: 14px;
+	line-height: 10px;
+	font-weight: bold;
+	margin: 5px 10px 4px 10px;
+	text-decoration: none;
+	text-shadow: 2px 2px 2px rgb(45,159,234);
+	color: black;
+	}
+
+#tabnav li.active a:link, #tabnav li.active a:visited, #tabnav a:hover {
+	display:inline-block;
+	border-bottom: 4px solid black;
+	padding-bottom: 2px;
+	background: rgb(45,159,234);
+	color: black;
+	}
+
+#tabnav a:hover {
+	display:inline-block;
+	color: black;
+	}
+
+footer{
+	border-top: 1px solid black;
+	font-family: Courier New;
+	text-align: center;
+	font-size: 12px;
+}
+}
+
+/* Sur tous types d'écran, quand la largeur de la fenêtre est 1024px */
+@media all and (max-width: 1024px)
+{
+	body {
+    font: 100% verdana, arial, sans-serif;
+	background-image: url("img/images2.jpg");
+    margin: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+
+h1
+{
+    color: white;
+	text-align: center;
+	text-shadow: 2px 2px 2px black, -2px -2px 2px white;
+}
+
+h2
+{
+    color: white;
+	font-family: Georgia;
+	font-style: italic;
+	text-align: center;
+	text-shadow: 2px 2px 2px black;
+}
+
+titre1
+{
+	background-color: white;
+    color: rgb(45,159,234);
+	font-size: 20px;
+	font-family: Georgia;
+    border-radius: 50% 20% / 10% 40%;
+	border-top: 2px solid rgb(34,159,234);
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+	margin: 75px;
+}
+
+p
+{
+	background-color: white;
+	color: black;
+	width: 90%;
+	font-size: 14px;
+	font-family: Georgia;
+	border-top: 2px solid rgb(34,159,234);
+	border-left: 10px solid rgb(34,159,234);
+    border-radius: 5px;
+	text-align: justify;
+	padding: 10px;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	margin-right: 50px;
+	margin-left: 50px;
+}
+
+nav
+{
+	background-color: white;
+    color: rgb(45,159,234);
+	font-size: 20px;
+	font-family: Georgia;
+	border-radius: 10% / 50%;
+	border: 2px solid rgb(34,159,234);
+	text-align: center;
+	padding-top: 0px;
+	padding-bottom: 15px;
+	padding-right: 50px;
+	padding-left: 50px;
+	margin: 15px;
+}
+
+#tabnav {
+	position: relative;
+	list-style: none ;
+	text-align: center ;
+	display: block;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+#tabnav li {
+	margin: 0;
+	padding: 0;
+	text-align:center;
+	list-style-type: none;
+	}
+
+#tabnav a:link, #tabnav a:visited {
+	display:inline-block;
+	float: left;
+	text-align: center;
+	font-size: 12px;
+	line-height: 10px;
+	font-weight: bold;
+	margin: 5px 20px 20px 20px;
+	text-decoration: none;
+	text-shadow: 2px 2px 2px rgb(45,159,234);
+	color: black;
+	}
+
+#tabnav li.active a:link, #tabnav li.active a:visited, #tabnav a:hover {
+	display:inline-block;
+	border-bottom: 4px solid black;
+	padding-bottom: 2px;
+	background: rgb(45,159,234);
+	color: black;
+	}
+
+#tabnav a:hover {
+	display:inline-block;
+	color: black;
+	}
+
+footer{
+	border-top: 1px solid black;
+	font-family: Courier New;
+	text-align: center;
+	font-size: 12px;
+}
+	
+}
+/* Sur les téléviseurs */
+@media tv
+{
+
+
+}
+/* Sur tous types d'écrans orientés verticalement */
+@media all and (orientation: portrait)
+{
+	
+}

@@ -1,0 +1,248 @@
+<!DOCTYPE html> 
+<html>
+<html lang="fr">
+
+	<head>
+ 	<meta charset="utf-8">
+		<title>Mon super site web</title>
+
+		<!-- mon icon -->
+		<link rel="shortcut icon" href="img/favicon.ico">
+
+		<!-- mon template.css -->
+		<link rel="stylesheet" href="mon_css.css" media="screen">
+
+<body>
+    <header><h1>A la découverte du HTML <img src="img/gif4.gif"></h1>
+    <h2>Comment mettre du contenu sur une page web</h2></header>
+  <nav>
+    <ul id="tabnav">
+        <li><a href="index.html" title="Aller à l'acceuil">Accueil</a></li>
+						<li><a href="nav.html" title="Naviguer sur le web">Naviguer sur le web</a></li>
+					<li><a href="html.html" title="HTML">A la découverte du HTML et du CSS</a></li>
+				</ul>
+		<ul id="tabnav">	
+			<li><a href="mapage.html" title="Ma page web" target="_blank">Ma page web</a></li>
+			<li><a href="droit.html" title="Licences et droit">Licences et droit d'auteur</a></li>
+			<li><a href="pour en savoir plus.html" title="Pour en savoir plus">Pour en savoir +</a></li>
+    </ul>
+    </nav>
+	<article>
+	
+	<h2>A la découverte du HTML</h2>
+	<p>
+	Le contenu d'une page web est intégré dans un fichier d'extention .html, ce type de fichier est écrit par un webmaster ou généré par un serveur (dans le cadre du web dynamique) qui le renvoie au client. Le navigateur web lit ce fichier, cette exécution permet au client de voir apparaître le contenu d'une page web sur son navigateur.
+	<br/><br/>
+	Voici à quoi ressemble le squelette "très simplifié" d'un script en HTML :
+	
+	</br></br>
+<img src="img/img14.png">
+</br></br>
+
+	Pour construire une page web en HTML, il suffit d'ouvrir un éditeur de texte et d'y écrire le code sous la forme d'un fichier ayant comme extention .html. </br>
+	
+	Le HTML est langage dit balisé. Pour écrire du contenu, il faut l'écrire entre balises. Chaque balise opère une fonction sur le contenu.
+	
+	Un exemple de balise est la balise &lt;h1&gt; &lt;/h1&gt; permettra de mettre en grand le texte.
+	
+	&lt;b&gt; &lt;/b&gt; en gras.</br></br>
+	
+	Exemple :</br>
+	
+		</br></br>
+<img src="img/img15.png">
+</br></br>
+
+On observe une "correspondance" entre les balises et ce qui est affiché. Pour mieux l'observer, l'image ci-dessous met en couleur la balise en lien avec ce qu'elle affiche.
+	
+			</br></br>
+<img src="img/img16.png">
+</br></br>
+
+
+	</p>
+	
+<titre1>Manipulation 1 : Changer le titre de la page</titre1>
+<p>
+<b>1. Aller dans le dossier "Mon super site" que vous avez copier-coller dans votre dossier personnel. Faîte clique-droit sur le fichier mapage et cliquer sur Edit with notepad++.</b>
+			</br></br>
+<img src="img/img17.png">
+</br></br>
+Notepad ++ est un éditeur de texte qui colorie les balises automatiquement. Il s'adapte aussi à plusieurs langages de programmation.
+<br/>
+<b>Vous devriez voir la fenêtre apparaître identique à l'image ci-dessous :</b>
+
+			</br></br>
+<img src="img/img18.png">
+</br></br>
+
+<b>2. A la ligne 8 du fichier. 
+
+		</br></br>
+<img src="img/img39.png">
+</br></br>
+
+Modifier la ligne en indiquant votre nom et votre prénom. Sauvegarder le fichier en cliquant sur la disquette bleu en haut à gauche (<img src="img/img20.png">).</b>
+</br></br>
+<b>3. Retourner dans le répertoire "Mon super site" et ouvrir le fichier "mapage" avec un navigateur web.</b>
+</p>
+
+<titre1>Manipulation 2 : Insérer du texte</titre1>
+<p>
+<b> Retourner sur notepad++ afin de continuer à éditer le fichier mapage.html. Nous allons insérer la suite du code en faisant un saut de ligne pour chaque nouveauté :<br/><br/>
+1. Utiliser les balises : &lt;h1&gt; &lt;/h1&gt; pour écrire en titre : Ma page web en SNT. (en ligne 9) <br/><br/>
+2. Utiliser les balises : &lt;p&gt; &lt;/p&gt; pour un texte personalisé. (en ligne 10) <br/><br/>
+3. Sauvegarder le fichier, retourner sur votre navigateur avec le fichier mapage chargé. Pour rafraichir votre page, appuyer sur F5.</b>
+</p>
+
+<titre1>Manipulation 3 : Insérer un lien vers l'accueil du site</titre1>
+<p>
+Chaque page du site se situe dans le répertoire "Mon super site" :
+			</br></br>
+<img src="img/img21.png">
+</br></br>
+Le lien hypertexte a pour but de nous rediriger vers l'une des pages. Pour créer un lien hypertexte, nous aurons besoin de la balise suivante :</br>
+&lt;a href="<i>chemin du fichier HTML</i>"&gt;Texte apparant sur le site et cliquable&lt;/a&gt; .</br>
+Le chemin relatif pour aller à la page acceuil est index.html, car le fichier mapage.html et index.html se situe dans le même répertoire.</br></br>
+<b> Retourner sur notepad++ afin de continuer à éditer le fichier mapage.html et à la suite : </br></br>
+1. Créer un lien hypertexte permettant de se rediriger vers la page acceuil. Grâce à la ligne de code : &lt;a href="<i>index.html</i>"&gt;Acceuil&lt;/a&gt;</br></br>
+2. Créer un lien hypertexte permettant de se rediriger vers la page naviguer sur le web. Le chemin relatif du fichier est : nav.html</br></br>
+3. Sauvegarder le fichier, retourner sur votre navigateur avec le fichier mapage chargé. Pour rafraichir votre page, appuyer sur F5. </b>
+</p>
+
+<titre1>Manipulation 4 : Insérer un lien vers un autre site web</titre1>
+<p>
+Pour créer un lien hypertexte vers un autre site web, il suffit de remplacer dans &lt;a href="<i>chemin du fichier HTML</i>"&gt;Texte apparant sur le site&lt;/a&gt;, le chemin du fichier par l'adresse URL.</br>
+Par exemple pour créer un lien hypertexte allant vers google, on tapera dans notre script HTML :</br></br>   &lt;a href="https://www.google.fr"&gt;Google&lt;/a&gt; donnera le résultat suivant sur votre page : <a href="https://www.google.fr">Google</a>.</br></br>
+<b>Retourner sur notepad++ afin de continuer à éditer le fichier mapage.html et à la suite : </br></br>
+1. Créer 3 liens hypertextes redirigeant vers des sites : Le site du Télégramme, le site de la CNIL, Youtube.</br></br>
+2. Sauvegarder le fichier, retourner sur votre navigateur avec le fichier mapage chargé. Pour rafraichir votre page, appuyer sur F5. </b>
+</p>
+
+<titre1>Manipulation 5 : Insérer une image</titre1>
+<p>
+&lt;img src="<i>chemin du fichier image</i>"&gt;; est la balise permettant d'afficher une image. </br>
+Par exemple, le gif en haut de cette page se situe par rapport au répertoire courant dans le répertoire img avec l'image gif4.gif. Le chemin relatif par rapport au fichier mapage.html est img/gif4.gif.</br>
+En tapant &lt;img src="img/gif4.gif"&gt; dans notre fichier html; on obtient ceci : <img src="img/gif4.gif"></br></br>
+<b>Retourner sur notepad++ afin de continuer à éditer le fichier mapage.html et à la suite : </br></br>
+1. Insérer le gif ci-dessus dans votre page web.</br></br>
+2. Insérer l'image qui a pour ressource : https://ih0.redbubble.net/image.468377772.5294/flat,550x550,075,f.u1.jpg</br></br>
+3. Sauvegarder le fichier, retourner sur votre navigateur avec le fichier mapage chargé. Pour rafraichir votre page, appuyer sur F5. </b>
+</p>
+
+<titre1>Manipulation 6 : Créer un lien hypertexte sur l'image</titre1>
+<p>
+Afin qu'une image possède un lien hypertexte, il va falloir utiliser les deux balises. D'abord celle du lien l'hypertexte : &lt;a href="www.google.fr"&gt;Google&lt;/a&gt;. Au lieu d'écrire le texte Google entre les balises, on peut insérer une balise image.</br>
+Par exemple &lt;a href="https://www.google.fr"&gt;&lt;img src="https://cdn-icons-png.flaticon.com/512/5968/5968863.png"&gt&lt;/a&gt; donnera le résultat suivant : </br>
+<a href="https://www.google.fr"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968863.png"></a></br></br>
+<b>Retourner sur notepad++ afin de continuer à éditer le fichier mapage.html et à la suite : </br></br>
+1. Créer une image doter d'un lien hypertexte (différente de celle présentée ci-dessus)</br></br>
+2. Sauvegarder le fichier, retourner sur votre navigateur avec le fichier mapage chargé. Pour rafraichir votre page, appuyer sur F5. </b> </br>
+</p>
+
+<titre1>Manipulation 7 : Intégrer une video Youtube à la page</titre1>
+<p>
+<b>1. Aller sur youtube et choisir sur une video.</br></br>
+2. Sur la page de la video, cliquer sur partager </br></br>
+</br></br>
+<img src="img/img22.png">
+</br></br>
+3. Puis, cliquer sur intégrer </br></br>
+</br></br>
+<img src="img/img23.PNG">
+</br></br>
+4. Copier-coller le script générer par Youtube dans votre fichier mapage.html.</br></br>
+</br></br>
+<img src="img/img24.PNG">
+</br></br>
+5. Sauvegarder le fichier, retourner sur votre navigateur avec le fichier mapage chargé. Pour rafraichir votre page, appuyer sur F5. </b>
+</p>
+	<h2>A la découverte du CSS</h2>
+	<p>Après ces 7 manipulations, vous avez obtenu un résultat similaire à celui présent ci-dessous : </br>
+	</br></br>
+<img src="img/img25.png">
+</br></br>
+Le CSS est un langage web qui se rajoute dans un fichier HTML permettant d'éditer le webdisign d'une page web. Ses paramètres se trouvent après la balise méta :  &lt;link rel="stylesheet" href="css_eleve.css" media="screen"&gt;
+Elle indique où se situe le fichier mon_css.css qui contient les paramètres graphiques de la page. </br></br>
+
+Lancer dans notepad++ le fichier css_eleve.css. Nous allons modifier quelques lignes de codes.</br></br>
+
+	</br></br>
+<img src="img/img40.png">
+</br></br>
+
+A l'ouverture vous devez obtenir ceci :
+
+	</br></br>
+<img src="img/img30.png">
+</br></br>
+
+</b>
+
+
+	</p>
+
+<titre1>Manipulation 8 : Mettre le texte de la balise &lt;h1&gt; &lt;/h1&gt; en rouge et de la &lt;p&gt; &lt;/p&gt; en bleu</titre1>
+<p><b>1. A la ligne 15 du fichier css, il y a un bloc consacré au style de la balise &lt;h1&gt;. A cette ligne, on a <i>color: green;</i>.</br>
+Remplacer <i>green</i> par <i> red</i>.</br></br>
+2. Copier-coller à la fin du ficher :</br></br></br></b>
+
+p</br>
+{</br>
+    color: blue;</br>
+}</br></br>
+<b>3. Sauvegarder le fichier, retourner sur votre navigateur avec le fichier mapage chargé. Pour rafraichir votre page, appuyer sur F5. </br></b>
+</p>
+
+<titre1>Manipulation 9 : Changer la couleur du background</titre1>
+<p> 
+
+La partie body du fichier css : </br></br></br>
+
+body {</br>
+    font: 100% verdana, arial, sans-serif;</br>
+    background-color: rgb(177,247,174);</br>
+    margin: 50px;</br>
+	padding-left: 250px;</br>
+	padding-right: 250px;</br>
+}</br></br>
+
+permet de modifier le corps de la page. La ligne <i>background-color: rgb(177,247,174);</i> définie la couleur de l'arrière plan de la page. Afin de définir une couleur, rgb pour red, green, blue prend trois paramètres. Ces paramètres sont une série de trois nombres compris entre 0 et 255. La combinaison de ces trois nombres permet d'obtenir une couleur.</br>
+Pour obtenir quelles valeurs correspond à telle couleur, vous pouvez ouvrir le logiciel Paint et cliquer sur modifier les couleurs. Selectionner votre couleur et noter la valeur du rouge, du vert et du bleu.
+
+
+	</br></br>
+<img src="img/img31.png">
+</br></br>
+
+Ici la couleur orcre a pour valeur rouge : 142, vert : 149, bleu 17. En modifiant la ligne <i>background-color: rgb(177,247,174);</i> par <i>background-color: rgb(142,149,17);</i>. La couleur de l'arrière plan de la page sera orcre.
+</br></br>
+<b>1. Choisissez une couleur dans les tons bleu et changer l'arrière plan du site par cette couleur.</br></br>
+2. Sauvegarder le fichier, retourner sur votre navigateur avec le fichier mapage chargé. Pour rafraichir votre page, appuyer sur F5. </b>
+</p>
+
+<titre1>Manipulation 10 : Mettre une image en background</titre1>
+<p>
+
+Pour mettre une image en arrière plan il faut remplacer <i>background-color: rgb(177,247,174);</i> par <i>background-image: url("<i>url de l'image</i>");</i>.</br></br>
+<b>1. Modifier l'arrière plan de votre page web par l'image ayant comme adresse URL : https://wallpapercave.com/wp/YpCO1pN.jpg </br></br>
+2. Sauvegarder le fichier, retourner sur votre navigateur avec le fichier mapage chargé. Pour rafraichir votre page, appuyer sur F5. </b>
+</p>
+
+		<h2>Modifions le site du Likès à l'aide de l'inspecteur</h2>
+	
+	<p><b>1. Lire la video :</br></br></p>
+	<center><iframe width="560" height="315" src="https://www.youtube.com/embed/ZBITsl3wVgI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</center>.
+	<p><a href="https://www.youtube.com/watch?v=ZBITsl3wVgI">Cliquer ici si la video ne s'affiche pas.</a></br></br>
+2. Tester l'inspecteur sur le site du Likès pour le modifier.
+</p>	
+
+
+
+	<section>
+	<center><a href="nav.html" title="Naviguer sur le web"><img alt="Survol" onmouseout="this.src='img/bac2.png';" onmouseover="this.src='img/bac.png';" src="img/bac2.png" /><space></space></a><a href="droit.html" title="Licences et droit"><img alt="Survol" onmouseout="this.src='img/suite2.png';" onmouseover="this.src='img/suite.png';" src="img/suite2.png" /></a><center>
+	</article>
+    <footer> &copy; Copyright Super Site Web 2019</footer>
+</body>
+</html>

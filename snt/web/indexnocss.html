@@ -1,0 +1,185 @@
+<!DOCTYPE html> 
+<html>
+<html lang="fr">
+
+	<head>
+ 	<meta charset="utf-8">
+		<title>Mon super site web</title>
+
+		<!-- mon icon -->
+		<link rel="shortcut icon" href="img/favicon.ico">
+
+		
+
+<body>
+    <header><h1>Bienvenue sur mon Super Site Web <img src="img/gif.gif"></h1>
+    <h2>Apprenons en un peu plus sur le web en cours de SNT ! </h2></header>
+ <nav>
+    <ul id="tabnav">
+        <li><a href="index.html" title="Aller à l'acceuil">Accueil</a></li>
+						<li><a href="nav.html" title="Naviguer sur le web">Naviguer sur le web</a></li>
+				<li><a href="html.html" title="HTML">A la découverte du HTML et du CSS</a></li>
+				</ul>
+		<ul id="tabnav">	
+			<li><a href="mapage.html" title="Ma page web" target="_blank">Ma page web</a></li>
+			<li><a href="droit.html" title="Licences et droit">Licences et droit d'auteur</a></li>
+			<li><a href="pour en savoir plus.html" title="Pour en savoir plus">Pour en savoir +</a></li>
+    </ul>
+    </nav>
+	<article>
+	
+	<p>Avant de commencer, une petite vidéo qui explique la différence entre le web et internet :</p>
+	<center><iframe width="560" height="315" src="https://www.youtube.com/embed/TeiUyeXjzJ4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+		<a href="https://www.youtube.com/embed/TeiUyeXjzJ4">Cliquer ici si la video ne s'affiche pas.</a>
+	
+	<h2>Introduction : Normalisation de la présentation de l’information sur le web</h2>
+	
+	<titre1>Repères historiques</titre1>
+	<ul id=puce>
+	<li>1965 : invention et programmation du concept <span style="font-family: Georgia;" title="Définition disponible en fin de page."><span style="font-size: 12pt; color: red;">d’hypertexte</span></span> par Ted Nelson;</li>
+	<li>1989 : naissance du web au <span style="font-family: Georgia;" title="Conseil Européen pour la Recherche Nucléaire, c'est l'un des plus grand laboratoire de recherche en Physique au monde. Il se situe près de Genève en Suisse."><span style="font-size: 12pt; color: red;">CERN</span></span> par Tim Berners Lee;</li>
+	<li>1993 : mise dans le domaine public, disponibilité du premier navigateur Mosaic; <a href="tonphp.php"  onclick="open('https://media.wired.com/photos/59344b215321273fc0f91cd1/master/pass/mos-10.jpg', 'Popup', 'scrollbars=1,resizable=1,height=560,width=770'); return false;" >(Capture du navigateur)</a></li>
+	<li>1995 : mise à disposition de technologies pour le développement de site Web interactif (langage JavaScript) et dynamique (langage PHP); <i>Ce sont deux langages que nous n'étudirons pas.</i></li>
+	<li>2001 : standardisation des pages grâce au DOM (Document Object Model); <i>Une manière pour le navigateur de lire et d'afficher les informations d'une page web.</i></li>
+	<li>2010 : mise à disposition de technologies pour le développement d’applications sur mobiles.</li>
+	</ul>
+	
+
+	<titre1>Document 1 : Les langages web</titre1>
+	<p> 	
+	Sur le Web, les textes, photos, vidéos, graphiques, sons, programmes sont exprimés et
+assemblés dans divers formats normalisés par un consortium mondial (W3C : World Wide
+Web Consortium), ce qui permet une circulation standardisée de ces informations. </br></br>
+Les pages Web sont écrites dans le langage HTML
+(HypertextMarkupLanguage). Leur style graphique est défini dans le langage CSS
+(Cascading Style Sheets).</br></br>
+Actuellement, vous êtes sur une page web écrite en langage HTML et CSS. Elle est lisible en utilisant un navigateur web. 
+</br></br>
+Vous pouvez observer, le code source HTML de cette page web en faisant un clique droit sur la page et en cliquant sur Code source de la page.
+</br></br>
+<img src="img/img1.png">
+</br></br>
+Afin de voir l'action du CSS sur une page web, vous pouvez <a href="indexnocss.html"  onclick="open('indexnocss.html', 'Popup', 'scrollbars=1,resizable=1,height=560,width=770'); return false;" >cliquer ici</a>. 
+La page que vous venez d'ouvrir est la même la page d'acceuil du site mais sans CSS.</br></br>
+
+Voici à quoi ressemble du CSS : (vous pouvez cliquer sur l'image pour ouvrir le fichier contenant le code source CSS du site web)
+
+</br></br>
+<a href="mon_css.css" onclick="open('mon_css.css', 'Popup', 'scrollbars=1,resizable=1,height=560,width=770'); return false;" title="Code source du CSS du site"><img src="img/img2.png"></a>
+</br></br>
+
+</p>
+
+<titre1>Document 2 : URL et protocole HTTP/HTTPS</titre1>
+	<p> 
+
+Les pages web ont une adresse unique, nommée URL (Uniform Ressource Locator). Cette adresse URL, nous est communiquée par la barre d'adresse de notre navigateur web.
+</br></br>
+<img src="img/img3.png">
+</br></br>
+
+
+Sur internet, les pages web sont accessibles en utilisant le protocole HTTP (Hypertext Transfer Protocol) ou sa
+version sécurisée HTTPS qui crypte les échanges. 
+</br>
+</br>
+HTTPS permet au visiteur de vérifier l'identité du site web auquel il accède, grâce à un certificat d'authentification émis par une autorité tierce, 
+réputée fiable (et faisant généralement partie de la liste blanche des navigateurs internet). 
+Il garantit théoriquement la confidentialité et l'intégrité des données envoyées par l'utilisateur. 
+</br>
+</br>
+L’affichage des pages est réalisé chez l’utilisateur par un programme appelé navigateur web. Parmi les navigateurs, vous devez sûrement connaitre des navigateurs comme Google Chrome, Safari, Opéra, Firefox ou encore Internet Explorer.
+</br>
+</br>
+
+Ces deux protocoles de communication comminiquent avec des serveurs web, qui eux hébergent des pages web sur un réseau. Le plus courament sur le réseau internet.</br>
+
+</br>
+</br>
+
+Il existe différents protocoles de communication. mailto:prof@likes.org, avec un protocole mailto qui permet de se connecter au serveur mail avec comme URL mailto:prof@likes.org.
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/ avec un protocole ftp (serveur de gestion de fichier) qui permet de se connecter au serveur ftp avec comme URL ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/. 
+</br></br> 
+
+Par ailleurs, on peut observer que sur notre barre d'adresse, le protocole de l'URL n'est pas un protocole HTTP ou HTTPS. C'est un protocole file:// qui appelle simplement les fichiers disponible sur notre ordinateur. 
+En effet, cette page web n'est pas hébergée sur le web mais localement sur votre ordinateur. On n'a donc pas besoin d'utliser sur un protocole HTTP ou HTTPS pour y accéder.
+
+</br> 
+
+Toute adresse URL se décompose comme ceci :
+
+</br></br>
+<img src="img/img6.png">
+</br></br>
+
+</p>
+
+<titre1>Document 3 : Lien hypertexte</titre1>
+	<p> 
+
+Un hypertexte est un texte augmenté contenant comme information une adresse URL. On l'utilise notament pour créer des liens entre des pages web. 
+
+</br> </br> 
+
+<b> Exemple 1 :</b>
+
+</br>
+
+<a href="http://www.likes.org/">Cliquer ici</a> est un lien hypertexte qui va vous rediriger vers la page web du site Le Likès d'adresse URL http://www.likes.org/.
+
+</br></br>
+
+<b> Exemple 2 :</b>
+
+</br> 
+
+Un lien hypertexte avec un protocole mailto pour communiquer avec l'adresse mail d'adresse URL mailto:prof@likes.org; <a href="mailto:prof@likes.org">Contacter : prof@likes.org</a>.
+Comme le navigateur web ne s'occupe pas des protocoles mailto, c'est outlook qui s'ouvre pour communiquer avec le serveur mail.
+
+ </br></br></br>
+ 
+
+	Les liens hypextextes sont utlisés pour créer des liens entre des pages web. Par exemple sur ce site on peut distinguer un menu; comportant 7 liens hypertextes. Répétés sur chacune des pages afin de naviguer entres-elles. A l'exeption d'une page web.
+
+</br></br>
+<img src="img/img7.png">
+</br></br>
+
+On peut représenter les liens hypertextes entre les pages par un graphe orienté. La flèche symbolise le lien qui indique que l'on peut aller de telle page vers telle page. 
+
+</br></br>
+<img src="img/img8.png">
+</br></br>
+
+</p>
+	
+	<titre1>Document 4 : Interaction client/serveur</titre1>
+	<p> Le Web s’appuie sur le dialogue entre clients et serveurs. L’interaction est à l’initiative des
+clients qui envoient des requêtes HTTP ou HTTPS aux serveurs. 
+</br></br>
+<img src="img/img5.png">
+</br></br>
+
+De manière simplifié, le client est l'utilisateur qui souhaite voir une page web. 
+Le contenu de cette page web est stocké sur ce que l'on appelle un serveur web. Le client envoi une requête (demande) HTTP ou HTTPS pour voir la page s'afficher sur son navigateur web.
+
+
+
+<h2>Répondre aux questions suivantes :</h2>
+
+<p><b>
+1) Décomposer l'URL du site : http://www.likes.org/Espace-Numerique </br></br>
+2) Décomposer l'URL de la video : https://www.youtube.com/watch?v=TeiUyeXjzJ4 </br></br>
+3) Quel est le langage web qui permet d'écrire du contenu sur une page web ? </br></br>
+4) Quel est le langage web qui permet d'éditer le style graphique d'une page web ? </br></br>
+5) Quel est la différence entre le protocole HTTP et le protocole HTTPS ? </br></br>
+6) Quel est le rôle d'un lien hypertexte sur un site web ? </br></br>
+7) Le menu de navigation du site comportant 7 liens hypertextes. Répétés sur chacune des pages afin de naviguer entre-elles. A l'exeption d'une page. Laquelle ? Donner son adresse URL.</b>
+</p>
+
+<center><a href="nav.html" title="Naviguer sur le web"><img alt="Survol" onmouseout="this.src='img/suite2.png';" onmouseover="this.src='img/suite.png';" src="img/suite2.png" /></a><center>
+
+	</article>
+    <footer> &copy; Copyright Super Site 2019</footer>
+</body>
+</html>
