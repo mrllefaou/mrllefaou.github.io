@@ -284,7 +284,7 @@ footer{
 	font-size: 12px;
 }
 
-/* Sur les écrans, quand la largeur de la fenêtre fait au maximum 1280px */
+/* Sur les Ã©crans, quand la largeur de la fenÃªtre fait au maximum 1280px */
 @media screen and (max-width: 1280px)
 {
 		
@@ -329,23 +329,7 @@ titre1
 	margin: 75px;
 }
 
-p
-{
-	background-color: white;
-	color: black;
-	width: 90%;
-	font-size: 14px;
-	font-family: Georgia;
-	border-top: 2px solid rgb(34,159,234);
-	border-left: 10px solid rgb(34,159,234);
-    border-radius: 5px;
-	text-align: justify;
-	padding: 10px;
-	margin-top: 0px;
-	margin-bottom: 20px;
-	margin-right: 50px;
-	margin-left: 50px;
-}
+
 
 nav
 {
@@ -414,7 +398,7 @@ footer{
 }
 }
 
-/* Sur tous types d'écran, quand la largeur de la fenêtre est 1024px */
+/* Sur tous types d'Ã©cran, quand la largeur de la fenÃªtre est 1024px */
 @media all and (max-width: 1024px)
 {
 	body {
@@ -543,13 +527,13 @@ footer{
 }
 	
 }
-/* Sur les téléviseurs */
+/* Sur les tÃ©lÃ©viseurs */
 @media tv
 {
 
 
 }
-/* Sur tous types d'écrans orientés verticalement */
+/* Sur tous types d'Ã©crans orientÃ©s verticalement */
 @media all and (orientation: portrait)
 {
 	
