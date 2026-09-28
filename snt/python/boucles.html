@@ -1,0 +1,237 @@
+<!DOCTYPE html> 
+<html>
+<html lang="fr">
+
+	<head>
+ 	<meta charset="utf-8">
+		<title>Les boucles</title>
+
+		<!-- mon icon -->
+		<link rel="shortcut icon" href="../../favicon.ico">
+
+		<!-- mon template.css -->
+		<link rel="stylesheet" href="mon_css.css" media="screen">
+
+<body>
+<a href="introduction.html"><h1 data-name="Programmation en Python">Programmation en Python</h1></a>
+ <nav>
+    <ul id="tabnav">
+        <li><a href="../snt.html" title="Aller à l'acceuil du menu python">Accueil</a></li>
+			<li><a href="introduction.html" title="Introduction">Introduction</a></li>
+			<li><a href="variables1.html" title="Variables, types de variables, lecture, écriture (Partie 1/2)">Variables, types de variables, lecture, écriture (Partie 1/2)</a></li>
+			<li><a href="variables2.html" title="Variables, types de variables, lecture, écriture (Partie 2/2)">Variables, types de variables, lecture, écriture (Partie 2/2)</a></li>
+		</ul>
+		<ul id="tabnav">	
+			<li><a href="conditions.html" title="Structures de contrôle : les conditions">Structures de contrôle : les conditions</a></li>
+			<li><a href="boucles.html" title="Structures de contrôle : les boucles">Structures de contrôle : les boucles</a></li>
+			<li><a href="fonctions.html" title="Les fonctions informatiques">Les fonctions informatiques</a></li>
+			<li><a href="listes.html" title="Les listes">Les listes</a></li>
+    </ul>
+    </nav>
+	<article>
+	
+<titre1>Structures de contrôle : les boucles</titre1>
+
+<div class="joli">	
+
+<p>Afin de suivi le cours/TD plus agréable, je vous conseille de lire le guide vidéo disponible en cliquant sur l&rsquo;image ci-dessous. Vous pouvez par ailleurs optimiser votre espace de travail en ouvrant une fenêtre consacré au guide vidéo et une autre à la lecture de cette page web.</p>
+
+
+
+<center>
+<a href="https://youtu.be/6yxYffZ_wiw"><img src="img/log.png"></a>
+</center>
+
+<hr class="wp-block-separator"/>
+
+<p>Afin de répéter une instruction plusieurs fois, on utilise la structure de boucle. Imaginons un robot sur une chaine de production, qui répète le même mouvement. Sans structure de boucle, le programmeur serait obligé d&rsquo;écrire plusieurs fois les mêmes d&rsquo;instructions. C&rsquo;est une solution très chronophage, surtout si le nombre répétition évolue.</p>
+
+
+
+<p>La structure de boucle répond à cette problématique. Elle est similaire à la structure des conditions.</p>
+
+
+
+<p><strong><span class="has-inline-color has-vivid-red-color">1. La boucle while (tant que) </span></strong></p>
+
+
+
+<p>Pour comprendre la structure de boucles, partons de plusieurs exemples :</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bte"><a target="_blank" href="https://create.withcode.uk/python/Bte">create.withcode.uk</a></iframe>
+
+
+
+<p><strong>Exemple 1 :</strong></p>
+
+
+
+<ul><li>L’instruction 1&nbsp;: Affiche la chaine de caractères «&nbsp;PUNITION &#8211; copier 1000 fois : Je cesserai insensément mes sottises insensées en cours de SNT&nbsp;».</li><li>L’instruction 2&nbsp;: On stocke la valeur 1 dans une variable i.</li><li>L’instruction 3&nbsp;: C’est la structure de boucle while. Composées :<ul><li>De l’instruction while qui marque le commencement de la boucle. Que l’on peut traduire par Tant que</li><li>i&lt;=1000 est l’assertion de la structure de boucle. Tant qu’elle est vraie, on répète les instructions du bloc d’instructions de la boucle.</li><li>&nbsp;: permet de marquer la fin de l’assertion.</li></ul></li><li>L’instruction 4&nbsp;: affiche la chaine de caractère «&nbsp;Ligne n&nbsp;» Valeur de la variable i&nbsp;«&nbsp;Je cesserai insensément mes sottises ensemencées en cours de SNT&nbsp;»</li><li>L’instruction 5&nbsp;: Stocke dans la variable i la valeur de la variable i plus 1.</li></ul>
+
+
+
+<p><strong>Exemple 2 :</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btf"><a target="_blank" href="https://create.withcode.uk/python/Btf">create.withcode.uk</a></iframe>
+
+
+
+<p>Tant que l’assertion reponse==1 est vraie, les instructions des lignes 5 et 6 seront exécutées.</p>
+
+
+
+<p><strong>Remarque :</strong> Comme pour les conditions, le bloc d&rsquo;instructions des boucles est indenté.</p>
+
+
+
+<p><strong>Exemple de boucle infini :</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btg"><a target="_blank" href="https://create.withcode.uk/python/Btg">create.withcode.uk</a></iframe>
+
+
+
+<p>Si l’on saisit la valeur 1 pour l’instruction 2, l’assertion reponse==1 sera vraie. Dans la structure de boucle, la valeur de la variable réponse n’évolue plus. Par conséquent, l’assertion reponse==1 sera tout le temps vraie. L’instruction 4 sera donc exécutée à l’infinie. On dit que la boucle est une boucle infinie.</p>
+
+
+
+<p>Pour rappels, vous trouverez ci-dessous la liste des opérateurs logiques :</p>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td><strong>Opérateur logique</strong></td><td><strong>Rôle</strong></td><td><strong>Exemple</strong></td></tr><tr><td>==</td><td>Test de l’égalité</td><td>3==4&nbsp;: renvoi faux</td></tr><tr><td>!=</td><td>Test de différence</td><td>3&nbsp;!=4&nbsp;: renvoi vrai</td></tr><tr><td>&lt;</td><td>Test inférieur</td><td>3&lt;4&nbsp;: renvoi vrai</td></tr><tr><td>&lt;=</td><td>Test inférieur ou égal</td><td>4&lt;=3&nbsp;: renvoi faux</td></tr><tr><td>&gt;</td><td>Test supérieur</td><td>3&gt;4&nbsp;: renvoi faux</td></tr><tr><td>&gt;=</td><td>Test supérieur ou égal</td><td>4&gt;=3&nbsp;: renvoi vrai</td></tr><tr><td>and</td><td>Et logique</td><td></td></tr><tr><td>or</td><td>Ou logique</td><td></td></tr><tr><td>not</td><td>Non logique</td><td><br></td></tr></tbody></table></figure>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><strong><em>Exercice 1</em></strong></p>
+
+
+
+<p><strong>Tester le programme ci-dessous et expliquer l’intérêt de l&rsquo;usage de la boucle.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bth"><a target="_blank" href="https://create.withcode.uk/python/Bth">create.withcode.uk</a></iframe>
+
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim">Réponse en vidéo </p>
+
+
+
+<figure class="wp-block-embed-youtube wp-block-embed is-type-rich is-provider-prise-en-charge-des-contenus-embarques wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+<iframe title="Les boucles - ex 1" width="1040" height="585" src="https://www.youtube.com/embed/CoTeAXYT9z4?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div></figure>
+
+
+
+</div></div>
+
+
+
+<p><strong><em>Exercice 2</em></strong></p>
+
+
+
+<p><strong>Écrire un programme qui affiche le message suivant tant que la valeur 29 n’est pas saisie : ”Veuillez saisir 29”</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bti"><a target="_blank" href="https://create.withcode.uk/python/Bti">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><strong><span class="has-inline-color has-vivid-red-color">2. La boucle for (pour)</span></strong></p>
+
+
+
+<p>Voici un type de boucle différent. Ce type de boucle de sert qu’à répéter un bloc d’instructions un certain nombre de fois.</p>
+
+
+
+<p>Voici un exemple qui exécute exactement les mêmes instructions que dans l’exemple 1.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btj"><a target="_blank" href="https://create.withcode.uk/python/Btj">create.withcode.uk</a></iframe>
+
+
+
+<ul><li>La structure de boucle for de décompose de la façon suivante :<ul><li>for introduit la structure de la boucle de type pour.</li><li>i est la variable évoluant dans la boucle.</li><li>in range(0,1000) implique que la variable i va prendre les valeurs évoluant de 0 à 999 inclus. En tout 1000 instructions sont exécutées.</li><li> : permet de la structure de boucle.</li></ul></li></ul>
+
+
+
+<p><strong>Remarque&nbsp;:</strong> La boucle for est une boucle while&nbsp;«&nbsp;masquée&nbsp;»</p>
+
+
+
+<p>Si l&rsquo;on veut commencé par la ligne 1 et finir à la ligne, il suffit d&rsquo;incrémenter de 1 les valeurs prises par la variable i.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btk"><a target="_blank" href="https://create.withcode.uk/python/Btk">create.withcode.uk</a></iframe>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><strong><em>Exercice 3</em></strong></p>
+
+
+
+<p><strong>Écrire un programme qui affiche “coucou” 300 fois.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btm"><a target="_blank" href="https://create.withcode.uk/python/Btm">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><strong><em>Exercice 4</em></strong></p>
+
+
+
+<p><strong>Écrire un programme qui affiche les 300 premiers nombres. Puis les 300 premiers nombres pairs.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btn"><a target="_blank" href="https://create.withcode.uk/python/Btn">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><strong><em>Exercice 5</em></strong></p>
+
+
+
+<p><strong>Tester et dérouler le programme suivant. C&rsquo;est-à-dire expliquer le rôle de chaque instruction.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btp"><a target="_blank" href="https://create.withcode.uk/python/Btp">create.withcode.uk</a></iframe>
+
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim">Réponse en vidéo</p>
+
+
+
+<figure class="wp-block-embed-youtube wp-block-embed is-type-rich is-provider-prise-en-charge-des-contenus-embarques wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+<iframe title="Les boucles - ex5" width="1040" height="585" src="https://www.youtube.com/embed/5gYkiw1Hndo?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div></figure>
+<center><a href="conditions.html" title="Les conditions"><img alt="Survol" onmouseout="this.src='img/bac2.png';" onmouseover="this.src='img/bac.png';" src="img/bac2.png" /><space></space><a href="fonctions.html" title="Les fonctions"><img alt="Survol" onmouseout="this.src='img/suite2.png';" onmouseover="this.src='img/suite.png';" src="img/suite2.png" /></a><center>
+
+</div>
+</article>
+<footer> &copy; Copyright 2019-2027</footer>
+</body>
+</html>

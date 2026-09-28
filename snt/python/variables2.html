@@ -1,0 +1,378 @@
+<!DOCTYPE html> 
+<html>
+<html lang="fr">
+
+	<head>
+ 	<meta charset="utf-8">
+		<title>Les variables partie 2</title>
+
+		<!-- mon icon -->
+		<link rel="shortcut icon" href="../../favicon.ico">
+
+		<!-- mon template.css -->
+		<link rel="stylesheet" href="mon_css.css" media="screen">
+
+<body>
+<a href="introduction.html"><h1 data-name="Programmation en Python">Programmation en Python</h1></a>
+ <nav>
+    <ul id="tabnav">
+        <li><a href="../snt.html" title="Aller à l'acceuil du menu python">Accueil</a></li>
+			<li><a href="introduction.html" title="Introduction">Introduction</a></li>
+			<li><a href="variables1.html" title="Variables, types de variables, lecture, écriture (Partie 1/2)">Variables, types de variables, lecture, écriture (Partie 1/2)</a></li>
+			<li><a href="variables2.html" title="Variables, types de variables, lecture, écriture (Partie 2/2)">Variables, types de variables, lecture, écriture (Partie 2/2)</a></li>
+		</ul>
+		<ul id="tabnav">	
+			<li><a href="conditions.html" title="Structures de contrôle : les conditions">Structures de contrôle : les conditions</a></li>
+			<li><a href="boucles.html" title="Structures de contrôle : les boucles">Structures de contrôle : les boucles</a></li>
+			<li><a href="fonctions.html" title="Les fonctions informatiques">Les fonctions informatiques</a></li>
+			<li><a href="listes.html" title="Les listes">Les listes</a></li>
+    </ul>
+    </nav>
+	<article>
+	
+<titre1>Variables, types de variables, lecture, écriture (Partie 2/2)</titre1>
+
+<div class="joli">	
+
+<p>Afin de suivi le cours/TD plus agréable, je vous conseille de lire le guide vidéo disponible en cliquant sur l&rsquo;image ci-dessous. Vous pouvez par ailleurs optimiser votre espace de travail en ouvrant une fenêtre consacré au guide vidéo et une autre à la lecture de cette page web.</p>
+
+
+
+<center>
+<a href="https://www.youtube.com/watch?v=E2n1gfZxUPU"><img src="img/log.png"></a>
+</center>
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Pour qu&rsquo;une machine puisse communiquer avec son utilisateur, il est important qu&rsquo;elle puisse interagir avec ce dernier. Pour cela, il faut que la machine puisse afficher de l&rsquo;information pour guider l&rsquo;utilisateur. Pour mener une interaction, il faut que l&rsquo;utilisateur envoie des informations vers cette machine. Ces informations doivent être stockée en mémoire, afin qu&rsquo;elles puissent être traitées par la machine. Une fois le traitement de cette information, ou des informations saisit par l&rsquo;utilisateur, la machine affiche un résultat qui informe l&rsquo;utilisateur. Ce principe de communication entre l&rsquo;homme et la machine est la base de l&rsquo;informatique.</p>
+
+
+
+<p><strong><span class="has-inline-color has-vivid-red-color">3. Variables et opérations</span></strong></p>
+
+
+
+<p>Comme expliqué&nbsp;ci-dessus, les variables peuvent changer de valeurs au cours d’un programme. Cela est&nbsp;possible en effectuant des opérations&nbsp;sur la variable&nbsp;ou en changeant la valeur par une nouvelle affectation.&nbsp;</p>
+
+
+
+<p>Voir programme ci-dessous :</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Brf"><a target="_blank" href="https://create.withcode.uk/python/Brf">create.withcode.uk</a></iframe>
+
+
+
+<ul><li>La première instruction&nbsp;<strong>age=16&nbsp;</strong>permet de stocker dans un espace mémoire la valeur 16 dans une variable appelée&nbsp;age.&nbsp;</li><li>La deuxième instruction<strong>&nbsp;print(age)&nbsp;</strong>écrit la valeur stockée&nbsp;dans la variable&nbsp;age. C’est-à-dire 16.&nbsp;</li><li>La troisième instruction&nbsp;<strong>age=18</strong>&nbsp;stocke la valeur 18 dans l’espace mémoire dédié à la variable&nbsp;age. Sa valeur n’est plus 16 mais 18.&nbsp;</li><li>La quatrième instruction<strong>&nbsp;print(age)&nbsp;</strong>écrit&nbsp;la valeur stockée&nbsp;dans la variable&nbsp;age. C’est-à-dire 18.&nbsp;</li></ul>
+
+
+
+<p>Regardons maintenant le programme suivant et exécutons-le.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Brg"><a target="_blank" href="https://create.withcode.uk/python/Brg">create.withcode.uk</a></iframe>
+
+
+
+<ul><li>Dans la première instruction : On stocke la valeur 2 dans une variable&nbsp;nommée&nbsp;nombre1.&nbsp;</li><li>Dans la&nbsp;deuxième instruction : On stocke la valeur&nbsp;3&nbsp;dans une variable nommée&nbsp;nombre2.&nbsp;</li><li>Dans la troisième instruction : On stocke la valeur de la variable nombre1 que l&rsquo;on additionne avec la valeur de la variable nombre2 qui est stockée dans une variable nommée nombre3.&nbsp;</li><li>Dans la quatrième instruction : On affiche la valeur de la variable nombre 3.&nbsp; C’est-à-dire 5 (2+3).&nbsp;</li></ul>
+
+
+
+<p>Pour faire évoluer les valeurs des variables, on utilise ce type d&rsquo;opérateur. Il en existent plusieurs. Voici un tableau des opérateurs non exhaustif.</p>
+
+
+
+<p><strong>Tableau des opérateurs :</strong>&nbsp;</p>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td><strong>Opérateur</strong>&nbsp;</td><td><strong>Type de variable</strong>&nbsp;</td><td><strong>Rôle</strong>&nbsp;</td></tr><tr><td><strong>+</strong>&nbsp;</td><td><strong>int,&nbsp;float</strong>&nbsp;</td><td><strong>Additionne&nbsp;les valeurs stockées&nbsp;dans les variables.</strong>&nbsp;</td></tr><tr><td><strong>&#8211;</strong>&nbsp;</td><td><strong>int,&nbsp;float</strong>&nbsp;</td><td><strong>Soustrait&nbsp;les valeurs stockées dans les variables.</strong>&nbsp;</td></tr><tr><td><strong>*</strong>&nbsp;</td><td><strong>int,&nbsp;float</strong>&nbsp;</td><td><strong>Multiplie&nbsp;les valeurs stockées dans les variables.</strong>&nbsp;</td></tr><tr><td><strong>/</strong>&nbsp;</td><td><strong>int,&nbsp;float</strong>&nbsp;</td><td><strong>Divise les valeurs stockées dans les variables.</strong>&nbsp;</td></tr><tr><td><strong>**</strong>&nbsp;</td><td><strong>int,&nbsp;float</strong>&nbsp; &nbsp;</td><td><strong>Opérateur des puissances :</strong>&nbsp; <strong>Variable1**variable2 (variable1</strong><sup><strong>variable2</strong></sup><strong>).</strong>&nbsp;</td></tr><tr><td><strong>+</strong>&nbsp;</td><td><strong>str</strong>&nbsp;</td><td><strong>Concaténation de chaîne de caractères.</strong>&nbsp;</td></tr><tr><td>…&nbsp;</td><td>…&nbsp;</td><td><strong>&#8230;</strong>&nbsp;</td></tr></tbody></table></figure>
+
+
+
+<p>Pour résumer, ces opérateurs, exécuter le programme suivant :</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Brh"><a target="_blank" href="https://create.withcode.uk/python/Brh">create.withcode.uk</a></iframe>
+
+
+
+<p>On obtient l’affichage des opérations : 2+3;&nbsp;2-3; 2X3; 2/3; 2<sup>3</sup>.&nbsp;</p>
+
+
+
+<p><strong>Remarque :&nbsp;</strong>L’opération 2/3, nous donne un résultat arrondi.&nbsp;Il est à noter que certains calculs mathématiques en python ne donneront que des approximations. Cela est dû à la conversion des nombres décimaux en binaires. La virgule flottante peut être inexacte. Pour les plus curieux vous pouvez lire l&rsquo;article en <a rel="noreferrer noopener" href="https://zestedesavoir.com/tutoriels/570/introduction-a-larithmetique-flottante/approximation-des-reels-par-les-flottants/" target="_blank">cliquant ici</a> (c&rsquo;est assez compliqué).</p>
+
+
+
+<p>Si votre programme utilise l’opérateur + et que vos variables sont de types chaines de caractères. Le résultat sera une concaténation de ses deux chaines. La concaténation est l&rsquo;opération qui va « fusionner » vos chaines de caractères en une seule et même chaine.</p>
+
+
+
+<p><strong>Exemple :</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bri"><a target="_blank" href="https://create.withcode.uk/python/Bri">create.withcode.uk</a></iframe>
+
+
+
+<p>Dans une opération, il est possible de réaffecter une valeur à une variable en exploitant celle déjà stockée dans la mémoire vive.</p>
+
+
+
+<p><strong>Exemple :</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Brk"><a target="_blank" href="https://create.withcode.uk/python/Brk">create.withcode.uk</a></iframe>
+
+
+
+<ul><li>Première instruction : On stocke dans la variable&nbsp;mon_argent&nbsp;la valeur 100.&nbsp;</li><li>Deuxième instruction :&nbsp;&nbsp;On additionne&nbsp;à la valeur stockée dans la mémoire vive de la variable&nbsp;mon_argent&nbsp;la valeur 20. Ensuite le résultat de cette opération est stocké dans l’espace mémoire dédié à la variable&nbsp;mon_argent. En outre l’opération est toujours exécutée en premier lieu avant l’affectation.&nbsp;</li><li>Troisième instruction : On affiche la valeur de la variable&nbsp;mon_argent.&nbsp;(100+20=120)&nbsp;</li></ul>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><strong><em>Exercice 3&nbsp;</em></strong></p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<p><strong>Créer un programme composé des variables suivantes&nbsp;:</strong>&nbsp;</p>
+
+
+
+<ul><li><strong>nb1 ayant comme valeur 5.</strong>&nbsp; </li><li><strong>nb2&nbsp;ayant comme valeur&nbsp;8.</strong>&nbsp; </li><li><strong>nb3&nbsp;ayant comme valeur&nbsp;3.</strong>&nbsp; </li><li><strong>somme&nbsp;variable à laquelle on affecte l’addition des variables nb1, nb2 et nb3.</strong>&nbsp; <strong>Le programme affiche en sortie la valeur de la variable somme.</strong>&nbsp;</li></ul>
+</div></div>
+
+
+
+<p><strong>(En utilisant l&rsquo;éditeur ci-dessous)</strong>&nbsp; &nbsp;</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Brn"><a target="_blank" href="https://create.withcode.uk/python/Brn">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><strong><em>Exercice 4</em></strong></p>
+
+
+
+<p><strong>1) Tester le programme</strong> <strong>ci-dessous</strong>.</p>
+
+
+
+<p><strong>2) Dérouler le programme. C’est-à-dire expliquer le rôle de chacune des instructions du programme.</strong>&nbsp;&nbsp;</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Brp"><a target="_blank" href="https://create.withcode.uk/python/Brp">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim">
+<p>Chaque numéro correspond à l&rsquo;instruction exécutée par le programme.</p>
+<p>1) On affecte à une variable nommée a la valeur 5.</p>
+<p>2) On affecte à une variable nommée b la valeur 6.</p>
+<p>3) On affecte à une variable nommée c la valeur de la variable a, c&rsquo;est-à-dire 5.</p>
+<p>4) On affecte à une variable nommée a la valeur de la variable b, c&rsquo;est-à-dire 6.</p>
+<p>5) On affecte à une variable nommée b la valeur de la variable c, c&rsquo;est-à-dire 5.</p>
+<p>6) On affiche la chaine de caractère : « La valeur de la variable a est égale à » suivi de la valeur de variable a, c&rsquo;est-à-dire 6. </p>
+<p>7) On affiche la chaine de caractère : « La valeur de la variable a est égale à » suivi de la valeur de variable b, c&rsquo;est-à-dire 5. </p>
+<p>Le programme ci-dessus est appelé algorithme de permutation de variables.<br />
+</div></div>
+
+
+
+<p><strong><span class="has-inline-color has-vivid-red-color">4. Lecture/flux d&rsquo;entrée</span></strong></p>
+
+
+
+<p><strong>Cours</strong>&nbsp;</p>
+
+
+
+<p>Pour amener une interaction entre l&rsquo;ordinateur et l’utilisateur. Il est important que ces deux interlocuteurs puissent communiquer. Pour cela, l’utilisateur peut saisir des informations, en général à l’aide d’un clavier ou&nbsp;d’un&nbsp;autre périphérique&nbsp;(manettes, souris, micro,&nbsp;etc). Ces informations sont stockées dans des variables et traitées par un programme.&nbsp;&nbsp;</p>
+
+
+
+<p>L’ordinateur<strong>&nbsp;lit</strong>&nbsp;ses informations. On parle alors de&nbsp;<strong>lecture</strong>. L’utilisateur&nbsp;<strong>entre</strong>&nbsp;des informations&nbsp;dans l’ordinateur. On parle alors de flux d’<strong>entrée</strong>.&nbsp;</p>
+
+
+
+<p>Voici un programme&nbsp;permettant&nbsp;de saisir une valeur :&nbsp;</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Brq"><a target="_blank" href="https://create.withcode.uk/python/Brq">create.withcode.uk</a></iframe>
+
+
+
+<ul><li>La première instruction : affiche la chaine de caractère “Saisir un nombre entier”.&nbsp;</li></ul>
+
+
+
+<ul><li>La deuxième instruction : permet de stocker une valeur dans la variable a.&nbsp;</li><li>La troisième instruction : affiche la chaine de caractère “Le nombre saisit est : ” suivit de la valeur de la variable a.&nbsp;</li></ul>
+
+
+
+<p>Nous allons revenir sur la fonctionnalité de la deuxième instruction. Et observer comment cette dernière s’écrit.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="800" height="300" src="http://mathquiz.fr/wp-content/uploads/2020/10/image.png" alt="" class="wp-image-1009" srcset="https://mathquiz.fr/wp-content/uploads/2020/10/image.png 800w, https://mathquiz.fr/wp-content/uploads/2020/10/image-300x113.png 300w, https://mathquiz.fr/wp-content/uploads/2020/10/image-768x288.png 768w, https://mathquiz.fr/wp-content/uploads/2020/10/image-370x139.png 370w" sizes="(max-width: 800px) 100vw, 800px" /></figure>
+
+
+
+<p><strong>Remarque :</strong>&nbsp;Dans l’instruction&nbsp;input(), aucune information est mise entre ses parenthèses. Pourtant, il est possible d’y ajouter une chaine de caractère.&nbsp;</p>
+
+
+
+<p>Notre programme peut se&nbsp;transformer&nbsp;de la façon suivante :&nbsp;</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Brr"><a target="_blank" href="https://create.withcode.uk/python/Brr">create.withcode.uk</a></iframe>
+
+
+
+<p>Afin se familiariser avec cette instruction, voici plusieurs exemples d’applications.&nbsp;</p>
+
+
+
+<p><strong>Exemple 4</strong> :</p>
+
+
+
+<p>Taper votre nom en exécutant le programme.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Brs"><a target="_blank" href="https://create.withcode.uk/python/Brs">create.withcode.uk</a></iframe>
+
+
+
+<p><strong>Remarque : </strong>C’est grâce aux flux d’entrées et de sorties que l’interaction entre homme et machines, ainsi que machines et machines sont possibles.</p>
+
+
+
+<p><strong>Exemple complet&nbsp;:</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Brt"><a target="_blank" href="https://create.withcode.uk/python/Brt">create.withcode.uk</a></iframe>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><em><strong>Exercice 5</strong>&nbsp;</em></p>
+
+
+
+<p><strong>On considère le programme suivant :</strong>&nbsp; &nbsp;</p>
+
+
+
+<p> <strong>1) Tester le programme ci-dessous. Quel est son rôle ?</strong>&nbsp; </p>
+
+
+
+<p><strong>2) Tester le programme en saisissant des nombres décimaux. Que se passe-t-il ?&nbsp;</strong>&nbsp; </p>
+
+
+
+<p><strong>3) Corriger le programme afin qu’il puisse accepter des nombres décimaux.</strong>&nbsp;&nbsp;</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bsk"><a target="_blank" href="https://create.withcode.uk/python/Bsk">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim">
+<p>1) Le rôle du programme est d&rsquo;afficher le résultat d&rsquo;une multiplication de deux nombres saisit par l&rsquo;utilisateur.</p>
+<p>2) Si l&rsquo;on saisit deux nombres décimaux, on obtient un message d&rsquo;erreur. En effet, le programme demande de saisir deux valeur entière, car les variables sont de type int.</p>
+<p>3) Il faut changer à la ligne 2 et 3 le type de variable. On change le type int en float afin de pouvoir saisir des nombres décimaux.</p>
+</div></div>
+
+
+
+<p><em><strong>Exercice 6</strong>&nbsp;</em></p>
+
+
+
+<p><strong>Créer un programme avec deux variables flottantes nommées cote et aire. L’utilisateur saisit la valeur de la variable cote.&nbsp;</strong>&nbsp; <strong>Ce programme doit donner la valeur de l’aire d’un carré de côté égale à la valeur de la variable cote.</strong>&nbsp;</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bsm"><a target="_blank" href="https://create.withcode.uk/python/Bsm">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><em><strong>Exercice 7</strong>&nbsp;</em></p>
+
+
+
+<p><strong>Créer un programme avec&nbsp;trois&nbsp;variables&nbsp;flottantes&nbsp;nommées&nbsp;longueur, largeur et aire. L’utilisateur saisit la valeur des&nbsp;variables&nbsp;longueur et largeur.&nbsp;</strong>&nbsp; <strong>Ce programme doit donner la valeur de l’aire d’un&nbsp;rectangle&nbsp;de&nbsp;largeur&nbsp;égale à la valeur de la variable&nbsp;largeur et&nbsp;de longueur&nbsp;égale à la valeur de la variable longueur.</strong>&nbsp;</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bsn"><a target="_blank" href="https://create.withcode.uk/python/Bsn">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><em><strong>Exercice&nbsp;8</strong>&nbsp;</em></p>
+
+
+
+<p><strong>Créer un programme avec&nbsp;deux&nbsp;variables&nbsp;de type&nbsp;str&nbsp;nommées&nbsp;prenom&nbsp;et nom.&nbsp;L’utilisateur saisit la valeur des variables&nbsp;prenom&nbsp;et nom.&nbsp;</strong>&nbsp; <strong>Ce programme doit demander à l’utilisateur son&nbsp;prenom&nbsp;et son nom. Il affichera ensuite la chaine de caractère “Salut !” suivi du&nbsp;prenom&nbsp;et du nom saisit par l’utilisateur.</strong>&nbsp;&nbsp;</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bsp"><a target="_blank" href="https://create.withcode.uk/python/Bsp">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><em><strong>Exercice&nbsp;9</strong>&nbsp;</em></p>
+
+
+
+<p><strong>On considère le programme suivant :&nbsp;</strong>&nbsp;</p>
+
+
+
+<p><strong>1) Tester le programme ci-dessous et dérouler-le.</strong>&nbsp;<strong>C’est-à-dire expliquer le rôle de chacune des instructions du programme.</strong></p>
+
+
+
+<p><strong>2) Modifier le programme de tel façon à ce qu’il puisse rajouter de l’argent de son&nbsp;coffre-fort. Attention, le texte affiché par l’ordinateur doit être cohérent avec la situation.</strong>&nbsp;</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bsq"><a target="_blank" href="https://create.withcode.uk/python/Bsq">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim">
+1)<br />
+Ligne 1 : On affecte la valeur 10000 à la variable mon_coffre_fort.</p>
+<p>Ligne 2 : On affiche la chaine de caractère “Combien de pieces d&rsquo;or souhaitez-vous retirer de votre coffre fort ? « . On affecte la valeur saisit par l’utilisateur à la variable pieces.</p>
+<p>Ligne 3 : On affecte la valeur de la variable mon_coffre_fort moins la valeur de la variable pieces à la variable mon_coffre_fort. </p>
+<p>Ligne 4 : On affiche la chaine de caractère « Vous avez retirer  » suivit de la valeur de la variable pieces suivit de la chaine de caractère  » pieces d&rsquo;or. Il vous reste  » suivit de la valeur de la variable mon_coffre_fort suivit de la chaine de caractère  » pieces d&rsquo;or ! »</p>
+<p>2)</p>
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bsr"><a target="_blank" href="https://create.withcode.uk/python/Bsr">create.withcode.uk</a></iframe>
+</div></div>
+<center><a href="variables1.html" title="Les variables partie 1"><img alt="Survol" onmouseout="this.src='img/bac2.png';" onmouseover="this.src='img/bac.png';" src="img/bac2.png" /><space></space><a href="conditions.html" title="Les conditions"><img alt="Survol" onmouseout="this.src='img/suite2.png';" onmouseover="this.src='img/suite.png';" src="img/suite2.png" /></a><center>
+
+</div>
+</article>
+<footer> &copy; Copyright 2019-2027</footer>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html> 
+<html>
+<html lang="fr">
+
+	<head>
+ 	<meta charset="utf-8">
+		<title>Les conditions</title>
+
+		<!-- mon icon -->
+		<link rel="shortcut icon" href="../../favicon.ico">
+
+		<!-- mon template.css -->
+		<link rel="stylesheet" href="mon_css.css" media="screen">
+
+<body>
+<a href="introduction.html"><h1 data-name="Programmation en Python">Programmation en Python</h1></a>
+ <nav>
+    <ul id="tabnav">
+        <li><a href="../snt.html" title="Aller à l'acceuil du menu python">Accueil</a></li>
+			<li><a href="introduction.html" title="Introduction">Introduction</a></li>
+			<li><a href="variables1.html" title="Variables, types de variables, lecture, écriture (Partie 1/2)">Variables, types de variables, lecture, écriture (Partie 1/2)</a></li>
+			<li><a href="variables2.html" title="Variables, types de variables, lecture, écriture (Partie 2/2)">Variables, types de variables, lecture, écriture (Partie 2/2)</a></li>
+		</ul>
+		<ul id="tabnav">	
+			<li><a href="conditions.html" title="Structures de contrôle : les conditions">Structures de contrôle : les conditions</a></li>
+			<li><a href="boucles.html" title="Structures de contrôle : les boucles">Structures de contrôle : les boucles</a></li>
+			<li><a href="fonctions.html" title="Les fonctions informatiques">Les fonctions informatiques</a></li>
+			<li><a href="listes.html" title="Les listes">Les listes</a></li>
+    </ul>
+    </nav>
+	<article>
+	
+<titre1>Structures de contrôle : les conditions</titre1>
+
+<div class="joli">	
+
+<p>Afin de suivi le cours/TD plus agréable, je vous conseille de lire le guide vidéo disponible en cliquant sur l&rsquo;image ci-dessous. Vous pouvez par ailleurs optimiser votre espace de travail en ouvrant une fenêtre consacré au guide vidéo et une autre à la lecture de cette page web.</p>
+
+
+
+<center>
+<a href="https://www.youtube.com/watch?v=2xJTx3OcIJc"><img src="img/log.png"></a>
+</center>
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><strong><span class="has-inline-color has-vivid-red-color">1. La condition if</span></strong></p>
+
+
+
+<p>Il est possible de faire évoluer les valeurs de nos variables, grâce aux conditions. Pour cela, nous utiliserons l’instruction if. If pour si en anglais possède la structure suivante&nbsp;:</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bss"><a target="_blank" href="https://create.withcode.uk/python/Bss">create.withcode.uk</a></iframe>
+
+
+
+<ul><li>Première instruction&nbsp;: La valeur 5 est stockée dans la variable x.</li><li>Deuxième instruction&nbsp;: C’est la structure de condition&nbsp;:<ul><li>if signale que l’on écrit une condition.</li><li>x==5, est<strong> l&rsquo;assertion de la condition</strong>. Une assertion est une proposition qui est soit vraie, soit fausse. Si elle est vraie, les instructions appartenant au bloc de la condition sont exécutées. Sinon, elles ne sont pas exécutées. Le double égal (==) est l’opérateur logique d’égalité. L&rsquo;assertion x==5 est donc vraie. Car la valeur stockée dans la variable x est égale à 5. Le programme exécutera le bloc d&rsquo;instruction de la condition.</li><li>&nbsp;: permet de marquer la fin de l’assertion.</li></ul></li><li>Troisième instruction&nbsp;: Elle affiche la chaine de caractères «&nbsp;La valeur de la variable x est égale à 5&nbsp;». On remarque que cette instruction est indentée (c’est-à-dire qu’il y a une sorte d’alinéa). Cette indentation est importante. Elle marque l’appartenance de l’instruction à la structure/bloc de la condition.</li></ul>
+
+
+
+<p>En exécutant le programme. Le programme affiche la chaine de caractère « La valeur de la variable x est égale à 5 ».</p>
+
+
+
+<p>Changeons maintenant, x=5 en x=6.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bst"><a target="_blank" href="https://create.withcode.uk/python/Bst">create.withcode.uk</a></iframe>
+
+
+
+<p>En exécutant le programme, il ne se passe rien. En effet, x==5, l&rsquo;assertion est fausse. La troisième instruction appartenant au bloc de la condition n’est pas exécutée.</p>
+
+
+
+<p>Si l’indentation n’est pas mise, le programme devient la suivant&nbsp;:</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bsu"><a target="_blank" href="https://create.withcode.uk/python/Bsu">create.withcode.uk</a></iframe>
+
+
+
+<p>En exécutant le programme, on obtient un message d’erreur. La troisième instruction n’est pas exécutée car elle n’est pas indentée.</p>
+
+
+
+<p><strong>Exemple :</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bsv"><a target="_blank" href="https://create.withcode.uk/python/Bsv">create.withcode.uk</a></iframe>
+
+
+
+<p>Tester le programme en saisissant la valeur : Toto, puis toto. Vous remarquerez que dans le deuxième cas, l&rsquo;assertion est fausse. « T » et « t » sont deux informations différentes.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><strong><span class="has-inline-color has-vivid-red-color">2. Les opérateurs logiques</span></strong></p>
+
+
+
+<p>Pour créer notre assertion dans les exemples précédents, nous avons utiliser l&rsquo;opérateur logique ==. Il en existe plusieurs, nous permettant de faire varier les différentes assertions dans nos structures de conditions.</p>
+
+
+
+<p>Ci-dessous le tableau des opérateurs logiques. Liste non exhaustive.</p>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td><strong>Opérateur logique</strong></td><td><strong>Rôle</strong></td><td><strong>Exemple</strong></td></tr><tr><td>==</td><td>Test de l’égalité</td><td>3==4&nbsp;: renvoi faux</td></tr><tr><td>!=</td><td>Test de différence</td><td>3&nbsp;!=4&nbsp;: renvoi vrai</td></tr><tr><td>&lt;</td><td>Test inférieur</td><td>3&lt;4&nbsp;: renvoi vrai</td></tr><tr><td>&lt;=</td><td>Test inférieur ou égal</td><td>4&lt;=3&nbsp;: renvoi faux</td></tr><tr><td>&gt;</td><td>Test supérieur</td><td>3&gt;4&nbsp;: renvoi faux</td></tr><tr><td>&gt;=</td><td>Test supérieur ou égal</td><td>4&gt;=3&nbsp;: renvoi vrai</td></tr><tr><td>and</td><td>Et logique</td><td>Voir exercice 2</td></tr><tr><td>or</td><td>Ou logique</td><td>Voir exercice 3</td></tr><tr><td>not</td><td>Non logique</td><td><br></td></tr></tbody></table></figure>
+
+
+
+<p>Appliquons ces nouvelles notions dans quelques exercices.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><strong><em>Exercice 1</em></strong></p>
+
+
+
+<p><strong>Tester le programme ci-dessous et dérouler le programme (c&rsquo;est-à-dire expliquer le rôle de chaque instructions)</strong>.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bsw"><a target="_blank" href="https://create.withcode.uk/python/Bsw">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim">
+Ligne 1 : On affiche la chaine de caractère : « Saisir un nombre » et on demande à l&rsquo;utilisateur de saisir une valeur de type float qui est stockée dans la variable nb1.</p>
+<p>Ligne 2 : On affiche la chaine de caractère : « Saisir un nombre » et on demande à l&rsquo;utilisateur de saisir une valeur de type float qui est stockée dans la variable nb2.</p>
+<p>Ligne 4 : Si la valeur de la variable nb1 est égale à la valeur de la variable nb2. On exécute l&rsquo;instruction de la ligne 5.</p>
+<p>Ligne 5 : On affiche la chaine de caractères : « Les nombres sont égaux ».</p>
+<p>Ligne 7 : Si la valeur de la variable nb1 est différente de la valeur de la variable nb2. On exécute l&rsquo;instruction de la ligne 8.</p>
+<p>Ligne 8 : On affiche la chaine de caractères : « Les nombres sont différents ».</p>
+<p>Ligne 10 : Si la valeur de la variable nb1 est strictement supérieure à la valeur de la variable nb2. On exécute l&rsquo;instruction de la ligne 11.</p>
+<p>Ligne 11 : On affiche la valeur de la variable nb1, suivi de la chaine de caractères : « est plus grand que », suivi de la valeur de variable nb2.</p>
+<p>Ligne 13 : Si la valeur de la variable nb1 est strictement inferieure à la valeur de la variable nb2. On exécute l&rsquo;instruction de la ligne 14.</p>
+<p>Ligne 14 : On affiche la valeur de la variable nb1, suivi de la chaine de caractères : « est plus petit que », suivi de la valeur de variable nb2.<br />
+</div></div>
+
+
+
+<p><strong><em>Exercice 2</em></strong></p>
+
+
+
+<p><strong>Tester le programme suivant et modifier la ligne 6 en écrivant un texte correspondant au contexte du programme.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bsx"><a target="_blank" href="https://create.withcode.uk/python/Bsx">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bsy"><a target="_blank" href="https://create.withcode.uk/python/Bsy">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><em><strong>Exercice 3</strong></em></p>
+
+
+
+<p><strong>Tester le programme suivant et modifier la ligne 6 en écrivant un texte correspondant au contexte du programme.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bsz"><a target="_blank" href="https://create.withcode.uk/python/Bsz">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bt2"><a target="_blank" href="https://create.withcode.uk/python/Bt2">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><em><strong>Exercice 4</strong></em></p>
+
+
+
+<p><strong>Écrire un programme demandant à l&rsquo;utilisateur de saisir une valeur entière qui sera stockée dans une variable nommée age et affichant la chaine de caractères « Quel age as-tu ? ». Si la valeur saisit par l&rsquo;utilisateur est supérieure ou égale à 18, le programme affiche la chaine de caractère « Tu es majeur ».</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bt3"><a target="_blank" href="https://create.withcode.uk/python/Bt3">create.withcode.uk</a></iframe></div></div>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><strong><span class="has-inline-color has-vivid-red-color">3.</span></strong> <strong><span class="has-inline-color has-vivid-red-color">Les conditions if, elif, else</span></strong></p>
+
+
+
+<p>Il est possible de rendre nos conditions «&nbsp;plus performantes&nbsp;» en utilisant les instructions elif et else.</p>
+
+
+
+<p>L’instruction if correspond en français à l’instruction si, suivi d’une assertion. L’instruction elif correspond au sinon si suivi d’une assertion. Tant qu’à l’instruction else, elle correspond à l’instruction sinon. Cette dernière instruction s’écrit à la fin de notre structure de contrôle et s’exécute si les assertions du if et des elif sont fausses. Comprenons mieux ces éléments au travers d&rsquo;un exemple.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bt4"><a target="_blank" href="https://create.withcode.uk/python/Bt4">create.withcode.uk</a></iframe>
+
+
+
+<ul><li>Si dans la variable prenom, on saisit la chaine de caractère «&nbsp;Paul&nbsp;». L&rsquo;assertion de la condition à la ligne 3 est vraie. Celles des lignes 5,7,9 sont fausses. On exécute l’instruction de la ligne 4.</li><li>Si dans la variable prenom, on saisit la chaine de caractère «&nbsp;Jack&nbsp;». L&rsquo;assertion de la condition à la ligne 5 est vraie. Celles des lignes 3,7,9 sont fausses. On exécute l’instruction de la ligne 6.</li><li>Si dans la variable prenom, on saisit la chaine de caractère «&nbsp;Léa&nbsp;». L&rsquo;assertion de la condition à la ligne 7 est vraie. Celles des lignes 3,5,9 sont fausses. On exécute l’instruction de la ligne 8.</li><li>Si dans la variable prenom, on saisit la chaine de caractère «&nbsp;paul&nbsp;».L&rsquo;assertion de la condition à la ligne 9 est vraie. Celles des lignes 3,5,7 sont fausses. En effet, la chaine de caractère «&nbsp;paul&nbsp;» est différente ede la chaine de caractère «&nbsp;Paul&nbsp;». On exécute l’instruction de la ligne 10.</li></ul>
+
+
+
+<p>Il est possible de créer des conditions dans des conditions. Pour qu’elles s’exécutent. Il faut respecter les indentations.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bt5"><a target="_blank" href="https://create.withcode.uk/python/Bt5">create.withcode.uk</a></iframe>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><strong><em>Exercice 5</em></strong></p>
+
+
+
+<p><strong>1) Tester et dérouler le programme ci-dessous (c&rsquo;est-à-dire expliquer le rôle de chacune des instructions)</strong></p>
+
+
+
+<p><strong>2) Rajouter un 4ème menu à la borne d&rsquo;achat JUNK FOOD.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bt6"><a target="_blank" href="https://create.withcode.uk/python/Bt6">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim">
+<p>1)</p>
+<p>A la ligne 1&nbsp;: On affiche la chaine de caractères « Bienvenue sur la borne d&rsquo;achat de JUNK FOOOOD ! Pour commander taper : \n »</p>
+<p>A la ligne 2&nbsp;: On affiche la chaine de caractères « 1. Pour le Royal Kebab »</p>
+<p>A la ligne 3&nbsp;: On affiche la chaine de caractères « 2. Pour le Sublime Burger »</p>
+<p>A la ligne 4&nbsp;: On affiche la chaine de caractèresprint « 3. Pour le Chaudron de Tenders »</p>
+<p>A la ligne 5&nbsp;: On affiche la chaine de caractères « Choix :  » et l’utilisateur saisit une valeur qui est affectée à la variable choix.<br />
+A la ligne 7&nbsp;: On teste l’assertion choix==1 , si elle est vraie, on exécute l’instruction de la ligne la ligne 8.</p>
+<p>A la ligne 8&nbsp;: On affiche la chaine de caractères « Vous avez choisit un Royal Kebab, votre commande est en cours de préparation 😉 »</p>
+<p>A la ligne 9&nbsp;: On teste l’assertion choix==2 , si elle est vraie,  on exécute l’instruction de la ligne 10.</p>
+<p>A la ligne 10&nbsp;: On affiche la chaine de caractères »Vous avez choisit un Sublime Burger, votre commande est en cours de préparation 😉 »</p>
+<p>A la ligne 11&nbsp;:  On teste l’assertion choix==3 , si elle est vraie,  on exécute l’instruction de la ligne la ligne 12.</p>
+<p>A la ligne 12&nbsp;: On affiche la chaine de caractères »Vous avez choisit un Chaudron de Tenders, votre commande est en cours de préparation 😉 »<br />
+else:</p>
+<p>A ligne 13&nbsp;: On teste l’assertion du else, c’est-à-dire, si les assertions des ligne 7,9,11 sont fausse, on exécute l’instruction de la ligne 10.</p>
+<p>A la ligne 14&nbsp;: On affiche la chaine de caractères »Erreur de saisie, veuillez relancer le programme pour choisir votre menu ! »)</p>
+<p>2)</p>
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/GZE"><a target="_blank" href="https://create.withcode.uk/python/GZE">create.withcode.uk</a></iframe>
+</div></div>
+
+
+
+<p><strong><em>Exercice 6</em></strong></p>
+
+
+
+<p><strong>Tester et dérouler (pas besoin de l&rsquo;écrire) le programme ci-dessous</strong>.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bt9"><a target="_blank" href="https://create.withcode.uk/python/Bt9">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim">
+Réponse en vidéo :<br />
+<iframe src="https://www.youtube.com/embed/5Kl-ZF2ebPo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" width="560" height="315" frameborder="0"></iframe><br />
+</div></div>
+
+
+
+<p><strong><em>Exercice 7</em></strong></p>
+
+
+
+<p><strong>Écrire un programme qui demande&nbsp;l&rsquo;age&nbsp;de l&rsquo;utilisateur et l&rsquo;informe s&rsquo;il est majeur&nbsp;ou mineur.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim">
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/BtA"><a target="_blank" href="https://create.withcode.uk/python/BtA">create.withcode.uk</a></iframe>
+</div></div>
+
+
+
+<p><strong><em>Exercice </em></strong><em><strong>8</strong></em></p>
+
+
+
+<p><strong>Écrire un programme qui demande&nbsp;l&rsquo;age&nbsp;d&rsquo;un enfant à l&rsquo;utilisateur. Ensuite, il l&rsquo;informe&nbsp;de sa catégorie :&nbsp;</strong></p>
+
+
+
+<ul><li><strong>« Pas de catégorie » moins de 6 ans&nbsp;</strong></li><li><strong>« Poussin » de 6 à 7 ans&nbsp;</strong></li><li><strong>« Pupille » de 8 à 9 ans&nbsp;</strong></li><li><strong>« Minime » de 10 à 11 ans&nbsp;</strong></li><li><strong>« Cadet » après 12 ans&nbsp;</strong></li></ul>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim">
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/GZD"><a target="_blank" href="https://create.withcode.uk/python/GZD">create.withcode.uk</a></iframe>
+</div></div>
+
+
+
+<p><strong><em>Exercice </em></strong><em><strong>9</strong></em></p>
+
+
+
+<p><strong>Écrire un programme qui demande à l&rsquo;utilisateur de saisir 3 valeurs correspondant aux longueurs des côtés d&rsquo;un triangle. Le programme affiche suivant les valeurs saisies, si le triangle est rectangle ou non.</strong></p>
+
+
+
+<p><strong>Pour rappel, un triangle ABC est rectangle en A si et seulement si BC<sup>2</sup>=AB<sup>2</sup>+AC<sup>2</sup>.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim">
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/BtC"><a target="_blank" href="https://create.withcode.uk/python/BtC">create.withcode.uk</a></iframe>
+</div></div>
+
+
+<center><a href="variables2.html" title="Les variables partie 2"><img alt="Survol" onmouseout="this.src='img/bac2.png';" onmouseover="this.src='img/bac.png';" src="img/bac2.png" /><space></space><a href="boucles.html" title="Les boucles"><img alt="Survol" onmouseout="this.src='img/suite2.png';" onmouseover="this.src='img/suite.png';" src="img/suite2.png" /></a><center>
+
+</div>
+</article>
+<footer> &copy; Copyright 2019-2027</footer>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html> 
+<html>
+<html lang="fr">
+
+	<head>
+ 	<meta charset="utf-8">
+		<title>Les fonctions</title>
+
+		<!-- mon icon -->
+		<link rel="shortcut icon" href="../../favicon.ico">
+
+		<!-- mon template.css -->
+		<link rel="stylesheet" href="mon_css.css" media="screen">
+
+<body>
+<a href="introduction.html"><h1 data-name="Programmation en Python">Programmation en Python</h1></a>
+ <nav>
+    <ul id="tabnav">
+        <li><a href="../snt.html" title="Aller à l'acceuil du menu python">Accueil</a></li>
+			<li><a href="introduction.html" title="Introduction">Introduction</a></li>
+			<li><a href="variables1.html" title="Variables, types de variables, lecture, écriture (Partie 1/2)">Variables, types de variables, lecture, écriture (Partie 1/2)</a></li>
+			<li><a href="variables2.html" title="Variables, types de variables, lecture, écriture (Partie 2/2)">Variables, types de variables, lecture, écriture (Partie 2/2)</a></li>
+		</ul>
+		<ul id="tabnav">	
+			<li><a href="conditions.html" title="Structures de contrôle : les conditions">Structures de contrôle : les conditions</a></li>
+			<li><a href="boucles.html" title="Structures de contrôle : les boucles">Structures de contrôle : les boucles</a></li>
+			<li><a href="fonctions.html" title="Les fonctions informatiques">Les fonctions informatiques</a></li>
+			<li><a href="listes.html" title="Les listes">Les listes</a></li>
+    </ul>
+    </nav>
+	<article>
+	
+<titre1>Les fonctions informatiques</titre1>
+<div class="joli">	
+
+
+
+<p>Une fonction informatique est une sorte de sous-programme, prenant en entrées plusieurs paramètres et retournant une valeur en sortie.</p>
+
+
+
+<p>Partons d&rsquo;un exemple, afin de mieux comprendre sa fonctionnalité.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btq"><a target="_blank" href="https://create.withcode.uk/python/Btq">create.withcode.uk</a></iframe>
+
+
+
+<ul><li>L’instruction 1&nbsp;:<ul><li><span class="has-inline-color has-vivid-red-color">def</span> est l’indicateur qui nous permet de définir une fonction.</li><li>somme est le nom de la fonction nommée par le programmeur.</li><li>Elle prend comme paramètre trois variables nommées : nb1, nb2, nb3. Ses variables sont définies entre parenthèses et séparées par des virgules.</li><li>: permet de marque le commencement de notre fonction. L’ensemble de son contenu est indenté.</li></ul></li><li>L’instruction 2 :<ul><li><span class="has-inline-color has-vivid-red-color">return </span>est l’instruction qui permet retourner, d’envoyer la valeur d’une opération, d’une assertion, ou d’une variable.</li><li>nb1+nb2+nb3 est l’opération dont la valeur retourner par la fonction somme</li></ul></li><li>L’instruction 3 affiche le résultat de la fonction somme si l’on affecte à nb1 la valeur 1, à nb2 la valeur 2, nb3 la valeur 3.</li></ul>
+
+
+
+<p>L’avantage des fonctions, c’est qu’une fois celles-ci écrites, elles sont réutilisables à souhait pour une autre application. Par ailleurs, il est possible de programmer des fonctions sans paramètre (voir ex 1 et 2).</p>
+
+
+
+<p>En mathématiques, vous avez souvent à faire l&rsquo;usage de fonctions. Vous faites appel à cette fonction dans l&rsquo;interprétateur. Cela évite d&rsquo;utiliser les instructions print, input, et de déclarer le types de variables rendant l&rsquo;usage du python plus simple. Cependant, cet usage ne permet de répondre à tout les problèmes.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="930" height="523" src="http://mathquiz.fr/wp-content/uploads/2020/10/Sequence-imbriquee-02_2.gif" alt="" class="wp-image-1102"/></figure>
+
+
+
+<p>Il existe ainsi quelques “fonctions” déjà programmées. Pour les appeler, il faut déclarer l’endroit où elle se situe. Le fichier qui stocke certains ensembles de fonctions est appelée bibliothèque, librairie ou encore module.</p>
+
+
+
+<p>Dans la bibliothèque random, on peut appeler la fonction randint(a,b) qui permet de générer un nombre aléatoire entier compris entre a et b.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btr"><a target="_blank" href="https://create.withcode.uk/python/Btr">create.withcode.uk</a></iframe>
+
+
+
+<ul><li>L’instruction 1 :<ul><li>from random, nous indique que l’on souhaite charger des “fonctions” de la bibliothèque random;</li><li>Import *, nous permet de charger l’ensemble des fonctions de la bibliothèque random. Le caractère * est l’expression régulière signifiant all (ou tout).</li></ul></li></ul>
+
+
+
+<ul><li>L’instruction 2 : on affecte à la variable a la valeur retournée par la fonction randint de paramètre 0 et 10. C’est-à-dire une valeur aléatoire (pseudo-aléatoire) comprises entre 0 et 10.</li><li>L’instruction 3 : affiche la valeur de la variable a.</li></ul>
+
+
+
+<p>A chaque exécution du programme, vous obtiendrez un nombre compris entre 0 et 10.</p>
+
+
+
+<p>Pour s’amuser avec ces fonctions déjà pré-programmées, le programmeur se documente afin d’utiliser. Voici la doc de la bibliothèque random : <a href="https://docs.python.org/3/library/random.html" target="_blank" rel="noreferrer noopener">https://docs.python.org/3/library/random.html</a></p>
+
+
+
+<p>Et pour plus d’amusement, la doc référençant les bibliothèques standards utilisées en python : <a rel="noreferrer noopener" href="https://docs.python.org/fr/3/library/index.html" target="_blank">https://docs.python.org/fr/3/library/index.html</a></p>
+
+
+
+<p>Pour les 4 exercices suivants, vous pouvez dérouler les programmes dans votre « tête » afin de gagner du temps. Solution en vidéo après l&rsquo;exercice 4.</p>
+
+
+
+<p><strong><em>Exercice 1</em></strong></p>
+
+
+
+<p><strong>Tester et dérouler le programme ci-dessous</strong>.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bts"><a target="_blank" href="https://create.withcode.uk/python/Bts">create.withcode.uk</a></iframe>
+
+
+
+<p><em><strong>Exercice 2</strong></em></p>
+
+
+
+<p><strong>Tester et dérouler le programme ci-dessous.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/MUv"><a target="_blank" href="https://create.withcode.uk/python/MUv">create.withcode.uk</a></iframe>
+
+
+
+<p><em><strong>Exercice 3</strong></em></p>
+
+
+
+<p><strong>Tester et dérouler le programme ci-dessous.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btu"><a target="_blank" href="https://create.withcode.uk/python/Btu">create.withcode.uk</a></iframe>
+
+
+
+<p><em><strong>Exercice </strong></em><strong><em>4</em></strong></p>
+
+
+
+<p><strong>Tester et dérouler le programme ci-dessous.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btv"><a target="_blank" href="https://create.withcode.uk/python/Btv">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim">Vidéo réponse aux 4 exercices précédents.</div></div>
+
+
+
+<p><em><strong>Exercice </strong></em><strong><em>5</em></strong></p>
+
+
+
+<p><strong>Tester et saisir les valeurs 3,4,5. Le programme indique le triangle n&rsquo;est pas rectangle. Ce qui est mathématiquement incohérent. </strong></p>
+
+
+
+<p><strong>Modifier le programme pour qu&rsquo;il donne un résultat cohérent.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/MUu"><a target="_blank" href="https://create.withcode.uk/python/MUu">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btw"><a target="_blank" href="https://create.withcode.uk/python/Btw">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><em><strong>Exercice 6</strong></em></p>
+
+
+
+<p><strong>Écrire un programme avec une fonction nommée parité. Elle prend en entrée une valeur entière de variable nommée nb et retourne en sortie une chaine de caractère.</strong></p>
+
+
+
+<p><strong>Si le nombre est pair, la fonction retourne la chaine de caractère “Le nombre est pair”.</strong></p>
+
+
+
+<p><strong>Si le nombre est impair, la fonction retourne la chaine de caractère “Le nombre est impair”.</strong></p>
+
+
+
+<p><strong>Pour ce programme, on utilisera l’assertion nb%2==0. Cette assertion signifie que le reste de la division euclidienne de nb par 2 doit être égal à 0.</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/MUw"><a target="_blank" href="https://create.withcode.uk/python/MUw">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btx"><a target="_blank" href="https://create.withcode.uk/python/Btx">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><strong><em>Exercice complet</em></strong></p>
+
+
+
+<p><strong>1) Tester et dérouler programme suivant :</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bty"><a target="_blank" href="https://create.withcode.uk/python/Bty">create.withcode.uk</a></iframe>
+
+
+
+<p><strong>2) On souhaite créer un jeu de Pierre-Feuille-Ciseau en contre l’ordinateur. On associe la valeur 1 à la pierre, la valeur 2 à la feuille et la valeur 3 au ciseau. Déterminer les 8 combinaisons possible et compléter le programme ci-dessous :</strong></p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Btz"><a target="_blank" href="https://create.withcode.uk/python/Btz">create.withcode.uk</a></iframe>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bu2"><a target="_blank" href="https://create.withcode.uk/python/Bu2">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><strong>3) Compléter votre programme. On souhaite jouer plusieurs fois contre l’ordinateur. En utilisant les boucles, faites-en sorte que le joueur puisse continuer à jouer tant qu’il ne saisit pas la valeur 0.</strong></p>
+
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bu3"><a target="_blank" href="https://create.withcode.uk/python/Bu3">create.withcode.uk</a></iframe></div></div>
+
+
+
+<p><strong>4) <strong>Compléter votre programme.</strong></strong> <strong>Créer deux variables permettant de compter le nombre de victoires du joueur et le nombre de victoires de l’ordinateur. A la fin du jeu, le jeu affiche qui est le gagnant de la partie.</strong></p>
+
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>Cliquer sur le + pour obtenir la réponse :</div><div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bu4"><a target="_blank" href="https://create.withcode.uk/python/Bu4">create.withcode.uk</a></iframe></div></div>
+
+<center><a href="boucles.html" title="Les boucles"><img alt="Survol" onmouseout="this.src='img/bac2.png';" onmouseover="this.src='img/bac.png';" src="img/bac2.png" /><space></space><a href="listes.html" title="Les listes"><img alt="Survol" onmouseout="this.src='img/suite2.png';" onmouseover="this.src='img/suite.png';" src="img/suite2.png" /></a><center>
+
+</div>	
+</article>
+<footer> &copy; Copyright 2019-2027</footer>
+</body>
+</html>

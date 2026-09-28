@@ -1,0 +1,329 @@
+<!DOCTYPE html> 
+<html>
+<html lang="fr">
+
+	<head>
+ 	<meta charset="utf-8">
+		<title>Les variables partie 1</title>
+
+		<!-- mon icon -->
+		<link rel="shortcut icon" href="../../favicon.ico">
+
+		<!-- mon template.css -->
+		<link rel="stylesheet" href="mon_css.css" media="screen">
+
+<body>
+<a href="introduction.html"><h1 data-name="Programmation en Python">Programmation en Python</h1></a>
+ <nav>
+    <ul id="tabnav">
+        <li><a href="../snt.html" title="Aller à l'acceuil du menu python">Accueil</a></li>
+			<li><a href="introduction.html" title="Introduction">Introduction</a></li>
+			<li><a href="variables1.html" title="Variables, types de variables, lecture, écriture (Partie 1/2)">Variables, types de variables, lecture, écriture (Partie 1/2)</a></li>
+			<li><a href="variables2.html" title="Variables, types de variables, lecture, écriture (Partie 2/2)">Variables, types de variables, lecture, écriture (Partie 2/2)</a></li>
+		</ul>
+		<ul id="tabnav">	
+			<li><a href="conditions.html" title="Structures de contrôle : les conditions">Structures de contrôle : les conditions</a></li>
+			<li><a href="boucles.html" title="Structures de contrôle : les boucles">Structures de contrôle : les boucles</a></li>
+			<li><a href="fonctions.html" title="Les fonctions informatiques">Les fonctions informatiques</a></li>
+			<li><a href="listes.html" title="Les listes">Les listes</a></li>
+    </ul>
+    </nav>
+	<article>
+<titre1>Variables, types de variables, lecture, écriture (Partie 1/2)</titre1>
+
+<div class="joli">	
+
+<p>Afin de suivi le cours/TD plus agréable, je vous conseille de lire le guide vidéo disponible en cliquant sur l&rsquo;image ci-dessous. Vous pouvez par ailleurs optimiser votre espace de travail en ouvrant une fenêtre consacré au guide vidéo et une autre à la lecture de cette page web.</p>
+
+
+
+<center>
+<a href="https://www.youtube.com/watch?v=BqiqK0yTc0A"><img src="img/log.png"></a>
+</center>
+
+
+<hr/>
+
+
+
+<p>Pour qu&rsquo;une machine puisse communiquer avec son utilisateur, il est important qu&rsquo;elle puisse interagir avec ce dernier. Pour cela, il faut que la machine puisse afficher de l&rsquo;information pour guider l&rsquo;utilisateur. Pour mener une interaction, il faut que l&rsquo;utilisateur envoie des informations vers cette machine. Ces informations doivent être stockée en mémoire, afin qu&rsquo;elles puissent être traitées par la machine. Une fois le traitement de cette information, ou des informations saisit par l&rsquo;utilisateur, la machine affiche un résultat qui informe l&rsquo;utilisateur. Ce principe de communication entre l&rsquo;homme et la machine est la base de l&rsquo;informatique.</p>
+
+
+
+<p>Dans cette partie, nous allons donc voir comment cela se programme en langage de programmation python. </p>
+
+
+
+<p><strong><span class="has-inline-color has-vivid-red-color">1. Écriture/flux de sortie</span></strong></p>
+
+
+
+<p>L’instruction&nbsp;print(“Mon texte”)&nbsp;permet d’afficher le texte Mon texte dans la console python.&nbsp;Exécuter le programme ci-dessous pour observer ce qu&rsquo;il fait, en appuyant sur le triangle vert.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/BrZ"><a target="_blank" href="https://create.withcode.uk/python/BrZ">create.withcode.uk</a></iframe>
+
+
+
+<p>L&rsquo;endroit où s&rsquo;affiche le résultat est appelé<strong> console d’exécution </strong>ou dans le cas particulier du python est aussi appelé <strong>l&rsquo;interpréteur</strong>. L&rsquo;endroit où vous saisissez votre programme est appelé <strong>éditeur de texte</strong>.</p>
+
+
+
+<p>Maintenant changer le texte si situant entre les guillemets. Par un texte de votre choix. Vous observez que vous avez saisit correspond au texte que vous avez écrit.</p>
+
+
+
+<p><strong>print&nbsp;</strong>est l’instruction qui permet d’afficher du texte sur l’écran. Le texte est mis entre parenthèses&nbsp;et entre guillemets. Le texte entre guillemets&nbsp;est une&nbsp;<strong>chaîne de caractères</strong>.&nbsp;C&rsquo;est l&rsquo;information que prend l&rsquo;instruction<strong> print</strong>.</p>
+
+
+
+<p>On dit que l’ordinateur&nbsp;écrit&nbsp;de l’information. Cette information est un <strong>flux de&nbsp;sortie</strong>&nbsp;car elle va de l’ordinateur vers l’écran.&nbsp;</p>
+
+
+
+<p>Exerçons-nous avec cette instruction, dans deux exercices 😉</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><em><strong>Exercice 1</strong>&nbsp;</em></p>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td><strong>En vous inspirant de l’exemple ci-dessus. Afficher dans la console python le texte : Hello World !</strong>&nbsp;(En utilisant l&rsquo;éditeur ci-dessous)</td></tr></tbody></table></figure>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+<details>
+	<summary><black>Cliquer sur la flêche pour obtenir la réponse :</black></summary>
+<div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="1S" width="100%" height="400px" src="https://create.withcode.uk/embed/Bra"><a target="_blank" href="https://create.withcode.uk/python/Bra">create.withcode.uk</a></iframe></div>
+</details>
+
+
+
+<p><em><strong>Exercice&nbsp;2</strong>&nbsp;</em></p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<p><strong>En vous inspirant de l’exemple ci-dessus. Afficher dans la console python le texte&nbsp;(en prenant en compte&nbsp;les sauts&nbsp;de ligne)&nbsp; (En utilisant l&rsquo;éditeur ci-dessous) :</strong>&nbsp; &nbsp;<br>Quisque eleifend elit nec odio malesuada, in tristique elit tristique.</p>
+
+
+
+<p>Proin&nbsp;malesuada&nbsp;risus&nbsp;id&nbsp;iaculis&nbsp;pharetra.&nbsp; </p>
+
+
+
+<p>Aenean&nbsp;bibendum&nbsp;leo&nbsp;quis&nbsp;justo&nbsp;faucibus, id&nbsp;condimentum&nbsp;arcu&nbsp;euismod.&nbsp; </p>
+
+
+
+<p>Sed semper&nbsp;purus&nbsp;at&nbsp;fringilla&nbsp;interdum</p>
+</div></div>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/5"><a target="_blank" href="https://create.withcode.uk/python/5">create.withcode.uk</a></iframe>
+
+
+<details>
+	<summary><black>Cliquer sur la flêche pour obtenir la réponse :</black></summary>
+<div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="1S" width="100%" height="400px" src="https://create.withcode.uk/embed/Brb"><a target="_blank" href="https://create.withcode.uk/embed/Brb">create.withcode.uk</a></iframe></div>
+</details>
+
+
+<p><strong>Remarque :&nbsp;</strong>ajouter&nbsp;<strong>\n</strong>&nbsp;dans une chaine de caractère permet d’établir un saut de ligne.&nbsp;</p>
+
+
+<details>
+	<summary><black>Cliquer sur la flêche pour obtenir la réponse :</black></summary>
+<div class="su-spoiler-content su-u-clearfix su-u-trim"><iframe frameborder="1S" width="100%" height="400px" src="https://create.withcode.uk/embed/Brc"><a target="_blank" href="https://create.withcode.uk/embed/Brc">create.withcode.uk</a></iframe></div>
+</details>
+
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><span class="has-inline-color has-vivid-red-color"><strong>2. Les variables informatiques</strong></span></p>
+
+
+
+<p>Pour stocker de l’information sur un ordinateur, nous avons besoin d’un “outil” qui s’appelle variable.&nbsp;</p>
+
+
+
+<p>Une variable à plusieurs rôles :&nbsp;</p>
+
+
+
+<ol><li>Elle stocke de l’information. Cette information est stockée dans la mémoire RAM à une adresse mémoire. </li><li>Elle a un type. Cette information peut être :<ul><li>Un nombre entier (type :&nbsp;int).&nbsp;</li><li>Un nombre décimal (type :&nbsp;float).&nbsp;</li><li>Une chaine de caractère (du texte) (type :&nbsp;str).&nbsp;&nbsp;</li><li>Etc&nbsp;</li></ul></li><li>La variable est définie par un nom. Elle peut être appelée&nbsp;dans un programme et peut évoluer au cours du programme. C&rsquo;est-à-dire qu’elle possède le même espace de stockage dans la mémoire RAM, mais&nbsp;l’information stockée dans cette espace peut-être modifier au cours du programme. Par convention d’écriture&nbsp;:&nbsp;le nom d’une variable commence toujours par une minuscule, sans espace et sans accent.&nbsp;</li></ol>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="640" height="480" src="http://mathquiz.fr/wp-content/uploads/2020/10/640px-Elixir_M2U51264DS8HC3G-5T_20060320.jpg" alt="" class="wp-image-964" srcset="https://mathquiz.fr/wp-content/uploads/2020/10/640px-Elixir_M2U51264DS8HC3G-5T_20060320.jpg 640w, https://mathquiz.fr/wp-content/uploads/2020/10/640px-Elixir_M2U51264DS8HC3G-5T_20060320-300x225.jpg 300w, https://mathquiz.fr/wp-content/uploads/2020/10/640px-Elixir_M2U51264DS8HC3G-5T_20060320-370x278.jpg 370w" sizes="(max-width: 640px) 100vw, 640px" /><figcaption><em>Image de barrettes de RAM. <em>(source Wikipédia)</em></em>. <em>C&rsquo;est dans cet espace stockage que sont sauvegardées les valeurs de vos variables.</em></figcaption></figure>
+
+
+
+<p>Pour affecter une information à une variable on utilise en python le signe<span class="has-inline-color has-vivid-red-color">&nbsp;=</span><span class="has-inline-color has-black-color">.</span> <strong>Ce dernier est différent du = mathématique.&nbsp;</strong></p>
+
+
+
+<p>Pour mieux comprendre son fonctionnement, nous allons étudier quelques exemples.</p>
+
+
+
+<p><strong>Exemple 1 :</strong>&nbsp;</p>
+
+
+
+<p>prenom=”Michel”&nbsp;</p>
+
+
+
+<p>Le nom de la variable est&nbsp;prenom. Un espace de stockage se créer dans la mémoire RAM associé à la variable&nbsp;prenom. On affecte&nbsp;la variable&nbsp;de type <strong>chaîne de caractères </strong>“Michel” (de type <strong>str</strong>) à la variable&nbsp;prenom. Le texte Michel est stocké dans l’espace mémoire RAM dédié à la variable&nbsp;prenom.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="800" height="500" src="http://mathquiz.fr/wp-content/uploads/2020/10/var1.png" alt="" class="wp-image-969" srcset="https://mathquiz.fr/wp-content/uploads/2020/10/var1.png 800w, https://mathquiz.fr/wp-content/uploads/2020/10/var1-300x188.png 300w, https://mathquiz.fr/wp-content/uploads/2020/10/var1-768x480.png 768w, https://mathquiz.fr/wp-content/uploads/2020/10/var1-370x231.png 370w" sizes="(max-width: 800px) 100vw, 800px" /></figure>
+
+
+
+<p><strong>Exemple&nbsp;2&nbsp;:</strong>&nbsp;</p>
+
+
+
+<p>&nbsp;age=16&nbsp;</p>
+
+
+
+<p>Le nom de la variable est&nbsp;age. Un espace de stockage se créer&nbsp;dans la mémoire RAM associé&nbsp;à la variable&nbsp;age. On affecte la variable&nbsp;age&nbsp;un&nbsp;type&nbsp;de variable&nbsp;<strong>entier</strong> (type <strong>int)</strong>&nbsp;ayant comme valeur&nbsp;16. Le valeur 16 est stockée dans l’espace mémoire RAM dédié à la variable&nbsp;age.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="800" height="500" src="http://mathquiz.fr/wp-content/uploads/2020/10/var2-1.png" alt="" class="wp-image-972" srcset="https://mathquiz.fr/wp-content/uploads/2020/10/var2-1.png 800w, https://mathquiz.fr/wp-content/uploads/2020/10/var2-1-300x188.png 300w, https://mathquiz.fr/wp-content/uploads/2020/10/var2-1-768x480.png 768w, https://mathquiz.fr/wp-content/uploads/2020/10/var2-1-370x231.png 370w" sizes="(max-width: 800px) 100vw, 800px" /></figure>
+
+
+
+<p><strong>Exemple&nbsp;3&nbsp;:</strong>&nbsp;</p>
+
+
+
+<p>&nbsp;masse=75.4&nbsp;</p>
+
+
+
+<p>Le nom de la variable est&nbsp;masse. Un espace de stockage se créer&nbsp;dans la mémoire RAM associé&nbsp;à la variable&nbsp;masse. On affecte la variable&nbsp;age&nbsp;un&nbsp;type&nbsp;de variable&nbsp;<strong>flottante</strong>, nombre décimal (type <strong>float)</strong>&nbsp;ayant comme valeur&nbsp;75.4. Le valeur 75.4 est stockée dans l’espace mémoire RAM dédié à la variable&nbsp;masse.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="800" height="500" src="http://mathquiz.fr/wp-content/uploads/2020/10/var3.png" alt="" class="wp-image-976" srcset="https://mathquiz.fr/wp-content/uploads/2020/10/var3.png 800w, https://mathquiz.fr/wp-content/uploads/2020/10/var3-300x188.png 300w, https://mathquiz.fr/wp-content/uploads/2020/10/var3-768x480.png 768w, https://mathquiz.fr/wp-content/uploads/2020/10/var3-370x231.png 370w" sizes="(max-width: 800px) 100vw, 800px" /></figure>
+
+
+
+<p>Vos variables restent sauvegardées dans la mémoire vive tant que le programme reste ouvert (ou est exécuté).</p>
+
+
+
+<p>Chaque espace de stockage de la mémoire vive est appelé <strong>adresse de la variable.</strong></p>
+
+
+
+<p><strong>Exemple complet :</strong></p>
+
+
+
+<p>Pour traiter de l&rsquo;information, la machine va utiliser les variables et modifier ou non leurs valeurs suivant le programme.</p>
+
+
+
+<p>Pour afficher la valeur d&rsquo;une variable, on utilise également l’instruction <strong>print</strong>. Exécuter le programme ci-dessous et observer le résultat.</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Brd"><a target="_blank" href="https://create.withcode.uk/python/Brd">create.withcode.uk</a></iframe>
+
+
+
+<p>Dans l&rsquo;instruction print, certains éléments sont entre guillemets. Ce sont les chaines de caractères dont écrit le contenu directement. Si l&rsquo;on enlève les guillemets, on demande à l&rsquo;instruction print de récupérer les informations stockés à l&rsquo;adresse de la variable correspondante. Pour mettre plusieurs informations dans l&rsquo;instruction print, on les sépare par virgules. <strong>Il est important de respecter la syntaxe du langage de programme. Sinon, le programme ne pourra s’exécuter.</strong></p>
+
+
+
+<p>Exécutons le programme, ci dessous :</p>
+
+
+<iframe frameborder="0" width="100%" height="400px" src="https://create.withcode.uk/embed/Bre"><a target="_blank" href="https://create.withcode.uk/python/Bre">create.withcode.uk</a></iframe>
+
+
+
+<p>On remarque qu&rsquo;a l’exécution, la 6ème instruction n&rsquo;indiquera pas le prenom Michel et la masse 75.4. En effet, les variables prenom et age on subit une nouvelle affectation de valeurs à la ligne 5 et 6.</p>
+
+
+
+<p>Les instructions d&rsquo;un programme s’exécute dans l’ordre où elles sont écrites. Chaque ligne correspond à une instruction. Décortiquons le programme pour observer ce qu&rsquo;il se passe au niveau de la mémoire vive.</p>
+
+
+
+<p>État de la mémoire vive à la ligne 1.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="800" height="500" src="http://mathquiz.fr/wp-content/uploads/2020/10/var1.png" alt="" class="wp-image-969" srcset="https://mathquiz.fr/wp-content/uploads/2020/10/var1.png 800w, https://mathquiz.fr/wp-content/uploads/2020/10/var1-300x188.png 300w, https://mathquiz.fr/wp-content/uploads/2020/10/var1-768x480.png 768w, https://mathquiz.fr/wp-content/uploads/2020/10/var1-370x231.png 370w" sizes="(max-width: 800px) 100vw, 800px" /></figure>
+
+
+
+<p>État de la mémoire vive à la ligne 2.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="800" height="500" src="http://mathquiz.fr/wp-content/uploads/2020/10/var2.png" alt="" class="wp-image-971" srcset="https://mathquiz.fr/wp-content/uploads/2020/10/var2.png 800w, https://mathquiz.fr/wp-content/uploads/2020/10/var2-300x188.png 300w, https://mathquiz.fr/wp-content/uploads/2020/10/var2-768x480.png 768w, https://mathquiz.fr/wp-content/uploads/2020/10/var2-370x231.png 370w" sizes="(max-width: 800px) 100vw, 800px" /></figure>
+
+
+
+<p>État de la mémoire vive à la ligne 3.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="800" height="500" src="http://mathquiz.fr/wp-content/uploads/2020/10/var3-2.png" alt="" class="wp-image-985" srcset="https://mathquiz.fr/wp-content/uploads/2020/10/var3-2.png 800w, https://mathquiz.fr/wp-content/uploads/2020/10/var3-2-300x188.png 300w, https://mathquiz.fr/wp-content/uploads/2020/10/var3-2-768x480.png 768w, https://mathquiz.fr/wp-content/uploads/2020/10/var3-2-370x231.png 370w" sizes="(max-width: 800px) 100vw, 800px" /></figure>
+
+
+
+<p>État de la mémoire vive à la ligne 4. Idem qu&rsquo;à la ligne 3. Car, il n&rsquo;y a aucune nouvelle affectation.</p>
+
+
+
+<p>État de la mémoire vive à la ligne 5.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="800" height="500" src="http://mathquiz.fr/wp-content/uploads/2020/10/var4.png" alt="" class="wp-image-987" srcset="https://mathquiz.fr/wp-content/uploads/2020/10/var4.png 800w, https://mathquiz.fr/wp-content/uploads/2020/10/var4-300x188.png 300w, https://mathquiz.fr/wp-content/uploads/2020/10/var4-768x480.png 768w, https://mathquiz.fr/wp-content/uploads/2020/10/var4-370x231.png 370w" sizes="(max-width: 800px) 100vw, 800px" /></figure>
+
+
+
+<p>État de la mémoire vive à la ligne 6.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="800" height="500" src="http://mathquiz.fr/wp-content/uploads/2020/10/var5.png" alt="" class="wp-image-988" srcset="https://mathquiz.fr/wp-content/uploads/2020/10/var5.png 800w, https://mathquiz.fr/wp-content/uploads/2020/10/var5-300x188.png 300w, https://mathquiz.fr/wp-content/uploads/2020/10/var5-768x480.png 768w, https://mathquiz.fr/wp-content/uploads/2020/10/var5-370x231.png 370w" sizes="(max-width: 800px) 100vw, 800px" /></figure>
+
+
+
+<p>État de la mémoire vive à la ligne 7. Idem qu&rsquo;a la ligne 6. Car, il n&rsquo;y a aucune nouvelle affectation.</p>
+
+
+
+<p>Pour faire évoluer « automatiquement » la valeur des variables déclarées et stockées dans la mémoire vive, il faut effectuer des opérations. Ces opérations sont écrites dans le programme et sont considérés comme des instructions.</p>
+
+
+
+<center><a href="introduction.html" title="introduction"><img alt="Survol" onmouseout="this.src='img/bac2.png';" onmouseover="this.src='img/bac.png';" src="img/bac2.png" /><space></space><a href="variables2.html" title="Variables, types de variables, lecture, écriture (Partie 2/2)"><img alt="Survol" onmouseout="this.src='img/suite2.png';" onmouseover="this.src='img/suite.png';" src="img/suite2.png" /></a><center>
+
+</div>
+</article>
+<footer> &copy; Copyright 2019-2027</footer>
+</body>
+</html>
