@@ -44,7 +44,8 @@ nav
 
 p {
   line-height: 3; /* Valeur recommandée sans unité */
-	font-family: Arial, sans-serif
+  font-family: Arial, sans-serif;
+  font-size: 16px;
 }
 
 space{
