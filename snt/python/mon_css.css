@@ -43,7 +43,7 @@ nav
 }
 
 p {
-  line-height: 2; /* Valeur recommandée sans unité */
+  line-height: 1.5; /* Valeur recommandée sans unité */
   font-family: Arial, sans-serif;
   font-size: 20px;
 }
