@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Correction – Systèmes embarqués et voiture autonome · SNT</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="../informatique-embarquee.html">Chapitre 6 – Informatique embarquée</a><span class="sep">›</span>
+        <a href="../informatique-embarquee-seance1.html">Séance 1</a><span class="sep">›</span>
+        <span>Correction</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="background:linear-gradient(135deg,#7c3aed,#1c2333)">
+      <p class="eyebrow">Réservé à l’enseignant</p>
+      <h1>Correction – Systèmes embarqués et voiture autonome</h1>
+      <p class="meta">Séance 1 · Questions 1 à 5 (proposition)</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">1</span> Question 1 – Capteurs</h2>
+      <p>Capteurs d’une voiture autonome : <b>caméras</b> (reconnaissance des panneaux, lignes, piétons, feux), <b>radars</b> (distance et vitesse des véhicules), <b>lidar</b> (laser qui cartographie l’environnement en 3D), <b>capteurs à ultrasons</b> (obstacles proches, manœuvres), <b>GPS</b> et <b>centrale inertielle</b> (position et mouvements du véhicule), capteurs de vitesse des roues.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">2</span> Question 2 – Actionneurs</h2>
+      <ul><li><b>Freins</b> : activés par exemple quand un obstacle ou un piéton apparaît devant la voiture.</li><li><b>Direction</b> (moteur de direction) : activée pour rester dans la voie, éviter un obstacle ou tourner.</li><li><b>Accélérateur / moteur</b> : activé pour suivre la vitesse du trafic ou repartir au feu vert.</li><li>Autres exemples : <b>clignotants</b>, <b>feux</b> et <b>essuie-glaces</b> (pluie, nuit), <b>klaxon</b>.</li></ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">3</span> Question 3 – Débat sur l’interface</h2>
+      <p>Réponse argumentée attendue (deux points de vue possibles).</p>
+      <ul><li><b>Oui, une interface est nécessaire :</b> informer les passagers de ce que fait la voiture, les rassurer, permettre de choisir une destination, de donner un ordre d’arrêt, et surtout, aux niveaux 2 et 3, <b>alerter le conducteur</b> pour qu’il reprenne le contrôle (doc. 2).</li>
+      <li><b>Non, pas obligatoirement :</b> en niveau 5, la voiture pourrait être commandée à distance ou par une application ; les robotaxis n’ont pas de conducteur. Mais une <b>interface de secours</b> (arrêt d’urgence) reste indispensable pour la sécurité.</li></ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">4</span> Question 4 – Niveaux d’autonomie</h2>
+      <ul><li>(a) Régulateur de vitesse adaptatif : <b>niveau 1</b> (ou 2 s’il est couplé au maintien dans la voie). Le conducteur ne peut pas lire : il conduit et surveille.</li>
+      <li>(b) Mercedes <i>Drive Pilot</i> : <b>niveau 3</b>. Le conducteur peut détourner son attention dans les conditions prévues (trafic fluide sur autoroute, ≤ 95 km/h), mais il doit rester capable de reprendre le contrôle quand le système le demande.</li>
+      <li>(c) Robotaxi Waymo : <b>niveau 4</b>. Il n’y a pas de conducteur : le passager peut lire, mais uniquement dans la zone où le service est autorisé.</li></ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">5</span> Question 5 – Sécurité</h2>
+      <p>Une attaque adverse peut faire lire un panneau « stop » comme une limitation de vitesse : la voiture ne freine pas, ce qui met en danger les passagers et les autres usagers (<b>criticité</b> et <b>sécurité</b> d’un système embarqué).</p>
+      <p>Solutions possibles : croiser plusieurs capteurs (caméra, lidar, cartes embarquées, GPS), entraîner l’IA avec des exemples d’attaques, détecter les situations incohérentes et imposer un freinage de précaution, mettre à jour régulièrement les logiciels.</p>
+    </section>
+
+    <div class="note"><strong class="title">Remarque pour l’enseignant</strong><p>Tu n’avais pas fourni de corrigé : cette correction est une <b>proposition</b> à relire et à adapter. Les questions 4 et 5 sont des ajouts liés à la mise à jour de la séance.</p></div>
+
+    <nav class="pager" aria-label="Navigation">
+      <a class="btn secondary" href="../informatique-embarquee-seance1.html">← Retour à la séance 1</a>
+    </nav>
+  </main>
+
+  <footer>SNT · Seconde · Correction réservée à l’enseignant · à ne pas publier</footer>
+
+</body>
+</html>

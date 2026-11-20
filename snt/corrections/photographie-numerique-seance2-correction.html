@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Correction – Compression et traitement d’image · SNT</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="../photographie-numerique.html">Chapitre 7 – Photographie numérique</a><span class="sep">›</span>
+        <a href="../photographie-numerique-seance2.html">Partie 2</a><span class="sep">›</span>
+        <span>Correction</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="background:linear-gradient(135deg,#db2777,#1c2333)">
+      <p class="eyebrow">Réservé à l’enseignant</p>
+      <h1>Correction – Compression et traitement d’image</h1>
+      <p class="meta">Partie 2 · Compression, programmes Python et photomontage (proposition)</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">A1</span> Question 1 – Pourquoi compresser une image ?</h2>
+      <p>Une image brute (RAW) est <b>très lourde</b>. La compresser permet de <b>réduire le poids du fichier</b> : on économise de la place de stockage (carte mémoire, disque, cloud) et l’image est <b>plus rapide à transférer, à envoyer ou à afficher</b> sur le Web.</p>
+      <p>En contrepartie, le format JPEG perd une partie de l’information : le RAW conserve toutes les données du capteur et permet de retoucher davantage, mais il est lourd et demande un logiciel de développement.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">A2</span> Question 2 – Trois modifications subies par une image compressée</h2>
+      <p>Réponses possibles (compression <b>avec perte</b>, comme le JPEG) :</p>
+      <ul><li><b>Réduire le nombre de couleurs</b> : on remplace des nuances très proches par une seule (le GIF est limité à 256 couleurs).</li>
+      <li><b>Supprimer des détails peu visibles pour l’œil</b> : on regroupe des pixels voisins presque identiques (JPEG : l’image est découpée en blocs de 8 × 8 pixels).</li>
+      <li><b>Réduire la définition</b> de l’image (moins de pixels) ou la <b>qualité</b> de l’enregistrement.</li></ul>
+      <p>Une compression <b>sans perte</b> (PNG, TIFF avec compression) code autrement les données répétées, sans rien perdre : le gain de poids est plus faible.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">B1</span> Question 1 – Programmes 1 et 2</h2>
+      <ul><li><b>Programme 1</b> : deux boucles imbriquées parcourent les pixels de l’image (ligne par ligne, <code>y</code> puis <code>x</code>). Pour chaque pixel, <code>getpixel((x,y))</code> renvoie son code RVB (<code>r,v,b</code>), qui est affiché. Il affiche 950 × 540 = <b>513 000 lignes</b>, puis « fin ».</li>
+      <li><b>Programme 2</b> : pour chaque pixel, on lit <code>r,v,b</code> puis on les <b>permute</b> : le nouveau rouge est l’ancien vert, le nouveau vert est l’ancien bleu, le nouveau bleu est l’ancien rouge. <code>putpixel</code> écrit le nouveau code. Les couleurs de l’image changent (ciel et herbe prennent d’autres teintes).</li></ul>
+      <div class="results"><figure><img src="../img/photo/res-permutation.jpg" alt="Résultat du programme 2" loading="lazy"><figcaption>Résultat du programme 2</figcaption></figure></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">B2</span> Question 2 – Programme 3 (négatif)</h2>
+      <p>Pour chaque pixel, on remplace chaque composante par <b>255 moins sa valeur</b> : (r, v, b) devient (255 − r, 255 − v, 255 − b). On obtient le <b>négatif</b> de l’image : une zone sombre devient claire, un pixel (24, 31, 37) devient (231, 224, 218).</p>
+      <div class="results"><figure><img src="../img/photo/res-negatif.jpg" alt="Résultat du programme 3" loading="lazy"><figcaption>Résultat du programme 3</figcaption></figure></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">B3</span> Question 3 – Programme 4 (noir et blanc)</h2>
+      <p>On calcule un <b>niveau de gris</b> pour chaque pixel avec une moyenne pondérée : <code>0,2125 × r + 0,7154 × v + 0,0721 × b</code>. Le vert pèse le plus, car l’œil humain y est le plus sensible ; le bleu pèse le moins. On donne ensuite cette même valeur aux trois composantes : (gris, gris, gris), ce qui donne une image en <b>niveaux de gris</b>.</p>
+      <div class="results"><figure><img src="../img/photo/res-noir-blanc.jpg" alt="Résultat du programme 4" loading="lazy"><figcaption>Résultat du programme 4</figcaption></figure></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">B4</span> Question 4 – La partie non traitée</h2>
+      <p>L’image mesure <b>960 × 540 pixels</b>, mais les programmes déclarent <code>largeur_image=950</code> : les boucles ne parcourent que les colonnes 0 à 949. Les <b>10 dernières colonnes</b> (x de 950 à 959) ne sont pas traitées : on voit une bande non modifiée sur le <b>bord droit</b> de l’image.</p>
+      <p><b>Correction :</b> remplacer <code>largeur_image=950</code> par <code>largeur_image=960</code>. Mieux, laisser Python lire la taille de l’image :</p>
+      <pre class="code"><code>largeur_image, hauteur_image = img.size</code></pre>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">C</span> Question 5 – Photomontage</h2>
+      <p>Réponse libre. Avec <b>GIMP</b> : on place et on ajuste l’image à la souris, avec un aperçu immédiat et de nombreux outils (calques, retouche) ; mais il faut recommencer à la main. Avec le <b>programme</b> : le résultat est <b>reproductible</b> et automatisable (même position à chaque exécution), mais il faut tâtonner sur les coordonnées et la taille.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">+</span> Question 6 – Du bruit aléatoire</h2>
+      <p>Dans <code>random_bandes.py</code>, la première boucle bruite les lignes 0 à 49 (haut de l’image), la seconde les lignes 490 à 539 (bas). Changer <code>hauteur_image</code> change l’épaisseur de la bande du haut ; changer <code>range(490,540)</code> change celle de la bande du bas.</p>
+      <div class="results"><figure><img src="../img/photo/res-bruit-bandes.jpg" alt="Résultat de random_bandes.py" loading="lazy"><figcaption>Résultat de random_bandes.py</figcaption></figure></div>
+    </section>
+
+      <div class="note"><strong class="title">Remarque pour l’enseignant</strong><p>Tu n’avais pas fourni de corrigé pour la partie 2 : cette correction est une <b>proposition</b> à relire. Je n’ai pas pu consulter la fiche technique de Philippe Balladur : les réponses A1 et A2 sont générales. Les captures des programmes sont celles de leur exécution réelle.</p></div>
+
+    <nav class="pager" aria-label="Navigation">
+      <a class="btn secondary" href="../photographie-numerique-seance2.html">← Retour à la partie 2</a>
+    </nav>
+  </main>
+
+  <footer>SNT · Seconde · Correction réservée à l’enseignant · à ne pas publier</footer>
+
+</body>
+</html>

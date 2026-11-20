@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Correction – Calcul du plus court chemin · SNT</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="../cartographie.html">Chapitre 5 – Cartographie et localisation</a><span class="sep">›</span>
+        <a href="../cartographie-seance4.html">Séance 4</a><span class="sep">›</span>
+        <span>Correction</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="background:linear-gradient(135deg,#dc2626,#1c2333)">
+      <p class="eyebrow">Réservé à l’enseignant</p>
+      <h1>Correction – Calcul du plus court chemin</h1>
+      <p class="meta">Séance 4 · Questions 1 à 4</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">1</span> Question 1 – Deux calculs d’itinéraires</h2>
+      <p>Les deux applications ne prennent pas en compte les mêmes paramètres. <b>OpenStreetMap</b> cherche le chemin le <b>plus court</b>. <b>Google Maps</b> propose différents itinéraires en prenant en compte la <b>durée du trajet suivant le trafic</b> : il utilise la <b>géolocalisation des téléphones</b> pour évaluer en direct l’évolution du trafic.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">2</span> Question 2 – Chemin le plus court</h2>
+      <p>Le chemin le plus court pour aller du sommet A au sommet H est <b>A – B – F – H</b> : 12 + 9 + 11 = <b>32 km</b> (contre 33 km par A – B – H et 34 km par A – D – E – H).</p>
+      <p>Ce n’est pas forcément le plus rapide : l’algorithme basé sur les distances ne tient compte ni de la vitesse de déplacement ni du trafic.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">3</span> Question 3 – Justifier les durées</h2>
+      <p>On sait que v = d ÷ t, donc t = d ÷ v.</p>
+      <ul><li>Arête AD : d = 14 km, v = 80 km/h, donc t = 14 ÷ 80 = 0,175 h, soit 0,175 × 60 = <b>10,5 min</b>.</li>
+      <li>Arête EH : d = 10 km, v = 130 km/h, donc t = 10 ÷ 130 ≈ 0,0769 h, soit 10 ÷ 130 × 60 ≈ <b>4,6 min</b>.</li></ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">4</span> Question 4 – Chemin le plus rapide (algorithme de Dijkstra)</h2>
+      <div class="table-wrap"><table class="data-table dijkstra-table"><thead><tr><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>Choix</th></tr></thead><tbody><tr><td>0</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td><b>A (0)</b></td></tr><tr><td></td><td>9 v A</td><td>∞</td><td>10,5 v A</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td><b>B (9)</b></td></tr><tr><td></td><td></td><td>∞</td><td>10,5 v A</td><td>∞</td><td>15,75 v B</td><td>21 v B</td><td>24,75 v B</td><td><b>D (10,5)</b></td></tr><tr><td></td><td></td><td>∞</td><td></td><td>15,1 v D</td><td>15,75 v B</td><td>21 v B</td><td>24,75 v B</td><td><b>E (15,1)</b></td></tr><tr><td></td><td></td><td>24,85 v E</td><td></td><td></td><td>15,75 v B</td><td>21 v B</td><td>19,7 v E</td><td><b>F (15,75)</b></td></tr><tr><td></td><td></td><td>23,25 v F</td><td></td><td></td><td></td><td>21 v B</td><td>19,7 v E</td><td><b>H (19,7)</b></td></tr></tbody></table></div>
+      <p>Le chemin le plus rapide est <b>A – D – E – H</b>, d’une durée d’environ <b>19,7 minutes</b> (10,5 + 4,6 + 4,6).</p>
+      <p>En comparaison, le chemin le plus court en distance (A – B – F – H) dure 9 + 6,75 + 5,1 ≈ 20,85 minutes.</p>
+      <div class="note"><strong class="title">Remarque pour l’enseignant</strong><p>J’ai reconstitué le tableau complet ligne par ligne. Dans ta version, les lignes sont décalées et la valeur « 27,1 v D » pour F est erronée : il s’agit en réalité de 27,1 par E (15,1 + 12), valeur non retenue car 15,75 par B est meilleure. Le terme « Disjkra » est corrigé en « Dijkstra »).</p></div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation">
+      <a class="btn secondary" href="../cartographie-seance4.html">← Retour à la séance 4</a>
+    </nav>
+  </main>
+
+  <footer>SNT · Seconde · Correction réservée à l’enseignant · à ne pas publier</footer>
+
+</body>
+</html>

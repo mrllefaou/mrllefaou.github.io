@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Correction – Où sont stockées les données ? · SNT</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="../donnees.html">Chapitre 3 – Les données</a><span class="sep">›</span>
+        <a href="../donnees-seance3.html">Séance 3</a><span class="sep">›</span>
+        <span>Correction</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="background:linear-gradient(135deg,#059669,#1c2333)">
+      <p class="eyebrow">Réservé à l’enseignant</p>
+      <h1>Correction – Où sont stockées les données ?</h1>
+      <p class="meta">Séance 3 · Activité (questions 1 à 4) et ouverture sur le RGPD</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">1</span> Question 1 – Le cloud</h2>
+      <p>Le <b>cloud</b> est un service informatique qui permet de <b>stocker et d’accéder à ses données via une interface disponible en ligne</b>, sur les serveurs d’une entreprise (dans des data centers).</p>
+      <ul>
+        <li><b>Avantage principal :</b> on peut accéder à ses données sur quasiment n’importe quel appareil qui possède une connexion Internet, à tout moment.</li>
+        <li><b>Inconvénient principal :</b> le <b>coût environnemental</b> : les serveurs sont perpétuellement allumés et climatisés.</li>
+      </ul>
+      <div class="note"><strong class="title">Pour compléter (ajout)</strong><p>Autres avantages possibles : sauvegarde des données, partage facile, pas de matériel à entretenir. Autres inconvénients : dépendance à une connexion Internet et à l’entreprise qui héberge, confidentialité des données.</p></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">2</span> Question 2 – Disponibilité d’un data center</h2>
+      <p>Le taux de disponibilité est de 99,6 % à 99,995 %. Temps d’indisponibilité <b>par jour</b> (1 jour = 24 × 60 = 1 440 min) :</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th scope="col">Taux de disponibilité</th><th scope="col">Calcul</th><th scope="col">Indisponibilité par jour</th></tr></thead>
+          <tbody>
+            <tr><td>99,6 %</td><td>24 × 60 × (100 − 99,6) / 100 = 1 440 × 0,004 = 5,76 min</td><td><b>≈ 5 min 46 s</b> (0,76 min × 60 ≈ 45,6 s)</td></tr>
+            <tr><td>99,995 %</td><td>24 × 60 × (100 − 99,995) / 100 = 1 440 × 0,00005 = 0,072 min</td><td><b>≈ 4,3 s</b> (0,072 min × 60 = 4,32 s)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Un data center peut donc être indisponible <b>entre environ 4 secondes et 5 min 46 s par jour</b>.</p>
+      <p class="source">Pour comparaison, par an : 99,6 % correspond à environ 35 h d’indisponibilité ; 99,995 % à environ 26 min.</p>
+      <p><b>Comment cette disponibilité est-elle assurée ?</b> Les data centers abritent des milliers de serveurs, avec une <b>redondance</b> des équipements (serveurs, alimentation électrique, réseau, refroidissement) : si une machine tombe en panne, une autre prend le relais ; les données sont <b>copiées</b> sur plusieurs machines ou sites.</p>
+      <div class="note"><strong class="title">Remarques pour l’enseignant</strong><p>Dans ta version : la formule « (1 − 99,6)/100 » donnait un nombre négatif ; j’ai écrit (100 − 99,6)/100. La conclusion « entre 5 min 46 s et 5 s » est devenue « environ 4 s » (4,32 s) et précise que c’est <b>par jour</b>. La partie « comment » n’était pas dans ton fichier : elle est de moi.</p></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">3</span> Question 3 – Pourquoi l’énergie solaire ou éolienne ne suffit pas</h2>
+      <ul>
+        <li><b>La consommation est immense et explose.</b> Les data centers ont consommé environ 415 TWh en 2024, soit à peu près autant que la France, et leur consommation a encore augmenté de 17 % en 2025 ; elle devrait doubler d’ici 2030. Cette demande, continue (24 h/24), ne peut pas être couverte seulement par des énergies renouvelables, qui sont intermittentes.</li>
+        <li><b>La fabrication des appareils pollue.</b> Le renouvellement très rapide des téléphones, ordinateurs, tablettes, consoles, etc. a un coût énergétique et en ressources : un téléphone de 100 g demande environ 40 kg de matière pour sa fabrication (métaux rares, eau, énergie, pollution). Selon l’étude ADEME-Arcep, la <b>fabrication représente environ 80 %</b> de l’empreinte carbone du numérique en France.</li>
+      </ul>
+      <div class="note"><strong class="title">Remarque pour l’enseignant</strong><p>Ta version citait « 10 % de la consommation électrique mondiale », chiffre du manuel (2017) désormais dépassé : les estimations récentes de l’AIE donnent plutôt entre 1 et 2 % pour les seuls data centers. J’ai remplacé ce chiffre.</p></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">4</span> Question 4 – Gestes individuels</h2>
+      <p>Pour limiter l’impact énergétique du numérique, chacun peut :</p>
+      <ul>
+        <li>supprimer les mails inutiles ;</li>
+        <li>ne stocker dans le cloud que les informations utiles, et faire le tri régulièrement ;</li>
+        <li>favoriser l’achat de produits reconditionnés ;</li>
+        <li>limiter ses publications sur les réseaux sociaux à ce qui semble pertinent ;</li>
+        <li>garder ses appareils plus longtemps et les faire réparer (la fabrication pèse le plus lourd) ;</li>
+        <li>privilégier le Wi-Fi au réseau mobile et limiter la qualité du streaming vidéo quand ce n’est pas nécessaire.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">5</span> En ouverture – Le RGPD (éléments de réponse)</h2>
+      <div class="note"><strong class="title">Remarque pour l’enseignant</strong><p>Ton fichier de réponses ne contenait que les questions de l’activité 3. Ce qui suit est une proposition de ma part pour la partie « En ouverture » ; les questions 1 – a, 1 – c, 3 (avis) et 4 sont des réponses personnelles.</p></div>
+      <h3>Question 1</h3>
+      <ul>
+        <li><b>a.</b> Réponses personnelles : inscription sur un réseau social, achat en ligne, création d’un compte, jeux, cookies acceptés sur un site, applications qui demandent la localisation, etc.</li>
+        <li><b>b.</b> Les données personnelles sont l’« or noir » car, comme le pétrole, elles ont une grande <b>valeur économique</b> : elles permettent de <b>cibler la publicité</b> et de proposer des services personnalisés.</li>
+        <li><b>c.</b> Réponse personnelle. Par exemple : ne collecter que les données nécessaires (pertinence), être transparent, respecter les droits des personnes (accès, rectification, suppression), sécuriser les données.</li>
+      </ul>
+      <h3>Question 2</h3>
+      <ul>
+        <li><b>a.</b> L’objectif essentiel du RGPD est de <b>protéger les données personnelles</b> des citoyens européens et de leur donner le contrôle de ces données : les organismes doivent prouver la nécessité de la collecte, protéger les données et être transparents.</li>
+        <li><b>b.</b> Trois mauvaises pratiques de Google : le <b>manque de transparence</b>, l’<b>information insatisfaisante</b> (accès difficile aux finalités des traitements) et l’<b>absence de consentement valable</b> pour la personnalisation de la publicité (la personnalisation est activée par défaut).</li>
+        <li><b>c.</b> Le <b>consentement</b> est l’accord libre de la personne pour que ses données soient collectées et utilisées. Il doit être <b>éclairé</b> (informé), <b>univoque</b> (sans ambiguïté) et <b>spécifique</b> (pour une finalité précise). Le reproche fait à Google concerne la <b>personnalisation de la publicité</b>.</li>
+      </ul>
+      <h3>Question 3</h3>
+      <p>Pour G. Shapiro, le RGPD, trop centré sur la défense de la vie privée, <b>freine l’innovation</b> : la donnée est « la nouvelle richesse », et l’Europe, en se privant de data, <b>perdra du terrain</b> face à la Chine et aux États-Unis. L’avis personnel de l’élève reste libre (argument inverse : la vie privée est un droit fondamental et le RGPD crée la confiance).</p>
+      <h3>Question 4</h3>
+      <p>Réponse personnelle : par exemple, lire les demandes de consentement avant d’accepter, refuser les cookies publicitaires, demander la suppression de données, vérifier les paramètres de confidentialité.</p>
+      <h3>Question 5 (ajout) – Comparaison</h3>
+      <ul>
+        <li>Le RGPD est appliqué fermement : les amendes sont élevées (jusqu’à 1,2 milliard d’euros pour Meta en 2023) et ne visent pas que les géants (Shein, Google, Amazon…).</li>
+        <li><b>Europe :</b> une règle unique, centrée sur les droits des personnes. <b>États-Unis :</b> pas de loi fédérale générale, des lois par État, plus favorables à l’innovation. <b>Chine :</b> la PIPL protège les individus face aux entreprises, mais l’État garde un large accès aux données et encadre strictement leur sortie du pays.</li>
+        <li>Réponse argumentée attendue ; les élèves peuvent privilégier le contrôle par la personne (Europe) ou le compromis avec l’innovation (États-Unis).</li>
+      </ul>
+      <h3>Débat</h3>
+      <ul>
+        <li><b>Utilisateurs :</b> vie privée, contrôle de ses données, transparence, droit à l’effacement, sanctions dissuasives.</li>
+        <li><b>Entreprises :</b> coût de la mise en conformité, frein à l’innovation et à l’IA, concurrence des entreprises américaines et chinoises, difficulté pour les petites entreprises.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Mises à jour effectuées dans la page</h2>
+      <ul>
+        <li><b>Consommation des data centers :</b> 415 TWh en 2024, +17 % en 2025, prévision de 945 TWh en 2030 (AIE) ; répartition États-Unis / Chine / Europe.</li>
+        <li><b>Empreinte du numérique :</b> remplacement des chiffres du manuel (« 10 % de l’électricité », « 3<sup>e</sup> pays pollueur », « 1,5 fois le transport aérien ») par l’étude ADEME-Arcep (79 % terminaux, 16 % data centers, 5 % réseaux, 80 % fabrication).</li>
+        <li><b>Chiffres clés :</b> objets connectés mis à jour (21,1 milliards fin 2025) ; les autres chiffres du manuel (2017) sont conservés comme ordres de grandeur et signalés comme tels.</li>
+        <li><b>Exemples supprimés :</b> « Gangnam Style » (équivalent d’une centrale) et « un courriel = une ampoule une demi-heure », que je n’ai pas pu vérifier ; ainsi que les chiffres d’OVH (27 centres, 9 %), datés.</li>
+        <li><b>RGPD :</b> montants des amendes, sanctions récentes (Meta, Amazon, Google et Shein en 2025), et ajout d’un document comparant l’Union européenne, les États-Unis et la Chine.</li>
+      </ul>
+    </section>
+
+    <nav class="pager" aria-label="Navigation">
+      <a class="btn secondary" href="../donnees-seance3.html">← Retour à la séance 3</a>
+    </nav>
+  </main>
+
+  <footer>SNT · Seconde · Correction réservée à l’enseignant · à ne pas publier</footer>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Correction – Localisation avec le système GPS · SNT</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="../cartographie.html">Chapitre 5 – Cartographie et localisation</a><span class="sep">›</span>
+        <a href="../cartographie-seance1.html">Séance 1</a><span class="sep">›</span>
+        <span>Correction</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="background:linear-gradient(135deg,#dc2626,#1c2333)">
+      <p class="eyebrow">Réservé à l’enseignant</p>
+      <h1>Correction – Localisation avec le système GPS</h1>
+      <p class="meta">Séance 1 · Questions 1 à 5</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">1</span> Question 1 – Le système GPS</h2>
+      <p>Le GPS est un <b>système de positionnement par satellites</b>. À l’aide de satellites et de la <b>trilatération</b>, on peut localiser la position d’un objet qui contient un récepteur GPS.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">2</span> Question 2 – Nombre de satellites</h2>
+      <p>Il faut <b>4 satellites</b>.</p>
+      <ul><li>Trois d’entre eux permettent de déterminer la <b>latitude</b>, la <b>longitude</b> et l’<b>altitude</b> (trilatération).</li><li>Le quatrième permet de <b>corriger l’horloge</b> du récepteur GPS, qui est bien moins précise que les horloges atomiques des satellites.</li></ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">3</span> Question 3 – Pourquoi Galileo ?</h2>
+      <p>Galileo s’est déployé pour que l’Europe <b>ne dépende plus de la technologie GPS américaine</b> : l’Union européenne est ainsi <b>indépendante</b>, avec son propre système de positionnement, sous contrôle civil.</p>
+      <p><b>Avantages :</b> indépendance stratégique et économique, meilleure <b>précision</b> (de l’ordre du mètre, contre quelques mètres pour le GPS civil), compatibilité avec le GPS et d’autres systèmes, services de recherche et de sauvetage.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">4</span> Question 4 – Le protocole NMEA</h2>
+      <p>Le protocole <b>NMEA</b> (et non « MNEA » comme dans ta version) a été créé pour <b>harmoniser et standardiser les équipements de la marine</b> : il permet à des instruments de fabricants différents de <b>communiquer entre eux</b>.</p>
+      <p>Une trame NMEA est une chaîne de caractères qui indique : le type de récepteur, le type de trame, les coordonnées GPS, l’heure d’acquisition des données et la validité des données.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num tp">5</span> Question 5 – Extraction des trames</h2>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>Trame</th><th>Récepteur / type</th><th>Latitude</th><th>Longitude</th><th>Heure (UTC)</th><th>Validité</th></tr></thead><tbody>
+      <tr><td><code>$GPGLL,6715.12,N,3245.12,W,153421,A</code></td><td>GPS / GLL</td><td>67° 15,12′ Nord<br>(≈ 67° 15′ 07″ N)</td><td>32° 45,12′ Ouest<br>(≈ 32° 45′ 07″ O)</td><td>15 h 34 min 21 s</td><td>A : valides</td></tr>
+      <tr><td><code>$GPGLL,1154.65,S,2356.76,W,045432,A</code></td><td>GPS / GLL</td><td>11° 54,65′ Sud<br>(≈ 11° 54′ 39″ S)</td><td>23° 56,76′ Ouest<br>(≈ 23° 56′ 46″ O)</td><td>04 h 54 min 32 s</td><td>A : valides</td></tr>
+      </tbody></table></div>
+      <div class="note"><strong class="title">Remarque pour l’enseignant</strong><p>Dans ta correction, « 11°54’65” » et « 23°56’76” » lisent les chiffres décimaux comme des secondes, ce qui est impossible (une minute n’a que 60 secondes). Dans une trame GLL, le format est <b>ddmm.mmmm</b> : les degrés, puis des <b>minutes décimales</b> (0,65′ = 0,65 × 60 ≈ 39″). Le document de cours donne pourtant l’exemple « 4631.35 → 46° 31′ 35″ » : c’est une lecture simplifiée. Ici j’ai donné la lecture exacte, avec la conversion en secondes entre parenthèses. Tu peux garder uniquement la forme « minutes décimales » avec les élèves.</p></div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation">
+      <a class="btn secondary" href="../cartographie-seance1.html">← Retour à la séance 1</a>
+    </nav>
+  </main>
+
+  <footer>SNT · Seconde · Correction réservée à l’enseignant · à ne pas publier</footer>
+
+</body>
+</html>
