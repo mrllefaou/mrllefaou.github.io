@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Les cartes numériques · Cartographie et localisation · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 5 Cartographie et localisation – Séance 3 · Découverte de Géoportail et OpenStreetMap.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="cartographie.html">Chapitre 5 – Cartographie et localisation</a><span class="sep">›</span>
+        <span>Séance 3</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#dc2626,#1c2333)">
+      <p class="eyebrow">Chapitre 5 – Cartographie et localisation</p>
+      <h1>Les cartes numériques</h1>
+      <p class="meta">Séance 3 · Découverte de Géoportail et OpenStreetMap</p>
+      <div class="page-tabs"><a href="#card">Des cartes plus souples à l’usage</a><a href="#card">Carte vectorielle et carte matricielle</a><a href="#card">Découverte de Géoportail</a><a href="#card">Activité sur Géoportail</a></div>
+    </section>
+
+    <section class="card" id="numeriques" aria-labelledby="t-numeriques">
+      <h2 id="t-numeriques"><span class="num ">1</span> Des cartes plus souples à l’usage</h2>
+      <p>La cartographie a été révolutionnée par l’arrivée des <b>cartes numériques</b>, accessibles depuis les ordinateurs, les tablettes et les téléphones, bien plus souples à l’usage que les cartes papier.</p>
+      <p>Les cartes numériques rassemblent <b>toutes les échelles</b> et permettent de montrer différents aspects de la région visualisée sur une seule carte. Les <b>algorithmes de recherche</b> permettent de retrouver un lieu en donnant simplement son nom, et de calculer des itinéraires entre points selon des modes de transport variés.</p>
+      <p>Depuis le début de l’ère spatiale (fin des années 1950), les cartes ont radicalement changé de visage : les <b>satellites</b> offrent une vision globale de la planète avec une résolution fine. Les informations des cartes numériques proviennent de nombreuses sources : services géographiques des États, photos prises par des satellites, des avions ou des voitures, données fournies par les utilisateurs, etc.</p>
+      <div class="lexique"><strong class="title">Vocabulaire · Géomatique</strong><p>L’acquisition et le traitement informatique de l’ensemble des données géographiques s’appellent la géomatique (contraction de « géographie » et « informatique »).</p></div>
+      <figure class="small"><img src="img/cartographie/couches-donnees.png" alt="Schéma de couches de données superposées : points d’observation au sol, contours géologiques, classifications, image satellitaire, données de géophysique" loading="lazy"><figcaption>Une carte numérique est constituée de plusieurs <b>couches</b> d’information superposées.</figcaption></figure>
+    </section>
+    <section class="card" id="categories" aria-labelledby="t-categories">
+      <h2 id="t-categories"><span class="num ">2</span> Carte vectorielle et carte matricielle</h2>
+      <p>Les cartes numériques rassemblent toutes les échelles et permettent d’accéder à différents types de données selon la ou les <b>couches d’information</b> sélectionnées : vue aérienne, parcelles cadastrales, routes, cartes, statistiques…</p>
+      <p>Il existe deux grandes catégories de cartes numériques :</p>
+      <div class="compare-grid" style="grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))">
+        <article><h4>Carte matricielle</h4><p style="margin:0">C’est une <b>image point par point</b> (des pixels). Quand on zoome, l’image est simplement <b>agrandie</b>.</p></article>
+        <article><h4>Carte vectorielle</h4><p style="margin:0">Elle comporte des <b>objets positionnés selon leurs coordonnées</b> (routes, bâtiments, fleuves…). Quand on zoome, des <b>détails apparaissent</b>.</p></article>
+      </div>
+      <p>Les applications qui utilisent des cartes vectorielles (par exemple <b>OpenStreetMap</b> ou <b>Géoportail</b>) permettent généralement de sélectionner les catégories d’informations à afficher (lignes de transports, fleuves…). La carte est alors composée automatiquement à la demande.</p>
+    </section>
+    <section class="card" id="geoportail" aria-labelledby="t-geoportail">
+      <h2 id="t-geoportail"><span class="num ">3</span> Découverte de Géoportail</h2>
+      <p><b>Géoportail</b> est un logiciel en ligne donnant accès à des services de recherche et de visualisation de données géographiques ou géolocalisées. L’image ci-dessous met en évidence les différentes couches de données.</p>
+      <figure class="small"><img src="img/cartographie/geoportail-couches.png" alt="Fonds de carte de Géoportail : vue aérienne, routes, cartes, plan IGN, parcelles cadastrales, carte de l’état-major" loading="lazy"><figcaption>Quelques fonds de carte proposés par Géoportail.</figcaption></figure>
+      <p>Ce site de service public, ouvert en 2006, contient aussi de nombreuses données classées par thèmes : parcelles cadastrales, espaces protégés, zones de sismicité, quartiers prioritaires de la politique de la ville…</p>
+    </section>
+    <section class="card" id="activite" aria-labelledby="t-activite">
+      <h2 id="t-activite"><span class="num tp">Act.</span> Activité sur Géoportail</h2>
+      <a class="btn ext" href="https://www.geoportail.gouv.fr/" target="_blank" rel="noopener">Ouvrir Géoportail</a>
+      <ol>
+        <li>Rends-toi sur le site Géoportail et saisis <b>une adresse de ton choix</b> (en France de préférence).</li>
+        <li>Modifie les <b>couches de données</b> (le fond de carte) pour voir les possibilités de Géoportail.</li>
+        <li>Fais un zoom sur le <b>Likès</b> (place de la Tourbie, 29000 Quimper).</li>
+        <li>À partir du fond de carte « <b>Parcelles cadastrales</b> » et des <b>outils de mesure</b>, estime la <b>superficie du lycée Le Likès</b> (ensemble des bâtiments et cours de récréation).</li>
+        <li>À partir du fond de carte « <b>Photographies aériennes 1950-1965</b> », estime la superficie du lycée Le Likès à cette époque.</li>
+        <li><b>Compare</b> ces deux valeurs.</li>
+      </ol>
+      <div class="tp-question"><span class="label">Résultat 1</span><p>Superficie actuelle estimée (m²) :</p><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Résultat 2</span><p>Superficie estimée en 1950-1965 (m²) :</p><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Comparaison</span><p>Compare les deux valeurs : que constates-tu ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="cartographie-seance2.html">← Histoire de la cartographie</a><a class="btn secondary" href="cartographie-seance4.html">Calcul du plus court chemin →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie</footer>
+
+</body>
+</html>

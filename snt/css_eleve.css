@@ -1,0 +1,24 @@
+@charset "iso-8859-1";
+	
+body {
+    font: 100% verdana, arial, sans-serif;
+    background-color: rgb(177,247,174);
+    margin: 50px;
+	padding-left: 250px;
+	padding-right: 250px;
+}
+
+
+h1
+{
+    color: green;
+	text-align: center;
+}
+
+h2
+{
+    color: #696;
+	font-family: Georgia;
+	font-style: italic;
+}
+

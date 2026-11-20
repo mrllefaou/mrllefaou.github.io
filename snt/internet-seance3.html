@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Les réseaux pair-à-pair · Internet · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 1 Internet – Séance 3 : activité sur les réseaux pair-à-pair (P2P), puis cours sur le modèle client-serveur, le DNS et la chronologie d'Internet.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="internet.html">Chapitre 1 – Internet</a><span class="sep">›</span>
+        <span>Séance 3</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <p class="eyebrow">Chapitre 1 – Internet</p>
+      <h1>Les réseaux pair-à-pair</h1>
+      <p class="meta">Séance 3 · Activité documentaire puis cours : client-serveur, DNS et chronologie</p>
+      <div class="page-tabs">
+        <a href="#activite">Activité</a>
+        <a href="#doc1">Doc. 1</a>
+        <a href="#doc2">Doc. 2</a>
+        <a href="#doc3">Doc. 3</a>
+        <a href="#doc4">Doc. 4</a>
+        <a href="#cours">Cours</a>
+      </div>
+    </section>
+
+    <!-- ===================== ACTIVITÉ ===================== -->
+    <section class="card" id="activite" aria-labelledby="t-activite">
+      <h2 id="t-activite"><span class="num tp">Act.</span> Activité : les réseaux pair-à-pair</h2>
+      <p>La plupart des services utilisés sur Internet reposent sur des <b>serveurs</b> mis en place par des entreprises. Pourtant, toutes les machines connectées à Internet peuvent potentiellement communiquer entre elles. C’est le cas avec les réseaux <span class="keyword">pair-à-pair</span> (<em>peer-to-peer</em>, ou <span class="keyword">P2P</span>), utilisés surtout pour le partage de fichiers (jeux, vidéos, etc.).</p>
+      <div class="definition">
+        <strong class="title">Problématique</strong>
+        <p>Comment le modèle P2P fonctionne-t-il ? Quels sont les avantages et les risques de son utilisation ?</p>
+      </div>
+      <div class="consigne">
+        <span class="icon" aria-hidden="true">📖</span>
+        <p><b>Consigne :</b> étudie les quatre documents ci-dessous et réponds aux questions qui les accompagnent.</p>
+      </div>
+    </section>
+
+    <!-- Doc 1 -->
+    <section class="card" id="doc1" aria-labelledby="t-doc1">
+      <h2 id="t-doc1"><span class="doc-tag">Doc. 1</span> Le pair-à-pair toujours utilisé</h2>
+
+      <p>Environ 70 % des internautes disent se rendre le plus souvent directement sur des sites ou applications déjà connus lorsqu’ils recherchent une œuvre. Pour la très grande majorité d’entre eux, les pratiques illicites se résument au <b>streaming</b>, au <b>téléchargement</b> et au <b>pair-à-pair</b>, avec peu d’évolutions depuis 2013.</p>
+      <p><b>Le streaming s’affirme comme le mode d’accès principal, tandis que le pair-à-pair recule.</b> Le streaming est à la fois le mode le plus répandu (92 % des consommateurs) et le plus régulier (79 % l’utilisent au moins une fois par mois). Le téléchargement vient ensuite (74 % ; 46 % mensuellement). Le pair-à-pair est un usage moins répandu, en baisse (35 % contre 46 % en 2013) et occasionnel (21 % d’utilisateurs mensuels).</p>
+
+      <h3>Principaux modes d’accès</h3>
+      <p class="source" style="margin-top:0">Base : ensemble des consommateurs</p>
+      <ul class="bars">
+        <li>
+          <div class="mode">🎬 Streaming</div>
+          <div class="bar-row"><span class="bar-track"><span class="bar-fill all" style="--v:92"></span></span><span class="bar-val">92 %</span></div>
+          <div class="bar-row"><span class="bar-track"><span class="bar-fill month" style="--v:79"></span></span><span class="bar-val">79 %</span></div>
+        </li>
+        <li>
+          <div class="mode">⬇️ Téléchargement (tous modes)</div>
+          <div class="bar-row"><span class="bar-track"><span class="bar-fill all" style="--v:74"></span></span><span class="bar-val">74 %</span></div>
+          <div class="bar-row"><span class="bar-track"><span class="bar-fill month" style="--v:46"></span></span><span class="bar-val">46 %</span></div>
+        </li>
+        <li>
+          <div class="mode">🔗 Pair-à-pair</div>
+          <div class="bar-row"><span class="bar-track"><span class="bar-fill all" style="--v:35"></span></span><span class="bar-val">35 %</span></div>
+          <div class="bar-row"><span class="bar-track"><span class="bar-fill month" style="--v:21"></span></span><span class="bar-val">21 %</span></div>
+        </li>
+      </ul>
+      <div class="legend">
+        <span class="l-all">% d’utilisation pour l’ensemble</span>
+        <span class="l-month">Usage au moins 1 fois par mois</span>
+      </div>
+      <p class="source">Source : « La mixité des usages licites et illicites au cœur des stratégies d’accès aux musiques, films et séries en ligne », <em>L’Essentiel</em> n° 9, avril 2018, hadopi.fr.</p>
+
+      <div class="lexique">
+        <strong class="title">Vocabulaire – Pair-à-pair</strong>
+        <p>Le pair-à-pair (<em>peer-to-peer</em>, P2P) définit le fonctionnement d’un logiciel qui permet le partage d’une donnée constituée de plusieurs <b>fragments</b> répartis sur les <b>pairs</b>. Dans un réseau pair-à-pair, chaque client est lui-même un serveur.</p>
+      </div>
+
+      <div class="tp-question">
+        <span class="label">Question 1</span>
+        <p>Comparez vos modes d’accès aux biens culturels dématérialisés (streaming, pair-à-pair, etc.) par rapport à l’ensemble des consommateurs. Où vous situez-vous ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Doc 2 -->
+    <section class="card" id="doc2" aria-labelledby="t-doc2">
+      <h2 id="t-doc2"><span class="doc-tag">Doc. 2</span> Un site de téléchargement P2P</h2>
+      <p>Le site Webtorrent.io utilise une technologie qui permet de faire du téléchargement en P2P directement depuis le navigateur Internet.</p>
+
+      <figure>
+        <img src="img/p2p-webtorrent.png" width="1136" height="556" loading="lazy" alt="Capture du site Webtorrent : au centre « You » relié à 11 pairs désignés par leur adresse IP ; en bas « Downloading sintel.torrent from 11 peers » et « 25 MB of 129 MB – 2 minutes remaining ». Cinq éléments sont numérotés de 1 à 5.">
+        <figcaption>Capture d’écran du site Webtorrent. Les éléments sont numérotés de ① à ⑤.</figcaption>
+      </figure>
+
+      <div class="tp-question">
+        <span class="label">Question 2</span>
+        <p>Associe à chaque élément numéroté le terme qui convient parmi les suivants : <em>mon ordinateur · adresse d’un pair · nombre de pairs · quantité téléchargée · taille totale de la vidéo</em>.</p>
+        <ul style="list-style:none;padding:0;margin:.75rem 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.5rem">
+          <li>① ………………………</li>
+          <li>② ………………………</li>
+          <li>③ ………………………</li>
+          <li>④ ………………………</li>
+          <li>⑤ ………………………</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Doc 3 -->
+    <section class="card" id="doc3" aria-labelledby="t-doc3">
+      <h2 id="t-doc3"><span class="doc-tag">Doc. 3</span> Principe d’un protocole de partage de fichiers</h2>
+
+      <p>Un client pair-à-pair commence par se connecter à un <span class="keyword">tracker</span>, une machine qui maintient une liste de <b>pairs</b> ayant un fragment du fichier. Le logiciel récupère les adresses IP des pairs qui ont chacun un ou plusieurs fragments du fichier. Il contacte chaque pair en même temps pour télécharger chaque fragment, et enfin reconstituer la donnée.</p>
+      <p>Pendant ce temps, la machine où se trouve le logiciel devient elle-même un pair pour les autres utilisateurs : elle diffuse les fragments du fichier qu’elle a récupérés. Si la donnée est illégale (contenu illégal ou protégé par le droit d’auteur), l’utilisateur est responsable de la diffusion de cette donnée.</p>
+
+      <div class="p2p" role="group" aria-label="Schéma des échanges entre la machine 1 et les machines 2, 3 et 4">
+        <div class="machine me">Machine 1 <small>IP : 223.34.42.69</small></div>
+
+        <div class="p2p-row">
+          <div>
+            <div class="machine">Machine 2 <small>le tracker</small></div>
+            <table class="mini-table" aria-label="Liste tenue par la machine 2">
+              <tr><th>Fragment</th><th>IP</th></tr>
+              <tr><td>#1</td><td>12.34.56.78</td></tr>
+              <tr><td>#231</td><td>99.98.0.34</td></tr>
+              <tr><td>#115</td><td>12.34.56.78</td></tr>
+            </table>
+          </div>
+          <div class="msgs">
+            <div class="msg q">1 → 2 : « Qui possède le fichier ? »</div>
+            <div class="msg a">2 → 1 : <b>IP : 99.98.0.34, 12.34.56.78</b></div>
+          </div>
+        </div>
+
+        <div class="p2p-row">
+          <div class="machine">Machine 3 <small>IP : 99.98.0.34</small></div>
+          <div class="msgs">
+            <div class="msg q">1 → 3 : « Fragment #231 ? »</div>
+            <div class="msg a">3 → 1 : <b>Fragment #231</b></div>
+          </div>
+        </div>
+
+        <div class="p2p-row">
+          <div class="machine">Machine 4 <small>IP : 12.34.56.78</small></div>
+          <div class="msgs">
+            <div class="msg q">1 → 4 : « Fragments #1 et #115 ? »</div>
+            <div class="msg a">4 → 1 : <b>Fragments #1, #115</b></div>
+          </div>
+        </div>
+      </div>
+      <p class="caption">Après ces échanges, le tracker ajoute l’adresse 223.34.42.69 à sa liste : la machine 1 est devenue un pair à son tour.</p>
+
+      <div class="lexique">
+        <strong class="title">Vocabulaire – Pair (<em>peer</em>)</strong>
+        <p>Un « pair » (<em>peer</em>, en anglais) est une machine depuis laquelle on peut télécharger une donnée.</p>
+      </div>
+
+      <div class="tp-question">
+        <span class="label">Question 3</span>
+        <p>En t’appuyant sur le texte, identifie le rôle des différentes machines du schéma au cours du temps.</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Doc 4 -->
+    <section class="card" id="doc4" aria-labelledby="t-doc4">
+      <h2 id="t-doc4"><span class="doc-tag">Doc. 4</span> Les jeunes face aux pratiques illicites</h2>
+
+      <p>Les 15-24 ans semblent bien connaître les risques légaux liés à leurs pratiques illicites : ils ont à l’esprit le risque de recevoir une recommandation de l’<b>Hadopi</b>, mais estiment avoir le temps d’adapter leurs comportements, la sanction ne pouvant intervenir qu’<b>au bout de trois recommandations</b>. Ils se montrent aussi plus enclins à adopter des techniques de contournement comme le VPN, ou à opter pour le streaming afin de ne pas prendre de risque.</p>
+      <blockquote style="margin:1rem 0;padding:.25rem 1rem;border-left:4px solid var(--border);color:var(--muted)">
+        « Je regarde si le site paraît louche. Par exemple un site où le bouton de téléchargement n’est pas clair ou si l’antivirus m’indique que le site n’est pas fiable, je ne vais pas dessus. »
+      </blockquote>
+      <p class="source">Source : « Les 15-24 ans : un rapport paradoxal à la création, entre valorisation des “petits” artistes et rejet du “système” », <em>L’Essentiel</em> n° 10, mai 2018, hadopi.fr.</p>
+
+      <div class="lexique">
+        <strong class="title">Vocabulaire – Hadopi</strong>
+        <p>Haute Autorité pour la diffusion des œuvres et la protection des droits sur Internet. <em>Depuis le 1<sup>er</sup> janvier 2022, l’Hadopi a fusionné avec le CSA pour former l’<b>Arcom</b>.</em></p>
+      </div>
+
+      <div class="tp-question">
+        <span class="label">Question 4 – a</span>
+        <p>À quel type de pratique illicite est-il fait référence ? Quels sont les risques légaux en cas de pratique illicite ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 4 – b</span>
+        <p>Donnez des arguments pour et contre l’utilisation du P2P pour le téléchargement de contenus culturels.</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ===================== COURS ===================== -->
+    <section class="card" id="cours" aria-labelledby="t-cours3">
+      <h2 id="t-cours3"><span class="num">III</span> Modèle client-serveur</h2>
+
+      <p>Pour communiquer avec une machine, Internet s’appuie sur le dialogue entre <span class="keyword">clients</span> (les utilisateurs) et <span class="keyword">serveurs</span>. Un <span class="keyword">serveur informatique</span> est un dispositif informatique qui offre des services à un ou plusieurs clients.</p>
+      <p><b>Exemple :</b> un serveur web qui héberge des sites web.</p>
+      <p>L’interaction est à l’initiative des clients, qui envoient des <span class="keyword">requêtes</span> aux serveurs. Si le serveur peut répondre à la requête, il envoie les informations demandées au client : c’est la <span class="keyword">réponse</span>.</p>
+
+      <figure class="native">
+        <img src="img/client-serveur.png" width="376" height="271" loading="lazy" alt="Schéma : trois clients envoient chacun une requête à un serveur et reçoivent une réponse">
+        <figcaption>Trois clients dialoguent avec un serveur : requête, puis réponse.</figcaption>
+      </figure>
+
+      <div class="definition">
+        <strong class="title">Exemple</strong>
+        <p>Le client envoie une requête à un serveur de Google, car il souhaite voir le site s’afficher. Le serveur « entend » la demande ; s’il peut y répondre, il envoie au client les informations nécessaires pour qu’il puisse voir le site.</p>
+      </div>
+
+      <h2 style="margin-top:2rem"><span class="num">IV</span> Adresse DNS</h2>
+      <p>Pour trouver facilement les machines à utiliser, un registre conserve les associations entre des <b>adresses symboliques</b> et des <b>adresses IP</b>. C’est ce que l’on appelle le <span class="keyword">Domain Name System</span> (DNS), « système des noms de domaine ». Les adresses symboliques sont organisées sous la forme d’une suite de <em>labels</em> séparés par des points (par exemple, <code class="inline">www.likes.org</code>).</p>
+      <p>Pour trouver l’adresse IP correspondante, une machine contacte un <span class="keyword">serveur DNS</span>, qui donnera la réponse ou indiquera quel autre serveur peut répondre.</p>
+
+      <figure class="native">
+        <img src="img/dns-schema.png" width="315" height="128" loading="lazy" alt="Schéma : un ordinateur (192.168.1.30) demande à un serveur DNS (212.71.8.10) « Où se trouve google.com ? » et reçoit la réponse « Il se trouve à 66.102.13.105 »">
+        <figcaption>Un serveur DNS traduit un nom (google.com) en adresse IP (66.102.13.105).</figcaption>
+      </figure>
+
+      <h2 style="margin-top:2rem"><span class="num">V</span> Chronologie</h2>
+      <p>Complète la chronologie avec les événements marquants de l’histoire d’Internet.</p>
+      <ol class="timeline">
+        <li><span class="year">1968 / 1969</span><div class="answer-lines" aria-hidden="true"></div></li>
+        <li><span class="year">1972</span><div class="answer-lines" aria-hidden="true"></div></li>
+        <li><span class="year">1974</span><div class="answer-lines" aria-hidden="true"></div></li>
+        <li><span class="year">1989 – 1991</span><div class="answer-lines" aria-hidden="true"></div></li>
+      </ol>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="internet-seance2.html">← Séance 2</a>
+      <a class="btn secondary" href="internet.html">Retour au chapitre</a>
+      <a class="btn" href="internet-seance4.html">Séance 4 →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie</footer>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Systèmes embarqués et voiture autonome · Informatique embarquée · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 6 Informatique embarquée – Séance 1 · Capteurs, actionneurs, interface et voiture autonome.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="informatique-embarquee.html">Chapitre 6 – Informatique embarquée</a><span class="sep">›</span>
+        <span>Séance 1</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#7c3aed,#1c2333)">
+      <p class="eyebrow">Chapitre 6 – Informatique embarquée</p>
+      <h1>Systèmes embarqués et voiture autonome</h1>
+      <p class="meta">Séance 1 · Capteurs, actionneurs, interface et voiture autonome</p>
+      <div class="page-tabs"><a href="#card">Cours : les systèmes embarqués</a><a href="#card">La voiture autonome</a><a href="#card">Les niveaux d’autonomie d’une voiture</a><a href="#card">Les interfaces homme-machine</a><a href="#card">Pirater une voiture autonome</a><a href="#card">Vidéo complémentaire</a><a href="#card">Questions (suite)</a><a href="#card">Cours : les contraintes de l’informatique embarquée</a></div>
+    </section>
+
+    <section class="card" id="cours1" aria-labelledby="t-cours1">
+      <h2 id="t-cours1"><span class="num ">1</span> Cours : les systèmes embarqués</h2>
+      <p>Un <b>système embarqué</b> est un système à la fois <b>électronique et informatique</b>, intégré à un objet pour accomplir une tâche précise. L’un des plus célèbres est l’<b>Apollo Guidance Computer</b>, le système de guidage de la mission Apollo qui permit aux hommes de marcher sur la Lune en juillet 1969. L’astronaute-pilote l’utilisait en temps réel pour recueillir et fournir des informations de vol, et pour le contrôle automatique des fonctions de navigation du vaisseau.</p>
+      <figure class="small"><img src="img/embarque/agc-dsky.jpg" alt="Clavier et écran de l’Apollo Guidance Computer dans le module de commande" loading="lazy"><figcaption>Le clavier et l’écran de l’Apollo Guidance Computer dans le module de commande.</figcaption></figure>
+      <p>Aujourd’hui, les systèmes embarqués se sont développés dans des secteurs très variés : aéronautique, électroménager, matériel médical, téléphonie mobile, robotique industrielle, jeux vidéo, automobile… On en trouve <b>quasiment partout</b> : porte automatique, robot aspirateur, appareil photo numérique, pilote automatique, thermostat, etc.</p>
+      <h3>Une même architecture</h3>
+      <p>Tous ces systèmes reposent sur un modèle commun, composé de <b>capteurs</b>, d’un <b>système informatique</b> et d’<b>actionneurs</b>, et pour certains d’une <b>interface</b>.</p>
+      <ul class="loop" aria-label="Schéma capteurs, système informatique, actionneurs, environnement">
+        <li class="env"><b>Environnement</b><span>le monde physique</span></li><li class="ar" aria-hidden="true">→</li>
+        <li><b>Capteurs</b><span>recueillent des informations</span></li><li class="ar" aria-hidden="true">→</li>
+        <li><b>Système informatique</b><span>traite les informations</span></li><li class="ar" aria-hidden="true">→</li>
+        <li><b>Actionneurs</b><span>agissent sur le monde physique</span></li><li class="ar" aria-hidden="true">↩</li>
+      </ul>
+      <ul>
+        <li>Les <b>capteurs</b> recueillent de l’information sur le monde physique : photosites d’un appareil photo, altimètre d’un avion, GPS d’une voiture, laser d’un robot aspirateur, détecteur radar d’une porte automatique, thermomètre…</li>
+        <li>Ces informations sont traitées par une machine dotée d’une partie <b>matérielle</b> et d’une partie <b>logicielle</b>. Suivant les informations traitées, elle active des <b>actionneurs</b>.</li>
+        <li>Les <b>actionneurs</b> permettent au système d’agir sur le monde physique. Si la luminosité est trop faible, l’appareil photo active le flash ; si le radar détecte un mouvement, la porte automatique s’ouvre ; si la température baisse, le thermostat demande à la chaudière de chauffer.</li>
+        <li>Certains systèmes possèdent une <b>interface</b> : le moyen de communication entre l’utilisateur et la machine (tableau de bord d’une voiture, boutons du régulateur de vitesse…).</li>
+      </ul>
+    </section>
+    <section class="card" id="activite" aria-labelledby="t-activite">
+      <h2 id="t-activite"><span class="num tp">Act.</span> La voiture autonome</h2>
+      <div class="consigne"><span class="icon" aria-hidden="true">🚗</span><p><b>Consigne :</b> regarde la vidéo ci-dessous, puis réponds aux questions 1 et 2. Pour la question 3 (débat) et les suivantes, appuie-toi sur les documents.</p></div>
+      <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/49t5hph7bTM" title="La voiture autonome" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <p class="video-fallback"><a href="https://www.youtube.com/watch?v=49t5hph7bTM" target="_blank" rel="noopener">Cliquer ici si la vidéo ne s’affiche pas.</a></p>
+      <div class="tp-question"><span class="label">Question 1</span><p>Quels sont les <b>capteurs</b> de la voiture autonome ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 2</span><p>Donne <b>trois exemples d’actionneurs</b> de la voiture autonome et dans quelle situation ils peuvent être activés.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <section class="card" id="doc1" aria-labelledby="t-doc1">
+      <h2 id="t-doc1"><span class="doc-tag">Doc. 1</span> Les niveaux d’autonomie d’une voiture</h2>
+      <p>Avant d’arriver à ce que l’on appelle la voiture autonome (au sens strict, « sans intervention du conducteur »), il existe des <b>niveaux d’autonomie</b> à franchir. Ils sont définis par la norme internationale SAE (de 0 à 5).</p>
+      <ol class="levels" start="0">
+        <li><span class="lv">Niveau 0</span><span><b>Conduite manuelle</b> : toutes les tâches sont réalisées par l’homme (le véhicule peut seulement alerter).</span></li>
+        <li><span class="lv">Niveau 1</span><span><b>Conduite assistée</b> : la gestion du contrôle de la voiture est partagée (par exemple, un régulateur de vitesse adaptatif <i>ou</i> un maintien dans la voie).</span></li>
+        <li><span class="lv">Niveau 2</span><span><b>Conduite partiellement automatisée</b> : la voiture gère à la fois la vitesse et la direction, mais le <b>conducteur surveille en permanence</b> et doit pouvoir reprendre la main immédiatement.</span></li>
+        <li><span class="lv">Niveau 3</span><span><b>Conduite conditionnellement automatisée</b> : dans des conditions précises (par exemple trafic dense sur autoroute), la voiture surveille elle-même son environnement. Le conducteur peut détourner son attention, mais doit <b>reprendre le contrôle si le système le demande</b>.</span></li>
+        <li><span class="lv">Niveau 4</span><span><b>Conduite hautement automatisée</b> : la voiture gère tout dans un cadre défini (zone, type de route) et peut se mettre en sécurité seule en cas de défaillance. Aucune reprise en main n’est exigée dans ce cadre.</span></li>
+        <li><span class="lv">Niveau 5</span><span><b>Conduite totalement automatisée</b> : la voiture est autonome sur tout type de route, dans toutes les conditions.</span></li>
+      </ol>
+      <div class="lexique"><strong class="title">Vocabulaire · Voiture autonome</strong><p>Au sens strict, « voiture autonome » signifie <i>sans intervention du conducteur</i>. Pour cela, elle doit pouvoir communiquer avec son environnement et devenir un terminal connecté (au même titre qu’un smartphone ou une tablette numérique).</p></div>
+      <div class="maj">
+        <strong class="title">Mise à jour · Où en est-on ?</strong>
+        <ul>
+          <li><b>Niveau 4 :</b> aux États-Unis, la société <b>Waymo</b> fait circuler des robotaxis sans conducteur à bord. En mars 2026, elle annonçait environ <b>500 000 courses payantes par semaine</b> dans une dizaine de villes (Phoenix, San Francisco, Los Angeles, Dallas, Houston…).</li>
+          <li><b>Niveau 3 :</b> <b>Mercedes-Benz</b> propose son système <i>Drive Pilot</i>, homologué en Allemagne jusqu’à <b>95 km/h</b> sur autoroute, en trafic fluide et sous certaines conditions. Si le conducteur ne reprend pas la main quand le système le demande, la voiture freine jusqu’à l’arrêt et allume les feux de détresse.</li>
+          <li><b>Niveau 2 :</b> la plupart des voitures vendues aujourd’hui proposent des aides à la conduite (régulateur adaptatif, maintien dans la voie) : le conducteur reste <b>entièrement responsable</b>.</li>
+        </ul>
+      </div>
+      <p class="source">Sources : <a href="https://insideevs.com/news/791245/waymo-rides-per-week-2026-doubled/" target="_blank" rel="noopener">InsideEVs (mars 2026)</a> ; <a href="https://group.mercedes-benz.com/innovation/product-innovation/autonomous-driving/drive-pilot-95-kmh.html" target="_blank" rel="noopener">Mercedes-Benz, Drive Pilot 95 km/h (décembre 2024)</a>. Texte du document réécrit à partir du manuel.</p>
+    </section>
+    <section class="card" id="doc2" aria-labelledby="t-doc2">
+      <h2 id="t-doc2"><span class="doc-tag">Doc. 2</span> Les interfaces homme-machine</h2>
+      <p>Les <b>interfaces homme-machine</b> (IHM) des voitures évoluent beaucoup : les constructeurs investissent dans le futur tableau de bord, qui devient très sophistiqué. À mesure que la conduite s’automatise, le conducteur délègue des fonctions au système, et l’interface doit :</p>
+      <ul>
+        <li><b>informer</b> le conducteur de ce que fait la voiture et des conditions de circulation ;</li>
+        <li><b>l’avertir</b> lorsque la limite de l’automatisation est atteinte, pour qu’il <b>reprenne le contrôle</b> du véhicule à temps ;</li>
+        <li>proposer de <b>nouvelles activités à bord</b> (lire des courriels, regarder un film, travailler) lorsque le véhicule conduit seul.</li>
+      </ul>
+      <p>Les dispositifs d’interaction évoluent aussi : écrans tactiles, <b>reconnaissance vocale</b>, commandes gestuelles. Les boutons et manettes classiques sont de plus en plus souvent remplacés, mais ces nouvelles interfaces doivent atteindre une fiabilité quasi absolue : un conducteur ne doit pas quitter la route des yeux pour régler le chauffage.</p>
+      <p class="source">Texte réécrit à partir du manuel.</p>
+    </section>
+    <section class="card" id="doc3" aria-labelledby="t-doc3">
+      <h2 id="t-doc3"><span class="doc-tag">Doc. 3</span> Pirater une voiture autonome</h2>
+      <p>En 2017, des chercheurs ont montré que de <b>petits autocollants</b> collés sur un panneau « stop » suffisaient à tromper le système de reconnaissance d’images d’une voiture autonome, qui lisait alors un panneau de limitation de vitesse. Ce type d’attaque s’appelle une <b>attaque adverse</b> : on modifie légèrement l’environnement pour tromper l’intelligence artificielle du véhicule.</p>
+      <p>À lire : <a class="btn ext" href="https://www.lemonde.fr/pixels/video/2017/08/15/de-petits-autocollants-suffisent-pour-pirater-des-voitures-autonomes_5172638_4408996.html" target="_blank" rel="noopener">Le Monde – De petits autocollants suffisent pour pirater des voitures autonomes</a></p>
+      <p class="source">Cet article est susceptible d’être réservé aux abonnés.</p>
+    </section>
+    <section class="card" id="doc4" aria-labelledby="t-doc4">
+      <h2 id="t-doc4"><span class="doc-tag">Doc. 4</span> Vidéo complémentaire</h2>
+      <p>Regarde la vidéo suivante, puis utilise-la pour répondre aux questions.</p>
+      <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/MK0SrxBC1xs" title="Document 4" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <p class="video-fallback"><a href="https://www.youtube.com/watch?v=MK0SrxBC1xs" target="_blank" rel="noopener">Cliquer ici si la vidéo ne s’affiche pas.</a></p>
+    </section>
+    <section class="card" id="questions" aria-labelledby="t-questions">
+      <h2 id="t-questions"><span class="num tp">?</span> Questions (suite)</h2>
+      <div class="tp-question"><span class="label">Question 3 · Débat · Doc. 1 à 4</span><p><i>Une voiture autonome doit-elle obligatoirement posséder une interface ?</i> Appuie tes arguments en exploitant les documents.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 4 · Doc. 1 et mise à jour</span><p>Quel niveau d’autonomie correspond à (a) un régulateur de vitesse adaptatif, (b) le <i>Drive Pilot</i> de Mercedes, (c) un robotaxi Waymo ? Dans chaque cas, le « conducteur » peut-il lire un livre pendant le trajet ? Justifie.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label plus">Question 5 · Doc. 3</span><p>Pourquoi une attaque comme celle des autocollants est-elle particulièrement grave pour une voiture autonome ? Propose une solution pour s’en protéger.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <section class="card" id="cours2" aria-labelledby="t-cours2">
+      <h2 id="t-cours2"><span class="num ">2</span> Cours : les contraintes de l’informatique embarquée</h2>
+      <p>En informatique embarquée, il existe des <b>contraintes</b> différentes de celles de l’informatique personnelle :</p>
+      <ul>
+        <li><b>La criticité</b> : une sûreté de fonctionnement qui demande aux systèmes dits critiques de fournir des résultats exacts et pertinents.</li>
+        <li><b>La réactivité</b> : ces systèmes interagissent avec leur environnement, ce qui impose des temps de réponse précis. L’informatique embarquée repose souvent sur un système <b>temps réel</b>.</li>
+        <li><b>L’autonomie</b> : les systèmes embarqués doivent très souvent remplir leur mission pendant de longues périodes sans intervention humaine.</li>
+        <li><b>La robustesse, la fiabilité et la sécurité</b> : la sécurité (résistance aux malveillances) et la fiabilité (continuité de service) sont au cœur de la problématique.</li>
+        <li><b>Des contraintes externes</b> : une puissance de calcul calibrée au plus juste pour répondre aux besoins tout en évitant la surconsommation d’énergie.</li>
+      </ul>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="informatique-embarquee.html">← Retour au chapitre</a><a class="btn secondary" href="informatique-embarquee-seance2.html">Les objets connectés →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie</footer>
+
+  <script>
+  /* Garde la page en haut au chargement : les lecteurs intégrés (vidéos, éditeurs) peuvent prendre le focus et faire défiler la page. */
+  (function () {
+    if (location.hash) return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var touched = false, n = 0;
+    ["wheel", "touchstart", "mousedown", "keydown"].forEach(function (e) { addEventListener(e, function () { touched = true; }, { passive: true }); });
+    var t = setInterval(function () {
+      if (touched || ++n > 24) { clearInterval(t); return; }
+      if (window.scrollY > 0) window.scrollTo(0, 0);
+    }, 250);
+  })();
+  </script>
+</body>
+</html>

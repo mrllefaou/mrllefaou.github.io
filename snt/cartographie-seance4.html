@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calcul du plus court chemin · Cartographie et localisation · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 5 Cartographie et localisation – Séance 4 · Itinéraires, graphes et algorithme de Dijkstra.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="cartographie.html">Chapitre 5 – Cartographie et localisation</a><span class="sep">›</span>
+        <span>Séance 4</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#dc2626,#1c2333)">
+      <p class="eyebrow">Chapitre 5 – Cartographie et localisation</p>
+      <h1>Calcul du plus court chemin</h1>
+      <p class="meta">Séance 4 · Itinéraires, graphes et algorithme de Dijkstra</p>
+      <div class="page-tabs"><a href="#card">Deux calculs d’itinéraires</a><a href="#card">Un itinéraire est un graphe</a><a href="#card">L’algorithme de Dijkstra</a></div>
+    </section>
+
+    <section class="card" id="q1" aria-labelledby="t-q1">
+      <h2 id="t-q1"><span class="num tp">1</span> Deux calculs d’itinéraires</h2>
+      <p>Les deux cartes ci-dessous présentent deux calculs d’itinéraires entre les mêmes points, réalisés avec deux applications différentes.</p>
+      <figure><img src="img/cartographie/itineraires.png" alt="À gauche, itinéraire calculé dans OpenStreetMap : 5,0 km en 20 minutes. À droite, itinéraire calculé avec Google Maps avec propositions de parcours alternatifs" loading="lazy"><figcaption>À gauche : itinéraire calculé dans OpenStreetMap (5,0 km en 20 min). À droite : itinéraire calculé avec Google Maps, avec propositions de parcours alternatifs.</figcaption></figure>
+      <div class="tp-question"><span class="label">Question 1</span><p>Compare les deux calculs d’itinéraires. Quels sont les éléments qui peuvent expliquer les différences de durée du trajet ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <section class="card" id="graphe" aria-labelledby="t-graphe">
+      <h2 id="t-graphe"><span class="num tp">2</span> Un itinéraire est un graphe</h2>
+      <p>Un itinéraire peut se représenter mathématiquement par un <b>graphe</b>. Par exemple, dans le graphe ci-dessous, les <b>sommets</b> sont des villes et les <b>arêtes</b> sont les distances (en kilomètres) entre deux villes. Pour calculer des itinéraires (plus court, plus rapide, etc.) sur un graphe, de nombreux algorithmes s’appuyant sur la théorie des graphes ont été développés.</p>
+      <div class="lexique"><strong class="title">Vocabulaire · Algorithme de Dijkstra</strong><p>En théorie des graphes, l’algorithme de Dijkstra permet de résoudre le problème du <b>plus court chemin</b> (par exemple, le plus court chemin pour se rendre d’une ville à une autre connaissant le réseau routier d’une région). Il porte le nom de son inventeur, l’informaticien néerlandais Edsger Dijkstra, et a été publié en 1959.</p></div>
+      <figure class="small"><img src="img/cartographie/graphe-distances.png" alt="Graphe de huit villes A à H avec les distances en kilomètres sur les arêtes : AB 12, AD 14, BF 9, BG 16, BH 21, CF 10, CE 13, DE 10, EF 16, EH 10, FH 11, GH 11" loading="lazy"><figcaption>Les arêtes du graphe indiquent les distances en km.</figcaption></figure>
+      <div class="tp-question"><span class="label">Question 2</span><p>Quel est le chemin le plus court pour se rendre de la ville A à la ville H ? Est-ce le plus rapide ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <section class="card" id="dijkstra" aria-labelledby="t-dijkstra">
+      <h2 id="t-dijkstra"><span class="num tp">3</span> L’algorithme de Dijkstra</h2>
+      <div class="todo"><span class="label">Vidéo</span><p>Regarde la vidéo ci-dessous pour comprendre la méthode.</p></div>
+      <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/rHylCtXtdNs" title="Algorithme de Dijkstra" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <p class="video-fallback"><a href="https://www.youtube.com/watch?v=rHylCtXtdNs" target="_blank" rel="noopener">Cliquer ici si la vidéo ne s’affiche pas.</a></p>
+      <p>On ajoute au graphe des informations sur les arêtes : la vitesse est limitée à <b>80 km/h</b> sur toutes les routes, sauf sur les routes <b>DE, EH et FH</b> où la vitesse maximale est de <b>130 km/h</b>. On obtient le graphe suivant, où chaque arête indique le <b>temps nécessaire (en minutes)</b> pour la parcourir.</p>
+      <figure class="small"><img src="img/cartographie/graphe-minutes.png" alt="Graphe de huit villes A à H avec les durées en minutes : AB 9, AD 10,5, BF 6,75, BG 12, BH 15,75, CF 7,5, CE 9,75, DE environ 4,6, EF 12, EH environ 4,6, FH environ 5,1, GH 8,25" loading="lazy"><figcaption>Les arêtes indiquent le temps parcouru, en minutes.</figcaption></figure>
+      <div class="tp-question"><span class="label">Question 3</span><p>Justifie qu’il faut <b>10,5 minutes</b> pour parcourir le chemin AD, et environ <b>4,6 minutes</b> pour le chemin EH.<br><i>Rappel : v = d ÷ t, donc t = d ÷ v.</i></p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 4</span><p>En t’inspirant de la méthode présentée dans la vidéo et en utilisant le tableau ci-dessous, détermine, cette fois, <b>le chemin le plus rapide</b>. Quelle est sa durée ?</p>
+        <div class="table-wrap"><table class="data-table dijkstra-table"><thead><tr><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>Choix</th></tr></thead><tbody>
+        <tr><td>0</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td><b>A (0)</b></td></tr>
+        <tr><td></td><td>9 v A</td><td>∞</td><td>10,5 v A</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td><b>B (9)</b></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody></table></div>
+        <p class="source">Lecture : « 9 v A » signifie « 9 minutes en venant de A ».</p>
+        <div class="answer-lines short" aria-hidden="true"></div></div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="cartographie-seance3.html">← Les cartes numériques</a><a class="btn secondary" href="cartographie-seance5.html">Calculer des distances : la triangulation →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie</footer>
+
+  <script>
+  /* Garde la page en haut au chargement : les lecteurs intégrés (vidéos, éditeurs) peuvent prendre le focus et faire défiler la page. */
+  (function () {
+    if (location.hash) return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var touched = false, n = 0;
+    ["wheel", "touchstart", "mousedown", "keydown"].forEach(function (e) { addEventListener(e, function () { touched = true; }, { passive: true }); });
+    var t = setInterval(function () {
+      if (touched || ++n > 24) { clearInterval(t); return; }
+      if (window.scrollY > 0) window.scrollTo(0, 0);
+    }, 250);
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>À la découverte du HTML et du CSS · Le Web · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 2 Le Web – Séance 3 : découvrir le HTML et le CSS en construisant sa page web (mapage.html et css_eleve.css à télécharger).">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="web.html">Chapitre 2 – Le Web</a><span class="sep">›</span>
+        <span>Séance 3</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <p class="eyebrow">Chapitre 2 – Le Web</p>
+      <h1>À la découverte du HTML et du CSS</h1>
+      <p class="meta">Séance 3 · Comment mettre du contenu sur une page web, puis la mettre en forme</p>
+      <div class="page-tabs">
+        <a href="#html">HTML</a>
+        <a href="#fichiers">Fichiers</a>
+        <a href="#manip1">Manipulations 1 à 7</a>
+        <a href="#css">CSS</a>
+        <a href="#manip8">Manipulations 8 à 10</a>
+        <a href="#inspecteur">Inspecteur</a>
+      </div>
+    </section>
+
+    <section class="card" id="html" aria-labelledby="t-html">
+      <h2 id="t-html"><span class="num">&lt;/&gt;</span> À la découverte du HTML</h2>
+      <p>Le contenu d’une page web est intégré dans un fichier d’extension <code class="inline">.html</code>. Ce type de fichier est écrit par un webmaster, ou généré par un serveur (dans le cadre du web dynamique) qui le renvoie au client. Le navigateur web lit ce fichier, et cette lecture permet au client de voir apparaître le contenu de la page sur son navigateur.</p>
+      <p>Voici à quoi ressemble le squelette « très simplifié » d’un fichier HTML :</p>
+      <figure class="native">
+        <img src="img/img14.png" width="318" height="158" loading="lazy" alt="Squelette très simplifié d’un fichier HTML avec les balises html, head, title et body">
+        <figcaption>Squelette d’un fichier HTML.</figcaption>
+      </figure>
+      <p>Pour construire une page web en HTML, il suffit d’ouvrir un éditeur de texte et d’y écrire le code, sous la forme d’un fichier ayant pour extension <code class="inline">.html</code>.</p>
+      <div class="definition">
+        <strong class="title">À retenir</strong>
+        <p>Le HTML est un langage dit <span class="keyword">balisé</span> : pour écrire du contenu, on l’écrit entre des <b>balises</b>. Chaque balise opère une fonction sur le contenu.</p>
+      </div>
+      <p>Exemples : la balise <code class="inline">&lt;h1&gt; &lt;/h1&gt;</code> met le texte en grand (titre) ; la balise <code class="inline">&lt;b&gt; &lt;/b&gt;</code> met le texte en gras.</p>
+      <figure>
+        <img src="img/img15.png" width="800" height="400" loading="lazy" alt="Exemple de code HTML et de son affichage dans le navigateur">
+        <figcaption>Un exemple de code HTML.</figcaption>
+      </figure>
+      <p>On observe une « correspondance » entre les balises et ce qui est affiché. Pour mieux l’observer, l’image ci-dessous met en couleur chaque balise en lien avec ce qu’elle affiche.</p>
+      <figure>
+        <img src="img/img16.png" width="800" height="400" loading="lazy" alt="Le code HTML et l’affichage associé, avec chaque balise colorée de la couleur du contenu qu’elle affiche">
+        <figcaption>Chaque balise est colorée comme le contenu qu’elle affiche.</figcaption>
+      </figure>
+    </section>
+
+    <section class="card" id="fichiers" aria-labelledby="t-fichiers">
+      <h2 id="t-fichiers"><span class="num">⬇</span> Récupérer les fichiers de travail</h2>
+      <p>Pour les manipulations, tu as besoin du fichier <code class="inline">mapage.html</code> (le contenu de ta page) et du fichier <code class="inline">css_eleve.css</code> (son style). Télécharge-les dans un même dossier, nommé par exemple « Mon super site ».</p>
+      <div class="dl-grid">
+        <a class="btn dl" href="mapage.html" download="mapage.html">mapage.html</a>
+        <a class="btn dl" href="css_eleve.css" download="css_eleve.css">css_eleve.css</a>
+        <a class="btn secondary dl" href="mon-super-site.zip" download="mon-super-site.zip">Le dossier complet (.zip)</a>
+      </div>
+      <p class="fix-note">Le dossier .zip contient les deux fichiers ci-dessus, les images et les pages de la séance (utiles pour tester les liens hypertextes de la manipulation 3).</p>
+      <p>Tu peux aussi voir le résultat de départ : <a href="mapage.html" target="_blank" rel="noopener">ouvrir ma page web (nouvel onglet) ↗</a></p>
+    </section>
+
+    <section class="card" id="manip1" aria-labelledby="t-manip1">
+      <h2 id="t-manip1"><span class="num tp">M1</span> Manipulation 1 : Changer le titre de la page</h2>
+      <div class="todo">
+        <span class="label">À faire</span>
+        <ol>
+          <li>Aller dans le dossier « Mon super site » enregistré dans ton dossier personnel. Faire un clic droit sur le fichier <code class="inline">mapage</code> et cliquer sur « Éditer avec Notepad++ ».</li>
+          <li>À la <b>ligne 8</b> du fichier, modifier la ligne en indiquant ton nom et ton prénom. Sauvegarder le fichier en cliquant sur la disquette bleue en haut à gauche.</li>
+          <li>Retourner dans le répertoire « Mon super site » et ouvrir le fichier <code class="inline">mapage</code> avec un navigateur web.</li>
+        </ol>
+      </div>
+      <p><b>Notepad++</b> est un éditeur de texte qui colorie automatiquement les balises. Il s’adapte aussi à plusieurs langages de programmation. Vous devriez voir apparaître une fenêtre identique à l’image ci-dessous :</p>
+      <figure>
+        <img src="img/img17.png" width="800" height="400" loading="lazy" alt="Clic droit sur le fichier mapage avec l’entrée Éditer avec Notepad++">
+        <figcaption>Clic droit sur le fichier, puis « Éditer avec Notepad++ ».</figcaption>
+      </figure>
+      <figure>
+        <img src="img/img18.png" width="800" height="450" loading="lazy" alt="Le fichier mapage.html ouvert dans Notepad++">
+        <figcaption>Le fichier ouvert dans Notepad++.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/img39.png" width="1088" height="283" loading="lazy" alt="La ligne 8 du fichier mapage.html, qui contient la balise title">
+        <figcaption>La ligne 8 contient le titre de la page.</figcaption>
+      </figure>
+    </section>
+
+    <section class="card" id="manip2" aria-labelledby="t-manip2">
+      <h2 id="t-manip2"><span class="num tp">M2</span> Manipulation 2 : Insérer du texte</h2>
+      <p>Retourner dans Notepad++ afin de continuer à éditer le fichier <code class="inline">mapage.html</code>. Nous allons insérer la suite du code, en faisant un saut de ligne pour chaque nouveauté.</p>
+      <div class="todo">
+        <span class="label">À faire</span>
+        <ol>
+          <li>Utiliser les balises <code class="inline">&lt;h1&gt; &lt;/h1&gt;</code> pour écrire en titre : <i>Ma page web en SNT</i> (en ligne 9).</li>
+          <li>Utiliser les balises <code class="inline">&lt;p&gt; &lt;/p&gt;</code> pour un texte personnalisé (en ligne 10).</li>
+          <li>Sauvegarder le fichier, retourner sur le navigateur avec le fichier <code class="inline">mapage</code> chargé. Pour rafraîchir la page, appuyer sur <kbd>F5</kbd>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card" id="manip3" aria-labelledby="t-manip3">
+      <h2 id="t-manip3"><span class="num tp">M3</span> Manipulation 3 : Insérer un lien vers une autre page du site</h2>
+      <p>Les pages de la séance se situent dans le même répertoire que <code class="inline">mapage.html</code> (le dossier « Mon super site ») :</p>
+      <figure class="native">
+        <img src="img/img21.png" width="423" height="336" loading="lazy" alt="Contenu du dossier Mon super site : les fichiers HTML, le fichier CSS et le dossier img">
+        <figcaption>Le contenu du dossier « Mon super site ».</figcaption>
+      </figure>
+      <p>Le lien hypertexte a pour but de nous rediriger vers l’une des pages. Pour créer un lien hypertexte, nous avons besoin de la balise suivante :</p>
+      <pre class="code"><code>&lt;a href=&quot;chemin du fichier HTML&quot;&gt;Texte affiché et cliquable&lt;/a&gt;</code></pre>
+      <p>Le <b>chemin relatif</b> pour aller à la séance 1 est <code class="inline">web-seance1.html</code>, car les fichiers <code class="inline">mapage.html</code> et <code class="inline">web-seance1.html</code> se situent dans le même répertoire.</p>
+      <div class="todo">
+        <span class="label">À faire</span>
+        <ol>
+          <li>Créer un lien hypertexte permettant de se rediriger vers la séance 1, grâce à la ligne de code : <code class="inline">&lt;a href=&quot;web-seance1.html&quot;&gt;Séance 1&lt;/a&gt;</code></li>
+          <li>Créer un lien hypertexte permettant de se rediriger vers la séance 2 « Naviguer sur le web ». Le chemin relatif du fichier est : <code class="inline">web-seance2.html</code></li>
+          <li>Sauvegarder le fichier, retourner sur le navigateur avec le fichier <code class="inline">mapage</code> chargé, puis rafraîchir la page avec <kbd>F5</kbd>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card" id="manip4" aria-labelledby="t-manip4">
+      <h2 id="t-manip4"><span class="num tp">M4</span> Manipulation 4 : Insérer un lien vers un autre site web</h2>
+      <p>Pour créer un lien hypertexte vers un autre site web, il suffit de remplacer, dans la balise <code class="inline">&lt;a href=&quot;chemin du fichier HTML&quot;&gt;</code>, le chemin du fichier par l’<b>adresse URL</b>. Par exemple, pour créer un lien vers Google, on tape dans notre fichier HTML :</p>
+      <pre class="code"><code>&lt;a href=&quot;https://www.google.fr&quot;&gt;Google&lt;/a&gt;</code></pre>
+      <p>…ce qui donne le résultat suivant sur la page : <a href="https://www.google.fr" target="_blank" rel="noopener">Google</a>.</p>
+      <div class="todo">
+        <span class="label">À faire</span>
+        <ol>
+          <li>Créer 3 liens hypertextes redirigeant vers des sites : le site du Télégramme, le site de la CNIL, YouTube.</li>
+          <li>Sauvegarder le fichier, retourner sur le navigateur avec le fichier <code class="inline">mapage</code> chargé, puis rafraîchir la page avec <kbd>F5</kbd>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card" id="manip5" aria-labelledby="t-manip5">
+      <h2 id="t-manip5"><span class="num tp">M5</span> Manipulation 5 : Insérer une image</h2>
+      <p><code class="inline">&lt;img src=&quot;chemin du fichier image&quot;&gt;</code> est la balise permettant d’afficher une image. Par exemple, le gif ci-dessous se situe, par rapport au répertoire courant, dans le répertoire <code class="inline">img</code> sous le nom <code class="inline">gif4.gif</code>. Le chemin relatif par rapport au fichier <code class="inline">mapage.html</code> est donc <code class="inline">img/gif4.gif</code>.</p>
+      <p>En tapant <code class="inline">&lt;img src=&quot;img/gif4.gif&quot;&gt;</code> dans notre fichier HTML, on obtient ceci : <img src="img/gif4.gif" width="64" alt="Un gif animé" style="vertical-align:middle"></p>
+      <div class="todo">
+        <span class="label">À faire</span>
+        <ol>
+          <li>Insérer le gif ci-dessus dans ta page web.</li>
+          <li>Insérer l’image qui a pour ressource : <code class="inline">https://ih0.redbubble.net/image.468377772.5294/flat,550x550,075,f.u1.jpg</code></li>
+          <li>Sauvegarder le fichier, retourner sur le navigateur avec le fichier <code class="inline">mapage</code> chargé, puis rafraîchir la page avec <kbd>F5</kbd>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card" id="manip6" aria-labelledby="t-manip6">
+      <h2 id="t-manip6"><span class="num tp">M6</span> Manipulation 6 : Créer un lien hypertexte sur une image</h2>
+      <p>Pour qu’une image possède un lien hypertexte, il faut utiliser les deux balises : celle du lien hypertexte <code class="inline">&lt;a href=&quot;…&quot;&gt;Google&lt;/a&gt;</code>, et celle de l’image. Au lieu d’écrire le texte « Google » entre les balises, on peut insérer une balise image. Par exemple :</p>
+      <pre class="code"><code>&lt;a href=&quot;https://www.google.fr&quot;&gt;&lt;img src=&quot;https://cdn-icons-png.flaticon.com/512/5968/5968863.png&quot;&gt;&lt;/a&gt;</code></pre>
+      <p>…donnera le résultat suivant : <a href="https://www.google.fr" target="_blank" rel="noopener"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968863.png" width="48" alt="Icône cliquable vers Google" style="vertical-align:middle"></a></p>
+      <div class="todo">
+        <span class="label">À faire</span>
+        <ol>
+          <li>Créer une image dotée d’un lien hypertexte (différente de celle présentée ci-dessus).</li>
+          <li>Sauvegarder le fichier, retourner sur le navigateur avec le fichier <code class="inline">mapage</code> chargé, puis rafraîchir la page avec <kbd>F5</kbd>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card" id="manip7" aria-labelledby="t-manip7">
+      <h2 id="t-manip7"><span class="num tp">M7</span> Manipulation 7 : Intégrer une vidéo YouTube à la page</h2>
+      <div class="todo">
+        <span class="label">À faire</span>
+        <ol>
+          <li>Aller sur YouTube et choisir une vidéo.</li>
+          <li>Sur la page de la vidéo, cliquer sur « Partager ».</li>
+          <li>Puis cliquer sur « Intégrer ».</li>
+          <li>Copier-coller le code généré par YouTube dans le fichier <code class="inline">mapage.html</code>.</li>
+          <li>Sauvegarder le fichier, retourner sur le navigateur avec le fichier <code class="inline">mapage</code> chargé, puis rafraîchir la page avec <kbd>F5</kbd>.</li>
+        </ol>
+      </div>
+      <figure class="native">
+        <img src="img/img22.png" width="258" height="81" loading="lazy" alt="Bouton Partager sous une vidéo YouTube entouré en rouge">
+        <figcaption>Le bouton « Partager ».</figcaption>
+      </figure>
+      <figure class="native">
+        <img src="img/img23.png" width="572" height="252" loading="lazy" alt="Fenêtre de partage YouTube avec le bouton Intégrer entouré en rouge">
+        <figcaption>Le bouton « Intégrer ».</figcaption>
+      </figure>
+      <figure class="native">
+        <img src="img/img24.png" width="580" height="526" loading="lazy" alt="Fenêtre Intégrer la vidéo affichant le code iframe à copier">
+        <figcaption>Le code à copier-coller dans le fichier.</figcaption>
+      </figure>
+    </section>
+
+    <section class="card" id="css" aria-labelledby="t-css">
+      <h2 id="t-css"><span class="num">🎨</span> À la découverte du CSS</h2>
+      <p>Après ces 7 manipulations, vous avez obtenu un résultat similaire à celui ci-dessous :</p>
+      <figure>
+        <img src="img/img25.png" width="800" height="404" loading="lazy" alt="Page web obtenue : un titre, du texte, des liens, des images et une vidéo YouTube intégrée">
+        <figcaption>Résultat attendu après les 7 manipulations.</figcaption>
+      </figure>
+      <p>Le <span class="keyword">CSS</span> est un langage web qui s’ajoute à un fichier HTML et permet d’éditer le design d’une page web. Ses paramètres sont chargés grâce à la balise suivante, placée dans le fichier HTML :</p>
+      <pre class="code"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;css_eleve.css&quot; media=&quot;screen&quot;&gt;</code></pre>
+      <p>Elle indique où se situe le fichier <code class="inline">css_eleve.css</code>, qui contient les paramètres graphiques de la page.</p>
+      <p>Lancer dans Notepad++ le fichier <code class="inline">css_eleve.css</code> (clic droit, « Éditer avec Notepad++ »). Nous allons modifier quelques lignes de code.</p>
+      <figure>
+        <img src="img/img40.png" width="974" height="550" loading="lazy" alt="Clic droit sur le fichier css_eleve avec l’entrée Éditer avec Notepad++">
+        <figcaption>Ouvrir le fichier <code class="inline">css_eleve.css</code> avec Notepad++.</figcaption>
+      </figure>
+      <p>À l’ouverture, vous devez obtenir ceci :</p>
+      <figure class="native">
+        <img src="img/img30.png" width="541" height="400" loading="lazy" alt="Le fichier css_eleve.css dans Notepad++ : blocs body, h1 et h2">
+        <figcaption>Le fichier <code class="inline">css_eleve.css</code>.</figcaption>
+      </figure>
+    </section>
+
+    <section class="card" id="manip8" aria-labelledby="t-manip8">
+      <h2 id="t-manip8"><span class="num tp">M8</span> Manipulation 8 : Mettre le texte des titres en rouge et celui des paragraphes en bleu</h2>
+      <div class="todo">
+        <span class="label">À faire</span>
+        <ol>
+          <li>À la <b>ligne 15</b> du fichier CSS, il y a un bloc consacré au style de la balise <code class="inline">&lt;h1&gt;</code>. À cette ligne, on a <code class="inline">color: green;</code>. Remplacer <code class="inline">green</code> par <code class="inline">red</code>.</li>
+          <li>Copier-coller à la fin du fichier le bloc suivant (il règle la couleur de la balise <code class="inline">&lt;p&gt;</code>) :</li>
+          <li>Sauvegarder le fichier, retourner sur le navigateur avec le fichier <code class="inline">mapage</code> chargé, puis rafraîchir la page avec <kbd>F5</kbd>.</li>
+        </ol>
+      </div>
+<pre class="code"><code>p
+{
+    color: blue;
+}</code></pre>
+    </section>
+
+    <section class="card" id="manip9" aria-labelledby="t-manip9">
+      <h2 id="t-manip9"><span class="num tp">M9</span> Manipulation 9 : Changer la couleur du fond</h2>
+      <p>La partie <code class="inline">body</code> du fichier CSS permet de modifier le corps de la page :</p>
+<pre class="code"><code>body {
+    font: 100% verdana, arial, sans-serif;
+    background-color: rgb(177,247,174);
+    margin: 50px;
+    padding-left: 250px;
+    padding-right: 250px;
+}</code></pre>
+      <p>La ligne <code class="inline">background-color: rgb(177,247,174);</code> définit la couleur de l’arrière-plan de la page. Pour définir une couleur, <b>rgb</b> (<em>red, green, blue</em>) prend trois paramètres : une série de trois nombres compris entre 0 et 255. La combinaison de ces trois nombres permet d’obtenir une couleur.</p>
+      <p>Pour savoir quelles valeurs correspondent à telle couleur, vous pouvez ouvrir le logiciel Paint et cliquer sur « Modifier les couleurs ». Sélectionner une couleur et noter la valeur du rouge, du vert et du bleu.</p>
+      <figure>
+        <img src="img/img31.png" width="800" height="449" loading="lazy" alt="Logiciel Paint avec la fenêtre Modifier les couleurs, qui affiche les valeurs rouge, vert et bleu d’une couleur">
+        <figcaption>La fenêtre « Modifier les couleurs » de Paint.</figcaption>
+      </figure>
+      <p>Ici, la couleur ocre a pour valeur rouge : 142, vert : 149, bleu : 17. En remplaçant <code class="inline">background-color: rgb(177,247,174);</code> par <code class="inline">background-color: rgb(142,149,17);</code>, la couleur de l’arrière-plan de la page sera ocre.</p>
+      <div class="todo">
+        <span class="label">À faire</span>
+        <ol>
+          <li>Choisir une couleur dans les tons bleus et changer l’arrière-plan de la page par cette couleur.</li>
+          <li>Sauvegarder le fichier, retourner sur le navigateur avec le fichier <code class="inline">mapage</code> chargé, puis rafraîchir la page avec <kbd>F5</kbd>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card" id="manip10" aria-labelledby="t-manip10">
+      <h2 id="t-manip10"><span class="num tp">M10</span> Manipulation 10 : Mettre une image en arrière-plan</h2>
+      <p>Pour mettre une image en arrière-plan, il faut remplacer <code class="inline">background-color: rgb(177,247,174);</code> par :</p>
+      <pre class="code"><code>background-image: url(&quot;url de l’image&quot;);</code></pre>
+      <div class="todo">
+        <span class="label">À faire</span>
+        <ol>
+          <li>Modifier l’arrière-plan de ta page web par l’image ayant comme adresse URL : <code class="inline">https://wallpapercave.com/wp/YpCO1pN.jpg</code></li>
+          <li>Sauvegarder le fichier, retourner sur le navigateur avec le fichier <code class="inline">mapage</code> chargé, puis rafraîchir la page avec <kbd>F5</kbd>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card" id="inspecteur" aria-labelledby="t-inspecteur">
+      <h2 id="t-inspecteur"><span class="num">🕵️</span> Modifions le site du Likès à l’aide de l’inspecteur</h2>
+      <div class="todo"><span class="label">À faire</span><ol><li><b>Regarder la vidéo.</b></li></ol></div>
+      <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/ZBITsl3wVgI" title="Utiliser l’inspecteur du navigateur" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <p class="video-fallback"><a href="https://www.youtube.com/watch?v=ZBITsl3wVgI" target="_blank" rel="noopener">Cliquer ici si la vidéo ne s&#x27;affiche pas.</a></p>
+      <div class="todo"><span class="label">À faire</span><ol start="2"><li>Tester l’inspecteur sur le site du Likès pour le modifier.</li></ol></div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="web-seance2.html">← Séance 2</a>
+      <a class="btn secondary" href="web.html">Retour au chapitre</a>
+      <a class="btn" href="web-seance4.html">Séance 4 : publier dans les règles →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie</footer>
+
+  <script>
+  /* Garde la page en haut au chargement : les lecteurs intégrés (vidéos, éditeurs) peuvent prendre le focus et faire défiler la page. */
+  (function () {
+    if (location.hash) return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var touched = false, n = 0;
+    ["wheel", "touchstart", "mousedown", "keydown"].forEach(function (e) { addEventListener(e, function () { touched = true; }, { passive: true }); });
+    var t = setInterval(function () {
+      if (touched || ++n > 24) { clearInterval(t); return; }
+      if (window.scrollY > 0) window.scrollTo(0, 0);
+    }, 250);
+  })();
+  </script>
+</body>
+</html>

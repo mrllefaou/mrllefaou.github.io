@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Où sont stockées les données ? · Les données · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 3 Les données – Séance 3 : stockage des données, cloud, data centers, impact environnemental, puis protection des données personnelles et RGPD.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="donnees.html">Chapitre 3 – Les données</a><span class="sep">›</span>
+        <span>Séance 3</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#059669,#1c2333)">
+      <p class="eyebrow">Chapitre 3 – Les données</p>
+      <h1>Où sont stockées les données ?</h1>
+      <p class="meta">Séance 3 · Stockage, data centers, impact environnemental, puis protection des données personnelles</p>
+      <div class="page-tabs">
+        <a href="#activite">Activité</a>
+        <a href="#cours">Cours</a>
+        <a href="#ouverture">En ouverture : le RGPD</a>
+      </div>
+    </section>
+
+    <!-- ===================== ACTIVITÉ ===================== -->
+    <section class="card" id="activite" aria-labelledby="t-activite">
+      <h2 id="t-activite"><span class="num tp">Act.</span> Où sont stockées les données ?</h2>
+      <p>La quantité de données numériques est en constante augmentation. Par exemple, des sites comme Deezer ou Spotify stockent des <b>pétaoctets</b> de données. <b>Comment assurer le stockage de ces données massives ? Quel en est l’impact sur l’environnement ?</b></p>
+      <div class="consigne">
+        <span class="icon" aria-hidden="true">📖</span>
+        <p><b>Consigne :</b> étudie les quatre documents ci-dessous, puis réponds aux questions qui se trouvent à la fin de l’activité. Certains chiffres ont été mis à jour (2025-2026) ; la source et l’année sont indiquées.</p>
+      </div>
+    </section>
+
+    <!-- Doc 1 -->
+    <section class="card" id="doc1" aria-labelledby="t-doc1">
+      <h2 id="t-doc1"><span class="doc-tag">Doc. 1</span> L’ère du « Big Data »</h2>
+      <p>Nos activités (écoute de musique en ligne, partage d’images, capteurs d’objets connectés, etc.) génèrent la circulation d’<b>énormes quantités de données</b>. Pour extraire les informations pertinentes rapidement, on peut procéder à l’<b>indexation</b> des données (ce que font les moteurs de recherche). On utilise aussi, de plus en plus, des algorithmes d’<b>apprentissage</b> pour analyser ces données (reconnaissance de personnes sur des images, programmation de véhicules autonomes, etc.).</p>
+      <p>Cela demande de grandes capacités, à la fois en <b>stockage</b> et en <b>calcul</b>, et nos activités exigent que les données soient accessibles en permanence par Internet dans des délais très courts. Des <b>data centers</b> se sont développés partout dans le monde pour répondre à ces besoins.</p>
+
+      <h3>Quelques chiffres clés</h3>
+      <ul class="key-figures">
+        <li><span class="big">21,1 Md</span><span class="lab">objets connectés dans le monde fin 2025 (prévision : 39 Md en 2030)</span></li>
+        <li><span class="big">8 à 10 Md</span><span class="lab">de mails échangés en 1 heure (hors spams)*</span></li>
+        <li><span class="big">180 M</span><span class="lab">de recherches Google en 1 heure*</span></li>
+        <li><span class="big">Dizaines de Zo</span><span class="lab">de données stockées dans le monde (1 Zo = 10<sup>21</sup> octets)*</span></li>
+      </ul>
+      <p class="source">Sources : IoT Analytics, « State of IoT 2025 » (octobre 2025) pour les objets connectés ; * d’après ademe.fr, <i>La face cachée du numérique</i>, 2017 (chiffres plus anciens, donnés comme ordres de grandeur).</p>
+    </section>
+
+    <!-- Doc 2 -->
+    <section class="card" id="doc2" aria-labelledby="t-doc2">
+      <h2 id="t-doc2"><span class="doc-tag">Doc. 2</span> Les supports de stockage</h2>
+      <p>Les fichiers sont toujours stockés sur des <b>supports</b> (disque dur d’ordinateur, clé USB, carte de téléphone portable, etc.), qui permettent un <b>stockage local</b>. Ces supports peuvent subir des <b>altérations</b>, même dans le cas d’une utilisation normale, d’où l’importance de faire des <b>copies pour sauvegarder</b> les données.</p>
+      <p>Plutôt que de stocker ou traiter les données localement, les applications font de plus en plus souvent appel au <b>cloud</b>, un système de stockage en ligne : des entreprises mettent à la disposition des clients des machines permettant de stocker des données ; les clients peuvent y avoir accès à tout moment et de n’importe quel endroit. Ces machines sont généralement regroupées dans des <b>data centers</b>.</p>
+
+      <div class="lexique">
+        <strong class="title">Vocabulaire · Cloud</strong>
+        <p>L’informatique en nuage (en anglais, <i>cloud computing</i>) consiste à exploiter à travers Internet des ressources informatiques (stockage, services) proposées par des entreprises sur des serveurs distants.</p>
+      </div>
+      <div class="lexique">
+        <strong class="title">Vocabulaire · Data center</strong>
+        <p>Un centre de données est un bâtiment qui regroupe un grand nombre de serveurs permettant de stocker de très grandes quantités de données.</p>
+      </div>
+    </section>
+
+    <!-- Doc 3 -->
+    <section class="card" id="doc3" aria-labelledby="t-doc3">
+      <h2 id="t-doc3"><span class="doc-tag">Doc. 3</span> Les data centers</h2>
+      <p>Les data centers abritent des <b>milliers de serveurs informatiques</b> destinés à stocker et traiter les données via un réseau interne ou un accès à Internet. Pour proposer des services cloud à leurs clients, les géants du cloud (Microsoft, Google, Amazon, Apple, OVH, Orange, etc.) mettent à leur disposition des dizaines de data centers gigantesques ; il en existe plusieurs milliers dans le monde.</p>
+      <p>Ces centres sont conçus pour garantir une <b>haute disponibilité</b> : le <b>taux de disponibilité</b> atteint <b>99,6 %</b>, voire <b>99,995 %</b>. Ils cherchent aussi à optimiser les coûts d’exploitation. Ils consomment énormément d’énergie (près de 30 % des coûts d’exploitation). Toutefois, de gros efforts sont réalisés pour optimiser la consommation : par exemple, en s’implantant dans des régions froides pour éviter de climatiser, ou en limitant l’énergie « gaspillée » (refroidissement, transformateurs et câbles électriques).</p>
+
+      <div class="maj">
+        <strong class="title">Mise à jour · Consommation électrique des data centers</strong>
+        <ul>
+          <li>En <b>2024</b>, les data centers ont consommé environ <b>415 TWh</b> d’électricité dans le monde (entre 1 et 2 % de la consommation mondiale), soit à peu près ce que consomme un pays comme la France. Près de la moitié se situe aux États-Unis, environ 25 % en Chine et 15 % en Europe.</li>
+          <li>En <b>2025</b>, leur consommation a encore augmenté de <b>17 %</b>, tirée par l’intelligence artificielle.</li>
+          <li>L’Agence internationale de l’énergie prévoit qu’elle <b>doublera d’ici 2030</b> (environ 945 TWh).</li>
+        </ul>
+      </div>
+      <p class="source">Sources : <a href="https://www.carbonbrief.org/ai-five-charts-that-put-data-centre-energy-use-and-emissions-into-context" target="_blank" rel="noopener">Carbon Brief, d’après l’AIE, « Energy and AI » (2025)</a> ; <a href="https://iea.org/news/data-centre-electricity-use-surged-in-2025-even-with-tightening-bottlenecks-driving-a-scramble-for-solutions" target="_blank" rel="noopener">AIE, « Data centre electricity use surged in 2025 »</a> (2026).</p>
+    </section>
+
+    <!-- Doc 4 -->
+    <section class="card" id="doc4" aria-labelledby="t-doc4">
+      <h2 id="t-doc4"><span class="doc-tag">Doc. 4</span> L’impact du numérique sur l’environnement</h2>
+      <p>Les activités numériques permettent des économies d’énergie, mais elles consomment aussi beaucoup d’électricité et de ressources. Cette consommation <b>explose</b> et elle est concentrée dans les pays les plus riches : un Américain possède en moyenne une dizaine de périphériques, alors qu’un Indien n’en possède qu’un. Par ailleurs, la <b>fabrication</b> des objets connectés pollue et consomme beaucoup de <b>ressources limitées</b> (métaux rares).</p>
+
+      <div class="maj">
+        <strong class="title">Mise à jour · Où se situe l’impact ?</strong>
+        <ul>
+          <li>Selon l’étude <b>ADEME-Arcep</b>, en France, les <b>terminaux</b> (smartphones, ordinateurs, télévisions…) représentent <b>79 %</b> des émissions de gaz à effet de serre du numérique en 2020, les <b>data centers</b> environ <b>16 %</b> et les <b>réseaux</b> environ <b>5 %</b>. La <b>fabrication</b> pèse environ <b>80 %</b> du total, l’utilisation environ 20 %.</li>
+          <li>Sans action, les émissions du numérique en France augmenteraient d’environ <b>45 %</b> d’ici 2030.</li>
+          <li>Plus de 2 milliards de personnes, environ un quart de l’humanité, n’utilisent toujours pas Internet (UIT, 2025).</li>
+        </ul>
+      </div>
+      <p class="source">Sources : <a href="https://www.arcep.fr/la-regulation/grands-dossiers-thematiques-transverses/lempreinte-environnementale-du-numerique/etude-ademe-arcep-empreinte-environnemental-numerique-2020-2030-2050.html" target="_blank" rel="noopener">ADEME-Arcep, étude sur l’empreinte environnementale du numérique en France (2020-2030-2050)</a> ; UIT, <i>Facts and Figures</i> 2025.</p>
+
+      <h3>Cycle de vie d’un smartphone</h3>
+      <ol class="lifecycle">
+        <li><h4>1. Matières premières</h4><ul><li>terres rares</li><li>métaux</li><li>eau et énergie</li><li>pollution</li></ul></li>
+        <li><h4>2. Fabrication</h4><ul><li><b>40 kg</b> de matière pour un smartphone de <b>100 g</b></li></ul></li>
+        <li><h4>3. Utilisation</h4><ul><li>durée moyenne : <b>2 ans</b></li><li>consommation électrique</li></ul></li>
+        <li><h4>4. Collecte</h4><ul><li><b>15 %</b> collectés (France, 2015)</li></ul></li>
+        <li class="end"><h4>5. Déchets et valorisation</h4><ul><li>une grande partie est exportée (filières illégales)</li><li>développement de filières de recyclage et de réemploi</li></ul></li>
+      </ol>
+      <p class="source">Données du manuel (2015-2017), à considérer comme des ordres de grandeur.</p>
+      <p><b>Tendances :</b> cycles de vie de plus en plus courts et augmentation des quantités ; baisse de la valeur marchande des déchets, car il y a peu de matériel facile à recycler (trop grande variété de petits composants).</p>
+    </section>
+
+    <!-- Questions -->
+    <section class="card" id="questions" aria-labelledby="t-questions">
+      <h2 id="t-questions"><span class="num tp">?</span> Questions</h2>
+
+      <div class="tp-question">
+        <span class="label">Question 1 · Doc. 1, 2, 3</span>
+        <p>En quoi consiste le cloud ? Quels sont les avantages et les inconvénients du stockage dans le cloud ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 2 · Doc. 3</span>
+        <p>Combien de minutes un data center peut-il être indisponible ? Comment une telle disponibilité est-elle assurée ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 3 · Doc. 4</span>
+        <p>Il ne suffira pas d’alimenter les data centers en électricité solaire ou éolienne pour régler les problèmes environnementaux posés par le numérique. Pourquoi ? Donnez deux raisons.</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 4 · Doc. 4</span>
+        <p>Comment chaque individu peut-il contribuer à limiter les effets négatifs de ses activités numériques sur l’environnement ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ===================== COURS ===================== -->
+    <section class="card" id="cours" aria-labelledby="t-cours">
+      <h2 id="t-cours"><span class="num">III</span> Traitement des données</h2>
+      <p>Pour <b>stocker une donnée de façon persistante</b>, l’ordinateur l’enregistre dans un <span class="keyword">fichier</span>. On associe à tout fichier des <span class="keyword">métadonnées</span>, qui décrivent les données. Le choix d’un <b>format</b> pour le fichier dépend à la fois du type de donnée à stocker (par exemple, JPEG ou PNG pour des images, CSV ou JSON pour des tables) et de ce que l’on veut en faire. Par exemple, certains appareils photographiques enregistrent comme métadonnées la date et la géolocalisation d’une photographie ; pour du code informatique, les métadonnées peuvent comporter l’auteur et la licence.</p>
+      <p>Des programmes spécialisés ont été développés pour gérer les <span class="keyword">bases de données</span> et extraire des informations à partir des données. Il s’agit de stocker de façon fiable des données, de les filtrer rapidement, de réaliser des prédictions à partir de ces données ou encore de les visualiser.</p>
+
+      <h2 style="margin-top:2rem"><span class="num">IV</span> Exploitation des données</h2>
+      <p>L’explosion du volume de données disponibles et le développement de techniques <span class="keyword">Big Data</span> pour traiter ces données permettent de proposer ou d’améliorer des services dans de nombreux domaines : santé, science, économie, etc. Par exemple, les suggestions d’itinéraires sur Google Maps reposent sur l’exploitation de données créées par les utilisateurs.</p>
+      <p>Ces grands volumes de données, notamment celles des utilisateurs de services Web, deviennent un énorme <b>enjeu économique</b>. Le <span class="keyword">Règlement général sur la protection des données</span> (RGPD) encadre le stockage de données personnelles pour que les usagers puissent contrôler au mieux les données qu’ils fournissent en échange de services.</p>
+      <p>Les <span class="keyword">data centers</span>, qui gèrent de gros volumes de données, consomment beaucoup d’énergie et de ressources limitées ou polluantes, ce qui constitue un grand défi <b>géopolitique, économique et sanitaire</b>.</p>
+
+      <div class="definition">
+        <strong class="title">À retenir</strong>
+        <p>Les données sont stockées dans des <b>fichiers</b>, décrits par des <b>métadonnées</b>, sur des supports locaux ou dans le <b>cloud</b> (des data centers). Le Big Data est un enjeu économique, encadré par le <b>RGPD</b>, et un enjeu environnemental : les data centers consomment de l’électricité (plus de 400 TWh par an dans le monde, en forte hausse) et la fabrication des appareils pèse le plus lourd dans l’empreinte du numérique.</p>
+      </div>
+    </section>
+
+    <!-- ===================== EN OUVERTURE ===================== -->
+    <section class="card" id="ouverture" aria-labelledby="t-ouverture">
+      <h2 id="t-ouverture"><span class="num tp">Ouv.</span> Controverse : protéger les données personnelles</h2>
+      <p>Les données issues de l’utilisation des outils numériques (navigateurs Web, réseaux sociaux, etc.) sont le <b>« nouvel or noir »</b> de toute une partie de l’industrie du numérique, qui les utilise principalement pour <b>cibler la publicité</b>. Elles sont au cœur de la question de la <b>protection de la vie privée</b>. Pour encadrer la collecte et l’utilisation des données, l’Europe s’est dotée d’un règlement.</p>
+      <div class="consigne">
+        <span class="icon" aria-hidden="true">💬</span>
+        <p><b>Consigne :</b> étudie les documents, réponds aux questions, puis participe à un <b>débat</b> : le RGPD, une avancée trop lourde ou une contrainte ?</p>
+      </div>
+    </section>
+
+    <section class="card" id="odoc1" aria-labelledby="t-odoc1">
+      <h2 id="t-odoc1"><span class="doc-tag">Doc. 1</span> Qu’est-ce que le RGPD ?</h2>
+      <p>Lorsque nous effectuons des actions sur Internet, nous y laissons, d’une manière ou d’une autre, des <b>données personnelles</b>, c’est-à-dire des informations nous concernant : notre nom, notre numéro de téléphone, une photographie, un goût musical, une opinion politique, etc. Face aux risques de mauvaises utilisations de ces données, l’Europe a mis en place, en <b>2018</b>, le <b>Règlement général sur la protection des données</b> (RGPD).</p>
+      <p>Ce texte oblige tout organisme qui collecte des données à <b>prouver la nécessité</b> de cette collecte, à <b>protéger</b> celles recueillies et à être plus <b>transparent</b> sur leur utilisation. Le RGPD concerne toute entreprise sur le sol européen et toute donnée sur un citoyen européen, quelle que soit l’entreprise qui la collecte. Avec ce règlement, les données issues de l’utilisation de réseaux sociaux comme Facebook, Instagram ou WhatsApp sont plus protégées qu’avant.</p>
+
+      <div class="maj">
+        <strong class="title">Mise à jour · Le RGPD aujourd’hui</strong>
+        <ul>
+          <li>Les amendes peuvent atteindre <b>20 millions d’euros ou 4 % du chiffre d’affaires mondial</b> annuel de l’entreprise.</li>
+          <li>Depuis mai 2018, les amendes cumulées dépassent <b>7 milliards d’euros</b> en Europe (environ 1,2 milliard pour la seule année 2025).</li>
+          <li>Un organisme doit signaler une fuite de données à l’autorité de contrôle <b>sous 72 heures</b>.</li>
+        </ul>
+      </div>
+      <p class="source">Source : DLA Piper, enquête sur les amendes RGPD, janvier 2026 (via Kiteworks, <i>Guide 2026 des lois mondiales de protection des données</i>).</p>
+    </section>
+
+    <section class="card" id="odoc2" aria-labelledby="t-odoc2">
+      <h2 id="t-odoc2"><span class="doc-tag">Doc. 2</span> La CNIL rappelle les bons réflexes</h2>
+      <div class="lexique">
+        <strong class="title">Vocabulaire · CNIL</strong>
+        <p>Dans le domaine du numérique, la Commission nationale de l’informatique et des libertés aide les particuliers à avoir une maîtrise de leurs données personnelles et elle accompagne les entreprises dans leur mise en conformité vis-à-vis de la loi.</p>
+      </div>
+      <p>La CNIL a élaboré un document pour aider les entreprises à se mettre en conformité avec le RGPD. Il résume six réflexes :</p>
+      <ol class="reflex-list">
+        <li><span class="tag-r">1 · Pertinence</span><span><b>Ne collectez que les données vraiment nécessaires.</b> Quel est mon objectif ? Quelles données sont indispensables ? Ai-je le droit de les collecter ? Les personnes concernées sont-elles d’accord ?</span></li>
+        <li><span class="tag-r">2 · Transparence</span><span><b>Soyez transparent.</b> Une information claire et complète est le socle du contrat de confiance avec les personnes dont vous traitez les données.</span></li>
+        <li><span class="tag-r">3 · Respect des droits</span><span><b>Pensez aux droits des personnes.</b> Répondez dans les meilleurs délais aux demandes de consultation, de rectification ou de suppression des données.</span></li>
+        <li><span class="tag-r">4 · Maîtrise</span><span><b>Gardez la maîtrise des données.</b> Le partage et la circulation des données personnelles doivent être encadrés et contractualisés.</span></li>
+        <li><span class="tag-r">5 · Gestion des risques</span><span><b>Identifiez les risques.</b> Si vous traitez énormément de données, ou des données sensibles, des mesures spécifiques peuvent s’appliquer.</span></li>
+        <li><span class="tag-r">6 · Sécurité</span><span><b>Sécurisez vos données.</b> Les mesures de sécurité, informatiques mais aussi physiques, doivent être adaptées à la sensibilité des données.</span></li>
+      </ol>
+      <p class="source">D’après cnil.fr, « Les bons réflexes pour ne pas déraper », 28 février 2019.</p>
+    </section>
+
+    <section class="card" id="odoc3" aria-labelledby="t-odoc3">
+      <h2 id="t-odoc3"><span class="doc-tag">Doc. 3</span> Les mauvaises pratiques</h2>
+      <h3>Google devra payer 50 millions d’euros (2019)</h3>
+      <p>Depuis l’entrée en vigueur du RGPD en mai 2018, les pays européens guettaient le faux pas des géants du numérique. En janvier 2019, la CNIL inflige une <b>amende record de 50 millions d’euros à Google</b> « pour manque de transparence, information insatisfaisante et absence de consentement valable pour la personnalisation de la publicité ».</p>
+      <p>La CNIL explique que le consentement recueilli par Google n’est pas valide pour deux raisons principales : d’une part, la difficulté d’accéder aux <b>finalités</b> des traitements de données empêche de qualifier le consentement d’« <b>éclairé</b> » ; d’autre part, le consentement recueilli n’est ni « <b>univoque</b> » ni « <b>spécifique</b> ». La CNIL s’attaque aussi à une pratique qui active <b>par défaut</b> les publicités personnalisées lors de la création d’un nouveau compte.</p>
+      <p class="source">D’après O. Tesquet, telerama.fr, 21 janv. 2019, et L. Adam, zdnet.fr, 21 janv. 2019.</p>
+
+      <div class="maj">
+        <strong class="title">Mise à jour · Des sanctions de plus en plus élevées</strong>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th scope="col">Année</th><th scope="col">Entreprise</th><th scope="col">Amende</th><th scope="col">Autorité</th><th scope="col">Motif</th></tr></thead>
+            <tbody>
+              <tr><td>2019</td><td>Google</td><td>50 M€</td><td>CNIL (France)</td><td>Transparence et consentement pour la publicité personnalisée</td></tr>
+              <tr><td>2021</td><td>Amazon</td><td>746 M€</td><td>CNPD (Luxembourg)</td><td>Suivi des données sans consentement valable</td></tr>
+              <tr><td>2023</td><td>Meta</td><td>1,2 Md€</td><td>DPC (Irlande)</td><td>Transfert de données d’Européens vers les États-Unis</td></tr>
+              <tr><td>2025</td><td>Google</td><td>325 M€</td><td>CNIL (France)</td><td>Cookies publicitaires sans consentement, publicités dans Gmail</td></tr>
+              <tr><td>2025</td><td>Shein</td><td>150 M€</td><td>CNIL (France)</td><td>Cookies déposés sans consentement</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="source">Sources : <a href="https://termly.io/fr/ressources/articles/les-plus-grosses-amendes-rgpd/" target="_blank" rel="noopener">Termly, les plus grosses amendes RGPD</a> ; <a href="https://cnil.fr/fr/regulation-des-cookies-la-cnil-poursuit-le-plan-daction-initie-en-2019-et-prononce-deux-amendes" target="_blank" rel="noopener">CNIL, sanctions du 3 septembre 2025</a>.</p>
+    </section>
+
+    <section class="card" id="odoc4" aria-labelledby="t-odoc4">
+      <h2 id="t-odoc4"><span class="doc-tag">Doc. 4</span> Le RGPD, une contrainte coûteuse pour l’Europe ?</h2>
+      <h3>« Se priver de la data, une erreur stratégique » (2018)</h3>
+      <p>Gary Shapiro, patron du plus grand salon mondial des technologies, le CES, avance que la France « va rater beaucoup des futures vagues technologiques », parce que l’Union européenne, avec le RGPD, est « extraordinairement concentrée sur la défense de la vie privée des individus ». Selon lui, toute la zone Europe va subir les effets néfastes d’une trop forte régulation et accuser du <b>retard en matière d’innovation</b> : « l’Europe va perdre du terrain sur la Chine et sans doute aussi sur les États-Unis ».</p>
+      <p>Il témoigne d’un sentiment partagé par nombre d’entrepreneurs américains : se priver de la data est une erreur stratégique. « Aux États-Unis, la vie privée est importante aussi, mais il y a un équilibre entre la défense de la vie privée et l’innovation. Or la donnée, c’est la nouvelle richesse, on a besoin de la donnée partout, maintenant. »</p>
+      <p class="source">D’après « Vu des USA, le RGPD va coûter cher aux entreprises européennes », lejournaleconomique.com, 12 nov. 2018.</p>
+    </section>
+
+    <section class="card" id="odoc5" aria-labelledby="t-odoc5">
+      <h2 id="t-odoc5"><span class="doc-tag">Doc. 5</span> Et ailleurs dans le monde ? <span class="fix-note">(ajout)</span></h2>
+      <p>Les trois grandes puissances numériques n’ont pas la même approche de la protection des données personnelles.</p>
+      <div class="compare-grid">
+        <article>
+          <h4>🇪🇺 Union européenne</h4>
+          <ul>
+            <li><b>RGPD</b> (2018) : une seule règle pour toute l’Union, qui s’applique à toute entreprise qui traite des données de résidents européens.</li>
+            <li>Consentement, droits d’accès, de rectification, d’effacement.</li>
+            <li>Amendes jusqu’à 4 % du chiffre d’affaires mondial.</li>
+          </ul>
+        </article>
+        <article>
+          <h4>🇺🇸 États-Unis</h4>
+          <ul>
+            <li><b>Pas de loi fédérale générale</b> sur la vie privée.</li>
+            <li>Des lois <b>État par État</b> : la Californie (CCPA, entrée en vigueur en 2020) ouvre la voie, et environ une vingtaine d’États ont désormais leur loi.</li>
+            <li>Les transferts de données Europe → États-Unis reposent sur un accord (<i>Data Privacy Framework</i>, 2023), validé en septembre 2025 par la justice européenne, mais encore contesté.</li>
+          </ul>
+        </article>
+        <article>
+          <h4>🇨🇳 Chine</h4>
+          <ul>
+            <li><b>PIPL</b> (en vigueur depuis le 1<sup>er</sup> novembre 2021), avec la loi sur la cybersécurité (2017) et la loi sur la sécurité des données (2021).</li>
+            <li>Consentement, droits d’accès et de suppression ; consentement des parents pour les moins de 14 ans.</li>
+            <li>Amendes jusqu’à 50 millions de yuans ou 5 % du chiffre d’affaires.</li>
+            <li>Transferts de données hors de Chine <b>très encadrés</b> ; l’État conserve un large accès aux données.</li>
+          </ul>
+        </article>
+      </div>
+      <p class="source">Sources : <a href="https://www.kiteworks.com/fr/conformite-reglementaire/lois-mondiales-sur-la-protection-des-donnees-2026/" target="_blank" rel="noopener">Kiteworks, guide 2026 des lois mondiales de protection des données</a> ; <a href="https://termly.io/fr/ressources/articles/pipl/" target="_blank" rel="noopener">Termly, la PIPL chinoise</a> ; <a href="https://www.skadden.com/insights/publications/2025/09/eu-court-upholds-eu-us-data-flows" target="_blank" rel="noopener">Skadden, décision du Tribunal de l’UE du 3 septembre 2025</a>.</p>
+    </section>
+
+    <section class="card" id="oquestions" aria-labelledby="t-oquestions">
+      <h2 id="t-oquestions"><span class="num tp">?</span> Questions</h2>
+
+      <div class="tp-question">
+        <span class="label">Question 1 – a · Doc. 1, 2, 3</span>
+        <p>Identifiez les situations où vous avez pu laisser des données personnelles sur Internet.</p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 1 – b</span>
+        <p>Pourquoi dit-on que les données personnelles sont l’« or noir » du XXI<sup>e</sup> siècle ?</p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 1 – c</span>
+        <p>Parmi les comportements imposés par le RGPD, et rappelés par la CNIL, lesquels vous semblent les plus importants ? Pourquoi ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 2 – a · Doc. 1, 2, 3</span>
+        <p>Rappelez l’objectif essentiel du RGPD.</p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 2 – b</span>
+        <p>Quelles sont les trois mauvaises pratiques de Google pointées dans les articles du doc. 3 ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 2 – c</span>
+        <p>Qu’est-ce que le consentement ? Dans quel domaine précis l’absence de consentement est-elle reprochée à Google ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 3 · Doc. 4</span>
+        <p>Pourquoi G. Shapiro pense-t-il que le RGPD va nuire aux entreprises européennes ? Quel est votre avis sur la question ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 4</span>
+        <p>Pensez-vous que le RGPD va avoir un impact sur vos pratiques numériques ?</p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label plus">Question 5 · pour aller plus loin · Doc. 3, 5</span>
+        <p>D’après les amendes du doc. 3, le RGPD est-il appliqué fermement ? Comparez la protection des données en Europe, aux États-Unis et en Chine (doc. 5) : quelle approche protège le mieux les citoyens ? Justifiez.</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+
+      <div class="todo">
+        <span class="label">Débat</span>
+        <p><b>Lancez le débat.</b> Deux groupes défendent chacun un point de vue : celui des <b>utilisateurs</b> et celui des <b>entreprises du numérique</b>. Appuyez-vous sur les documents, sur vos réponses aux questions et sur une recherche documentaire.</p>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="donnees-seance2.html">← Séance 2</a>
+      <a class="btn secondary" href="donnees.html">Retour au chapitre</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie</footer>
+
+</body>
+</html>

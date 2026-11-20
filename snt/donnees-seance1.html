@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qu’est-ce qu’une donnée ? · Les données · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 3 Les données – Séance 1 : données, objets, descripteurs, collections et métadonnées.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="donnees.html">Chapitre 3 – Les données</a><span class="sep">›</span>
+        <span>Séance 1</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#059669,#1c2333)">
+      <p class="eyebrow">Chapitre 3 – Les données</p>
+      <h1>Qu’est-ce qu’une donnée ?</h1>
+      <p class="meta">Séance 1 · Données, objets, descripteurs, collections et métadonnées</p>
+      <div class="page-tabs">
+        <a href="#activite">Activité</a>
+        <a href="#enquete">Enquête</a>
+        <a href="#cours">Cours</a>
+      </div>
+    </section>
+
+    <!-- ===================== ACTIVITÉ ===================== -->
+    <section class="card" id="activite" aria-labelledby="t-activite">
+      <h2 id="t-activite"><span class="num tp">Act.</span> Des données non structurées aux collections</h2>
+      <p>Les applications que nous utilisons quotidiennement doivent manipuler de <b>grandes quantités de données</b> afin de répondre à nos requêtes (recherche d’une information sur Google, d’une vidéo sur YouTube, etc.). <b>Structurer</b> les données permet aux applications de les exploiter efficacement afin de répondre au mieux à nos attentes.</p>
+      <div class="consigne">
+        <span class="icon" aria-hidden="true">📖</span>
+        <p><b>Consigne :</b> étudie les trois documents ci-dessous, puis réponds aux questions qui se trouvent à la fin de l’activité.</p>
+      </div>
+    </section>
+
+    <!-- Doc 1 -->
+    <section class="card" id="doc1" aria-labelledby="t-doc1">
+      <h2 id="t-doc1"><span class="doc-tag">Doc. 1</span> Le résultat d’une recherche dans YouTube</h2>
+      <p>Lorsqu’on lance la recherche <i>Stromae Papaoutai</i> sur YouTube, on obtient des propositions de clips pertinentes, c’est-à-dire en lien avec le clip demandé (d’abord, la vidéo précisément demandée, puis, par exemple, une version live, d’autres vidéos du chanteur, etc.).</p>
+      <p>Chaque clip proposé s’affiche avec des informations le décrivant (artiste, titre de la chanson, etc.). Pour arriver à ce résultat, il faut au préalable que des <b>données</b> aient été structurées.</p>
+
+      <div class="yt-sim" role="group" aria-label="Simulation d’une recherche YouTube : stromae papaoutai">
+        <div class="search">stromae papaoutai</div>
+        <ul>
+          <li>
+            <div class="thumb a" aria-hidden="true">▶</div>
+            <div><div class="t">Stromae – Papaoutai (Clip)</div><div class="m">Stromae • 500 M vues • il y a 5 ans</div><div class="desc">papaoutai (Racine carrée) http://www.stromae…</div><span class="chip">Sous-titre</span></div>
+          </li>
+          <li>
+            <div class="thumb b" aria-hidden="true">▶</div>
+            <div><div class="t">Stromae – Papaoutai (Live)</div><div class="m">Stromae • 4 M vues • il y a 4 ans</div><div class="desc">Stromae interprète Papaoutai (extrait de l’album Racine carrée)</div></div>
+          </li>
+          <li>
+            <div class="thumb c" aria-hidden="true">▶</div>
+            <div><div class="t">Stromae – Tous les mêmes (Lyrics)</div><div class="m">Stromae • 220 M vues • il y a 6 ans</div><div class="desc">Tous les mêmes (Racine carrée) – Nouvel album disponible sur www…</div><span class="chip">Vidéos similaires</span></div>
+          </li>
+          <li>
+            <div class="thumb d" aria-hidden="true">▶</div>
+            <div><div class="t">Stromae – Racine carrée (Live)</div><div class="m">Stromae • 15 M vues • il y a 3 ans</div><span class="chip">Afficher la playlist</span></div>
+          </li>
+        </ul>
+      </div>
+      <p class="yt-cap">Une collection de propositions suite à une recherche lancée pour <i>Stromae Papaoutai</i> (simulation).</p>
+
+      <div class="lexique">
+        <strong class="title">Vocabulaire · Donnée</strong>
+        <p>Valeur décrivant un objet, une personne, un événement digne d’intérêt pour celui qui choisit de la conserver. Par exemple, le numéro de téléphone d’un contact ou encore la chaîne de caractères <i>Jeanne</i> sont des données.</p>
+      </div>
+    </section>
+
+    <!-- Doc 2 -->
+    <section class="card" id="doc2" aria-labelledby="t-doc2">
+      <h2 id="t-doc2"><span class="doc-tag">Doc. 2</span> Comment ont été structurées les données ?</h2>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th scope="col">Artiste</th><th scope="col">Titre</th><th scope="col">Vues</th><th scope="col">Ancienneté</th></tr></thead>
+          <tbody>
+            <tr><td>Stromae</td><td>Papaoutai</td><td>500 M</td><td>5 ans</td></tr>
+            <tr><td>Stromae</td><td>Papaoutai Live</td><td>4 M</td><td>4 ans</td></tr>
+            <tr><td>Stromae</td><td>Tous les mêmes</td><td>220 M</td><td>6 ans</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="yt-cap">Cette table est une représentation simple de la collection de propositions YouTube (doc. 1) : les <b>objets en ligne</b>, les <b>descripteurs en colonne</b>, et les <b>données à l’intersection</b>. Les données sont alors dites <b>structurées</b>.</p>
+
+      <p>Pour faire des propositions pertinentes de vidéos (doc. 1), YouTube a sélectionné en amont des données parmi le très grand nombre disponible, puis les a structurées selon des critères (nom de l’artiste, titre de la chanson, nombre de vues, etc.). La structuration de données peut se faire en créant une <b>collection</b>. Ci-dessus, la collection simplifiée d’une partie de la liste des propositions YouTube, sous la forme d’une table.</p>
+      <ul>
+        <li>Les <b>valeurs</b> dans les cases sont des <b>données</b> : <i>Stromae</i>, <i>Papaoutai</i> ou encore <i>500 M</i>. Les <b>objets</b> considérés ici sont des vidéos (ou clips) ; chacun est représenté par une ligne. Les <b>descripteurs</b> servent à décrire chaque objet : l’artiste, l’ancienneté de la mise en ligne, etc.</li>
+        <li>Pour un objet donné (par exemple, la première ligne), à chaque descripteur (doc. 3) correspond une valeur de l’objet, ce qui peut se formuler ainsi : <i>L’artiste Stromae a écrit une chanson dont le titre est Papaoutai, qui a été mise en ligne il y a 5 ans et a été vue 500 millions de fois.</i></li>
+      </ul>
+      <p>La collection des propositions du doc. 1 est modélisée par la collection des lignes de cette table.</p>
+
+      <div class="lexique">
+        <strong class="title">Vocabulaire · Collection</strong>
+        <p>Elle regroupe des objets partageant les mêmes descripteurs (par exemple, la collection des contacts d’un carnet d’adresses). La structure de table permet de présenter une collection.</p>
+      </div>
+    </section>
+
+    <!-- Doc 3 -->
+    <section class="card" id="doc3" aria-labelledby="t-doc3">
+      <h2 id="t-doc3"><span class="doc-tag">Doc. 3</span> La recherche dans une collection YouTube</h2>
+      <p>Lorsqu’on lance la recherche <i>musée d’Orsay</i> dans YouTube, voici ce qui apparaît : une partie de la collection résultat de cette recherche, que YouTube vient de sélectionner après une recherche dans sa table sous-jacente qui contient la totalité de ses vidéos. On y reconnaît, entre autres, les descripteurs suivants : <i>titre de la vidéo</i>, <i>nombre de vues</i>, <i>ancienneté</i>.</p>
+
+      <div class="yt-sim" role="group" aria-label="Simulation d’une recherche YouTube : musée d’Orsay">
+        <div class="search">musée d’Orsay</div>
+        <ul>
+          <li>
+            <div class="thumb a" aria-hidden="true">▶</div>
+            <div><div class="t">Musée d’Orsay à Paris</div><div class="m">Musée d’Orsay • 4,2 k vues • il y a 5 ans</div><div class="desc">Peintures impressionnistes et postimpressionnistes, sculptures, arts décoratifs…</div></div>
+          </li>
+          <li>
+            <div class="thumb b" aria-hidden="true">▶</div>
+            <div><div class="t">Musée d’Orsay (Paris) – Sculptures</div><div class="m">Grande galerie des sculptures • 3,9 k vues • il y a 2 ans</div><div class="desc">Une journée au musée d’Orsay – Visite guidée</div></div>
+          </li>
+          <li>
+            <div class="thumb c" aria-hidden="true">▶</div>
+            <div><div class="t">Horloge du musée d’Orsay (Paris)</div><div class="m">Musée d’Orsay • 302 vues • il y a 4 ans</div><div class="desc">Grande horloge intérieure de la gare d’Orsay</div></div>
+          </li>
+          <li>
+            <div class="thumb d" aria-hidden="true">▶</div>
+            <div><div class="t">L’ancienne gare d’Orsay</div><div class="m">Documentaire • 40 k vues • il y a 3 ans</div><div class="desc">Musée d’Orsay à Paris</div><span class="chip">Sous-titre</span></div>
+          </li>
+        </ul>
+      </div>
+      <p class="yt-cap">Une partie de la collection résultat de la recherche <i>musée d’Orsay</i> (simulation).</p>
+
+      <div class="lexique">
+        <strong class="title">Vocabulaire · Descripteur</strong>
+        <p>Il sert à décrire un objet. Par exemple, le nom, le prénom, l’adresse et le numéro de téléphone sont des descripteurs d’un contact dans un agenda.</p>
+      </div>
+    </section>
+
+    <!-- Questions -->
+    <section class="card" id="questions" aria-labelledby="t-questions">
+      <h2 id="t-questions"><span class="num tp">?</span> Questions</h2>
+
+      <div class="tp-question">
+        <span class="label">Question 1 – a · Doc. 1, 2</span>
+        <p>Pour chaque objet de la table (doc. 2), indiquez chacun de ses descripteurs, la donnée correspondante et à quel objet du doc. 1 il correspond.</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 1 – b</span>
+        <p>Ajoutez dans la table (doc. 2) une quatrième ligne correspondant à la dernière proposition de YouTube du doc. 1 et précisez ses descripteurs et ses données.</p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 1 – c</span>
+        <p>Observez le résultat de la recherche YouTube : quelles autres données n’apparaissent pas dans la table ? À quels descripteurs ces données correspondent-elles ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 2 · Doc. 1, 2</span>
+        <p>En vous appuyant sur les documents et sur vos réponses à la question 1, proposez des données structurées sous la forme d’une collection (représentée par une table) pour modéliser toutes les informations de l’emploi du temps de votre classe, avec un objet pour chaque créneau de cours (matière, professeur, salle, etc.). Puis construisez à la main une table contenant uniquement les jours, les créneaux et les salles de cours de mathématiques.</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ===================== ENQUÊTE ===================== -->
+    <section class="card" id="enquete" aria-labelledby="t-enquete">
+      <h2 id="t-enquete"><span class="num tp">🔎</span> Enquête : où est le lieu de captivité ?</h2>
+
+      <div class="avis">
+        <div class="seal" aria-hidden="true">🛡️</div>
+        <h3>Avis de recherche</h3>
+        <p class="sub">Exercice pédagogique · scénario fictif</p>
+        <p>Monsieur et madame Tcheiphaki, un couple de touristes, ont été kidnappés. L’un d’entre eux a réussi à envoyer un MMS au service de police, contenant une <b>photo du lieu de captivité</b>. Il semblerait que l’emplacement du lieu de captivité soit un <b>moulin</b> ! Cette photo est disponible sous le nom <code class="inline">photo_kidnapping.jpg</code>.</p>
+        <span class="stamp">Urgent</span>
+      </div>
+
+      <figure class="native">
+        <img src="img/photo_kidnapping_apercu.jpg" style="width:min(100%,420px);height:auto" width="900" height="1200" loading="lazy" alt="Photo envoyée par MMS : un moulin à vent au bord d’un canal, vu depuis un bateau, sous un ciel nuageux">
+        <figcaption>La photo envoyée par MMS (aperçu). Le fichier à télécharger ci-dessous est l’original.</figcaption>
+      </figure>
+
+      <div class="todo">
+        <span class="label">Mission</span>
+        <p>Retrouve <b>l’adresse du lieu de captivité</b>. Nous sommes dans le chapitre sur les <b>données</b> : à toi d’exploiter tout ce que le fichier peut t’apprendre.</p>
+      </div>
+
+      <div class="dl-grid">
+        <a class="btn dl" href="photo_kidnapping.jpg" download>Télécharger photo_kidnapping.jpg</a>
+      </div>
+
+      <div class="note">
+        <strong class="title">Conseil</strong>
+        <p>Travaille sur le fichier <b>téléchargé tel quel</b>, directement depuis cette page. Ne le renvoie pas par messagerie ou réseau social, et ne l’ouvre pas dans un logiciel de retouche : le fichier pourrait être modifié.</p>
+      </div>
+
+      <div class="tp-question">
+        <span class="label">Réponse</span>
+        <p>Quelle est l’adresse du lieu de captivité ? Explique ta démarche.</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ===================== COURS ===================== -->
+    <section class="card" id="cours" aria-labelledby="t-cours">
+      <h2 id="t-cours"><span class="num">Cours</span> Données et structure de données</h2>
+
+      <p>Une <span class="keyword">donnée</span> est la représentation, dans un système informatique, d’une information décrivant un sujet particulier (l’âge d’une personne, le nom d’une personne, etc.).</p>
+      <p>Qu’elles soient issues du Web, de réseaux sociaux, de capteurs, etc., les données sont au cœur de notre quotidien : toute activité numérique consiste essentiellement à <b>acquérir, transformer ou échanger</b> des données.</p>
+      <p>Pour transformer une donnée en information utile, il faut connaître son <b>contexte</b>, l’<span class="keyword">objet</span> qu’elle décrit. C’est le rôle des <span class="keyword">descripteurs</span>.</p>
+
+      <div class="struct-demo">
+        <div class="labels"><span class="l-desc">Descripteurs (colonnes)</span><span class="l-data">Donnée (case)</span><span class="l-coll">Collection (table) · un objet par ligne</span></div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th scope="col">Nom</th><th scope="col">Téléphone</th><th scope="col">Adresse électronique</th></tr></thead>
+            <tbody>
+              <tr><td>Marie</td><td>06…</td><td>marie.dupond@orange.fr</td></tr>
+              <tr><td class="hl">Erwan</td><td>04…</td><td>erwan.dupond@orange.fr</td></tr>
+              <tr><td>Sarah</td><td>05…</td><td>sarah.dupond@gmail.fr</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p>Une <span class="keyword">collection</span> est un ensemble d’objets partageant les <b>mêmes descripteurs</b>. On peut représenter une collection sous forme de <b>table</b>. Lorsque les données sont ainsi organisées en collections, on parle de <span class="keyword">données structurées</span>. Une <span class="keyword">base de données</span> est un ensemble de collections.</p>
+
+      <h3>Métadonnées</h3>
+      <p>Une <span class="keyword">métadonnée</span> est une donnée qui sert à décrire une autre donnée (une « donnée à propos d’une donnée »). La date d’enregistrement d’un fichier ou encore le nom de son auteur sont des métadonnées.</p>
+
+      <div class="definition">
+        <strong class="title">À retenir</strong>
+        <p>Objet → décrit par des <b>descripteurs</b> → qui prennent des <b>valeurs</b> (les données). Des objets qui ont les mêmes descripteurs forment une <b>collection</b>, représentable par une <b>table</b>. Les <b>métadonnées</b> décrivent les fichiers eux-mêmes (date, auteur, lieu de prise de vue…).</p>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="donnees.html">Retour au chapitre</a>
+      <a class="btn secondary" href="snt.html">Tous les chapitres</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie</footer>
+
+</body>
+</html>

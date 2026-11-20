@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>TP : Tri de données · Les données · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 3 Les données – Séance 2 : TP évalué, accès protégé par mot de passe.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="donnees.html">Chapitre 3 – Les données</a><span class="sep">›</span>
+        <span>Séance 2</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#059669,#1c2333)">
+      <p class="eyebrow">Chapitre 3 – Les données</p>
+      <h1>TP : Tri de données</h1>
+      <p class="meta">Séance 2 · Évaluation · accès protégé</p>
+    </section>
+
+    <section class="card lock" id="lock" aria-labelledby="t-lock">
+      <h2 id="t-lock"><span class="num tp">🔒</span> Accès protégé</h2>
+      <p>Ce TP est une évaluation. Saisis le mot de passe donné par ton professeur pour afficher le sujet.</p>
+      <form id="lock-form" class="lock-form" autocomplete="off">
+        <label for="pw" class="lock-label">Mot de passe</label>
+        <div class="lock-row">
+          <input type="password" id="pw" name="pw" required autocomplete="off" autocapitalize="off" spellcheck="false">
+          <button type="submit" class="btn" id="lock-btn">Déverrouiller</button>
+        </div>
+        <p class="lock-msg" id="lock-msg" role="alert"></p>
+      </form>
+      <noscript><p class="lock-msg">JavaScript est nécessaire pour déverrouiller cette page.</p></noscript>
+    </section>
+
+    <div id="content" hidden></div>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="donnees-seance1.html">← Séance 1</a>
+      <a class="btn secondary" href="donnees.html">Retour au chapitre</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie</footer>
+
+  <!-- Le contenu du TP et le fichier de données sont chiffrés (AES-256-GCM) :
+       ils ne deviennent lisibles qu'avec le mot de passe. -->
+  <script>
+  (function () {
+    var SALT = "GA7HtWArdazlrK2ump7YlA==", ITER = 600000;
+    var PAYLOAD = "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";
+    var form = document.getElementById("lock-form"), msg = document.getElementById("lock-msg");
+    var btn = document.getElementById("lock-btn"), pwEl = document.getElementById("pw");
+    function b64(s) { var b = atob(s), a = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return a; }
+    function decrypt(key, bytes) { return crypto.subtle.decrypt({ name: "AES-GCM", iv: bytes.slice(0, 12) }, key, bytes.slice(12)); }
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      if (!window.crypto || !crypto.subtle) { msg.textContent = "Ce navigateur ne permet pas le déverrouillage (page non sécurisée ?)."; return; }
+      msg.textContent = ""; btn.disabled = true; btn.textContent = "Vérification…";
+      var enc = new TextEncoder();
+      crypto.subtle.importKey("raw", enc.encode(pwEl.value), "PBKDF2", false, ["deriveKey"])
+        .then(function (km) {
+          return crypto.subtle.deriveKey({ name: "PBKDF2", salt: b64(SALT), iterations: ITER, hash: "SHA-256" }, km, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+        })
+        .then(function (key) {
+          return decrypt(key, b64(PAYLOAD)).then(function (buf) { return [key, buf]; });
+        })
+        .then(function (r) {
+          var key = r[0], html = new TextDecoder().decode(r[1]);
+          var box = document.getElementById("content");
+          box.innerHTML = html; box.hidden = false;
+          document.getElementById("lock").hidden = true;
+          var dl = document.getElementById("dl-csv"), note = document.getElementById("dl-msg");
+          dl.addEventListener("click", function () {
+            dl.disabled = true; note.textContent = "Préparation du fichier…";
+            fetch("donnees-seance2.enc").then(function (rp) { if (!rp.ok) throw new Error("http"); return rp.arrayBuffer(); })
+              .then(function (ab) { return decrypt(key, new Uint8Array(ab)); })
+              .then(function (gz) {
+                var stream = new Blob([gz]).stream().pipeThrough(new DecompressionStream("gzip"));
+                return new Response(stream).blob();
+              })
+              .then(function (blob) {
+                var a = document.createElement("a");
+                a.href = URL.createObjectURL(new Blob([blob], { type: "text/csv" }));
+                a.download = "donnees.csv";
+                document.body.appendChild(a); a.click(); a.remove();
+                note.textContent = "Fichier téléchargé.";
+              })
+              .catch(function () { note.textContent = "Le téléchargement a échoué. Ouvre le site en ligne (et non depuis un fichier local), puis réessaie."; })
+              .then(function () { dl.disabled = false; });
+          });
+        })
+        .catch(function () {
+          msg.textContent = "Mot de passe incorrect.";
+          btn.disabled = false; btn.textContent = "Déverrouiller"; pwEl.select();
+        });
+    });
+  })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cours : localisation et cartographie · Cartographie et localisation · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 5 Cartographie et localisation – Séance 7 · Conclusion : les notions à retenir.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="cartographie.html">Chapitre 5 – Cartographie et localisation</a><span class="sep">›</span>
+        <span>Séance 7</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#dc2626,#1c2333)">
+      <p class="eyebrow">Chapitre 5 – Cartographie et localisation</p>
+      <h1>Cours : localisation et cartographie</h1>
+      <p class="meta">Séance 7 · Conclusion : les notions à retenir</p>
+      <div class="page-tabs"><a href="#card">Se localiser avec le GPS</a><a href="#card">Les cartes numériques</a><a href="#card">Calculer un itinéraire</a><a href="#card">Calculer une distance par triangulation hors programme</a><a href="#card">Vocabulaire à connaître</a></div>
+    </section>
+
+    <section class="card" id="gps" aria-labelledby="t-gps">
+      <h2 id="t-gps"><span class="num ">1</span> Se localiser avec le GPS</h2>
+      <ul>
+        <li>Le <b>GPS</b> (<i>Global Positioning System</i>) est un système de positionnement par satellites, développé à l’origine par les États-Unis.</li>
+        <li>Le récepteur calcule sa position par <b>trilatération</b> : il mesure sa distance à plusieurs satellites à partir du temps mis par les signaux pour lui parvenir. Il faut <b>au moins 4 satellites</b> : 3 pour déterminer la position (latitude, longitude, altitude) et 1 pour corriger l’horloge du récepteur.</li>
+        <li>Il existe plusieurs systèmes : le GPS américain, <b>Galileo</b> (Europe, plus précis, de l’ordre du mètre), Glonass (Russie) et Beidou (Chine). Galileo garantit à l’Europe son <b>indépendance</b>.</li>
+        <li>Le récepteur transmet ses données selon le protocole <b>NMEA-0183</b> sous forme de <b>trames</b> commençant par <code>$</code>.</li>
+      </ul>
+      <div class="nmea">$GPGLL,4631.35,N,634.44,E,205532,A</div>
+      <p><code>GP</code> = récepteur GPS · <code>GLL</code> = type de trame (latitude-longitude) · latitude (46° 31,35′ Nord) · longitude (6° 34,44′ Est) · heure UTC (20 h 55 min 32 s) · <code>A</code> = données valides.</p>
+    </section>
+    <section class="card" id="cartes" aria-labelledby="t-cartes">
+      <h2 id="t-cartes"><span class="num ">2</span> Les cartes numériques</h2>
+      <ul>
+        <li>Une carte numérique rassemble <b>toutes les échelles</b> et superpose des <b>couches</b> d’information (vue aérienne, routes, cadastre, données statistiques…).</li>
+        <li>Une carte <b>matricielle</b> est une image point par point : zoomer l’agrandit. Une carte <b>vectorielle</b> contient des objets positionnés par leurs coordonnées : zoomer fait apparaître des détails.</li>
+        <li>OpenStreetMap et Géoportail utilisent des cartes vectorielles et permettent de choisir les informations affichées.</li>
+        <li>Les données viennent de services géographiques, de satellites, d’avions, de voitures et des utilisateurs. Leur acquisition et leur traitement s’appellent la <b>géomatique</b>.</li>
+      </ul>
+    </section>
+    <section class="card" id="itineraires" aria-labelledby="t-itineraires">
+      <h2 id="t-itineraires"><span class="num ">3</span> Calculer un itinéraire</h2>
+      <ul>
+        <li>Un réseau routier se représente par un <b>graphe</b> : les villes sont les <b>sommets</b>, les routes sont les <b>arêtes</b>, auxquelles on associe une valeur (distance ou durée).</li>
+        <li>L’<b>algorithme de Dijkstra</b> (1959) détermine le plus court chemin entre deux sommets en testant pas à pas les chemins possibles.</li>
+        <li>Le chemin le <b>plus court</b> n’est pas forcément le <b>plus rapide</b> : cela dépend des vitesses autorisées et du trafic. Les applications comme Google Maps utilisent la géolocalisation des téléphones pour estimer le trafic en direct.</li>
+        <li>Pour passer des distances aux durées : <b>t = d ÷ v</b>.</li>
+      </ul>
+    </section>
+    <section class="card" id="triangulation" aria-labelledby="t-triangulation">
+      <h2 id="t-triangulation"><span class="num ">4</span> Calculer une distance par triangulation <span class="hors-prog">hors programme</span></h2>
+      <p>Dans un triangle ABC, la <b>loi des sinus</b> relie les côtés et les angles :</p>
+      <div class="formula"><span class="frac"><span>a</span><span>sin α</span></span> = <span class="frac"><span>b</span><span>sin β</span></span> = <span class="frac"><span>c</span><span>sin γ</span></span></div>
+      <p>Connaissant une distance et deux angles, on peut calculer les autres distances : c’est le principe de la <b>triangulation</b>, utilisée en topographie avant l’arrivée du GPS.</p>
+      <p class="source">Exemple de la séance 5 : Quimper – Rennes ≈ 177 km et Brest – Rennes ≈ 207 km.</p>
+    </section>
+    <section class="card" id="vocab" aria-labelledby="t-vocab">
+      <h2 id="t-vocab"><span class="num ">5</span> Vocabulaire à connaître</h2>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>Mot</th><th>Définition</th></tr></thead><tbody>
+      <tr><th scope="row">Géolocalisation</th><td>Déterminer la position d’un objet ou d’une personne sur la Terre.</td></tr>
+      <tr><th scope="row">Trilatération</th><td>Calcul d’une position à partir de distances à plusieurs points connus.</td></tr>
+      <tr><th scope="row">NMEA</th><td>Standard de transmission des données entre instruments et récepteurs GPS.</td></tr>
+      <tr><th scope="row">Géomatique</th><td>Acquisition et traitement informatique des données géographiques.</td></tr>
+      <tr><th scope="row">Carte vectorielle</th><td>Carte composée d’objets positionnés par leurs coordonnées.</td></tr>
+      <tr><th scope="row">Carte matricielle</th><td>Carte composée d’une image point par point.</td></tr>
+      <tr><th scope="row">Graphe</th><td>Ensemble de sommets reliés par des arêtes.</td></tr>
+      <tr><th scope="row">Algorithme de Dijkstra</th><td>Algorithme qui détermine le plus court chemin dans un graphe.</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="cartographie-seance6.html">← La longueur des côtes est-elle infinie ?</a><a class="btn secondary" href="cartographie.html">Retour au chapitre</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie</footer>
+
+</body>
+</html>
