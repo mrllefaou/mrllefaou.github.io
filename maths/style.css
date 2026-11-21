@@ -1274,3 +1274,15 @@ html:has(.qcm) { scroll-padding-top: 4.5rem; scroll-padding-bottom: 7rem; }
 .tree .tv { background: var(--surface); padding: 0 .2rem; font-size: .95rem; }
 .tree .troot { width: .5rem; height: .5rem; border-radius: 50%; background: var(--text); }
 .tree .tq { display: inline-block; min-width: 1.6rem; padding: .1rem .35rem; border: 2px solid var(--accent); border-radius: 6px; background: var(--accent-soft); color: #b45309; font-weight: 800; text-align: center; font-style: italic; }
+
+/* Repères (lecture graphique) */
+.graph-wrap { margin: .7rem 0; max-width: 420px; }
+.graph { width: 100%; height: auto; display: block; font-weight: 400; }
+.graph .g { stroke: var(--border); stroke-width: 1; }
+.graph .ax { stroke: var(--text); stroke-width: 1.6; }
+.graph .arr { fill: var(--text); }
+.graph .tk { font-size: 11px; fill: var(--muted); font-family: inherit; }
+.graph .dr { stroke: var(--primary); stroke-width: 2.4; }
+.graph .pt { fill: #dc2626; }
+.graph .cr { stroke: #dc2626; stroke-width: 2; }
+.graph .lb { font-size: 14px; font-style: italic; font-family: "Times New Roman", serif; fill: var(--text); font-weight: 600; }
