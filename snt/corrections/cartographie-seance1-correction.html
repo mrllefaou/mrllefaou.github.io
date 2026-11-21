@@ -53,10 +53,11 @@
     <section class="card">
       <h2><span class="num tp">5</span> Question 5 – Extraction des trames</h2>
       <div class="table-wrap"><table class="data-table"><thead><tr><th>Trame</th><th>Récepteur / type</th><th>Latitude</th><th>Longitude</th><th>Heure (UTC)</th><th>Validité</th></tr></thead><tbody>
-      <tr><td><code>$GPGLL,6715.12,N,3245.12,W,153421,A</code></td><td>GPS / GLL</td><td>67° 15,12′ Nord<br>(≈ 67° 15′ 07″ N)</td><td>32° 45,12′ Ouest<br>(≈ 32° 45′ 07″ O)</td><td>15 h 34 min 21 s</td><td>A : valides</td></tr>
-      <tr><td><code>$GPGLL,1154.65,S,2356.76,W,045432,A</code></td><td>GPS / GLL</td><td>11° 54,65′ Sud<br>(≈ 11° 54′ 39″ S)</td><td>23° 56,76′ Ouest<br>(≈ 23° 56′ 46″ O)</td><td>04 h 54 min 32 s</td><td>A : valides</td></tr>
+      <tr><td><code>$GPGLL,6715.12,N,3245.12,W,153421,A</code></td><td>GPS / GLL</td><td><b>67° 15′ 07″ N</b><br>(6715.12 → 67° 15,12′)</td><td><b>32° 45′ 07″ O</b><br>(3245.12 → 32° 45,12′)</td><td>15 h 34 min 21 s</td><td>A : valides</td></tr>
+      <tr><td><code>$GPGLL,1154.65,S,2356.76,W,045432,A</code></td><td>GPS / GLL</td><td><b>11° 54′ 39″ S</b><br>(1154.65 → 11° 54,65′)</td><td><b>23° 56′ 46″ O</b><br>(2356.76 → 23° 56,76′)</td><td>04 h 54 min 32 s</td><td>A : valides</td></tr>
       </tbody></table></div>
-      <div class="note"><strong class="title">Remarque pour l’enseignant</strong><p>Dans ta correction, « 11°54’65” » et « 23°56’76” » lisent les chiffres décimaux comme des secondes, ce qui est impossible (une minute n’a que 60 secondes). Dans une trame GLL, le format est <b>ddmm.mmmm</b> : les degrés, puis des <b>minutes décimales</b> (0,65′ = 0,65 × 60 ≈ 39″). Le document de cours donne pourtant l’exemple « 4631.35 → 46° 31′ 35″ » : c’est une lecture simplifiée. Ici j’ai donné la lecture exacte, avec la conversion en secondes entre parenthèses. Tu peux garder uniquement la forme « minutes décimales » avec les élèves.</p></div>
+      <div class="note"><strong class="title">Conversion utilisée</strong><p>Partie décimale des minutes × 60 = secondes : 0,12 × 60 ≈ 7″ ; 0,65 × 60 = 39″ ; 0,76 × 60 ≈ 46″ (valeurs arrondies à la seconde).</p></div>
+      <div class="note"><strong class="title">Remarque pour l’enseignant</strong><p>Dans ta correction, « 11°54’65” » et « 23°56’76” » lisent les chiffres décimaux comme des secondes, ce qui est impossible (une minute n’a que 60 secondes). Dans une trame GLL, le format est <b>ddmm.mmmm</b> : les degrés, puis des <b>minutes décimales</b> (0,65′ = 0,65 × 60 ≈ 39″). Le document de cours donne pourtant l’exemple « 4631.35 → 46° 31′ 35″ » : c’est une lecture simplifiée. Ici la correction donne la conversion en degrés, minutes, secondes, comme demandé dans la question 5 de l’énoncé (qui précise maintenant la conversion à faire).</p></div>
     </section>
 
     <nav class="pager" aria-label="Navigation">

@@ -38,7 +38,8 @@
         <li>Le récepteur transmet ses données selon le protocole <b>NMEA-0183</b> sous forme de <b>trames</b> commençant par <code>$</code>.</li>
       </ul>
       <div class="nmea">$GPGLL,4631.35,N,634.44,E,205532,A</div>
-      <p><code>GP</code> = récepteur GPS · <code>GLL</code> = type de trame (latitude-longitude) · latitude (46° 31,35′ Nord) · longitude (6° 34,44′ Est) · heure UTC (20 h 55 min 32 s) · <code>A</code> = données valides.</p>
+      <p><code>GP</code> = récepteur GPS · <code>GLL</code> = type de trame (latitude-longitude) · latitude 46° 31,35′ Nord (soit 46° 31′ 21″ N) · longitude 6° 34,44′ Est (soit 6° 34′ 26″ E) · heure UTC (20 h 55 min 32 s) · <code>A</code> = données valides.</p>
+      <p class="source">Conversion : partie décimale des minutes × 60 = secondes (0,35 × 60 = 21″ ; 0,44 × 60 ≈ 26″).</p>
     </section>
     <section class="card" id="cartes" aria-labelledby="t-cartes">
       <h2 id="t-cartes"><span class="num ">2</span> Les cartes numériques</h2>
