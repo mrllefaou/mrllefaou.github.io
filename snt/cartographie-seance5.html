@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculer des distances : la triangulation · Cartographie et localisation · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 5 Cartographie et localisation – Séance 5 · Loi des sinus (hors programme).">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="cartographie.html">Chapitre 5 – Cartographie et localisation</a><span class="sep">›</span>
+        <span>Séance 5</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#dc2626,#1c2333)">
+      <p class="eyebrow">Chapitre 5 – Cartographie et localisation</p>
+      <h1>Calculer des distances : la triangulation</h1>
+      <p class="meta">Séance 5 · Loi des sinus (hors programme)</p>
+    </section>
+
+    <section class="card" id="sinus" aria-labelledby="t-sinus">
+      <h2 id="t-sinus"><span class="num ">1</span> La loi des sinus <span class="hors-prog">hors programme</span></h2>
+      <div class="todo"><span class="label">Vidéo</span><p>Regarde la vidéo ci-dessous.</p></div>
+      <a class="video-lien" href="https://www.youtube.com/watch?v=fbqFWDyQK6s" target="_blank" rel="noopener"><span class="video-play" aria-hidden="true"></span><span class="video-titre">Calcul de distances par triangulation</span><span class="video-info">Regarder sur YouTube · nouvel onglet</span></a>
+      <div class="formula-box">
+        <p><b>Loi des sinus (XIᵉ siècle)</b></p>
+        <p>On considère un triangle ABC quelconque :</p>
+        <ul>
+          <li>a = BC et α = angle formé par [AB] et [AC] ;</li>
+          <li>b = AC et β = angle formé par [BA] et [BC] ;</li>
+          <li>c = AB et γ = angle formé par [CA] et [CB].</li>
+        </ul>
+        <p>On appelle <b>loi des sinus</b> l’égalité suivante :</p>
+        <div class="formula"><span class="frac"><span>a</span><span>sin α</span></span> = <span class="frac"><span>b</span><span>sin β</span></span> = <span class="frac"><span>c</span><span>sin γ</span></span></div>
+        <p>On en déduit le résultat suivant :</p>
+        <div class="formula">b = <span class="frac"><span>c × sin β</span><span>sin γ</span></span> &nbsp; ; &nbsp; a = <span class="frac"><span>c × sin α</span><span>sin γ</span></span></div>
+      </div>
+    </section>
+    <section class="card" id="exercice" aria-labelledby="t-exercice">
+      <h2 id="t-exercice"><span class="num tp">Act.</span> Distances Brest – Rennes – Quimper</h2>
+      <p>On cherche à calculer la distance entre <b>Brest et Rennes</b>, ainsi que la distance entre <b>Quimper et Rennes</b>.</p>
+      <p>Le point A correspond à la ville de Brest, le point B à Quimper et le point C à Rennes. Comme dans la vidéo, on connaît trois données : la distance entre Quimper et Brest est de <b>52 km</b> (longueur c), l’angle Rennes-Brest-Quimper mesure <b>48,28°</b> (angle α) et l’angle Rennes-Quimper-Brest mesure <b>119,04°</b> (angle β).</p>
+      <figure class="small"><img src="img/cartographie/triangle-brest-quimper-rennes.png" alt="Triangle ABC : A = Brest avec un angle α de 48,28°, B = Quimper avec un angle β de 119,04°, C = Rennes" loading="lazy"><figcaption>Le triangle Brest (A) – Quimper (B) – Rennes (C).</figcaption></figure>
+      <div class="tp-question"><span class="label">Question 1</span><p>Détermine la valeur de l’angle γ, angle formé par [CA] et [CB]. On sait que la somme des angles d’un triangle fait 180°.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 2</span><p>En utilisant la formule des sinus, calcule la distance <b>b</b> correspondant à la distance entre Brest et Rennes.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 3</span><p>En utilisant la formule des sinus, calcule la distance <b>a</b> correspondant à la distance entre Quimper et Rennes.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 4</span><p>Utilise le site <a href="https://www.geoportail.gouv.fr/" target="_blank" rel="noopener">Géoportail</a> et l’outil « Mesurer » pour vérifier si tes résultats semblent pertinents.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="cartographie-seance4.html">← Calcul du plus court chemin</a><a class="btn secondary" href="cartographie-seance6.html">La longueur des côtes est-elle infinie ? →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+  <script>
+  /* Garde la page en haut au chargement : les lecteurs intégrés (vidéos, éditeurs) peuvent prendre le focus et faire défiler la page. */
+  (function () {
+    if (location.hash) return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var touched = false, n = 0;
+    ["wheel", "touchstart", "mousedown", "keydown"].forEach(function (e) { addEventListener(e, function () { touched = true; }, { passive: true }); });
+    var t = setInterval(function () {
+      if (touched || ++n > 24) { clearInterval(t); return; }
+      if (window.scrollY > 0) window.scrollTo(0, 0);
+    }, 250);
+  })();
+  </script>
+</body>
+</html>

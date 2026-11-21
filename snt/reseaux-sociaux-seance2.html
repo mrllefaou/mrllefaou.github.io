@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Les graphes et l’effet « petit monde » · Les réseaux sociaux · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 8 Les réseaux sociaux – Séance 2 · Graphes, expérience de Milgram, social graph de Facebook (activité 3, vidéos et cours).">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="reseaux-sociaux.html">Chapitre 8 – Les réseaux sociaux</a><span class="sep">›</span>
+        <span>Séance 2</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#0891b2,#1c2333)">
+      <p class="eyebrow">Chapitre 8 – Les réseaux sociaux</p>
+      <h1>Les graphes et l’effet « petit monde »</h1>
+      <p class="meta">Séance 2 · Graphes, expérience de Milgram, social graph de Facebook (activité 3, vidéos et cours)</p>
+      <div class="page-tabs"><a href="#act3">Activité 3</a><a href="#a3d2">Vidéos</a><a href="#cours">Cours</a></div>
+    </section>
+
+    <div class="part-sep"><h3>Activité 3 · Les graphes et les « petits mondes »</h3></div>
+    <section class="card" id="act3" aria-labelledby="t-act3">
+      <h2 id="t-act3"><span class="num tp">3</span> Les graphes et les « petits mondes »</h2>
+      <p>La <b>théorie des graphes</b> est l’approche mathématique des propriétés d’une collection d’éléments mis en relation entre eux. Elle s’est révélée précieuse pour expliquer le fonctionnement des réseaux sociaux sur Internet. À partir de l’expérience de Milgram, la planète a été définie comme un « <b>petit monde</b> » où tous les êtres humains seraient connectés les uns aux autres par une chaîne de six relations. <b>Est-ce bien vrai ?</b></p>
+      <div class="consigne"><span class="icon" aria-hidden="true">📖</span><p><b>Consigne :</b> lis les cinq documents ci-dessous (et regarde les deux vidéos), puis réponds aux questions qui les suivent.</p></div>
+    </section>
+    <section class="card" id="a3d1" aria-labelledby="t-a3d1">
+      <h2 id="t-a3d1"><span class="doc-tag">Doc. 1</span> Le graphe mathématique</h2>
+      <p>Un <b>graphe</b> est un ensemble de points appelés <b>sommets</b>, reliés par des liens appelés <b>arêtes</b> : à chaque arête sont associés deux sommets, qui en sont les extrémités. L’ensemble forme une figure semblable à un réseau.</p>
+      <p>Une <b>chaîne</b> (ou chemin) est une suite de sommets telle que chaque sommet est relié au suivant par une arête. La <b>longueur</b> d’une chaîne est le nombre d’arêtes parcourues dans cette chaîne. La <b>distance</b> entre deux sommets est la longueur minimale des chaînes qui les relient.</p>
+      <figure class="graph"><svg viewBox="0 0 280 200" role="img" aria-label="Graphe 1 : six sommets numérotés de 1 à 6 et sept arêtes : 6-4, 4-5, 4-3, 5-1, 5-2, 1-2, 3-2."><title>Graphe 1</title><g class="edges"><line x1="30" y1="30" x2="100" y2="85"/><line x1="100" y1="85" x2="190" y2="70"/><line x1="100" y1="85" x2="115" y2="170"/><line x1="190" y1="70" x2="250" y2="100"/><line x1="190" y1="70" x2="205" y2="160"/><line x1="250" y1="100" x2="205" y2="160"/><line x1="115" y1="170" x2="205" y2="160"/></g><g class="nodes"><g><circle cx="30" cy="30" r="16"/><text x="30" y="35" text-anchor="middle">6</text></g><g><circle cx="100" cy="85" r="16"/><text x="100" y="90" text-anchor="middle">4</text></g><g><circle cx="190" cy="70" r="16"/><text x="190" y="75" text-anchor="middle">5</text></g><g><circle cx="250" cy="100" r="16"/><text x="250" y="105" text-anchor="middle">1</text></g><g><circle cx="115" cy="170" r="16"/><text x="115" y="175" text-anchor="middle">3</text></g><g><circle cx="205" cy="160" r="16"/><text x="205" y="165" text-anchor="middle">2</text></g></g></svg><figcaption>Graphe 1</figcaption></figure>
+    </section>
+    <section class="card" id="a3d2" aria-labelledby="t-a3d2">
+      <h2 id="t-a3d2"><span class="doc-tag">Doc. 2</span> Rayon, diamètre et centre d’un graphe</h2>
+      <p>Dans un graphe donné, on peut calculer différentes valeurs utiles pour comprendre la structure du graphe. On peut ainsi déterminer l’<b>écartement d’un sommet</b> et le <b>diamètre</b> du graphe.</p>
+      <p>Le <b>centre</b> d’un graphe est un sommet dont l’écartement est minimal. Ce centre n’est pas forcément unique. Le <b>rayon</b> du graphe est l’écartement d’un centre du graphe.</p>
+      <figure class="graph"><svg viewBox="0 0 290 240" role="img" aria-label="Graphe 2 : six sommets numérotés de 1 à 6 et sept arêtes : 2-1, 2-3, 2-4, 1-5, 3-4, 3-5, 3-6."><title>Graphe 2</title><g class="edges"><line x1="150" y1="30" x2="40" y2="110"/><line x1="150" y1="30" x2="145" y2="125"/><line x1="150" y1="30" x2="250" y2="110"/><line x1="40" y1="110" x2="95" y2="215"/><line x1="145" y1="125" x2="250" y2="110"/><line x1="145" y1="125" x2="95" y2="215"/><line x1="145" y1="125" x2="200" y2="215"/></g><g class="nodes"><g><circle cx="150" cy="30" r="16"/><text x="150" y="35" text-anchor="middle">2</text></g><g><circle cx="40" cy="110" r="16"/><text x="40" y="115" text-anchor="middle">1</text></g><g><circle cx="250" cy="110" r="16"/><text x="250" y="115" text-anchor="middle">4</text></g><g><circle cx="145" cy="125" r="16"/><text x="145" y="130" text-anchor="middle">3</text></g><g><circle cx="95" cy="215" r="16"/><text x="95" y="220" text-anchor="middle">5</text></g><g><circle cx="200" cy="215" r="16"/><text x="200" y="220" text-anchor="middle">6</text></g></g></svg><figcaption>Graphe 2</figcaption></figure>
+      <div class="lexique"><strong class="title">Vocabulaire · Écartement d’un sommet</strong><p>Distance maximale existant entre ce sommet et les autres sommets du graphe.</p></div>
+      <div class="lexique"><strong class="title">Vocabulaire · Diamètre</strong><p>Plus grande distance possible qui puisse exister entre deux sommets.</p></div>
+      <div class="note"><strong class="title">Zoom sur · Degré d’un sommet et popularité</strong><p>Dans un graphe, le <b>degré d’un sommet</b> est le nombre d’arêtes dont ce sommet est une extrémité. Transposé aux réseaux sociaux, ce degré permet d’évaluer la <b>popularité</b> d’un individu représenté par ce sommet.</p></div>
+      <p>Ce degré est à l’origine d’un paradoxe surprenant : <b>pourquoi a-t-on, en moyenne, moins d’amis que nos amis ?</b> Regarde la vidéo.</p>
+      <a class="video-lien" href="https://www.youtube.com/watch?v=MySkCFFgiRQ" target="_blank" rel="noopener"><span class="video-play" aria-hidden="true"></span><span class="video-titre">Pourquoi a-t-on moins d’amis que les autres ?</span><span class="video-info">Regarder sur YouTube · nouvel onglet</span></a>
+    </section>
+    <section class="card" id="a3d3" aria-labelledby="t-a3d3">
+      <h2 id="t-a3d3"><span class="doc-tag">Doc. 3</span> L’expérience de Milgram</h2>
+      <p>L’expérience du « petit monde » a été réalisée en <b>1967</b> par le psychosociologue américain <b>Stanley Milgram</b>, bien avant l’invention du Web. Sur un échantillon de 300 individus, aux États-Unis, il s’agissait de faire parvenir une lettre à un <b>destinataire final</b>, identifié mais inconnu des cobayes, en la remettant à une connaissance et avec le moins d’intermédiaires possible. Pour arriver à destination, les courriers sont passés en moyenne entre <b>5 et 6 intermédiaires</b> (la valeur exacte était de 5,2). C’est cette théorie des « six relations » qui a été appliquée aux réseaux sociaux.</p>
+      <div class="note"><strong class="title">Zoom sur · Graphe et petit monde</strong><p>Si chaque sommet d’un graphe est un habitant des États-Unis, l’expérience de Milgram se traduit par le fait que l’<b>écartement de chaque sommet est de 6</b>.</p></div>
+      <p>Regarde la vidéo pour mieux comprendre cette expérience.</p>
+      <a class="video-lien" href="https://www.youtube.com/watch?v=nn1mIqW9oYQ" target="_blank" rel="noopener"><span class="video-play" aria-hidden="true"></span><span class="video-titre">Réseaux sociaux : le monde est-il si petit ?</span><span class="video-info">Regarder sur YouTube · nouvel onglet</span></a>
+      <div class="maj">
+        <strong class="title">Mise à jour · Et sur Facebook ?</strong>
+        <p>En 2011, Facebook et des chercheurs avaient calculé une distance moyenne de <b>4,74</b> entre deux utilisateurs. En 2016, avec 1,59 milliard de comptes, Facebook annonçait « <b>3,57 degrés de séparation</b> », soit environ 4,57 liens : le monde des réseaux sociaux « rétrécit » à mesure qu’il grandit.</p>
+      </div>
+      <p class="source">Source : <a href="https://research.fb.com/blog/2016/02/three-and-a-half-degrees-of-separation/" target="_blank" rel="noopener">Facebook Research, « Three and a half degrees of separation » (février 2016)</a>.</p>
+    </section>
+    <section class="card" id="a3d4" aria-labelledby="t-a3d4">
+      <h2 id="t-a3d4"><span class="doc-tag">Doc. 4</span> Les limites du « petit monde »</h2>
+      <p>Dans l’expérience de Milgram, la plupart des lettres n’ont <b>jamais atteint leur but</b> : seul un quart d’entre elles est arrivé dans les mains du destinataire. L’expérience est donc incomplète : nous ne sommes pas tous connectés aux autres par un maximum de 6 degrés de séparation. Certaines personnes sont bien mieux connectées que d’autres, ce qui veut dire que le « <b>networking</b> » est un savoir-faire qui peut se développer. En lisant, en se formant, en étant « coaché », le tissu de contacts peut être amélioré. C’est ainsi que l’on peut progressivement faire partie des <b>29 %</b> de personnes les mieux reliées, et être alors connecté au reste du monde par seulement 6 degrés.</p>
+      <div class="lexique"><strong class="title">Vocabulaire · Networking</strong><p>Technique, plus communément appelée « réseautage », permettant de rentrer en relation avec un grand nombre de personnes pour constituer un réseau.</p></div>
+    </section>
+    <section class="card" id="a3d5" aria-labelledby="t-a3d5">
+      <h2 id="t-a3d5"><span class="doc-tag">Doc. 5</span> Les « social graph » de Facebook</h2>
+      <p>L’<b>affaire Cambridge Analytica</b><sup>*</sup>, la plus grande crise traversée par Facebook, s’est déroulée en deux temps. D’abord, des chercheurs de l’université de Cambridge ont développé une méthode pour caractériser le <b>profil psychologique</b> d’une personne à partir de son activité sur Facebook, notamment en fonction de ce qu’elle « like ». Ensuite, Cambridge Analytica a utilisé, en toute légalité, les <i>social graph</i> de Facebook, qui donnent accès aux profils des <b>amis</b> des utilisateurs qui s’inscrivent sur des applications tierces. Les 270 000 cobayes ont ainsi généré <b>50 millions de profils</b> récupérés par Cambridge Analytica entre 2014 et 2015. L’utilisation de ces données aurait contribué à la victoire de Donald Trump aux États-Unis en 2016, avec une influence possible des services secrets russes.</p>
+      <p class="source"><sup>*</sup> Cambridge Analytica : entreprise britannique spécialisée dans l’analyse de données et le conseil en communication.</p>
+      <div class="note"><strong class="title">Zoom sur · Les social graph</strong><p>Sur Facebook, les <i>social graph</i> désignent toutes les <b>relations entre les membres</b> et les éléments avec lesquels ils sont entrés en contact (amis, pages « J’aime », groupes, lieux, événements, etc.).</p></div>
+      <div class="maj">
+        <strong class="title">Mise à jour · Les suites de l’affaire</strong>
+        <p>En juillet 2019, l’autorité américaine de la concurrence et de la consommation (FTC) a infligé à Facebook une amende record de <b>5 milliards de dollars</b> pour atteintes à la vie privée, en lien avec cette affaire.</p>
+      </div>
+      <p class="source">Source : <a href="https://ftc.gov/news-events/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions" target="_blank" rel="noopener">FTC, communiqué du 24 juillet 2019</a>.</p>
+    </section>
+    <section class="card" id="a3q" aria-labelledby="t-a3q">
+      <h2 id="t-a3q"><span class="num tp">?</span> Questions · Activité 3</h2>
+      <p class="source" style="margin-top:0">Appuie-toi sur les documents 1 à 5.</p>
+      <div class="tp-question"><span class="label">Question 1 · Doc. 1</span><p><b>a.</b> Combien de sommets le graphe 1 possède-t-il ? Combien possède-t-il d’arêtes ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 1 · Doc. 1</span><p><b>b.</b> Décris une chaîne de ce graphe. Quelle en est sa longueur ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 1 · Doc. 1</span><p><b>c.</b> Quelle est la distance entre les sommets 2 et 6 ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 2 · Doc. 2</span><p><b>a.</b> Sur le graphe 2, quel est l’écartement du sommet 5 ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 2 · Doc. 2</span><p><b>b.</b> Détermine le diamètre, le rayon et le centre du graphe 2.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 3 · Doc. 3 et 4</span><p>L’expérience de Milgram a été appliquée aux citoyens américains. <b>Choisis un pays</b> et dessine le graphe « petit monde » te reliant à l’un de ses habitants, avec sa chaîne de relations.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 4 · Doc. 5</span><p>L’affaire Cambridge Analytica a été révélée en 2018. Depuis, Facebook a restreint l’accès aux <i>social graph</i>. Cela résout-il tous les problèmes ? Justifie ta réponse.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <div class="part-sep"><h3>Cours</h3></div>
+    <section class="card" id="cours" aria-labelledby="t-cours">
+      <h2 id="t-cours"><span class="num ">📘</span> Cours : Les réseaux sociaux (partie 2/2) – Les graphes et les « petits mondes »</h2>
+      <div class="cours-block">
+      <ul>
+        <li>Les réseaux sociaux peuvent être représentés sous la forme d’un <b>graphe mathématique</b>. Un <b>nœud</b> (ou sommet) du graphe représente une entité sociale (individu, animal, machine, cellule, etc.), et un <b>lien</b> (ou arête) représente une interaction sociale (amitié, intérêt commun, relation intime, relation professionnelle, etc.).</li>
+        <li>En 1967, le psychosociologue américain <b>Stanley Milgram</b> expérimente la théorie des « <b>petits mondes</b> », selon laquelle toute personne est reliée à n’importe quelle autre dans le monde par une chaîne de <b>six relations</b>. Sur un graphe, cela se traduit par le fait qu’un sommet est relié à n’importe quel autre sommet par un chemin comprenant <b>au plus six arêtes</b>. Ainsi, Facebook peut affirmer que la distance moyenne, au sein de son réseau, entre deux individus est de <b>4,74</b>.</li>
+      </ul>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="reseaux-sociaux-seance1.html">← Pourquoi les réseaux sociaux sont-ils attractifs ?</a><a class="btn secondary" href="reseaux-sociaux-seance3.html">Le financement des réseaux sociaux →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+  <script>
+  /* Garde la page en haut au chargement : les lecteurs intégrés (vidéos, éditeurs) peuvent prendre le focus et faire défiler la page. */
+  (function () {
+    if (location.hash) return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var touched = false, n = 0;
+    ["wheel", "touchstart", "mousedown", "keydown"].forEach(function (e) { addEventListener(e, function () { touched = true; }, { passive: true }); });
+    var t = setInterval(function () {
+      if (touched || ++n > 24) { clearInterval(t); return; }
+      if (window.scrollY > 0) window.scrollTo(0, 0);
+    }, 250);
+  })();
+  </script>
+</body>
+</html>

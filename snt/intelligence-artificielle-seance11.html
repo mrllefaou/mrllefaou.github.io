@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projet : créer un site web (avec un budget de prompts) · Intelligence artificielle · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 9 Intelligence artificielle – Séance 11 · Projet web en HTML/CSS : concevoir sur papier, coder soi-même, n’utiliser l’IA que de façon ciblée.">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="intelligence-artificielle.html">Chapitre 9 – Intelligence artificielle</a><span class="sep">›</span>
+        <span>Séance 11</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#4f46e5,#1c2333)">
+      <p class="eyebrow">Chapitre 9 – Intelligence artificielle · Séance 11</p>
+      <h1>Projet : créer un site web (avec un budget de prompts)</h1>
+      <p class="meta">Séance 11 · Projet web en HTML/CSS : concevoir sur papier, coder soi-même, n’utiliser l’IA que de façon ciblée</p>
+      <div class="page-tabs"><a href="#act1">Étape 1</a><a href="#act2">Étape 2</a><a href="#act3">Étape 3</a><a href="#eval">Évaluation</a></div>
+    </section>
+
+    <div class="part-sep"><h3>Étape 1 · Concevoir sur papier</h3></div>
+    <section class="card" id="act1" aria-labelledby="t-act1">
+      <h2 id="t-act1"><span class="num tp">1</span> Dessiner avant de coder</h2>
+      <div class="consigne"><span class="icon" aria-hidden="true">📝</span><p><b>Consigne :</b> choisis un sujet, puis complète la fiche de conception <b>sans ordinateur</b>. Le projet comporte <b>2 pages au minimum</b> reliées par un menu.</p></div>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>Rubrique</th><th>À compléter</th></tr></thead><tbody><tr><th scope="row">Sujet et public visé</th><td></td></tr><tr><th scope="row">Nom du site</th><td></td></tr><tr><th scope="row">Pages prévues (nom du fichier + rôle)</th><td></td></tr><tr><th scope="row">Éléments de chaque page (titre, texte, image, liste, lien…)</th><td></td></tr><tr><th scope="row">Couleurs et police choisies</th><td></td></tr><tr><th scope="row">Une fonctionnalité “plus” (formulaire, galerie, tableau…)</th><td></td></tr></tbody></table></div>
+      <p>Dessine sur une feuille le <b>plan</b> de la page d’accueil : en-tête, menu, contenu principal, pied de page.</p>
+    </section>
+    <div class="part-sep"><h3>Étape 2 · Coder soi-même</h3></div>
+    <section class="card" id="act2" aria-labelledby="t-act2">
+      <h2 id="t-act2"><span class="num tp">2</span> Écrire le HTML puis le CSS</h2>
+      <p>Voici le squelette minimal d’une page à compléter.</p>
+      <pre class="code"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Titre de la page&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Nom du site&lt;/h1&gt;
+    &lt;nav&gt;&lt;a href=&quot;index.html&quot;&gt;Accueil&lt;/a&gt; &lt;a href=&quot;page2.html&quot;&gt;Page 2&lt;/a&gt;&lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;main&gt;
+    &lt;!-- ton contenu ici --&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;© ton nom&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <ol><li>Crée d’abord <b>tout le contenu en HTML</b> sans te soucier de l’apparence.</li><li>Vérifie que les liens entre les pages fonctionnent.</li><li>Ajoute ensuite le fichier <code>style.css</code> : couleurs, polices, marges.</li><li>Teste ton site sur la largeur d’un téléphone (réduis la fenêtre).</li></ol>
+      <div class="note"><strong class="title">Valider son code</strong><p>Utilise le validateur W3C (validator.w3.org) pour détecter des erreurs d’HTML, et lis chaque message : c’est un excellent moyen de progresser.</p></div>
+    </section>
+    <div class="part-sep"><h3>Étape 3 · Utiliser l’IA avec parcimonie</h3></div>
+    <section class="card" id="act3" aria-labelledby="t-act3">
+      <h2 id="t-act3"><span class="num tp">3</span> Le budget de 4 prompts</h2>
+      <div class="consigne"><span class="icon" aria-hidden="true">🎟️</span><p><b>Consigne :</b> tu as droit à <b>4 prompts</b> pour tout le projet. Chacun doit demander <b>une seule chose précise</b>, en moins de 5 lignes, et tu dois <b>comprendre et tester</b> la réponse avant de l’utiliser.</p></div>
+      <h3>Règles pour économiser tes prompts (et des tokens)</h3>
+      <ul><li><b>Chercher d’abord seul(e)</b> : cours, documentation MDN, essai-erreur.</li><li><b>Décomposer</b> : demander une seule propriété ou un seul bloc, pas tout le site.</li><li><b>Donner le contexte utile</b> : coller seulement les quelques lignes concernées, pas toute la page.</li><li><b>Préciser le format</b> : « donne seulement le CSS, avec un commentaire par ligne ».</li><li><b>Ne pas demander « refais tout »</b> à chaque ajustement.</li></ul>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>N°</th><th>Mon prompt (court)</th><th>Ce que j’ai obtenu</th><th>Ce que j’ai compris / testé / corrigé</th></tr></thead><tbody><tr><th scope="row">1</th><td></td><td></td><td></td></tr><tr><th scope="row">2</th><td></td><td></td><td></td></tr><tr><th scope="row">3</th><td></td><td></td><td></td></tr><tr><th scope="row">4</th><td></td><td></td><td></td></tr></tbody></table></div>
+      <div class="tp-question"><span class="label">Question 1</span><p>Choisis un de tes prompts. Était-il assez précis ? Comment l’aurais-tu amélioré pour obtenir la bonne réponse du premier coup ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 2</span><p>Une partie du code fourni par l’IA te paraissait-elle incompréhensible ? Qu’as-tu fait pour la comprendre ou la remplacer ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 3 · Sobriété</span><p>Environ combien de tokens aurait consommé la demande « Crée-moi un site complet » par rapport à tes 4 demandes ciblées ? Pourquoi est-ce une bonne pratique à l’échelle d’un établissement ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <div class="part-sep"><h3>Évaluation</h3></div>
+    <section class="card" id="eval" aria-labelledby="t-eval">
+      <h2 id="t-eval"><span class="num tp">✅</span> Grille d’évaluation</h2>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>Critère</th><th>Points</th></tr></thead><tbody><tr><th scope="row">Conception papier complète</th><td>/ 3</td></tr><tr><th scope="row">Structure HTML valide et sémantique (header, nav, main, footer)</th><td>/ 5</td></tr><tr><th scope="row">CSS et mise en forme cohérente</th><td>/ 4</td></tr><tr><th scope="row">Site utilisable sur téléphone et accessible (alt, contrastes)</th><td>/ 2</td></tr><tr><th scope="row">Journal de prompts et capacité à expliquer le code</th><td>/ 4</td></tr><tr><th scope="row">Qualité du contenu</th><td>/ 2</td></tr><tr><th scope="row"><b>Total</b></th><td>/ 20</td></tr></tbody></table></div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="intelligence-artificielle-seance10.html">← Séance 10</a><a class="btn secondary" href="intelligence-artificielle-seance12.html">Séance 12 →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Utiliser un chatbot : comprendre les LLM · Intelligence artificielle · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 9 Intelligence artificielle – Séance 2 · Expériences avec l’outil « Génération Texte » de Vittascience, puis cours sur les LLM.">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="intelligence-artificielle.html">Chapitre 9 – Intelligence artificielle</a><span class="sep">›</span>
+        <span>Séance 2</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#4f46e5,#1c2333)">
+      <p class="eyebrow">Chapitre 9 – Intelligence artificielle · Séance 2</p>
+      <h1>Utiliser un chatbot : comprendre les LLM</h1>
+      <p class="meta">Séance 2 · Expériences avec l’outil « Génération Texte » de Vittascience, puis cours sur les LLM</p>
+      <div class="page-tabs"><a href="#act1">Activité</a><a href="#cours">Cours</a></div>
+    </section>
+
+    <div class="part-sep"><h3>Activité · Explorer un modèle de langage</h3></div>
+    <section class="card" id="act1" aria-labelledby="t-act1">
+      <h2 id="t-act1"><span class="num tp">1</span> Dans les coulisses d’un chatbot</h2>
+      <div class="consigne"><span class="icon" aria-hidden="true">🧪</span><p><b>Consigne :</b> ouvre l’outil <b>Génération Texte</b> sur le site Vittascience. Effectue les quatre expériences ci-dessous <b>par binôme</b> et note tes observations.</p></div>
+      <p><a class="btn ext" href="https://fr.vittascience.com/ia/" target="_blank" rel="noopener">Ouvrir Vittascience IA (nouvel onglet)</a></p>
+      <p>Cet outil permet de choisir un modèle de langage, de régler sa <b>température</b> (le niveau de créativité), d’observer le découpage en <b>tokens</b> et d’ajouter un <b>pré-prompt</b> (une consigne donnée au modèle avant ta question).</p>
+      <h3>Expérience A · La température</h3>
+      <p>Pose trois fois la même question : <i>« Écris une phrase de début de conte sur un dragon. »</i> d’abord avec la température la plus basse, puis avec la température la plus haute.</p>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th></th><th>Température basse</th><th>Température haute</th></tr></thead><tbody><tr><th scope="row">Les 3 réponses sont-elles identiques ?</th><td></td><td></td></tr><tr><th scope="row">Cohérence du texte (1 à 5)</th><td></td><td></td></tr><tr><th scope="row">Originalité (1 à 5)</th><td></td><td></td></tr></tbody></table></div>
+      <div class="tp-question"><span class="label">Question 1</span><p>À quoi sert le réglage de température ? Dans quel cas vaut-il mieux une température basse ? Une température haute ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <h3>Expérience B · Les tokens</h3>
+      <p>Écris la phrase <i>« Intelligence artificielle »</i>, puis un mot rare comme <i>« anticonstitutionnellement »</i> et observe le découpage en tokens (si l’outil l’affiche).</p>
+      <div class="tp-question"><span class="label">Question 2</span><p>Comment le modèle découpe-t-il ces mots ? Pourquoi les services d’IA facturent-ils en nombre de tokens plutôt qu’en nombre de mots ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <h3>Expérience C · Les hallucinations</h3>
+      <p>Demande au modèle : <i>« Résume le roman “Les Brumes de Valmont” d’Hélène Courtois. »</i> (ce roman <b>n’existe pas</b>). Puis pose une question dont tu connais la réponse (par exemple la capitale d’un pays), et une question de calcul à plusieurs étapes.</p>
+      <div class="tp-question"><span class="label">Question 3</span><p>Le modèle a-t-il reconnu que le roman n’existe pas ? Qu’en conclus-tu sur la fiabilité d’une réponse « bien rédigée » ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <h3>Expérience D · Le pré-prompt</h3>
+      <p>Ajoute le pré-prompt : <i>« Tu es un pirate. Réponds toujours en trois phrases maximum. »</i> et pose la question : <i>« Comment fonctionne un réseau de neurones ? »</i> Puis change le pré-prompt pour : <i>« Tu es un professeur patient qui explique à un élève de 10 ans. »</i></p>
+      <div class="tp-question"><span class="label">Question 4</span><p>Qu’est-ce qui a changé dans la réponse : le <b>fond</b> (les connaissances) ou la <b>forme</b> (le style) ? Que peut-on contrôler avec un pré-prompt ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 5 · Biais</span><p>Demande : <i>« Écris l’histoire d’un chirurgien et d’une infirmière. »</i> Observe qui est un homme, qui est une femme. Recommence en inversant les métiers. Compare avec les autres groupes. Que remarques-tu ? D’où peut venir ce biais ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label plus">Bilan</span><p>Rédige trois règles d’usage pour utiliser un chatbot de manière responsable.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <div class="part-sep"><h3>Cours</h3></div>
+    <section class="card" id="cours" aria-labelledby="t-cours">
+      <h2 id="t-cours"><span class="num ">📘</span> Cours : Les grands modèles de langage</h2>
+      <div class="cours-block">
+      <h3>1. Comment un LLM produit-il une réponse ?</h3>
+      <ol><li>Ton texte est découpé en <b>tokens</b>.</li><li>Le modèle calcule, pour chaque token possible, la <b>probabilité</b> d’être le suivant.</li><li>Il en choisit un (le hasard dépend de la <b>température</b>) et l’ajoute à la suite du texte.</li><li>Il recommence, token après token, jusqu’à la fin de la réponse.</li></ol>
+      <div class="lexique"><strong class="title">Vocabulaire · Token</strong><p>Unité de texte traitée par le modèle : un mot court, un morceau de mot ou un signe de ponctuation. L’usage d’un modèle se mesure et se facture en tokens.</p></div>
+      <div class="lexique"><strong class="title">Vocabulaire · Température</strong><p>Paramètre qui règle le degré de hasard : basse, le modèle choisit presque toujours le token le plus probable (réponses stables) ; haute, il prend des risques (réponses variées, parfois incohérentes).</p></div>
+      <h3>2. Le prompt et le pré-prompt</h3>
+      <p>Le <b>prompt</b> est la consigne donnée au modèle. Le <b>pré-prompt</b> (ou <i>prompt système</i>) est une consigne placée avant la conversation : il fixe le rôle, le ton, les contraintes. Un bon prompt précise : <b>le rôle</b>, <b>le contexte</b>, <b>la tâche</b>, <b>le format attendu</b>.</p>
+      <h3>3. Les limites à connaître</h3>
+      <ul><li><b>Hallucinations</b> : le modèle peut inventer des faits, des sources, des citations.</li><li><b>Biais</b> : il reproduit les stéréotypes présents dans ses données d’entraînement.</li><li><b>Connaissances datées</b> : il ne connaît que ce qu’il a vu avant sa date d’entraînement, sauf s’il est connecté à une recherche web.</li><li><b>Confidentialité</b> : ce que tu écris peut être conservé et réutilisé ; on ne transmet jamais de données personnelles.</li></ul>
+      <div class="note"><strong class="title">À retenir</strong><p>Un chatbot est un <b>outil de génération de texte vraisemblable</b>, pas une source de vérité. Toute information importante doit être <b>vérifiée</b> dans une source fiable.</p></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="intelligence-artificielle-seance1.html">← Séance 1</a><a class="btn secondary" href="intelligence-artificielle-seance3.html">Séance 3 →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+</body>
+</html>

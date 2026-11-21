@@ -1,0 +1,19 @@
+# Site pédagogique réservé aux élèves : il ne doit pas apparaître dans les moteurs de recherche.
+# Les moteurs (Google, Bing, Qwant, DuckDuckGo, Ecosia, Yahoo…) peuvent lire les pages
+# uniquement pour y trouver la consigne « noindex » placée dans chacune d'elles.
+
+# Robots d'entraînement d'IA et aspirateurs de contenu : accès refusé
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: CCBot
+User-agent: Google-Extended
+User-agent: anthropic-ai
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Bytespider
+User-agent: Applebot-Extended
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: *
+Allow: /

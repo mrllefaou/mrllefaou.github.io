@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Les listes · Programmation en Python · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 4 Programmation en Python – Séance 7 · Stocker plusieurs valeurs et les parcourir.">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="python.html">Chapitre 4 – Programmation en Python</a><span class="sep">›</span>
+        <span>Séance 7</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#d97706,#1c2333)">
+      <p class="eyebrow">Chapitre 4 – Programmation en Python</p>
+      <h1>Les listes</h1>
+      <p class="meta">Séance 7 · Stocker plusieurs valeurs et les parcourir</p>
+      <div class="page-tabs"><a href="#liste">Qu’est-ce qu’une liste ?</a></div>
+    </section>
+
+<section class="card" id="liste" aria-labelledby="t-liste">
+<h2 id="t-liste"><span class="num ">1</span> Qu’est-ce qu’une liste ?</h2>
+<p>Une <b>liste</b> est un type de variable particulier : elle peut stocker <b>plusieurs valeurs</b>. Pour manipuler les listes, les boucles jouent un rôle important.</p><div class="wc"><iframe src="https://create.withcode.uk/embed/Bu6" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bu6" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><ul><li>La première instruction crée une variable de type liste d’entiers, contenant trois valeurs : 1, 2 et 3. Elles sont placées aux <b>rangs</b> (indices) 0, 1 et 2 de la liste.</li><li>La deuxième instruction affiche la valeur de la liste au rang 0 : 1.</li><li>La troisième instruction affiche la valeur de la liste au rang 1 : 2.</li><li>La quatrième instruction affiche la valeur de la liste au rang 2 : 3.</li></ul><div class="note"><strong class="title">Attention</strong><p>Le premier élément d’une liste est au rang <b>0</b>, pas au rang 1.</p></div><p>Lorsque la liste est longue, il est préférable d’utiliser une boucle pour afficher ou faire évoluer ses valeurs.</p><p>On peut aussi placer des valeurs flottantes ou des chaînes de caractères dans une liste.</p><div class="wc"><iframe src="https://create.withcode.uk/embed/GZF" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/GZF" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><p>On peut enfin ajouter des éléments à une liste en partant d’une liste vide, grâce à la <a href="https://fr.wikipedia.org/wiki/M%C3%A9thode_(informatique)" target="_blank" rel="noopener">méthode</a> <code>.append()</code>.</p><div class="wc"><iframe src="https://create.withcode.uk/embed/Bu8" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bu8" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div>
+</section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="python-seance6.html">← Les fonctions</a><a class="btn secondary" href="python.html">Retour au chapitre</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+  <script>
+  /* Garde la page en haut au chargement : les lecteurs intégrés (vidéos, éditeurs) peuvent prendre le focus et faire défiler la page. */
+  (function () {
+    if (location.hash) return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var touched = false, n = 0;
+    ["wheel", "touchstart", "mousedown", "keydown"].forEach(function (e) { addEventListener(e, function () { touched = true; }, { passive: true }); });
+    var t = setInterval(function () {
+      if (touched || ++n > 24) { clearInterval(t); return; }
+      if (window.scrollY > 0) window.scrollTo(0, 0);
+    }, 250);
+  })();
+  </script>
+</body>
+</html>

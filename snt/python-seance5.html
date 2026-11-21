@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Les boucles · Programmation en Python · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 4 Programmation en Python – Séance 5 · while et for.">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="python.html">Chapitre 4 – Programmation en Python</a><span class="sep">›</span>
+        <span>Séance 5</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#d97706,#1c2333)">
+      <p class="eyebrow">Chapitre 4 – Programmation en Python</p>
+      <h1>Les boucles</h1>
+      <p class="meta">Séance 5 · while et for</p>
+      <div class="page-tabs"><a href="#while">La boucle while (tant que)</a><a href="#for">La boucle for (pour)</a></div>
+    </section>
+
+<section class="card" id="while" aria-labelledby="t-while">
+<h2 id="t-while"><span class="num tp">1</span> La boucle while (tant que)</h2>
+<p class="guide"><a class="btn ext" href="https://youtu.be/6yxYffZ_wiw" target="_blank" rel="noopener">▶ Guide vidéo de la séance</a> <span class="muted">Astuce : ouvre le guide dans une fenêtre et cette page dans une autre pour suivre plus facilement.</span></p>
+<p>Pour répéter une instruction plusieurs fois, on utilise une <b>structure de boucle</b>. Imaginons un robot sur une chaîne de production qui répète toujours le même mouvement : sans boucle, le programmeur devrait écrire plusieurs fois les mêmes instructions. C’est très chronophage, surtout si le nombre de répétitions évolue. La boucle répond à cette problématique ; sa structure est proche de celle des conditions.</p>
+<p>Pour comprendre, partons de plusieurs exemples.</p><h3>Exemple 1</h3><div class="wc"><iframe src="https://create.withcode.uk/embed/Bte" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bte" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><ul><li>Instruction 1 : on affiche « PUNITION – copier 1000 fois : Je cesserai mes sottises en cours de SNT ».</li><li>Instruction 2 : on stocke la valeur 1 dans la variable <code>i</code>.</li><li>Instruction 3 : c’est la structure de boucle <code>while</code>, composée de :<ul><li><code>while</code>, qui marque le début de la boucle (« tant que ») ;</li><li><code>i&lt;=1000</code>, l’<b>assertion</b> : tant qu’elle est vraie, on répète les instructions du bloc de la boucle ;</li><li>le signe <code>:</code>, qui marque la fin de l’assertion.</li></ul></li><li>Instruction 4 : on affiche « Ligne » suivi de la valeur de <code>i</code>, puis « Je cesserai mes sottises en cours de SNT ».</li><li>Instruction 5 : on stocke dans <code>i</code> sa valeur augmentée de 1.</li></ul><h3>Exemple 2</h3><div class="wc"><iframe src="https://create.withcode.uk/embed/Btf" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Btf" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><p>Tant que l’assertion <code>reponse==1</code> est vraie, les instructions des lignes 5 et 6 sont exécutées.</p><p><b>Remarque :</b> comme pour les conditions, le bloc d’instructions d’une boucle est <b>indenté</b>.</p><h3>Exemple de boucle infinie</h3><div class="wc"><iframe src="https://create.withcode.uk/embed/Btg" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Btg" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><p>Si l’on saisit la valeur 1 à l’instruction 2, l’assertion <code>reponse==1</code> est vraie. Dans la boucle, la valeur de <code>reponse</code> n’évolue plus : l’assertion reste toujours vraie et l’instruction 4 est exécutée à l’infini. On dit que la boucle est une <b>boucle infinie</b>.</p>
+<p>Pour rappel, voici les opérateurs logiques :</p><div class="table-wrap"><table class="data-table"><thead><tr><th>Opérateur</th><th>Rôle</th><th>Exemple</th></tr></thead><tbody>
+<tr><td><code>==</code></td><td>Test d’égalité</td><td><code>3==4</code> renvoie faux</td></tr>
+<tr><td><code>!=</code></td><td>Test de différence</td><td><code>3!=4</code> renvoie vrai</td></tr>
+<tr><td><code>&lt;</code></td><td>Strictement inférieur</td><td><code>3&lt;4</code> renvoie vrai</td></tr>
+<tr><td><code>&lt;=</code></td><td>Inférieur ou égal</td><td><code>4&lt;=3</code> renvoie faux</td></tr>
+<tr><td><code>&gt;</code></td><td>Strictement supérieur</td><td><code>3&gt;4</code> renvoie faux</td></tr>
+<tr><td><code>&gt;=</code></td><td>Supérieur ou égal</td><td><code>4&gt;=3</code> renvoie vrai</td></tr>
+<tr><td><code>and</code></td><td>Et logique</td><td>vrai si les deux assertions sont vraies</td></tr>
+<tr><td><code>or</code></td><td>Ou logique</td><td>vrai si au moins une assertion est vraie</td></tr>
+<tr><td><code>not</code></td><td>Non logique</td><td>inverse la valeur de vérité</td></tr>
+</tbody></table></div><div class="tp-question"><span class="label">Exercice 1</span><p>Teste le programme ci-dessous et explique l’intérêt de la boucle.</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/Bth" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bth" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la réponse en vidéo</summary><div class="sol-body"><a class="video-lien" href="https://www.youtube.com/watch?v=CoTeAXYT9z4" target="_blank" rel="noopener"><span class="video-play" aria-hidden="true"></span><span class="video-titre">Les boucles – exercice 1</span><span class="video-info">Regarder sur YouTube · nouvel onglet</span></a></div></details><div class="tp-question"><span class="label">Exercice 2</span><p>Écris un programme qui affiche le message « Veuillez saisir 29 » tant que la valeur 29 n’est pas saisie.</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/5" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/5" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la correction</summary><div class="sol-body"><div class="wc"><iframe src="https://create.withcode.uk/embed/Bti" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bti" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div></div></details>
+</section>
+
+<section class="card" id="for" aria-labelledby="t-for">
+<h2 id="t-for"><span class="num tp">2</span> La boucle for (pour)</h2>
+<p>Ce type de boucle sert à répéter un bloc d’instructions un <b>nombre de fois connu</b>. Voici un exemple qui exécute exactement les mêmes instructions que l’exemple 1.</p><div class="wc"><iframe src="https://create.withcode.uk/embed/Btj" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Btj" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><ul><li><code>for</code> introduit la boucle de type « pour ».</li><li><code>i</code> est la variable qui évolue dans la boucle.</li><li><code>in range(0,1000)</code> signifie que <code>i</code> prend les valeurs de 0 à 999 inclus : en tout, 1000 répétitions.</li><li>Le signe <code>:</code> termine l’en-tête de la boucle.</li></ul><p><b>Remarque :</b> la boucle <code>for</code> est une boucle <code>while</code> « masquée ».</p><p>Si l’on veut commencer à la ligne 1 et finir à la ligne 1000, il suffit d’ajouter 1 aux valeurs prises par <code>i</code> :</p><div class="wc"><iframe src="https://create.withcode.uk/embed/Btk" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Btk" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><div class="tp-question"><span class="label">Exercice 3</span><p>Écris un programme qui affiche « coucou » 300 fois.</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/5" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/5" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la correction</summary><div class="sol-body"><div class="wc"><iframe src="https://create.withcode.uk/embed/Btm" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Btm" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div></div></details><div class="tp-question"><span class="label">Exercice 4</span><p>Écris un programme qui affiche les 300 premiers nombres, puis les 300 premiers nombres pairs.</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/5" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/5" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la correction</summary><div class="sol-body"><div class="wc"><iframe src="https://create.withcode.uk/embed/Btn" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Btn" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div></div></details><div class="tp-question"><span class="label">Exercice 5</span><p>Teste et « déroule » le programme suivant : explique le rôle de chaque instruction.</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/Btp" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Btp" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la réponse en vidéo</summary><div class="sol-body"><a class="video-lien" href="https://www.youtube.com/watch?v=5gYkiw1Hndo" target="_blank" rel="noopener"><span class="video-play" aria-hidden="true"></span><span class="video-titre">Les boucles – exercice 5</span><span class="video-info">Regarder sur YouTube · nouvel onglet</span></a></div></details>
+</section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="python-seance4.html">← Les conditions</a><a class="btn secondary" href="python-seance6.html">Les fonctions →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+  <script>
+  /* Garde la page en haut au chargement : les lecteurs intégrés (vidéos, éditeurs) peuvent prendre le focus et faire défiler la page. */
+  (function () {
+    if (location.hash) return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var touched = false, n = 0;
+    ["wheel", "touchstart", "mousedown", "keydown"].forEach(function (e) { addEventListener(e, function () { touched = true; }, { passive: true }); });
+    var t = setInterval(function () {
+      if (touched || ++n > 24) { clearInterval(t); return; }
+      if (window.scrollY > 0) window.scrollTo(0, 0);
+    }, 250);
+  })();
+  </script>
+</body>
+</html>

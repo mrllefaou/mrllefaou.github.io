@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compression et traitement d’image · Photographie numérique · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 7 Photographie numérique – Partie 2 · Formats, compression et programmes Python de traitement d’image.">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="photographie-numerique.html">Chapitre 7 – Photographie numérique</a><span class="sep">›</span>
+        <span>Partie 2</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#db2777,#1c2333)">
+      <p class="eyebrow">Chapitre 7 – Photographie numérique</p>
+      <h1>Compression et traitement d’image</h1>
+      <p class="meta">Partie 2 · Formats, compression et programmes Python de traitement d’image</p>
+      <div class="page-tabs"><a href="#card">Compression d’image</a><a href="#card">Traitement d’image</a><a href="#card">Testons le photomontage</a><a href="#card">Pour aller plus loin : du bruit dans l’image</a></div>
+    </section>
+
+    <section class="card" id="compression" aria-labelledby="t-compression">
+      <h2 id="t-compression"><span class="num tp">A</span> Compression d’image</h2>
+      <p>Chaque image numérique possède un <b>format</b>. Le format définit la manière dont les données sont écrites et compressées. Les formats courants en prise de vue numérique sont le <b>JPEG</b> (compressé) et le <b>RAW</b> (format brut, non compressé). Il existe aussi des formats adaptés au Web (JPEG, GIF, PNG), à l’impression (TIFF), etc.</p>
+      <div class="consigne"><span class="icon" aria-hidden="true">📖</span><p><b>Consigne :</b> réponds aux questions suivantes en t’appuyant sur les deux documents proposés.</p></div>
+      <p>
+        <a class="btn ext" href="https://www.lemonde.fr/pixels/article/2017/07/29/photographier-en-raw-une-fausse-bonne-idee_5166505_4408996.html" target="_blank" rel="noopener">Le Monde – Photographier en RAW : une fausse bonne idée ?</a>
+        <a class="btn secondary ext" href="http://philippe.balladur.free.fr/Fiches_techniques/Formats_images.htm" target="_blank" rel="noopener">Fiche technique : les formats d’images</a>
+      </p>
+      <p class="source">L’article du Monde est susceptible d’être réservé aux abonnés.</p>
+      <div class="tp-question"><span class="label">Question 1</span><p>À ton avis, <b>pourquoi compresse-t-on</b> les images numériques ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 2</span><p>Pour permettre une perte de poids à l’image, l’image compressée subit quelques modifications. Donne <b>3 exemples de modifications</b>.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <section class="card" id="traitement" aria-labelledby="t-traitement">
+      <h2 id="t-traitement"><span class="num tp">B</span> Traitement d’image</h2>
+      <p>Nous avons vu lors de la première séance la notion de <b>pixel</b> : un pixel correspond à une case, la composante la plus petite d’une image, à laquelle on associe une couleur. Cette couleur est générée par un <b>code RVB</b> (rouge, vert, bleu).</p>
+      <p>Le code <b>60, 163, 87</b> correspond à la couleur verte représentée ci-dessous : <span class="swatch" role="img" aria-label="Carré vert de code RVB 60, 163, 87"></span></p>
+      <figure class="small"><img src="img/photo/selecteur-couleur.png" alt="Sélecteur de couleurs indiquant R : 60, V : 163, B : 87, soit le code hexadécimal 3ca357" loading="lazy"><figcaption>Le même vert dans un sélecteur de couleurs : R = 60, V = 163, B = 87.</figcaption></figure>
+      <p>Pour modifier une image dans sa totalité ou partiellement, il faut <b>modifier le code RVB des pixels</b> concernés. Pour cela, on utilise des <b>programmes informatiques</b>.</p>
+      <h3>Récupérer les fichiers de travail</h3>
+      <p>Nous allons tester quelques programmes sur l’image ci-dessous (<code class="inline">image.jpg</code>). Télécharge l’image et les programmes dans <b>un même dossier</b>, puis ouvre chaque programme avec l’éditeur Python utilisé en classe. Les programmes utilisent la bibliothèque <b>Pillow</b> (<code class="inline">PIL</code>).</p>
+      <figure><img src="img/photo/image-test.jpg" alt="Photographie de travail : un éléphant suspendu à une montgolfière au-dessus d’une prairie, sous un ciel d’orage" loading="lazy"><figcaption>L’image de travail : <code class="inline">image.jpg</code> (960 × 540 pixels).</figcaption></figure>
+      <ul class="dl-files">
+        <li><a class="btn dl" href="fichiers/photographie/image.jpg" download="image.jpg">image.jpg</a><span class="d">l’image à traiter</span></li>
+        <li><a class="btn dl" href="fichiers/photographie/code_rvb_pixel.py" download="code_rvb_pixel.py">code_rvb_pixel.py</a><span class="d">programme 1</span></li>
+        <li><a class="btn dl" href="fichiers/photographie/modification_pixel.py" download="modification_pixel.py">modification_pixel.py</a><span class="d">programme 2</span></li>
+        <li><a class="btn dl" href="fichiers/photographie/negatif.py" download="negatif.py">negatif.py</a><span class="d">programme 3</span></li>
+        <li><a class="btn dl" href="fichiers/photographie/noir_et_blanc.py" download="noir_et_blanc.py">noir_et_blanc.py</a><span class="d">programme 4</span></li>
+        <li><a class="btn dl" href="fichiers/photographie/scripts-photographie.zip" download="scripts-photographie.zip">Tout télécharger (.zip)</a><span class="d">les images et tous les programmes de la séance</span></li>
+      </ul>
+      <h3>Programme 1 : <code>code_rvb_pixel.py</code></h3>
+      <p>Lit chaque pixel de l’image et affiche son code RVB. <i>(Il affiche plus de 500 000 lignes : laisse-le tourner jusqu’à l’affichage de « fin ».)</i></p>
+      <pre class="code"><code>from PIL import Image
+img = Image.open(&quot;image.jpg&quot;)
+largeur_image=950
+hauteur_image=540
+for y in range(hauteur_image):
+    for x in range(largeur_image):
+        r,v,b=img.getpixel((x,y))
+        print(&quot;rouge : &quot;,r,&quot;vert : &quot;,v,&quot;bleu : &quot;,b)
+print(&quot;fin&quot;)</code></pre>
+      <p class="guide"><a class="btn dl" href="fichiers/photographie/code_rvb_pixel.py" download="code_rvb_pixel.py">code_rvb_pixel.py</a></p>
+      <h3>Programme 2 : <code>modification_pixel.py</code></h3>
+      <p>Modifie le code RVB de chaque pixel, puis affiche l’image.</p>
+      <pre class="code"><code>from PIL import Image
+img = Image.open(&quot;image.jpg&quot;)
+largeur_image=950
+hauteur_image=540
+for y in range(hauteur_image):
+    for x in range(largeur_image):
+        r,v,b=img.getpixel((x,y))
+        n_r=v
+        n_v=b
+        n_b=r
+        img.putpixel((x,y),(n_r,n_v,n_b))
+img.show()</code></pre>
+      <p class="guide"><a class="btn dl" href="fichiers/photographie/modification_pixel.py" download="modification_pixel.py">modification_pixel.py</a></p>
+      <div class="tp-question"><span class="label">Question 1 · Programmes 1 et 2</span><p><b>Teste</b> et <b>explique</b> chacun de ces deux programmes.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <h3>Programme 3 : <code>negatif.py</code></h3>
+      <p>Modifie le code RVB de chaque pixel, puis affiche l’image.</p>
+      <pre class="code"><code>from PIL import Image
+img = Image.open(&quot;image.jpg&quot;)
+largeur_image=950
+hauteur_image=540
+for y in range(hauteur_image):
+    for x in range(largeur_image):
+        r,v,b=img.getpixel((x,y))
+        img.putpixel((x,y),(255-r,255-v,255-b))
+img.show()</code></pre>
+      <p class="guide"><a class="btn dl" href="fichiers/photographie/negatif.py" download="negatif.py">negatif.py</a></p>
+      <div class="tp-question"><span class="label">Question 2 · Programme 3</span><p><b>Teste</b> et <b>explique</b> le programme.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <h3>Programme 4 : <code>noir_et_blanc.py</code></h3>
+      <p>Modifie le code RVB de chaque pixel, puis affiche l’image.</p>
+      <pre class="code"><code>from PIL import Image
+img = Image.open(&quot;image.jpg&quot;)
+largeur_image=950
+hauteur_image=540
+for y in range(hauteur_image):
+    for x in range(largeur_image):
+        r,v,b=img.getpixel((x,y))
+        gris = int(0.2125 * r + 0.7154 * v + 0.0721 * b)
+        img.putpixel((x,y),(gris,gris,gris))
+img.show()</code></pre>
+      <p class="guide"><a class="btn dl" href="fichiers/photographie/noir_et_blanc.py" download="noir_et_blanc.py">noir_et_blanc.py</a></p>
+      <div class="tp-question"><span class="label">Question 3 · Programme 4</span><p><b>Teste</b> et <b>explique</b> le programme.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 4</span><p>Sur chacun des programmes testés, on remarque sur un bord de l’image qu’<b>une partie de l’image n’est pas traitée</b>. Que doit-on modifier pour que cela fonctionne correctement ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <section class="card" id="montage" aria-labelledby="t-montage">
+      <h2 id="t-montage"><span class="num tp">C</span> Testons le photomontage</h2>
+      <p>Le <b>photomontage</b> consiste à assembler plusieurs images en une seule. Cette partie se réalise avec le logiciel <b>GIMP</b>, selon la consigne donnée en classe.</p>
+      <p>On peut aussi réaliser un photomontage avec un programme Python : <code class="inline">montage.py</code> réduit de moitié l’image <code class="inline">batman.png</code> (une image à fond transparent), puis la colle sur <code class="inline">image.jpg</code> aux coordonnées (350, 100).</p>
+      <pre class="code"><code>from PIL import Image
+
+img = Image.open(&quot;batman.png&quot;)
+taille=img.size
+img=img.resize((int(taille[0]/2.0),int(taille[1]/2.0)),Image.LANCZOS)
+
+background = Image.open(&quot;image.jpg&quot;)
+background.paste(img, (350, 100), img)
+background.show()</code></pre>
+      <ul class="dl-files">
+        <li><a class="btn dl" href="fichiers/photographie/batman.png" download="batman.png">batman.png</a><span class="d">l’image à fond transparent à coller</span></li>
+        <li><a class="btn dl" href="fichiers/photographie/montage.py" download="montage.py">montage.py</a><span class="d">le programme de photomontage</span></li>
+      </ul>
+      <div class="tp-question"><span class="label plus">Question 5</span><p>Compare le photomontage réalisé avec GIMP et celui réalisé avec le programme : quels sont les <b>avantages</b> et les <b>limites</b> de chaque méthode ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <section class="card" id="plus" aria-labelledby="t-plus">
+      <h2 id="t-plus"><span class="num plus">+</span> Pour aller plus loin : du bruit dans l’image</h2>
+      <p>Ces deux programmes remplacent des pixels par des couleurs <b>tirées au hasard</b> (fonction <code class="inline">randint</code>).</p>
+      <ul class="dl-files">
+        <li><a class="btn dl" href="fichiers/photographie/random_bandes.py" download="random_bandes.py">random_bandes.py</a><span class="d">du bruit sur les 50 premières et les 50 dernières lignes de l’image</span></li>
+        <li><a class="btn dl" href="fichiers/photographie/random_total.py" download="random_total.py">random_total.py</a><span class="d">du bruit sur toute l’image</span></li>
+      </ul>
+      <div class="tp-question"><span class="label plus">Question 6</span><p>Que se passe-t-il quand on modifie les valeurs de <code class="inline">hauteur_image</code> et de la deuxième boucle de <code class="inline">random_bandes.py</code> ? Fais le test.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="note"><strong class="title">Attention au nom du fichier</strong><p>Ne nomme jamais un de tes programmes <code class="inline">random.py</code> : Python le confondrait avec sa propre bibliothèque <code class="inline">random</code> et le programme ne fonctionnerait plus.</p></div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="photographie-numerique-seance1.html">← Pixels, photosites et résolution</a><a class="btn secondary" href="photographie-numerique.html">Retour au chapitre</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+</body>
+</html>

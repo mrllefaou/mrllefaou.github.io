@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Les conditions · Programmation en Python · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 4 Programmation en Python – Séance 4 · if, elif, else et opérateurs logiques.">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="python.html">Chapitre 4 – Programmation en Python</a><span class="sep">›</span>
+        <span>Séance 4</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#d97706,#1c2333)">
+      <p class="eyebrow">Chapitre 4 – Programmation en Python</p>
+      <h1>Les conditions</h1>
+      <p class="meta">Séance 4 · if, elif, else et opérateurs logiques</p>
+      <div class="page-tabs"><a href="#if">La condition if</a><a href="#operateurs">Les opérateurs logiques</a><a href="#elif">Les conditions if, elif, else</a></div>
+    </section>
+
+<section class="card" id="if" aria-labelledby="t-if">
+<h2 id="t-if"><span class="num ">1</span> La condition if</h2>
+<p class="guide"><a class="btn ext" href="https://www.youtube.com/watch?v=2xJTx3OcIJc" target="_blank" rel="noopener">▶ Guide vidéo de la séance</a> <span class="muted">Astuce : ouvre le guide dans une fenêtre et cette page dans une autre pour suivre plus facilement.</span></p>
+<p>Il est possible de faire évoluer le comportement d’un programme grâce aux <b>conditions</b>. Pour cela, on utilise l’instruction <code>if</code> (« si » en anglais), qui a la structure suivante :</p><div class="wc"><iframe src="https://create.withcode.uk/embed/Bss" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bss" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><ul><li>Première instruction : la valeur 5 est stockée dans la variable <code>x</code>.</li><li>Deuxième instruction : c’est la structure de condition.<ul><li><code>if</code> signale que l’on écrit une condition.</li><li><code>x==5</code> est l’<b>assertion</b> de la condition. Une assertion est une proposition soit vraie, soit fausse. Si elle est vraie, les instructions du bloc de la condition sont exécutées ; sinon, elles ne le sont pas. Le double égal <code>==</code> est l’opérateur logique d’égalité. Ici, l’assertion est vraie, car <code>x</code> vaut 5.</li><li>Le signe <code>:</code> marque la fin de l’assertion.</li></ul></li><li>Troisième instruction : elle affiche « La valeur de la variable x est égale à 5 ». Elle est <b>indentée</b> (décalée vers la droite, comme un alinéa). Cette indentation est essentielle : elle marque l’appartenance de l’instruction au bloc de la condition.</li></ul><p>En exécutant le programme, on obtient « La valeur de la variable x est égale à 5 ». Changeons maintenant <code>x=5</code> en <code>x=6</code>.</p><div class="wc"><iframe src="https://create.withcode.uk/embed/Bst" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bst" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><p>En exécutant le programme, il ne se passe rien : l’assertion <code>x==5</code> est fausse et la troisième instruction n’est pas exécutée.</p><p>Si l’on oublie l’indentation, le programme devient :</p><div class="wc"><iframe src="https://create.withcode.uk/embed/Bsu" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bsu" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><p>On obtient un message d’erreur : sans indentation, l’instruction n’appartient pas au bloc de la condition.</p><p><b>Exemple :</b></p><div class="wc"><iframe src="https://create.withcode.uk/embed/Bsv" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bsv" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><p>Teste le programme en saisissant « Toto », puis « toto ». Dans le second cas, l’assertion est fausse : « T » et « t » sont deux informations différentes.</p>
+</section>
+
+<section class="card" id="operateurs" aria-labelledby="t-operateurs">
+<h2 id="t-operateurs"><span class="num tp">2</span> Les opérateurs logiques</h2>
+<p>Pour créer nos assertions, nous avons utilisé l’opérateur logique <code>==</code>. Il en existe d’autres, qui permettent de faire varier les assertions de nos conditions. Voici le tableau des principaux opérateurs (liste non exhaustive).</p><div class="table-wrap"><table class="data-table"><thead><tr><th>Opérateur</th><th>Rôle</th><th>Exemple</th></tr></thead><tbody>
+<tr><td><code>==</code></td><td>Test d’égalité</td><td><code>3==4</code> renvoie faux</td></tr>
+<tr><td><code>!=</code></td><td>Test de différence</td><td><code>3!=4</code> renvoie vrai</td></tr>
+<tr><td><code>&lt;</code></td><td>Strictement inférieur</td><td><code>3&lt;4</code> renvoie vrai</td></tr>
+<tr><td><code>&lt;=</code></td><td>Inférieur ou égal</td><td><code>4&lt;=3</code> renvoie faux</td></tr>
+<tr><td><code>&gt;</code></td><td>Strictement supérieur</td><td><code>3&gt;4</code> renvoie faux</td></tr>
+<tr><td><code>&gt;=</code></td><td>Supérieur ou égal</td><td><code>4&gt;=3</code> renvoie vrai</td></tr>
+<tr><td><code>and</code></td><td>Et logique</td><td>vrai si les deux assertions sont vraies</td></tr>
+<tr><td><code>or</code></td><td>Ou logique</td><td>vrai si au moins une assertion est vraie</td></tr>
+<tr><td><code>not</code></td><td>Non logique</td><td>inverse la valeur de vérité</td></tr>
+</tbody></table></div><p>Appliquons ces notions dans quelques exercices.</p><div class="tp-question"><span class="label">Exercice 1</span><p>Teste le programme ci-dessous et « déroule-le » : explique le rôle de chaque instruction.</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/Bsw" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bsw" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la correction</summary><div class="sol-body"><ul><li>Ligne 1 : on affiche « Saisir un nombre » et on stocke dans <code>nb1</code> la valeur (de type <code>float</code>) saisie.</li>
+<li>Ligne 2 : idem pour <code>nb2</code>.</li>
+<li>Ligne 4 : si <code>nb1</code> est égal à <code>nb2</code>, on exécute la ligne 5.</li><li>Ligne 5 : on affiche « Les nombres sont égaux ».</li>
+<li>Ligne 7 : si <code>nb1</code> est différent de <code>nb2</code>, on exécute la ligne 8.</li><li>Ligne 8 : on affiche « Les nombres sont différents ».</li>
+<li>Ligne 10 : si <code>nb1</code> est strictement supérieur à <code>nb2</code>, on exécute la ligne 11.</li><li>Ligne 11 : on affiche <code>nb1</code>, « est plus grand que », <code>nb2</code>.</li>
+<li>Ligne 13 : si <code>nb1</code> est strictement inférieur à <code>nb2</code>, on exécute la ligne 14.</li><li>Ligne 14 : on affiche <code>nb1</code>, « est plus petit que », <code>nb2</code>.</li></ul></div></details><div class="tp-question"><span class="label">Exercice 2</span><p>Teste le programme suivant (opérateur <code>and</code>) et modifie la ligne 6 en écrivant un texte correspondant au contexte du programme.</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/Bsx" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bsx" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la correction</summary><div class="sol-body"><div class="wc"><iframe src="https://create.withcode.uk/embed/Bsy" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bsy" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div></div></details><div class="tp-question"><span class="label">Exercice 3</span><p>Teste le programme suivant (opérateur <code>or</code>) et modifie la ligne 6 en écrivant un texte correspondant au contexte du programme.</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/Bsz" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bsz" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la correction</summary><div class="sol-body"><div class="wc"><iframe src="https://create.withcode.uk/embed/Bt2" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bt2" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div></div></details><div class="tp-question"><span class="label">Exercice 4</span><p>Écris un programme qui demande à l’utilisateur de saisir une valeur entière, stockée dans une variable <code>age</code>, en affichant « Quel âge as-tu ? ». Si la valeur saisie est supérieure ou égale à 18, le programme affiche « Tu es majeur ».</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/5" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/5" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la correction</summary><div class="sol-body"><div class="wc"><iframe src="https://create.withcode.uk/embed/Bt3" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bt3" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div></div></details>
+</section>
+
+<section class="card" id="elif" aria-labelledby="t-elif">
+<h2 id="t-elif"><span class="num ">3</span> Les conditions if, elif, else</h2>
+<p>On peut rendre les conditions plus performantes avec <code>elif</code> et <code>else</code>. <code>if</code> signifie « si », <code>elif</code> « sinon si » (suivi d’une assertion) et <code>else</code> « sinon ». Cette dernière instruction s’écrit à la fin de la structure et s’exécute si les assertions du <code>if</code> et des <code>elif</code> sont toutes fausses. Un exemple pour mieux comprendre :</p><div class="wc"><iframe src="https://create.withcode.uk/embed/Bt4" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bt4" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><ul><li>Si l’on saisit « Paul » : l’assertion de la ligne 3 est vraie, celles des lignes 5, 7 et 9 sont fausses. On exécute la ligne 4.</li><li>Si l’on saisit « Jack » : l’assertion de la ligne 5 est vraie. On exécute la ligne 6.</li><li>Si l’on saisit « Léa » : l’assertion de la ligne 7 est vraie. On exécute la ligne 8.</li><li>Si l’on saisit « paul » : toutes les assertions sont fausses, car « paul » est différent de « Paul ». C’est le <code>else</code> (ligne 9) qui s’exécute : on exécute la ligne 10.</li></ul><p>Il est aussi possible d’imbriquer des conditions dans des conditions. Pour qu’elles s’exécutent, il faut respecter les indentations.</p><div class="wc"><iframe src="https://create.withcode.uk/embed/Bt5" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bt5" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><div class="tp-question"><span class="label">Exercice 5</span><p>1) Teste et « déroule » le programme ci-dessous (explique le rôle de chaque instruction).<br>2) Ajoute un 4<sup>e</sup> menu à la borne d’achat JUNK FOOD.</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/Bt6" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bt6" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la correction</summary><div class="sol-body"><p><b>1)</b></p><ul><li>Ligne 1 : on affiche « Bienvenue sur la borne d’achat de JUNK FOOOOD ! Pour commander, tape : ».</li><li>Lignes 2 à 4 : on affiche les trois menus (1. Royal Kebab ; 2. Sublime Burger ; 3. Chaudron de Tenders).</li><li>Ligne 5 : on affiche « Choix : » et l’utilisateur saisit une valeur affectée à <code>choix</code>.</li>
+<li>Ligne 7 : si <code>choix==1</code>, on exécute la ligne 8, qui affiche « Vous avez choisi un Royal Kebab, votre commande est en cours de préparation ».</li>
+<li>Ligne 9 : sinon, si <code>choix==2</code>, on exécute la ligne 10 (Sublime Burger).</li>
+<li>Ligne 11 : sinon, si <code>choix==3</code>, on exécute la ligne 12 (Chaudron de Tenders).</li>
+<li>Ligne 13 : <code>else</code> : si les assertions des lignes 7, 9 et 11 sont fausses, on exécute la ligne 14 : « Erreur de saisie, veuillez relancer le programme pour choisir votre menu ! ».</li></ul><p><b>2)</b></p><div class="wc"><iframe src="https://create.withcode.uk/embed/GZE" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/GZE" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div></div></details><div class="tp-question"><span class="label">Exercice 6</span><p>Teste et « déroule » (sans l’écrire) le programme ci-dessous.</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/Bt9" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/Bt9" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la réponse en vidéo</summary><div class="sol-body"><a class="video-lien" href="https://www.youtube.com/watch?v=5Kl-ZF2ebPo" target="_blank" rel="noopener"><span class="video-play" aria-hidden="true"></span><span class="video-titre">Exercice 6 – réponse en vidéo</span><span class="video-info">Regarder sur YouTube · nouvel onglet</span></a></div></details><div class="tp-question"><span class="label">Exercice 7</span><p>Écris un programme qui demande l’âge de l’utilisateur et l’informe s’il est majeur ou mineur.</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/5" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/5" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la correction</summary><div class="sol-body"><div class="wc"><iframe src="https://create.withcode.uk/embed/BtA" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/BtA" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div></div></details><div class="tp-question"><span class="label">Exercice 8</span><p>Écris un programme qui demande l’âge d’un enfant à l’utilisateur, puis l’informe de sa catégorie :</p><ul><li>« Pas de catégorie » : moins de 6 ans ;</li><li>« Poussin » : de 6 à 7 ans ;</li><li>« Pupille » : de 8 à 9 ans ;</li><li>« Minime » : de 10 à 11 ans ;</li><li>« Cadet » : à partir de 12 ans.</li></ul></div><div class="wc"><iframe src="https://create.withcode.uk/embed/5" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/5" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la correction</summary><div class="sol-body"><div class="wc"><iframe src="https://create.withcode.uk/embed/GZD" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/GZD" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div></div></details><div class="tp-question"><span class="label">Exercice 9</span><p>Écris un programme qui demande à l’utilisateur de saisir trois valeurs correspondant aux longueurs des côtés d’un triangle. Le programme indique, selon les valeurs saisies, si le triangle est rectangle ou non.</p><p>Rappel : un triangle ABC est rectangle en A si et seulement si BC² = AB² + AC².</p></div><div class="wc"><iframe src="https://create.withcode.uk/embed/5" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/5" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div><details class="solution"><summary>Voir la correction</summary><div class="sol-body"><div class="wc"><iframe src="https://create.withcode.uk/embed/BtC" title="Éditeur Python" loading="lazy" height="380"></iframe><a class="wc-link" href="https://create.withcode.uk/python/BtC" target="_blank" rel="noopener">Ouvrir l’éditeur dans un nouvel onglet ↗</a></div></div></details>
+</section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="python-seance3.html">← Variables, lecture et écriture (2/2)</a><a class="btn secondary" href="python-seance5.html">Les boucles →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+  <script>
+  /* Garde la page en haut au chargement : les lecteurs intégrés (vidéos, éditeurs) peuvent prendre le focus et faire défiler la page. */
+  (function () {
+    if (location.hash) return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var touched = false, n = 0;
+    ["wheel", "touchstart", "mousedown", "keydown"].forEach(function (e) { addEventListener(e, function () { touched = true; }, { passive: true }); });
+    var t = setInterval(function () {
+      if (touched || ++n > 24) { clearInterval(t); return; }
+      if (window.scrollY > 0) window.scrollTo(0, 0);
+    }, 250);
+  })();
+  </script>
+</body>
+</html>

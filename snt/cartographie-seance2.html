@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Histoire de la cartographie · Cartographie et localisation · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 5 Cartographie et localisation – Séance 2 · Des premières cartes aux cartes numériques.">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="cartographie.html">Chapitre 5 – Cartographie et localisation</a><span class="sep">›</span>
+        <span>Séance 2</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#dc2626,#1c2333)">
+      <p class="eyebrow">Chapitre 5 – Cartographie et localisation</p>
+      <h1>Histoire de la cartographie</h1>
+      <p class="meta">Séance 2 · Des premières cartes aux cartes numériques</p>
+    </section>
+
+    <section class="card" id="histoire" aria-labelledby="t-histoire">
+      <h2 id="t-histoire"><span class="num tp">1</span> Histoire de la cartographie</h2>
+      <div class="consigne"><span class="icon" aria-hidden="true">🎬</span><p><b>Consigne :</b> regarde la vidéo ci-dessous. Note les grandes étapes de l’histoire de la cartographie (outils, techniques, dates) : elles te serviront pour la suite du chapitre.</p></div>
+      <a class="video-lien" href="https://www.youtube.com/watch?v=8mbmY8kYp5g" target="_blank" rel="noopener"><span class="video-play" aria-hidden="true"></span><span class="video-titre">Histoire de la cartographie</span><span class="video-info">Regarder sur YouTube · nouvel onglet</span></a>
+      <div class="tp-question"><span class="label">À toi de noter</span><p>Quelles sont, selon la vidéo, les grandes étapes qui ont fait évoluer la manière de dresser des cartes ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="cartographie-seance1.html">← Localisation avec le système GPS</a><a class="btn secondary" href="cartographie-seance3.html">Les cartes numériques →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+  <script>
+  /* Garde la page en haut au chargement : les lecteurs intégrés (vidéos, éditeurs) peuvent prendre le focus et faire défiler la page. */
+  (function () {
+    if (location.hash) return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var touched = false, n = 0;
+    ["wheel", "touchstart", "mousedown", "keydown"].forEach(function (e) { addEventListener(e, function () { touched = true; }, { passive: true }); });
+    var t = setInterval(function () {
+      if (touched || ++n > 24) { clearInterval(t); return; }
+      if (window.scrollY > 0) window.scrollTo(0, 0);
+    }, 250);
+  })();
+  </script>
+</body>
+</html>

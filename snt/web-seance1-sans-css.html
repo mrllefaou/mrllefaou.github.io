@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <script src="../commun/acces.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sans CSS – Comprendre le Web · Le Web · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 2 Le Web – Séance 1 : repères historiques, langages du Web, URL, protocoles HTTP/HTTPS, liens hypertextes et modèle client-serveur.">
+</head>
+<body>
+  <p><b>Page de démonstration :</b> voici la séance 1 du chapitre 2 <b>sans CSS</b> (aucune feuille de style n’est chargée). Fermez l’onglet pour revenir à la séance.</p>
+  <hr>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="web.html">Chapitre 2 – Le Web</a><span class="sep">›</span>
+        <span>Séance 1</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <p class="eyebrow">Chapitre 2 – Le Web</p>
+      <h1>Comprendre le Web</h1>
+      <p class="meta">Séance 1 · Repères historiques, langages du Web, URL, protocoles HTTP et HTTPS, liens hypertextes</p>
+      <div class="page-tabs">
+        <a href="#video">Vidéo</a>
+        <a href="#reperes">Repères</a>
+        <a href="#doc1">Doc. 1</a>
+        <a href="#doc2">Doc. 2</a>
+        <a href="#doc3">Doc. 3</a>
+        <a href="#doc4">Doc. 4</a>
+        <a href="#questions">Questions</a>
+      </div>
+    </section>
+
+    <section class="card" id="video" aria-labelledby="t-video">
+      <h2 id="t-video">Avant de commencer</h2>
+      <p>Une petite vidéo qui explique la différence entre le Web et Internet :</p>
+      <a class="video-lien" href="https://www.youtube.com/watch?v=TeiUyeXjzJ4" target="_blank" rel="noopener"><span class="video-play" aria-hidden="true"></span><span class="video-titre">Différence entre le Web et Internet</span><span class="video-info">Regarder sur YouTube · nouvel onglet</span></a>
+    </section>
+
+    <section class="card" id="reperes" aria-labelledby="t-reperes">
+      <h2 id="t-reperes">Introduction : normalisation de la présentation de l’information sur le Web</h2>
+      <h3>Repères historiques</h3>
+      <ol class="hist">
+        <li><span class="yr">1965</span><span class="what">invention et programmation du concept d’<span class="keyword">hypertexte</span> par Ted Nelson ;<small>Définition dans le document 3.</small></span></li>
+        <li><span class="yr">1989</span><span class="what">naissance du Web au <span class="keyword">CERN</span> par Tim Berners-Lee ;<small>CERN : Organisation européenne pour la recherche nucléaire (à l’origine « Conseil européen pour la recherche nucléaire »), l’un des plus grands laboratoires de recherche en physique au monde, près de Genève en Suisse.</small></span></li>
+        <li><span class="yr">1993</span><span class="what">mise dans le domaine public du Web et disponibilité du premier navigateur grand public, <span class="keyword">Mosaic</span> ;<small><a href="https://media.wired.com/photos/59344b215321273fc0f91cd1/master/pass/mos-10.jpg" target="_blank" rel="noopener">Voir une capture du navigateur ↗</a></small></span></li>
+        <li><span class="yr">1995</span><span class="what">mise à disposition de technologies pour le développement de sites web interactifs (langage <span class="keyword">JavaScript</span>) et dynamiques (langage <span class="keyword">PHP</span>) ;<small>Ce sont deux langages que nous n’étudierons pas.</small></span></li>
+        <li><span class="yr">2001</span><span class="what">standardisation des pages grâce au <span class="keyword">DOM</span> (<em>Document Object Model</em>) ;<small>Une manière pour le navigateur de lire et d’afficher les informations d’une page web.</small></span></li>
+        <li><span class="yr">2010</span><span class="what">mise à disposition de technologies pour le développement d’applications sur mobiles.</span></li>
+      </ol>
+    </section>
+
+    <section class="card" id="doc1" aria-labelledby="t-doc1">
+      <h2 id="t-doc1"><span class="doc-tag">Doc. 1</span> Les langages web</h2>
+      <p>Sur le Web, les textes, photos, vidéos, graphiques, sons et programmes sont exprimés et assemblés dans divers formats normalisés par un consortium mondial, le <span class="keyword">W3C</span> (<em>World Wide Web Consortium</em>), ce qui permet une circulation standardisée de ces informations.</p>
+      <div class="definition">
+        <strong class="title">À retenir</strong>
+        <p>Les pages web sont écrites dans le langage <span class="keyword">HTML</span> (<em>HyperText Markup Language</em>). Leur style graphique est défini dans le langage <span class="keyword">CSS</span> (<em>Cascading Style Sheets</em>).</p>
+      </div>
+      <p>Actuellement, vous êtes sur une page web écrite en langage HTML et CSS. Elle est lisible grâce à un navigateur web.</p>
+      <p>Vous pouvez observer le code source HTML de cette page web en faisant un clic droit sur la page, puis en cliquant sur « Afficher le code source de la page » (ou avec le raccourci <kbd>Ctrl</kbd> + <kbd>U</kbd>).</p>
+      <figure class="native">
+        <img src="img/img32.png" width="408" height="380" loading="lazy" alt="Menu du clic droit dans un navigateur avec la ligne « Afficher le code source de la page » désignée par une flèche rouge">
+        <figcaption>Le menu du clic droit : « Afficher le code source de la page ».</figcaption>
+      </figure>
+      <p>Afin de voir l’action du CSS sur une page web, vous pouvez <a href="web-seance1-sans-css.html" target="_blank" rel="noopener">cliquer ici</a>. La page qui s’ouvre est la même que celle-ci, mais <b>sans CSS</b>.</p>
+      <p>Voici à quoi ressemble du CSS (extrait du fichier de style de ce site) :</p>
+      <pre class="code"><code>body {
+  margin: 0;
+  font-family: system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--primary), #7c3aed);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow);
+}</code></pre>
+      <p><a href="style.css" target="_blank" rel="noopener">Ouvrir le fichier CSS complet du site ↗</a></p>
+    </section>
+
+    <section class="card" id="doc2" aria-labelledby="t-doc2">
+      <h2 id="t-doc2"><span class="doc-tag">Doc. 2</span> URL et protocole HTTP / HTTPS</h2>
+      <p>Les pages web ont une adresse unique, nommée <span class="keyword">URL</span> (<em>Uniform Resource Locator</em>). Cette adresse nous est communiquée par la barre d’adresse de notre navigateur web.</p>
+      <figure>
+        <img src="img/img3.png" width="857" height="76" loading="lazy" alt="Barre d’adresse d’un navigateur avec l’URL file:///C:/Users/…/Desktop/Mon super site/index.html entourée en rouge">
+        <figcaption>Barre d’adresse d’un navigateur. Ici, la page est ouverte depuis un fichier de l’ordinateur (protocole <code class="inline">file://</code>).</figcaption>
+      </figure>
+      <p>Sur Internet, les pages web sont accessibles en utilisant le protocole <span class="keyword">HTTP</span> (<em>HyperText Transfer Protocol</em>) ou sa version sécurisée <span class="keyword">HTTPS</span>, qui chiffre les échanges.</p>
+      <p>HTTPS permet au visiteur de vérifier l’identité du site web auquel il accède, grâce à un certificat d’authentification émis par une autorité tierce réputée fiable (et faisant généralement partie de la liste blanche des navigateurs). Il garantit, en théorie, la confidentialité et l’intégrité des données envoyées par l’utilisateur.</p>
+      <p>L’affichage des pages est réalisé chez l’utilisateur par un programme appelé <span class="keyword">navigateur web</span>. Vous connaissez sûrement des navigateurs comme Google Chrome, Safari, Opera, Firefox ou Microsoft Edge.</p>
+      <p>Ces deux protocoles de communication échangent avec des <b>serveurs web</b>, qui hébergent des pages web sur un réseau, le plus couramment Internet.</p>
+      <p>Il existe d’autres protocoles de communication :</p>
+      <ul>
+        <li><code class="inline">mailto:prof@likes.org</code> : le protocole <b>mailto</b> permet de se connecter au serveur de messagerie.</li>
+        <li><code class="inline">ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/</code> : le protocole <b>ftp</b> (serveur de gestion de fichiers) permet de se connecter à un serveur ftp.</li>
+      </ul>
+      <div class="note">
+        <strong class="title">Observe la barre d’adresse</strong>
+        <p>Sur ce site, hébergé sur Internet, l’URL commence par <code class="inline">https://</code>. En revanche, lorsqu’on ouvre une page enregistrée sur son ordinateur (comme sur la capture ci-dessus, ou ta page <code class="inline">mapage.html</code> en séance 3), le protocole est <code class="inline">file://</code> : il appelle simplement les fichiers disponibles sur l’ordinateur. La page n’est alors pas hébergée sur le web, mais localement : on n’a pas besoin de HTTP ou HTTPS pour y accéder.</p>
+      </div>
+      <p>Toute adresse URL se décompose comme ceci :</p>
+      <figure class="native">
+        <img src="img/img6.png" width="483" height="154" loading="lazy" alt="URL http://fr.wikipedia.org/wiki/Uniform_Resource_Locator décomposée en protocole (http), nom de domaine (fr.wikipedia.org) et chemin de la ressource (/wiki/Uniform_Resource_Locator)">
+        <figcaption>Protocole, nom de domaine et chemin de la ressource.</figcaption>
+      </figure>
+    </section>
+
+    <section class="card" id="doc3" aria-labelledby="t-doc3">
+      <h2 id="t-doc3"><span class="doc-tag">Doc. 3</span> Lien hypertexte</h2>
+      <div class="definition">
+        <strong class="title">Définition</strong>
+        <p>Un <span class="keyword">hypertexte</span> est un texte augmenté qui contient comme information une adresse URL. On l’utilise notamment pour créer des liens entre des pages web.</p>
+      </div>
+      <p><b>Exemple 1 :</b> <a href="http://www.likes.org/" target="_blank" rel="noopener">Cliquer ici</a> est un lien hypertexte qui vous redirige vers la page web du site du Likès, d’adresse URL <code class="inline">http://www.likes.org/</code>.</p>
+      <p><b>Exemple 2 :</b> un lien hypertexte avec le protocole mailto, pour communiquer avec l’adresse mail d’URL <code class="inline">mailto:prof@likes.org</code> : <a href="mailto:prof@likes.org">Contacter : prof@likes.org</a>. Comme le navigateur web ne s’occupe pas du protocole mailto, c’est votre logiciel de messagerie (Outlook, par exemple) qui s’ouvre pour communiquer avec le serveur de messagerie.</p>
+      <p>Les liens hypertextes sont utilisés pour créer des liens entre des pages web. Par exemple, sur ce site, la barre en haut de la page comporte des liens hypertextes, répétés sur chacune des pages afin de naviguer entre elles… à l’exception d’une page du chapitre.</p>
+      <div class="demo-bar" aria-label="Exemple de barre de navigation du site">
+        <span class="brand">SNT<span>.</span></span>
+        <span><a href="snt.html">Accueil</a><span class="sep">›</span><a href="web.html">Chapitre 2 – Le Web</a><span class="sep">›</span>Séance 1</span>
+      </div>
+      <p>On peut représenter les liens hypertextes entre les pages par un <span class="keyword">graphe orienté</span>. La flèche symbolise le lien : elle indique que l’on peut aller de telle page vers telle autre.</p>
+      <figure>
+        <img src="img/graphe-liens.png" width="1717" height="634" loading="lazy" alt="Graphe orienté des liens entre les pages du chapitre 2 : snt.html, web.html, les quatre séances et mapage.html">
+        <figcaption>Liens hypertextes entre les pages du chapitre 2.</figcaption>
+      </figure>
+    </section>
+
+    <section class="card" id="doc4" aria-labelledby="t-doc4">
+      <h2 id="t-doc4"><span class="doc-tag">Doc. 4</span> Interaction client / serveur</h2>
+      <p>Le Web s’appuie sur le dialogue entre <span class="keyword">clients</span> et <span class="keyword">serveurs</span>. L’interaction est à l’initiative des clients, qui envoient des <b>requêtes HTTP ou HTTPS</b> aux serveurs.</p>
+      <figure>
+        <img src="img/img5.png" width="800" height="400" loading="lazy" alt="Modèle simplifié client/serveur : le client envoie une requête HTTPS au serveur qui héberge Wikipédia, et le serveur répond en transmettant la page à son navigateur">
+        <figcaption>Modèle simplifié client / serveur.</figcaption>
+      </figure>
+      <p>De manière simplifiée, le client est l’utilisateur qui souhaite voir une page web. Le contenu de cette page est stocké sur ce que l’on appelle un <b>serveur web</b>. Le client envoie une requête (une demande) HTTP ou HTTPS pour que la page s’affiche sur son navigateur web.</p>
+    </section>
+
+    <section class="card" id="questions" aria-labelledby="t-questions">
+      <h2 id="t-questions"><span class="num tp">?</span> Répondre aux questions suivantes</h2>
+      <div class="tp-question">
+        <span class="label">Question 1</span>
+        <p>Décomposer l’URL du site : <code class="inline">http://www.likes.org/Espace-Numerique</code></p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 2</span>
+        <p>Décomposer l’URL de la vidéo : <code class="inline">https://www.youtube.com/watch?v=TeiUyeXjzJ4</code></p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 3</span>
+        <p>Quel est le langage web qui permet d’écrire du contenu sur une page web ?</p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 4</span>
+        <p>Quel est le langage web qui permet d’éditer le style graphique d’une page web ?</p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 5</span>
+        <p>Quelle est la différence entre le protocole HTTP et le protocole HTTPS ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 6</span>
+        <p>Quel est le rôle d’un lien hypertexte sur un site web ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+      <div class="tp-question">
+        <span class="label">Question 7</span>
+        <p>La barre de navigation en haut de la page comporte des liens hypertextes, répétés sur chacune des pages afin de naviguer entre elles, à l’exception d’une page du chapitre. Laquelle ? Donner son adresse URL.</p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <span></span>
+      <a class="btn secondary" href="web.html">Retour au chapitre</a>
+      <a class="btn" href="web-seance2.html">Séance 2 : naviguer sur le web →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+  <script>
+  /* Garde la page en haut au chargement : les lecteurs intégrés (vidéos, éditeurs) peuvent prendre le focus et faire défiler la page. */
+  (function () {
+    if (location.hash) return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var touched = false, n = 0;
+    ["wheel", "touchstart", "mousedown", "keydown"].forEach(function (e) { addEventListener(e, function () { touched = true; }, { passive: true }); });
+    var t = setInterval(function () {
+      if (touched || ++n > 24) { clearInterval(t); return; }
+      if (window.scrollY > 0) window.scrollTo(0, 0);
+    }, 250);
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TP1 – Transmettons des paquets · Internet · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 1 Internet – Séance 2 : TP ping, tracert, adresses IP publique et privée, puis cours sur le protocole TCP/IP et le routage.">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="internet.html">Chapitre 1 – Internet</a><span class="sep">›</span>
+        <span>Séance 2</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <p class="eyebrow">Chapitre 1 – Internet</p>
+      <h1>TP1 – Internet</h1>
+      <p class="meta">Séance 2 · TP puis cours : ping, tracert, adresses IP, protocole TCP/IP et routage</p>
+      <div class="page-tabs">
+        <a href="#partie1">TP – Partie 1</a>
+        <a href="#partie2">TP – Partie 2</a>
+        <a href="#cours">Cours</a>
+      </div>
+    </section>
+
+    <!-- ===================== TP – PARTIE 1 ===================== -->
+    <section class="card" id="partie1" aria-labelledby="t-partie1">
+      <h2 id="t-partie1"><span class="num tp">TP</span> Partie 1 : Transmettons des paquets à Google</h2>
+
+      <h3>Première manipulation</h3>
+      <p>Pour cette première partie, nous allons envoyer des paquets à un serveur de Google grâce à l’<span class="keyword">invite de commande</span> Windows. L’invite de commande permet d’exécuter des actions avancées du système d’exploitation.</p>
+
+      <ol class="steps">
+        <li>
+          Appuyez sur les touches <kbd>Win</kbd> et <kbd>R</kbd> de votre clavier.
+          <figure class="small">
+            <img src="img/clavier-win-r.png" width="1000" height="454" loading="lazy" alt="Clavier avec les touches Windows et R entourées">
+            <figcaption>Les touches Win et R sont entourées.</figcaption>
+          </figure>
+        </li>
+        <li>
+          Une fenêtre s’ouvre : tapez <code class="inline">cmd</code> et appuyez sur la touche <kbd>Entrée</kbd>.
+          <figure class="small">
+            <img src="img/fenetre-executer.png" width="400" height="207" loading="lazy" alt="Fenêtre Exécuter de Windows avec cmd saisi">
+          </figure>
+        </li>
+        <li>
+          Une nouvelle fenêtre s’ouvre : c’est l’invite de commande.
+          <figure>
+            <img src="img/invite-commande.png" width="451" height="114" loading="lazy" alt="Fenêtre noire de l'invite de commande Windows">
+          </figure>
+        </li>
+        <li>
+          Pour envoyer des paquets au site de Google, tapez la commande suivante puis appuyez sur <kbd>Entrée</kbd> :
+          <code class="cmd">ping www.google.fr</code>
+          <figure>
+            <img src="img/ping-saisie.png" width="470" height="123" loading="lazy" alt="Commande ping www.google.fr saisie dans l'invite de commande">
+          </figure>
+        </li>
+        <li>
+          Vous obtenez un résultat similaire à celui-ci :
+          <figure class="scroll">
+            <img src="img/ping-resultat.png" width="755" height="309" loading="lazy" alt="Résultat de la commande ping : 4 paquets de 32 octets envoyés à 216.58.213.163, temps moyen 152 ms, TTL=52">
+            <figcaption>Exemple de résultat de la commande <code class="inline">ping</code>.</figcaption>
+          </figure>
+        </li>
+      </ol>
+
+      <p>Votre ordinateur joue le rôle d’<span class="keyword">émetteur</span> : il envoie <b>4 paquets de 32 octets</b> chacun à une adresse IP. Dans cet exemple, c’est l’adresse <b>216.58.213.163</b>. Il nous indique le temps qu’a mis chaque paquet pour arriver au destinataire, ainsi que le temps moyen. Ici, il est de <b>152 ms</b>.</p>
+
+      <div class="note">
+        <strong class="title">Remarque</strong>
+        <p>Il est fort possible que vous n’ayez pas la même adresse IP, c’est normal : google.fr possède plusieurs serveurs et donc plusieurs adresses IP.</p>
+      </div>
+
+      <div class="definition">
+        <strong class="title">Le paramètre TTL</strong>
+        <p>Le <span class="keyword">TTL</span> d’un paquet indique le nombre maximal de routeurs intermédiaires que l’on peut encore traverser pour atteindre la cible. Dans notre exemple, on peut passer par 52 routeurs au maximum pour atteindre le destinataire.</p>
+      </div>
+
+      <div class="tp-question">
+        <span class="label">Question 1</span>
+        <p>L’adresse IP de Google obtenue est 216.58.213.163. Qu’arrivera-t-il si l’on tape cette adresse IP dans un navigateur web ? Ouvrez un navigateur et copiez-collez l’adresse IP que vous avez obtenue dans l’invite de commande. Sur quel site tombez-vous ?</p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+
+      <div class="definition">
+        <strong class="title">Définition – DNS</strong>
+        <p>Le <span class="keyword">Domain Name System</span>, généralement abrégé <span class="keyword">DNS</span> (« système de noms de domaine »), est le service informatique distribué utilisé pour faire correspondre à une adresse IP un ou plusieurs noms de domaine Internet.</p>
+      </div>
+      <p>Dans notre exemple, 216.58.213.163 et google.fr correspondent au même site internet.</p>
+
+      <div class="tp-question">
+        <span class="label">Question 2</span>
+        <p>À votre avis, pourquoi utilise-t-on l’adresse DNS plutôt que l’adresse IP pour naviguer sur le web ?</p>
+        <div class="answer-lines" aria-hidden="true"></div>
+      </div>
+
+      <h3>Deuxième manipulation</h3>
+      <p>Dans notre première manipulation, le nombre maximal de routeurs pour aller au destinataire était de 52. Dans cette manipulation, nous allons chercher à connaître les adresses des différents <span class="keyword">routeurs intermédiaires</span> avant d’arriver au destinataire.</p>
+
+      <p>Pour cela, tapez dans l’invite de commande :</p>
+      <code class="cmd">tracert www.google.fr</code>
+
+      <figure class="scroll">
+        <img src="img/tracert-resultat.png" width="880" height="272" loading="lazy" alt="Résultat de la commande tracert vers www.google.fr : 9 sauts, de livebox.home (192.168.1.1) jusqu'à 216.58.198.195">
+        <figcaption>Exemple de résultat de la commande <code class="inline">tracert</code>.</figcaption>
+      </figure>
+
+      <p>Pour arriver à l’adresse IP correspondant à un des serveurs de google.fr, on passe ici par <b>9 machines différentes</b>, et cela en quelques secondes. La première adresse est votre adresse locale / privée, celle de votre box internet. La dernière correspond à celle d’un serveur Google.</p>
+
+      <p>Pour observer par quelles destinations nos paquets ont été envoyés au serveur Google, nous utiliserons le site <a href="https://iplocation.io/" target="_blank" rel="noopener">iplocation.io</a>. Nous saisissons sur le site les différentes adresses IP obtenues, <b>en commençant par la deuxième</b> (la première correspond à celle du Likès).</p>
+
+      <figure>
+        <img src="img/iplocation.png" width="828" height="620" loading="lazy" alt="Site de géolocalisation d'adresse IP : l'adresse 80.10.127.76 est localisée à Rennes">
+        <figcaption>Le site indique que cette adresse IP correspond à une machine située à Rennes.</figcaption>
+      </figure>
+
+      <p>En réitérant le procédé avec les autres adresses IP, on sait que pour envoyer un paquet à Google, on est passé par les villes suivantes :</p>
+      <p style="text-align:center;font-weight:600">Quimper → Rennes → Paris → une ville du Kansas → Grand Rapids (État de l’Illinois) → Mountain View (Californie)</p>
+
+      <div class="tp-question">
+        <span class="label">À vous de jouer</span>
+        <p>Testez avec les adresses IP que vous avez obtenues avec la commande <code class="inline">tracert</code>. Votre liste de villes :</p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+
+    </section>
+
+    <!-- ===================== TP – PARTIE 2 ===================== -->
+    <section class="card" id="partie2" aria-labelledby="t-partie2">
+      <h2 id="t-partie2"><span class="num tp">TP</span> Partie 2 : Observation du réseau de l’établissement</h2>
+
+      <p>Lorsque l’on va sur google.fr, une page web s’affiche sur notre navigateur : Google nous envoie donc des informations sur notre ordinateur, à notre adresse IP.</p>
+
+      <h3>Première manipulation</h3>
+      <p>Pour connaître son adresse IP (publique), il suffit d’aller sur le site <a href="http://www.mon-ip.com/" target="_blank" rel="noopener">mon-ip.com</a>.</p>
+
+      <div class="tp-question">
+        <span class="label">Question 1</span>
+        <p>Notez votre adresse IP et comparez cette adresse avec celles des autres élèves. Que constatez-vous ?</p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+
+      <h3>Deuxième manipulation</h3>
+      <p>Vous avez la même adresse IP et pourtant vous n’êtes pas sur le même ordinateur. En réalité, pour que Google puisse vous envoyer des informations, celles-ci doivent passer par <b>deux adresses IP</b> :</p>
+
+      <div class="ip-grid">
+        <article class="ip-card">
+          <h3><span class="badge">Publique</span> Adresse IP publique</h3>
+          <p>C’est l’adresse IP de votre <b>box internet</b>. Elle est attribuée par votre <span class="keyword">FAI</span> (Fournisseur d’Accès à Internet).</p>
+        </article>
+        <article class="ip-card">
+          <h3><span class="badge">Privée</span> Adresse IP privée</h3>
+          <p>Elle est attribuée <b>seulement dans le réseau local</b> par la box internet. Lorsqu’un ordinateur se connecte au réseau, une adresse IP privée lui est attribuée.</p>
+        </article>
+      </div>
+
+      <div class="definition">
+        <strong class="title">Définition</strong>
+        <p>Un <span class="keyword">réseau local</span> est un réseau informatique où chaque ordinateur est connecté à une même box.</p>
+      </div>
+
+      <p>Pour connaître votre adresse IP privée, tapez la commande :</p>
+      <code class="cmd">ipconfig</code>
+
+      <figure>
+        <img src="img/ipconfig.png" width="644" height="199" loading="lazy" alt="Résultat de la commande ipconfig : adresse IPv4 192.168.1.40">
+      </figure>
+      <p>Vous obtenez alors votre adresse IP privée. Dans l’exemple ci-dessus, l’adresse IP privée est <b>192.168.1.40</b>.</p>
+
+      <div class="tp-question">
+        <span class="label">Question 2</span>
+        <p>Notez votre adresse IP privée et comparez cette adresse avec celles des autres élèves. Que constatez-vous ?</p>
+        <div class="answer-lines short" aria-hidden="true"></div>
+      </div>
+
+      <p>Voici un schéma représentatif de la situation :</p>
+      <figure>
+        <img src="img/schema-reseau-local.png" width="1344" height="789" loading="lazy" alt="Schéma : deux classes, chacune avec des ordinateurs d'adresses privées 192.168.0.x reliés par un commutateur, puis la box (192.168.0.1) et le FAI avec l'adresse publique 82.55.154.15">
+        <figcaption>Dans chaque classe, les adresses IP sont privées. La box (192.168.0.1) est la passerelle vers l’extérieur ; son adresse publique (82.55.154.15) est celle que voient Google ou les autres sites.</figcaption>
+      </figure>
+
+      <p>C’est avec cette configuration que votre box internet utilise l’<span class="keyword">algorithme de routage</span> afin de faire circuler l’information entre votre ordinateur et les différents services internet que vous utilisez.</p>
+    </section>
+
+    <!-- ===================== COURS II ===================== -->
+    <section class="card" id="cours" aria-labelledby="t-cours">
+      <h2 id="t-cours"><span class="num">II</span> Protocole TCP/IP et table de routage</h2>
+
+      <p>Pour émettre des paquets à leur destinataire, les ordinateurs mis en réseau utilisent un protocole dit <span class="keyword">protocole TCP/IP</span> :</p>
+
+      <div class="ip-grid">
+        <article class="ip-card">
+          <h3><span class="badge">IP</span> Protocole IP</h3>
+          <p>Il a pour rôle d’<b>envoyer les paquets</b> de l’émetteur au destinataire, et de <b>détruire les paquets</b>, si demandé, au bout d’un certain délai.</p>
+        </article>
+        <article class="ip-card">
+          <h3><span class="badge">TCP</span> Protocole TCP</h3>
+          <p>Il a pour rôle de <b>numéroter les paquets</b>, d’indiquer le nombre de paquets envoyés, de <b>contrôler</b> si les paquets ont bien été envoyés et de les <b>renvoyer</b> le cas échéant (« principe d’accusé de réception »).</p>
+        </article>
+      </div>
+
+      <p>Néanmoins, il est possible que certains paquets n’arrivent pas à destination. Cela provoque des erreurs de téléchargement, des ralentissements si l’on regarde une vidéo en streaming sur le web, des ralentissements dans un jeu vidéo en ligne, etc.</p>
+
+      <p>Sur un réseau, le chemin que suivent les différents paquets de l’émetteur au destinataire n’est pas forcément le même, s’il y a plusieurs chemins possibles. Un programme appelé <span class="keyword">table de routage</span> ou <span class="keyword">algorithme de routage</span> détermine le chemin le plus rapide pour envoyer un paquet. Physiquement, ce programme se trouve sur un <span class="keyword">routeur</span>.</p>
+
+      <figure class="small">
+        <img src="img/routeur-et-box.png" width="1485" height="668" loading="lazy" alt="Un routeur Wi-Fi à deux antennes et une box internet Livebox">
+        <figcaption>Un routeur et une box internet. Ces deux appareils possèdent un algorithme de routage.</figcaption>
+      </figure>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="internet-seance1.html">← Séance 1</a>
+      <a class="btn secondary" href="internet.html">Retour au chapitre</a>
+      <a class="btn" href="internet-seance3.html">Séance 3 : activité P2P →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+</body>
+</html>

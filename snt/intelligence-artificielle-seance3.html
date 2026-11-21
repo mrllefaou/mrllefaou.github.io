@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Générer et reconnaître des images · Intelligence artificielle · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 9 Intelligence artificielle – Séance 3 · Entraîner un classifieur d’images, générer des images, comprendre les biais ; cours.">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="intelligence-artificielle.html">Chapitre 9 – Intelligence artificielle</a><span class="sep">›</span>
+        <span>Séance 3</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#4f46e5,#1c2333)">
+      <p class="eyebrow">Chapitre 9 – Intelligence artificielle · Séance 3</p>
+      <h1>Générer et reconnaître des images</h1>
+      <p class="meta">Séance 3 · Entraîner un classifieur d’images, générer des images, comprendre les biais ; cours</p>
+      <div class="page-tabs"><a href="#act1">Activité A</a><a href="#act2">Activité B</a><a href="#act3">Activité C</a><a href="#cours">Cours</a></div>
+    </section>
+
+    <div class="part-sep"><h3>Activité A · Entraîner un réseau de neurones</h3></div>
+    <section class="card" id="act1" aria-labelledby="t-act1">
+      <h2 id="t-act1"><span class="num tp">1</span> Apprendre à une IA à reconnaître des objets</h2>
+      <div class="consigne"><span class="icon" aria-hidden="true">🧪</span><p><b>Consigne :</b> ouvre l’outil <b>Entraînement Images</b> de Vittascience. Tu vas créer un classifieur à deux classes (par exemple <b>stylo</b> et <b>gomme</b>), puis le tester.</p></div>
+      <p><a class="btn ext" href="https://fr.vittascience.com/ia/" target="_blank" rel="noopener">Ouvrir Vittascience IA (nouvel onglet)</a></p>
+      <ol><li>Crée deux classes et ajoute <b>5 images</b> par classe, toujours sur la <b>même table</b>, avec le <b>même éclairage</b>.</li><li>Lance l’entraînement et teste le modèle avec les mêmes objets.</li><li>Teste maintenant avec un autre fond (ta main, une feuille de couleur, un autre éclairage) et avec un objet qui n’appartient à aucune des deux classes.</li><li>Recommence l’entraînement avec <b>20 images</b> variées (angles, fonds, lumière) par classe.</li></ol>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>Test</th><th>Résultat avec 5 images</th><th>Résultat avec 20 images variées</th></tr></thead><tbody><tr><th scope="row">Même fond</th><td></td><td></td></tr><tr><th scope="row">Fond différent</th><td></td><td></td></tr><tr><th scope="row">Objet inconnu (ex. : clé)</th><td></td><td></td></tr></tbody></table></div>
+      <div class="tp-question"><span class="label">Question 1</span><p>Que se passe-t-il quand le fond change ? Que semble avoir « appris » le modèle ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 2</span><p>Pourquoi le modèle donne-t-il toujours une réponse, même pour un objet qui n’appartient à aucune classe ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 3</span><p>Quelle règle peut-on en déduire sur la qualité des <b>données d’entraînement</b> ? Donne un exemple de conséquence grave si les données d’un modèle de reconnaissance de visages ne sont pas assez variées.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <div class="part-sep"><h3>Activité B · Générer des images</h3></div>
+    <section class="card" id="act2" aria-labelledby="t-act2">
+      <h2 id="t-act2"><span class="num tp">2</span> Du texte à l’image</h2>
+      <div class="consigne"><span class="icon" aria-hidden="true">🎨</span><p><b>Consigne :</b> ouvre l’outil <b>Génération Image</b>. Pour que cette activité reste sobre, tu disposes d’un <b>budget de 6 images</b> par binôme (tu noteras pourquoi dans la séance 4).</p></div>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>N°</th><th>Prompt écrit</th><th>Prompt négatif</th><th>Résultat (réussi ? défauts ?)</th></tr></thead><tbody><tr><th scope="row">1</th><td></td><td></td><td></td></tr><tr><th scope="row">2</th><td></td><td></td><td></td></tr><tr><th scope="row">3</th><td></td><td></td><td></td></tr><tr><th scope="row">4</th><td></td><td></td><td></td></tr><tr><th scope="row">5</th><td></td><td></td><td></td></tr><tr><th scope="row">6</th><td></td><td></td><td></td></tr></tbody></table></div>
+      <ol><li>Génère d’abord une image avec un prompt <b>très court</b> (3 mots).</li><li>Reprends-le en précisant le <b>sujet</b>, le <b>style</b> (photo, aquarelle…), la <b>lumière</b> et le <b>cadrage</b>.</li><li>Utilise le <b>prompt négatif</b> pour exclure un élément indésirable.</li><li>Essaie de faire écrire un texte sur l’image, ou de dessiner des mains.</li></ol>
+      <div class="tp-question"><span class="label">Question 4</span><p>Compare le prompt court et le prompt détaillé. Qu’est-ce qui améliore le plus le résultat ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 5</span><p>Quels défauts typiques as-tu remarqués (mains, texte, proportions, objets incohérents) ? Comment les expliques-tu ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <div class="part-sep"><h3>Activité C · Esprit critique</h3></div>
+    <section class="card" id="act3" aria-labelledby="t-act3">
+      <h2 id="t-act3"><span class="num tp">3</span> Vrai ou faux ? Et le « slop »</h2>
+      <div class="consigne"><span class="icon" aria-hidden="true">🎬</span><p><b>Consigne :</b> regarde la vidéo sur le « slop » (contenu de faible qualité produit en masse par IA), puis réponds aux questions.</p></div>
+      <a class="video-lien" href="https://www.youtube.com/watch?v=mqEnhLnGffQ" target="_blank" rel="noopener"><span class="video-play" aria-hidden="true"></span><span class="video-titre">Vidéo sur le « slop »</span><span class="video-info">Regarder sur YouTube · nouvel onglet</span></a>
+      <div class="tp-question"><span class="label">Question 6</span><p>D’après la vidéo, pourquoi produit-on des contenus « slop » ? Qui y gagne ? Qui y perd ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 7</span><p>Cite trois indices qui peuvent t’aider à repérer une image générée par IA. Pourquoi ces indices seront-ils de moins en moins fiables ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 8</span><p>Une image réaliste générée par IA est publiée sans mention. Quels risques pour la société (désinformation, <i>deepfakes</i>) ? Quelles précautions proposes-tu avant de partager une image ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <div class="part-sep"><h3>Cours</h3></div>
+    <section class="card" id="cours" aria-labelledby="t-cours">
+      <h2 id="t-cours"><span class="num ">📘</span> Cours : Reconnaître et générer des images</h2>
+      <div class="cours-block">
+      <h3>1. Apprentissage supervisé</h3>
+      <p>Pour reconnaître des images, on utilise l’<b>apprentissage supervisé</b> : on fournit au réseau de neurones de nombreux exemples déjà <b>étiquetés</b> (« chat », « chien »…). Il ajuste ses poids pour minimiser ses erreurs, puis généralise à des images nouvelles.</p>
+      <div class="lexique"><strong class="title">Vocabulaire · Biais de données</strong><p>Défaut d’un jeu de données qui n’est pas représentatif : le modèle reproduit alors cette déformation (fond, éclairage, origine des personnes, etc.).</p></div>
+      <h3>2. Générer une image</h3>
+      <p>Les générateurs d’images actuels reposent le plus souvent sur des <b>modèles de diffusion</b> : le modèle a appris à retirer progressivement du « bruit » d’une image. Pour générer, il part d’un bruit aléatoire et le transforme peu à peu en image, guidé par le texte du prompt. Un <b>prompt négatif</b> indique ce qu’il faut éviter.</p>
+      <h3>3. Enjeux</h3>
+      <ul><li><b>Désinformation</b> : images ou vidéos truquées (<i>deepfakes</i>) difficiles à distinguer du réel.</li><li><b>Droit d’auteur</b> : les modèles sont entraînés sur des œuvres, parfois sans accord de leurs auteurs ; la question juridique est encore débattue.</li><li><b>Droit à l’image et vie privée</b> : on ne génère pas et on ne publie pas l’image d’une personne sans son accord.</li><li><b>Transparence</b> : le règlement européen sur l’IA (« AI Act ») prévoit d’informer le public lorsqu’un contenu est généré par IA ; il est bon réflexe de l’indiquer.</li><li><b>Coût environnemental</b> : générer une image consomme de l’énergie (séance 4).</li></ul>
+      <div class="note"><strong class="title">À retenir</strong><p>Une image réaliste n’est plus une preuve. Avant de partager : <b>qui l’a publiée ? où ? quand ?</b> Une recherche inversée d’image et le recoupement des sources restent les meilleurs réflexes.</p></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="intelligence-artificielle-seance2.html">← Séance 2</a><a class="btn secondary" href="intelligence-artificielle-seance4.html">Séance 4 →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+  <script>
+  /* Garde la page en haut au chargement : les lecteurs intégrés (vidéos, éditeurs) peuvent prendre le focus et faire défiler la page. */
+  (function () {
+    if (location.hash) return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var touched = false, n = 0;
+    ["wheel", "touchstart", "mousedown", "keydown"].forEach(function (e) { addEventListener(e, function () { touched = true; }, { passive: true }); });
+    var t = setInterval(function () {
+      if (touched || ++n > 24) { clearInterval(t); return; }
+      if (window.scrollY > 0) window.scrollTo(0, 0);
+    }, 250);
+  })();
+  </script>
+</body>
+</html>

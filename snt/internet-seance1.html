@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fiche 1 – Réseau informatique · Internet · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 1 Internet – Séance 1 : réseau informatique, paquets et adresses IP.">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="internet.html">Chapitre 1 – Internet</a><span class="sep">›</span>
+        <span>Séance 1</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <p class="eyebrow">Chapitre 1 – Internet</p>
+      <h1>Fiche 1 – Question / Cours</h1>
+      <p class="meta">Séance 1 · Réseau informatique, paquets et adresses IP</p>
+    </section>
+
+    <!-- QUESTION -->
+    <section class="card question" aria-labelledby="q-titre">
+      <span class="label" id="q-titre">Question</span>
+      <p>Expliquer en quelques lignes quel est le rôle du réseau ARPANET. <em>(Vidéo)</em></p>
+      <div class="answer-lines" aria-hidden="true"></div>
+    </section>
+
+    <!-- COURS -->
+    <section class="card" aria-labelledby="cours">
+      <h2 id="cours"><span class="num">I</span> Réseau informatique</h2>
+
+      <div class="definition">
+        <strong class="title">Définition</strong>
+        <p>Un <span class="keyword">réseau informatique</span> est un ensemble de moyens matériels et logiciels mis en œuvre pour assurer les communications entre ordinateurs. Pour communiquer entre eux, ces ordinateurs s’échangent des <span class="keyword">paquets</span>.</p>
+      </div>
+
+      <h3>Mais, qu’est-ce qu’un paquet ?</h3>
+      <p>Afin de transmettre un message ou un fichier d’un ordinateur à un autre sur un réseau, celui-ci est découpé en plusieurs paquets transmis séparément. Un <span class="keyword">paquet</span> est tout simplement un petit morceau de fichier pesant quelques octets.</p>
+
+      <div class="flow" role="img" aria-label="Un fichier est découpé en paquets, transmis, puis reconstitué">
+        <span class="file">📄 Fichier</span>
+        <span class="arrow">→</span>
+        <span class="packets"><span class="packet">1</span><span class="packet">2</span><span class="packet">3</span><span class="packet">4</span></span>
+        <span class="arrow">→</span>
+        <span class="file">📄 Fichier reconstitué</span>
+      </div>
+      <p class="caption">Le fichier est découpé en paquets, envoyés séparément, puis « fusionnés » à l’arrivée.</p>
+
+      <p>Lorsque l’on télécharge un fichier sur internet, celui-ci se télécharge par paquets : il est découpé en petits morceaux et l’on reçoit au fur et à mesure chacun des paquets qui le composent. Une fois tous les paquets récupérés, le téléchargement est abouti et les paquets « fusionnent » entre eux pour créer le fichier téléchargé. C’est ce qu’on appelle l’<span class="keyword">empaquetage</span> ou l’<span class="keyword">encapsulage</span>.</p>
+
+      <h3>L’analogie de la lettre</h3>
+      <p>Envoyer un paquet à un ordinateur, c’est un peu comme envoyer une lettre. Il y a :</p>
+      <ul class="roles">
+        <li>
+          <span class="icon" aria-hidden="true">✉️</span>
+          <strong>L’expéditeur</strong>
+          <small>l’ordinateur qui envoie le paquet : l’<b>émetteur</b></small>
+        </li>
+        <li>
+          <span class="icon" aria-hidden="true">🚚</span>
+          <strong>Le facteur</strong>
+          <small>le moyen de communication entre l’émetteur et le destinataire</small>
+        </li>
+        <li>
+          <span class="icon" aria-hidden="true">📬</span>
+          <strong>Le destinataire</strong>
+          <small>l’ordinateur qui reçoit le paquet</small>
+        </li>
+      </ul>
+
+      <h3>Les adresses IP</h3>
+      <p>Pour envoyer une lettre, on écrit une adresse sur l’enveloppe. Pour les ordinateurs, c’est à peu près la même chose : afin qu’ils puissent communiquer entre eux, ils possèdent une adresse permettant de les identifier. Sur internet, chaque ordinateur possède une adresse dite <span class="keyword">adresse IP</span> (acronyme d’<em>Internet Protocol</em>).</p>
+
+      <div class="definition">
+        <strong class="title">À retenir</strong>
+        <p>Il existe deux normes d’adresse IP : l’<b>IPv4</b> et l’<b>IPv6</b>.</p>
+      </div>
+
+      <div class="ip-grid">
+        <article class="ip-card">
+          <h3><span class="badge">IPv4</span> Version 4</h3>
+          <ul>
+            <li>Série de <b>4 nombres</b> compris entre 0 et 255, séparés par des points « . ».</li>
+            <li>Offre <b>4 294 967 296</b> adresses IP différentes.</li>
+          </ul>
+          <p class="ip-example"><span class="label">Exemple</span>88.232.28.174</p>
+        </article>
+
+        <article class="ip-card">
+          <h3><span class="badge">IPv6</span> Version 6</h3>
+          <ul>
+            <li>Série de <b>8 blocs hexadécimaux</b> séparés par deux points « : ».</li>
+            <li>Offre <b>340 282 366 920 938 463 463 374 607 431 768 211 456</b> adresses IP différentes.</li>
+          </ul>
+          <p class="ip-example"><span class="label">Exemple</span>3bec:c504:3127:5800:10c3:30bf:cb2f:1eee</p>
+        </article>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="internet.html">← Retour au chapitre</a>
+      <a class="btn" href="internet-seance2.html">Séance 2 : TP et cours →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+</body>
+</html>

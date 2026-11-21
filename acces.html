@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Accès au site – M. Le Faou</title>
+  <link rel="icon" href="favicon.ico">
+  <script src="commun/theme.js"></script>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --text: #eef2ff;
+      --muted: #a3adc8;
+      --snt: #3b82f6;
+      --snt2: #22d3ee;
+      --maths2: #f43f5e;
+      --carte: rgba(255, 255, 255, .06);
+      --border: rgba(255, 255, 255, .14);
+      --champ: rgba(255, 255, 255, .08);
+    }
+    html.theme-clair {
+      --bg: #f3f6fc;
+      --text: #1c2333;
+      --muted: #5b6478;
+      --carte: rgba(255, 255, 255, .85);
+      --border: rgba(20, 30, 60, .14);
+      --champ: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1000px 700px at 80% -10%, #1e2a5a 0%, transparent 60%),
+                  radial-gradient(800px 600px at -10% 110%, #3a1d3f 0%, transparent 60%),
+                  var(--bg);
+    }
+    html.theme-clair body {
+      background: radial-gradient(1000px 700px at 80% -10%, #dbe6ff 0%, transparent 60%),
+                  radial-gradient(800px 600px at -10% 110%, #fbe3ee 0%, transparent 60%),
+                  var(--bg);
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 2rem 1.25rem;
+    }
+
+    .carte {
+      width: min(420px, 100%);
+      padding: 2.2rem 1.8rem;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: var(--carte);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 25px 60px -25px rgba(0, 0, 0, .5);
+      text-align: center;
+    }
+
+    .cadenas {
+      width: 64px; height: 64px;
+      margin: 0 auto 1.2rem;
+      display: grid; place-items: center;
+      font-size: 1.9rem;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--snt), var(--snt2));
+      box-shadow: 0 10px 30px -8px var(--snt);
+    }
+
+    h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -.01em; }
+    .intro { margin: .6rem 0 1.6rem; color: var(--muted); line-height: 1.55; }
+
+    form { display: flex; flex-direction: column; gap: .8rem; text-align: left; }
+    label { font-weight: 600; font-size: .95rem; }
+
+    input {
+      width: 100%;
+      padding: .8rem 1rem;
+      font: inherit;
+      font-size: 1.05rem;
+      color: var(--text);
+      background: var(--champ);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    input:focus { outline: 3px solid color-mix(in srgb, var(--snt) 55%, transparent); border-color: var(--snt); }
+
+    button {
+      margin-top: .3rem;
+      padding: .85rem 1rem;
+      font: inherit;
+      font-weight: 700;
+      color: #fff;
+      border: 0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--snt), #6366f1);
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    button:hover { transform: translateY(-1px); box-shadow: 0 10px 25px -10px var(--snt); }
+    button:focus-visible { outline: 3px solid var(--snt2); outline-offset: 2px; }
+
+    .erreur {
+      min-height: 1.4em;
+      color: var(--maths2);
+      font-size: .92rem;
+      font-weight: 600;
+      text-align: center;
+    }
+    .secoue { animation: secouer .35s ease; }
+    @keyframes secouer {
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    footer {
+      padding: .6rem 1rem .9rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+    .mentions-donnees {
+      max-width: 1100px;
+      margin: 0 auto;
+      font-size: .78rem;
+      line-height: 1.5;
+      opacity: .85;
+    }
+    .mentions-donnees strong { font-weight: 600; }
+
+    @media (prefers-reduced-motion: reduce) { .secoue { animation: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="carte" aria-labelledby="titre">
+      <div class="cadenas" aria-hidden="true">🔒</div>
+      <h1 id="titre">Accès réservé</h1>
+      <p class="intro">Ce site est réservé aux élèves de M.&nbsp;Le&nbsp;Faou. Saisis le mot de passe donné en classe.</p>
+      <form id="formulaire" novalidate>
+        <label for="mdp">Mot de passe</label>
+        <input type="password" id="mdp" name="mdp" required autocomplete="off" autocapitalize="off" spellcheck="false" autofocus>
+        <button type="submit">Entrer</button>
+        <p class="erreur" id="erreur" role="alert"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+  <script>
+    (function () {
+      var CLE = 'acces-site';
+      var JETON = 'ok-v1'; /* doit être identique à celui de commun/acces.js */
+      /* Empreinte SHA-256 du mot de passe, sans accent et en minuscules (« likès » → « likes ») */
+      var EMPREINTE = 'b0aa8a6c35b4deec55bc1f31b9be4c50a4426ada09b58c4e1dcaf9a81f913903';
+
+      var racine = location.href.replace(/acces\.html.*$/, '');
+
+      function destination() {
+        var retour = new URLSearchParams(location.search).get('retour');
+        if (retour && retour.indexOf(racine) === 0 && retour.indexOf('acces.html') === -1) return retour;
+        return racine + 'index.html';
+      }
+
+      try { if (localStorage.getItem(CLE) === JETON) { location.replace(destination()); return; } } catch (e) {}
+
+      function normaliser(t) {
+        return t.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+      }
+
+      function empreinte(t) {
+        var octets = new TextEncoder().encode(t);
+        return crypto.subtle.digest('SHA-256', octets).then(function (h) {
+          return Array.prototype.map.call(new Uint8Array(h), function (b) {
+            return ('0' + b.toString(16)).slice(-2);
+          }).join('');
+        });
+      }
+
+      var form = document.getElementById('formulaire');
+      var champ = document.getElementById('mdp');
+      var erreur = document.getElementById('erreur');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        empreinte(normaliser(champ.value)).then(function (h) {
+          if (h === EMPREINTE) {
+            try { localStorage.setItem(CLE, JETON); } catch (e) {}
+            location.replace(destination());
+          } else {
+            erreur.textContent = 'Mot de passe incorrect. Réessaie.';
+            champ.value = '';
+            champ.focus();
+            form.classList.remove('secoue');
+            void form.offsetWidth;
+            form.classList.add('secoue');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projet : modéliser la chute d’un objet en Python · Intelligence artificielle · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 9 Intelligence artificielle – Séance 12 · Modèle physique par pas de temps : chute libre, frottement de l’air, vitesse limite ; IA ciblée.">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="intelligence-artificielle.html">Chapitre 9 – Intelligence artificielle</a><span class="sep">›</span>
+        <span>Séance 12</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#4f46e5,#1c2333)">
+      <p class="eyebrow">Chapitre 9 – Intelligence artificielle · Séance 12</p>
+      <h1>Projet : modéliser la chute d’un objet en Python</h1>
+      <p class="meta">Séance 12 · Modèle physique par pas de temps : chute libre, frottement de l’air, vitesse limite ; IA ciblée</p>
+      <div class="page-tabs"><a href="#act1">Partie A</a><a href="#act2">Partie B</a><a href="#act3">Partie C</a><a href="#act4">IA</a><a href="#eval">Évaluation</a><a href="#dl">Fichiers</a></div>
+    </section>
+
+    <div class="part-sep"><h3>Partie A · La chute libre</h3></div>
+    <section class="card" id="act1" aria-labelledby="t-act1">
+      <h2 id="t-act1"><span class="num tp">1</span> Modéliser une balle lâchée du haut d’un immeuble</h2>
+      <p>On lâche, sans vitesse initiale, un objet d’une hauteur <b>h = 20 m</b>. On néglige d’abord les frottements de l’air. L’objet est soumis à son seul poids : son <b>accélération</b> est constante et vaut <b>g = 9,81 m/s²</b>.</p>
+      <h3>Le schéma de calcul pas à pas</h3>
+      <p>On découpe le temps en petits intervalles <b>dt</b> (par exemple 0,01 s). À chaque pas, on met à jour la vitesse puis la position :</p>
+      <ol><li>la nouvelle <b>vitesse</b> = ancienne vitesse + accélération × dt</li><li>la nouvelle <b>distance parcourue</b> = ancienne distance + vitesse × dt</li><li>le <b>temps</b> augmente de dt</li><li>on recommence tant que l’objet n’a pas touché le sol.</li></ol>
+      <div class="consigne"><span class="icon" aria-hidden="true">🐍</span><p><b>Consigne :</b> télécharge le programme <code>chute.py</code> ou recopie-le, puis exécute-le. Avant de l’exécuter, lis-le attentivement.</p></div>
+      <pre class="code"><code># Modélisation de la chute d&#x27;un objet lâché sans vitesse initiale
+# Axe vertical orienté vers le BAS : y = distance parcourue depuis le point de lâcher (en m)
+
+g = 9.81        # intensité de la pesanteur (m/s²)
+h = 20.0        # hauteur de chute (m)
+dt = 0.01       # pas de temps (s)
+k_sur_m = 0.0   # frottement de l&#x27;air (m⁻¹) ; 0 = pas de frottement
+
+t = 0.0         # temps (s)
+v = 0.0         # vitesse (m/s)
+y = 0.0         # distance parcourue (m)
+
+temps = [t]
+vitesses = [v]
+distances = [y]
+
+while y &lt; h:
+    a = g - k_sur_m * v * v     # accélération (m/s²)
+    v = v + a * dt              # nouvelle vitesse
+    y = y + v * dt              # nouvelle position
+    t = t + dt                  # nouveau temps
+    temps.append(t)
+    vitesses.append(v)
+    distances.append(y)
+
+print(&quot;Durée de la chute :&quot;, round(t, 2), &quot;s&quot;)
+print(&quot;Vitesse à l&#x27;arrivée :&quot;, round(v, 1), &quot;m/s, soit&quot;, round(v * 3.6), &quot;km/h&quot;)</code></pre>
+      <div class="tp-question"><span class="label">Question 1</span><p>Repère dans le programme : la boucle, la condition d’arrêt, la ligne qui met à jour la vitesse, celle qui met à jour la position. Pourquoi le test est-il <code>y &lt; h</code> ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 2</span><p>Exécute le programme. Note la durée de la chute et la vitesse à l’arrivée. Compare la durée à la formule théorique <b>t = √(2h / g)</b> (utilise ta calculatrice). Les deux valeurs sont-elles proches ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 3 · Le pas de temps</span><p>Remplace <code>dt = 0.01</code> par <code>0.5</code>, puis par <code>0.001</code>. Que remarques-tu sur le résultat et sur le temps de calcul ? Pourquoi dit-on que c’est une <b>approximation</b> ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 4 · Et la masse ?</span><p>Ajoute une variable <code>m = 5</code> (masse en kg) : son changement modifie-t-il le résultat ? Explique pourquoi un objet lourd et un objet léger arrivent ensemble quand il n’y a pas de frottement.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <div class="part-sep"><h3>Partie B · Avec les frottements de l’air</h3></div>
+    <section class="card" id="act2" aria-labelledby="t-act2">
+      <h2 id="t-act2"><span class="num tp">2</span> Un objet qui ne tombe pas comme une pierre</h2>
+      <p>En réalité, l’air freine l’objet d’autant plus qu’il va vite. On modélise cette force par une accélération de freinage <b>k/m × v²</b> : l’accélération devient <b>a = g − (k/m) × v²</b>. Le paramètre <b>k/m</b> (en m⁻¹) est élevé pour un objet léger et étalé (une feuille), faible pour un objet lourd et compact (une pierre).</p>
+      <div class="consigne"><span class="icon" aria-hidden="true">🧪</span><p><b>Consigne :</b> dans le programme, la ligne <code>a = g - k_sur_m * v * v</code> est déjà là : change simplement la valeur de <code>k_sur_m</code> et observe.</p></div>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>k_sur_m</th><th>Objet imaginaire</th><th>Durée de chute (s)</th><th>Vitesse à l’arrivée (m/s)</th></tr></thead><tbody><tr><th scope="row">0</th><td>sans air (vide)</td><td></td><td></td></tr><tr><th scope="row">0.05</th><td>objet lourd et compact</td><td></td><td></td></tr><tr><th scope="row">0.5</th><td>objet léger (balle de ping-pong)</td><td></td><td></td></tr><tr><th scope="row">5</th><td>feuille de papier</td><td></td><td></td></tr></tbody></table></div>
+      <div class="tp-question"><span class="label">Question 5</span><p>Complète le tableau. Comment évolue la durée de chute quand le frottement augmente ? Et la vitesse à l’arrivée ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 6 · Vitesse limite</span><p>Pour une valeur de <code>k_sur_m</code> assez grande, la vitesse cesse d’augmenter. Affiche-la à chaque pas (<code>print(round(t,2), round(v,2))</code>) ou trace la courbe avec le programme <code>chute_graphique.py</code>. Quand la vitesse devient-elle constante ? Que vaut alors l’accélération ? Vérifie que la vitesse limite est proche de √(g / (k/m)).</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label plus">Question 7 · Le parachute</span><p>Quelle valeur de <code>k_sur_m</code> choisirais-tu pour modéliser un parachutiste avant et après l’ouverture du parachute ? Comment modifier le programme pour changer de valeur en cours de chute ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <div class="part-sep"><h3>Partie C · Représenter les résultats</h3></div>
+    <section class="card" id="act3" aria-labelledby="t-act3">
+      <h2 id="t-act3"><span class="num tp">3</span> Tracer la vitesse en fonction du temps</h2>
+      <p>Le programme ci-dessous, à ajouter à la fin de <code>chute.py</code>, trace la courbe de la vitesse avec la bibliothèque <code>matplotlib</code> (déjà installée sur la plupart des environnements Python de lycée).</p>
+      <pre class="code"><code>import matplotlib.pyplot as plt
+
+plt.plot(temps, vitesses)
+plt.xlabel(&quot;temps (s)&quot;)
+plt.ylabel(&quot;vitesse (m/s)&quot;)
+plt.title(&quot;Vitesse d&#x27;un objet lâché&quot;)
+plt.grid(True)
+plt.show()</code></pre>
+      <div class="tp-question"><span class="label">Question 8</span><p>Lance le programme avec <code>k_sur_m = 0</code> puis avec <code>0.5</code>. Décris la forme des deux courbes. Que représente la pente de la courbe ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 9 · Limites du modèle</span><p>Cite deux éléments que ce modèle ne prend pas en compte (vent, forme de l’objet, rotation, variation de g avec l’altitude…). Dans quels cas ce modèle serait-il insuffisant ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <div class="part-sep"><h3>Utiliser l’IA avec parcimonie</h3></div>
+    <section class="card" id="act4" aria-labelledby="t-act4">
+      <h2 id="t-act4"><span class="num tp">IA</span> Budget : 2 demandes ciblées</h2>
+      <div class="consigne"><span class="icon" aria-hidden="true">🎟️</span><p><b>Consigne :</b> tu as droit à <b>2 demandes</b> à un assistant IA, courtes et précises (par exemple : « Pourquoi ce programme affiche-t-il une erreur à la ligne 12 ? » en collant <b>uniquement</b> les lignes concernées). Consigne chaque demande et ce que tu as vérifié.</p></div>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>N°</th><th>Ma demande</th><th>Ce que j’ai obtenu</th><th>Ce que j’ai compris / vérifié</th></tr></thead><tbody><tr><th scope="row">1</th><td></td><td></td><td></td></tr><tr><th scope="row">2</th><td></td><td></td><td></td></tr></tbody></table></div>
+      <div class="tp-question"><span class="label">Bilan</span><p>Une réponse de l’IA pourrait-elle être fausse dans ce projet ? Comment peux-tu le vérifier (calcul théorique, test avec k_sur_m = 0, ordre de grandeur) ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <div class="part-sep"><h3>Évaluation</h3></div>
+    <section class="card" id="eval" aria-labelledby="t-eval">
+      <h2 id="t-eval"><span class="num tp">✅</span> Grille d’évaluation</h2>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>Critère</th><th>Points</th></tr></thead><tbody><tr><th scope="row">Programme de chute libre correct et commenté</th><td>/ 6</td></tr><tr><th scope="row">Étude du pas de temps et comparaison avec la formule théorique</th><td>/ 4</td></tr><tr><th scope="row">Partie B : modèle avec frottement et tableau complété</th><td>/ 4</td></tr><tr><th scope="row">Représentation graphique et interprétation</th><td>/ 3</td></tr><tr><th scope="row">Utilisation raisonnée de l’IA (journal, vérification)</th><td>/ 3</td></tr><tr><th scope="row"><b>Total</b></th><td>/ 20</td></tr></tbody></table></div>
+    </section>
+    <div class="part-sep"><h3>Fichiers à télécharger</h3></div>
+    <section class="card" id="dl" aria-labelledby="t-dl">
+      <h2 id="t-dl"><span class="num tp">⬇</span> Programmes Python</h2>
+      <ul class="dl-files"><li><a class="btn dl" href="fichiers/ia/chute.py" download="chute.py">chute.py</a><span class="d">Programme de la chute libre avec frottement (paramètre k_sur_m).</span></li><li><a class="btn dl" href="fichiers/ia/chute_graphique.py" download="chute_graphique.py">chute_graphique.py</a><span class="d">Tracé de la vitesse en fonction du temps (matplotlib).</span></li></ul>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="intelligence-artificielle-seance11.html">← Séance 11</a><a class="btn secondary" href="intelligence-artificielle.html">Retour au chapitre →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+</body>
+</html>
