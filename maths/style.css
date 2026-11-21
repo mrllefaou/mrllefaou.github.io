@@ -1260,5 +1260,17 @@ html:has(.qcm) { scroll-padding-top: 4.5rem; scroll-padding-bottom: 7rem; }
 .q-line { display: block; }
 .qtab-wrap { overflow-x: auto; margin: .6rem 0; }
 .qtab { border-collapse: collapse; font-weight: 400; background: var(--surface); }
-.qtab th, .qtab td { border: 1.5px solid var(--border); padding: .4rem .75rem; text-align: center; white-space: nowrap; }
+.qtab { border: 2px solid var(--text); }
+.qtab th, .qtab td { border: 1.5px solid var(--muted); padding: .4rem .75rem; text-align: center; white-space: nowrap; }
 .qtab th { background: var(--primary-soft); color: var(--primary-dark); font-weight: 700; text-align: left; }
+
+/* Arbres pondérés */
+.tree-wrap { margin: .7rem 0; max-width: 420px; }
+.tree { position: relative; width: 100%; aspect-ratio: 400 / 230; font-weight: 400; }
+.tree svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.tree line { stroke: var(--text); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+.tree .tl { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; line-height: 1; }
+.tree .tn { font-size: 1.05rem; }
+.tree .tv { background: var(--surface); padding: 0 .2rem; font-size: .95rem; }
+.tree .troot { width: .5rem; height: .5rem; border-radius: 50%; background: var(--text); }
+.tree .tq { display: inline-block; min-width: 1.6rem; padding: .1rem .35rem; border: 2px solid var(--accent); border-radius: 6px; background: var(--accent-soft); color: #b45309; font-weight: 800; text-align: center; font-style: italic; }
