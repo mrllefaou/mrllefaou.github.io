@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Les « skills » : donner des compétences à une IA · Intelligence artificielle · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 9 Intelligence artificielle – Séance 8 · Écrire une compétence réutilisable, la faire exécuter par un autre groupe (jeu de rôle) ; cours.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="snt.html">Accueil</a><span class="sep">›</span>
+        <a href="intelligence-artificielle.html">Chapitre 9 – Intelligence artificielle</a><span class="sep">›</span>
+        <span>Séance 8</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="background:linear-gradient(135deg,#4f46e5,#1c2333)">
+      <p class="eyebrow">Chapitre 9 – Intelligence artificielle · Séance 8</p>
+      <h1>Les « skills » : donner des compétences à une IA</h1>
+      <p class="meta">Séance 8 · Écrire une compétence réutilisable, la faire exécuter par un autre groupe (jeu de rôle) ; cours</p>
+      <div class="page-tabs"><a href="#act1">Activité 1</a><a href="#act2">Activité 2</a><a href="#act3">Activité 3</a><a href="#cours">Cours</a></div>
+    </section>
+
+    <div class="part-sep"><h3>Activité 1 · De la consigne à la compétence</h3></div>
+    <section class="card" id="act1" aria-labelledby="t-act1">
+      <h2 id="t-act1"><span class="num tp">1</span> Qu’est-ce qu’une skill ?</h2>
+      <p>Quand tu donnes souvent la même consigne à une IA (« résume ce cours en fiche de révision, avec cinq questions »), tu dois la retaper à chaque fois. Une <b>skill</b> est une procédure rédigée une fois pour toutes, rangée dans un dossier, que l’IA charge <b>seulement quand c’est utile</b>.</p>
+      <p>Voici le format d’une skill : un fichier texte <code>SKILL.md</code> qui commence par un nom et une description, suivi des instructions.</p>
+      <pre class="code"><code>---
+name: fiche-de-revision
+description: Crée une fiche de révision à partir d’un cours. À utiliser quand
+  l’élève demande de réviser, de résumer ou de se préparer à un contrôle.
+---
+
+# Fiche de révision
+
+1. Lis le cours fourni et repère les 5 notions essentielles.
+2. Pour chaque notion : une définition en une phrase + un exemple concret.
+3. Termine par 5 questions de contrôle sans les réponses.
+4. Format : titres courts, phrases simples, 1 page maximum.
+5. Si le cours est trop court ou illisible, demande-le plutôt que d’inventer.</code></pre>
+      <div class="tp-question"><span class="label">Question 1</span><p>Repère dans cet exemple : la partie qui permet à l’IA de savoir <b>quand</b> utiliser la skill, les <b>étapes</b>, le <b>format de sortie</b> et la <b>limite</b>.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 2</span><p>Quelle différence y a-t-il entre un <b>prompt</b> tapé une fois et une <b>skill</b> ? Donne un avantage pour un élève ou un professeur.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <div class="part-sep"><h3>Activité 2 · Écrire sa skill</h3></div>
+    <section class="card" id="act2" aria-labelledby="t-act2">
+      <h2 id="t-act2"><span class="num tp">2</span> Atelier : rédiger une compétence</h2>
+      <div class="consigne"><span class="icon" aria-hidden="true">✍️</span><p><b>Consigne :</b> par groupe de trois, choisissez une des compétences ci-dessous (ou proposez la vôtre) et rédigez sa fiche <code>SKILL.md</code> sur papier ou sur ordinateur.</p></div>
+      <ul><li><b>correcteur-bienveillant</b> : corrige l’orthographe d’un texte en expliquant chaque faute.</li><li><b>planning-revision</b> : construit un planning de révision sur une semaine.</li><li><b>exercice-progressif</b> : propose trois exercices de difficulté croissante sur une notion.</li><li><b>explique-comme-a-un-enfant</b> : reformule une notion simplement.</li></ul>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>Rubrique</th><th>Votre texte</th></tr></thead><tbody><tr><th scope="row">name (court, sans espace)</th><td></td></tr><tr><th scope="row">description (quand l’utiliser ?)</th><td></td></tr><tr><th scope="row">étapes numérotées</th><td></td></tr><tr><th scope="row">format de sortie</th><td></td></tr><tr><th scope="row">limites / ce qu’il ne faut pas faire</th><td></td></tr></tbody></table></div>
+    </section>
+    <div class="part-sep"><h3>Activité 3 · Jeu de rôle : « sois l’IA »</h3></div>
+    <section class="card" id="act3" aria-labelledby="t-act3">
+      <h2 id="t-act3"><span class="num tp">3</span> Faire exécuter sa skill par un autre groupe</h2>
+      <div class="consigne"><span class="icon" aria-hidden="true">🎭</span><p><b>Consigne :</b> échangez vos skills. Le groupe « IA » reçoit la skill et un texte à traiter ; il n’a le droit de suivre <b>que</b> ce qui est écrit, sans interpréter. Le groupe auteur observe sans intervenir, puis commente.</p></div>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>Critère</th><th>Oui</th><th>Non</th></tr></thead><tbody><tr><th scope="row">Le groupe « IA » a compris quand utiliser la skill</th><td>☐</td><td>☐</td></tr><tr><th scope="row">Les étapes étaient assez précises pour être suivies</th><td>☐</td><td>☐</td></tr><tr><th scope="row">Le résultat a le format demandé</th><td>☐</td><td>☐</td></tr><tr><th scope="row">La skill a empêché une erreur (limite respectée)</th><td>☐</td><td>☐</td></tr></tbody></table></div>
+      <div class="tp-question"><span class="label">Question 3</span><p>Quelles ambiguïtés ont fait « échouer » ou dévier le groupe « IA » ? Réécris la phrase concernée pour la rendre plus claire.</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+      <div class="tp-question"><span class="label">Question 4</span><p>Qu’est-ce qui rend une skill <b>réutilisable</b> par d’autres personnes ?</p><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div><div class="answer-lines" aria-hidden="true"></div></div>
+    </section>
+    <div class="part-sep"><h3>Cours</h3></div>
+    <section class="card" id="cours" aria-labelledby="t-cours">
+      <h2 id="t-cours"><span class="num ">📘</span> Cours : Prompt, skill, agent</h2>
+      <div class="cours-block">
+      <h3>1. Définition</h3>
+      <p>Une <b>skill</b> (compétence) est un ensemble d’instructions, parfois accompagné de scripts ou de fichiers, qui apprend à un agent à réaliser <b>une tâche précise</b> de manière fiable. Elle est stockée dans un dossier et son contenu n’est chargé que lorsque la tâche correspond à sa description.</p>
+      <h3>2. Pourquoi des skills ?</h3>
+      <ul><li><b>Réutilisation</b> : on n’écrit plus la même consigne à chaque fois.</li><li><b>Fiabilité</b> : une procédure testée donne des résultats plus réguliers qu’une consigne improvisée.</li><li><b>Partage</b> : une skill peut être donnée à une équipe ou à une classe.</li><li><b>Sobriété</b> : seules les descriptions sont lues en permanence ; les instructions complètes ne sont chargées qu’au besoin, ce qui économise des tokens.</li></ul>
+      <h3>3. Prompt, skill, agent</h3>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>Notion</th><th>Rôle</th><th>Exemple</th></tr></thead><tbody><tr><th scope="row">Prompt</th><td>Demande ponctuelle</td><td>« Résume ce texte. »</td></tr><tr><th scope="row">Skill</th><td>Procédure réutilisable sur une tâche</td><td>Fiche de révision en 5 étapes</td></tr><tr><th scope="row">Agent</th><td>Système qui poursuit un but et choisit ses outils et skills</td><td>Assistant qui prépare tout le planning de révision</td></tr></tbody></table></div>
+      <h3>4. Précautions</h3>
+      <ul><li>Une skill peut contenir des instructions ou des scripts : ne jamais installer une skill dont on ignore la provenance (risque de <b>code malveillant</b> ou d’<b>injection de prompt</b>).</li><li>Relire et tester une skill avant de s’y fier.</li><li>Rester responsable du résultat : c’est toujours la personne qui valide.</li></ul>
+      <div class="note"><strong class="title">À retenir</strong><p>Une skill, c’est une <b>recette</b> écrite pour une IA : plus elle est précise, claire et testée, meilleur est le résultat. Rédiger une bonne skill, c’est apprendre à bien décrire une procédure, une compétence précieuse même sans IA.</p></div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Navigation entre séances">
+      <a class="btn secondary" href="intelligence-artificielle-seance7.html">← Séance 7</a><a class="btn secondary" href="intelligence-artificielle-seance9.html">Séance 9 →</a>
+    </nav>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie</footer>
+
+</body>
+</html>
