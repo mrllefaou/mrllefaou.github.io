@@ -241,6 +241,93 @@
     .carte:hover::before, .carte:hover::after,
     .carte:focus-visible::before, .carte:focus-visible::after { opacity: 1; }
 
+    /* ----- Décors de fond des cartes ----- */
+    .carte > *:not(.deco) { position: relative; z-index: 1; }
+    .deco {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .55;
+      transition: opacity .4s ease;
+      -webkit-mask-image: linear-gradient(115deg, transparent 25%, #000 75%);
+      mask-image: linear-gradient(115deg, transparent 25%, #000 75%);
+    }
+    .carte:hover .deco { opacity: .9; }
+    .deco svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    /* SNT : réseau de neurones + circuits */
+    .neurone { fill: var(--bg2); stroke: var(--snt2); stroke-width: 1.5; }
+    .neurone.actif { animation: neuroneOn 2.4s ease-in-out infinite; }
+    @keyframes neuroneOn {
+      0%, 100% { fill: var(--bg2); }
+      50% { fill: var(--snt2); filter: drop-shadow(0 0 4px var(--snt2)); }
+    }
+    .synapse { stroke: rgba(34, 211, 238, .22); stroke-width: 1; }
+    .signal {
+      stroke: var(--snt2);
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-dasharray: 6 300;
+      stroke-dashoffset: 306;
+      animation: signal 2.6s linear infinite;
+    }
+    @keyframes signal { to { stroke-dashoffset: 0; } }
+    .circuit { fill: none; stroke: rgba(59, 130, 246, .35); stroke-width: 1.4; }
+    .circuit-pastille { fill: var(--snt); }
+    .electron { fill: #fff; filter: drop-shadow(0 0 3px var(--snt2)); }
+    .binaire {
+      font: 600 9px ui-monospace, Menlo, Consolas, monospace;
+      fill: rgba(34, 211, 238, .35);
+      animation: clignoteBin 3s steps(2) infinite;
+    }
+    @keyframes clignoteBin { 50% { fill: rgba(34, 211, 238, .12); } }
+    .etiquette-ia {
+      font: 800 34px system-ui, sans-serif;
+      fill: none;
+      stroke: rgba(34, 211, 238, .4);
+      stroke-width: 1;
+    }
+
+    /* Maths : quadrillage, courbe, cercle trigo, formules */
+    .grille-fine { stroke: rgba(245, 158, 11, .10); stroke-width: .6; }
+    .axe { stroke: rgba(245, 158, 11, .45); stroke-width: 1.2; }
+    .courbe {
+      fill: none;
+      stroke: var(--maths);
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-dasharray: 700;
+      stroke-dashoffset: 700;
+      animation: tracer 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 4px rgba(245, 158, 11, .6));
+    }
+    .courbe.c2 { stroke: var(--maths2); stroke-width: 1.6; animation-delay: -3s; filter: none; opacity: .8; }
+    @keyframes tracer {
+      0% { stroke-dashoffset: 700; }
+      45%, 70% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -700; }
+    }
+    .cercle-trigo { fill: none; stroke: rgba(244, 63, 94, .5); stroke-width: 1.2; }
+    .rayon { transform-origin: 255px 60px; animation: tourner 8s linear infinite; }
+    .rayon line { stroke: var(--maths2); stroke-width: 1.6; }
+    .rayon circle { fill: var(--maths2); }
+    @keyframes tourner { to { transform: rotate(-360deg); } }
+    .triangle { fill: rgba(245, 158, 11, .06); stroke: rgba(245, 158, 11, .45); stroke-width: 1.2; stroke-dasharray: 4 4; animation: pointilles 4s linear infinite; }
+    @keyframes pointilles { to { stroke-dashoffset: -32; } }
+    .formule {
+      font: italic 600 13px "Cambria Math", Cambria, Georgia, serif;
+      fill: rgba(253, 230, 138, .55);
+      animation: flotteFormule 7s ease-in-out infinite alternate;
+    }
+    .formule.f2 { animation-delay: -2s; }
+    .formule.f3 { animation-delay: -4s; }
+    .formule.f4 { animation-delay: -5.5s; }
+    @keyframes flotteFormule {
+      from { transform: translateY(0); }
+      to { transform: translateY(-8px); }
+    }
+
     .carte-haut { display: flex; align-items: center; justify-content: space-between; }
 
     .icone {
@@ -315,6 +402,7 @@
     @media (max-width: 600px) {
       .blob { opacity: .3; }
       .carte { transform: none !important; }
+      .deco { opacity: .35; }
     }
   </style>
 </head>
@@ -342,6 +430,28 @@
     <ul class="matieres">
       <li>
         <a class="carte snt" href="snt/snt.html">
+          <span class="deco" aria-hidden="true">
+            <svg viewBox="0 0 320 240" preserveAspectRatio="xMaxYMid meet">
+              <!-- circuits imprimés -->
+              <path class="circuit" d="M320 200 H270 L255 215 H190" />
+              <path class="circuit" d="M320 222 H285 L275 232 H215" />
+              <path class="circuit" d="M320 20 H300 L290 10 H240" />
+              <circle class="circuit-pastille" cx="190" cy="215" r="3" />
+              <circle class="circuit-pastille" cx="215" cy="232" r="3" />
+              <circle class="circuit-pastille" cx="240" cy="10" r="3" />
+              <circle class="electron" r="2">
+                <animateMotion dur="3s" repeatCount="indefinite" path="M320 200 H270 L255 215 H190" />
+              </circle>
+              <circle class="electron" r="2">
+                <animateMotion dur="4s" begin="-1.5s" repeatCount="indefinite" path="M240 10 H290 L300 20 H320" />
+              </circle>
+              <!-- réseau de neurones (généré en JS) -->
+              <g id="ia-reseau"></g>
+              <text class="binaire" x="140" y="30">01001001 01000001</text>
+              <text class="binaire" x="150" y="190" style="animation-delay:-1.5s">1011 0110 1100</text>
+              <text class="etiquette-ia" x="262" y="190">IA</text>
+            </svg>
+          </span>
           <span class="carte-haut">
             <span class="icone" aria-hidden="true">💻</span>
             <span class="niveau">Seconde</span>
@@ -356,6 +466,41 @@
       </li>
       <li>
         <a class="carte maths" href="maths/maths.html">
+          <span class="deco" aria-hidden="true">
+            <svg>
+              <defs>
+                <pattern id="quadrillage" width="16" height="16" patternUnits="userSpaceOnUse">
+                  <path class="grille-fine" d="M16 0 H0 V16" fill="none" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#quadrillage)" />
+            </svg>
+            <svg viewBox="0 0 320 240" preserveAspectRatio="xMaxYMid meet">
+              <!-- repère -->
+              <line class="axe" x1="140" y1="150" x2="318" y2="150" />
+              <line class="axe" x1="170" y1="92" x2="170" y2="238" />
+              <path class="axe" d="M312 146 L318 150 L312 154" fill="none" />
+              <!-- courbes qui se tracent -->
+              <path class="courbe" d="M140 150 Q160.6 112 181.25 150 T222.5 150 T263.75 150 T305 150" />
+              <path class="courbe c2" d="M185 235 Q240 70 295 235" />
+              <!-- triangle rectangle -->
+              <polygon class="triangle" points="150,85 150,40 200,85" />
+              <path class="axe" d="M150 77 H158 V85" fill="none" />
+              <!-- cercle trigonométrique -->
+              <circle class="cercle-trigo" cx="268" cy="100" r="26" />
+              <g class="rayon">
+                <line x1="268" y1="100" x2="294" y2="100" />
+                <circle cx="294" cy="100" r="3" />
+              </g>
+              <!-- formules -->
+              <text class="formule" x="178" y="120">a² + b² = c²</text>
+              <text class="formule f2" x="228" y="20">e<tspan dy="-5" font-size="9">iπ</tspan><tspan dy="5"> + 1 = 0</tspan></text>
+              <text class="formule f3" x="178" y="214">f(x) = x²</text>
+              <text class="formule f4" x="232" y="234">Δ = b² − 4ac</text>
+              <text class="formule f2" x="290" y="178">∑</text>
+              <text class="formule f3" x="135" y="125">π</text>
+            </svg>
+          </span>
           <span class="carte-haut">
             <span class="icone" aria-hidden="true">📐</span>
             <span class="niveau">3ème · Terminale</span>
@@ -417,6 +562,43 @@
           carte.style.setProperty('--ry', '0deg');
         });
       });
+
+      /* Réseau de neurones dans la carte SNT */
+      (function () {
+        var g = document.getElementById('ia-reseau');
+        var ns = 'http://www.w3.org/2000/svg';
+        var couches = [[150, 3], [198, 4], [246, 4], [292, 2]];
+        var noeuds = couches.map(function (c) {
+          var tab = [];
+          for (var n = 0; n < c[1]; n++) tab.push({ x: c[0], y: 110 + (n - (c[1] - 1) / 2) * 30 });
+          return tab;
+        });
+        function el(nom, attrs) {
+          var e = document.createElementNS(ns, nom);
+          for (var a in attrs) e.setAttribute(a, attrs[a]);
+          g.appendChild(e);
+          return e;
+        }
+        var k = 0;
+        for (var c = 0; c < noeuds.length - 1; c++) {
+          noeuds[c].forEach(function (a) {
+            noeuds[c + 1].forEach(function (b) {
+              var d = { x1: a.x, y1: a.y, x2: b.x, y2: b.y };
+              el('line', Object.assign({ 'class': 'synapse' }, d));
+              if ((k++ * 7) % 3 === 0) {
+                var s = el('line', Object.assign({ 'class': 'signal' }, d));
+                s.style.animationDelay = (c * .8 + Math.random() * 1.2 - 3) + 's';
+              }
+            });
+          });
+        }
+        noeuds.forEach(function (couche, ci) {
+          couche.forEach(function (p) {
+            var n = el('circle', { 'class': 'neurone actif', cx: p.x, cy: p.y, r: 6 });
+            n.style.animationDelay = (ci * .6 + Math.random() * .4) + 's';
+          });
+        });
+      })();
 
       if (calme) return;
 
