@@ -1164,3 +1164,13 @@ h2 small.pts { font-size: .65em; font-weight: 600; color: var(--muted); }
 .rev-val small { color: var(--muted); font-size: .72rem; }
 .legend .l-month[style*="--c"]::before { background: var(--c); }
 @media (max-width: 640px) { .rev-row { grid-template-columns: 1fr 8.5rem; } .rev-q { grid-column: 1 / -1; } }
+
+/* ----- Mention données personnelles (pied de page) ----- */
+.mentions-donnees {
+  max-width: 760px;
+  margin: .6rem auto 0;
+  font-size: .78rem;
+  line-height: 1.5;
+  opacity: .85;
+}
+.mentions-donnees strong { font-weight: 600; }

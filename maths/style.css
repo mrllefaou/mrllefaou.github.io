@@ -1365,3 +1365,13 @@ html:has(.qcm) { scroll-padding-top: 4.5rem; scroll-padding-bottom: 7rem; }
 .sb-ctl { background: #ffab19; }
 .sb.in { margin-left: 1.2rem; }
 .sb-ctl.end { min-height: .9rem; width: 7rem; padding: .15rem; }
+
+/* ----- Mention données personnelles (pied de page) ----- */
+.mentions-donnees {
+  max-width: 760px;
+  margin: .6rem auto 0;
+  font-size: .78rem;
+  line-height: 1.5;
+  opacity: .85;
+}
+.mentions-donnees strong { font-weight: 600; }
