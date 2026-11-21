@@ -1,0 +1,107 @@
+/* ===== Fond animé commun (SNT + Maths) – même univers que la page d'accueil ===== */
+@media screen {
+  :root {
+    --bg: #0b1020;
+    --surface: rgba(22, 30, 52, .88);
+    --border: rgba(255, 255, 255, .12);
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px rgba(0, 0, 0, .35);
+    color-scheme: dark;
+  }
+
+  body { background: var(--bg); }
+
+  /* Les blocs laissent deviner le fond, sans gêner la lecture */
+  .card, .topbar, .chapter-card, .seance-item, .qcm-actions, .auto-bar {
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+  .topbar { background: rgba(11, 16, 32, .72); }
+
+  /* Bandeau de titre : reflet lumineux qui passe */
+  .hero { position: relative; overflow: hidden; }
+  .hero:not([style]) { background: linear-gradient(135deg, #2563eb, #7c3aed); }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .18) 50%, transparent 65%);
+    transform: translateX(-100%);
+    animation: fond-reflet 7s ease-in-out 1s infinite;
+    pointer-events: none;
+  }
+  @keyframes fond-reflet {
+    0% { transform: translateX(-100%); }
+    35%, 100% { transform: translateX(100%); }
+  }
+
+  /* Apparition douce des éléments de navigation */
+  .hero, .chapter-grid > li, .seance-list > li {
+    animation: fond-monte .7s cubic-bezier(.2, .8, .2, 1) both;
+  }
+  .chapter-grid > li:nth-child(1), .seance-list > li:nth-child(1) { animation-delay: .10s; }
+  .chapter-grid > li:nth-child(2), .seance-list > li:nth-child(2) { animation-delay: .16s; }
+  .chapter-grid > li:nth-child(3), .seance-list > li:nth-child(3) { animation-delay: .22s; }
+  .chapter-grid > li:nth-child(4), .seance-list > li:nth-child(4) { animation-delay: .28s; }
+  .chapter-grid > li:nth-child(5), .seance-list > li:nth-child(5) { animation-delay: .34s; }
+  .chapter-grid > li:nth-child(6), .seance-list > li:nth-child(6) { animation-delay: .40s; }
+  .chapter-grid > li:nth-child(n+7), .seance-list > li:nth-child(n+7) { animation-delay: .46s; }
+  @keyframes fond-monte {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* ----- Décor fixe derrière le contenu ----- */
+.fond-deco {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: radial-gradient(1100px 750px at 85% -10%, #1e2a5a 0%, transparent 60%),
+              radial-gradient(900px 700px at -10% 110%, #3a1d3f 0%, transparent 60%);
+}
+.fond-deco canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.fond-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .35;
+  animation: fond-flotter 20s ease-in-out infinite alternate;
+}
+.fond-blob.b1 { width: 420px; height: 420px; top: -140px; left: -120px; background: var(--fond-c1); }
+.fond-blob.b2 { width: 380px; height: 380px; bottom: -160px; right: -100px; background: var(--fond-c2); animation-delay: -7s; }
+.fond-blob.b3 { width: 260px; height: 260px; top: 45%; right: 15%; background: var(--fond-c3); opacity: .18; animation-delay: -13s; }
+@keyframes fond-flotter {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, 40px) scale(1.12); }
+  100% { transform: translate(-40px, 80px) scale(.95); }
+}
+
+.fond-snt   { --fond-c1: #3b82f6; --fond-c2: #7c3aed; --fond-c3: #22d3ee; }
+.fond-maths { --fond-c1: #f59e0b; --fond-c2: #f43f5e; --fond-c3: #a855f7; }
+
+.fond-symbole {
+  position: absolute;
+  bottom: -60px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .09);
+  animation: fond-symbole linear infinite;
+}
+.fond-maths .fond-symbole { font-family: "Cambria Math", Cambria, Georgia, serif; font-style: italic; }
+@keyframes fond-symbole {
+  from { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10%, 90% { opacity: 1; }
+  to { transform: translateY(-115vh) rotate(25deg); opacity: 0; }
+}
+
+@media print {
+  .fond-deco { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fond-blob, .hero::after, .hero, .chapter-grid > li, .seance-list > li { animation: none !important; }
+  .fond-symbole, .fond-deco canvas { display: none; }
+}
