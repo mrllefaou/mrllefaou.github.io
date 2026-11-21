@@ -1286,3 +1286,82 @@ html:has(.qcm) { scroll-padding-top: 4.5rem; scroll-padding-bottom: 7rem; }
 .graph .pt { fill: #dc2626; }
 .graph .cr { stroke: #dc2626; stroke-width: 2; }
 .graph .lb { font-size: 14px; font-style: italic; font-family: "Times New Roman", serif; fill: var(--text); font-weight: 600; }
+
+/* ===== Automatismes ===== */
+.nocalc {
+  margin: 1.25rem 0 0;
+  padding: .8rem 1rem;
+  border-radius: 12px;
+  border: 2px solid #dc2626;
+  background: #fde8e8;
+  color: #7f1d1d;
+  font-size: 1.02rem;
+}
+@media (prefers-color-scheme: dark) { .nocalc { background: #3a1414; color: #fecaca; } }
+.intro { margin: 1rem 0 0; }
+.auto-bar {
+  position: sticky; top: 3.6rem; z-index: 5;
+  display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; justify-content: space-between;
+  margin: 1rem 0; padding: .6rem .9rem;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
+}
+.auto-stats { margin: 0; font-size: .95rem; }
+.auto-bar .btn, .auto-q .btn { cursor: pointer; font: inherit; font-weight: 700; border: 0; }
+.auto-bar .btn.secondary { border: 1px solid var(--border); }
+.auto-sub { margin-top: 2rem; }
+.auto-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .9rem; }
+.auto-q {
+  background: var(--surface); border: 1px solid var(--border); border-left: 6px solid var(--border);
+  border-radius: 12px; padding: .9rem 1rem; scroll-margin-top: 8rem;
+}
+.auto-q.is-ok { border-left-color: var(--ok); }
+.auto-q.is-ko { border-left-color: #dc2626; }
+.auto-head { display: flex; gap: .7rem; align-items: flex-start; }
+.auto-num {
+  flex: none; min-width: 2.2rem; height: 2.2rem; padding: 0 .4rem; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--primary-soft); color: var(--primary); font-weight: 800; font-size: .95rem;
+}
+.auto-head .q-body { flex: 1; min-width: 0; padding-top: .2rem; }
+.auto-head .q-line { display: block; }
+.auto-show { margin-top: .7rem; }
+.auto-ans {
+  margin-top: .7rem; padding: .7rem .9rem; border-radius: 10px;
+  background: var(--ok-soft); border-left: 4px solid var(--ok);
+}
+.auto-ans p { margin: 0 0 .4rem; }
+.auto-expl { color: var(--muted); font-size: .95rem; }
+.auto-self { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; margin-top: .3rem; font-size: .9rem; }
+.btn.small { padding: .3rem .75rem; font-size: .88rem; border-radius: 8px; }
+.auto-self .ok-btn { background: var(--surface); color: var(--ok); border: 1.5px solid var(--ok); }
+.auto-self .ko-btn { background: var(--surface); color: #dc2626; border: 1.5px solid #dc2626; }
+.auto-self .ok-btn.is-picked { background: var(--ok); color: #fff; }
+.auto-self .ko-btn.is-picked { background: #dc2626; color: #fff; }
+@media print { .auto-bar, .auto-show, .auto-self { display: none; } .auto-ans[hidden] { display: none !important; } }
+
+/* Figures */
+.fig { margin: .7rem 0 0; overflow-x: auto; color: var(--text); }
+.fig svg { display: block; width: 100%; height: auto; margin: 0 auto; }
+.fig .fl { fill: currentColor; font-family: "Latin Modern Math","STIX Two Math","Cambria Math","Times New Roman",serif; }
+.fig .fn { fill: currentColor; font-family: inherit; }
+.fig .bar { fill: var(--primary); fill-opacity: .75; stroke: var(--primary); }
+.fig .curve { stroke: var(--primary); stroke-width: 2.4; fill: none; }
+
+/* Blocs Scratch */
+.scratch {
+  display: flex; flex-direction: column; gap: 2px; margin: .7rem 0 0; width: fit-content; max-width: 100%;
+  font: 600 .9rem/1.2 system-ui, sans-serif; color: #fff;
+}
+.sb { padding: .4rem .75rem; border-radius: 6px; width: max-content; max-width: 100%; }
+.sb b { font-weight: 700; }
+.sb .val, .sb .hole { display: inline-block; background: #fff; color: #333; border-radius: 999px; padding: 0 .5rem; margin: 0 .1rem; font-weight: 600; }
+.sb .hole { min-width: 1.8rem; text-align: center; border: 2px dashed #f59e0b; }
+.sb-ev { background: #e6a700; border-radius: 16px 16px 6px 6px; }
+.sb-se { background: #2ea6d9; }
+.sb-var { background: #ff8c1a; }
+.sb-look { background: #9966ff; }
+.sb-mv { background: #4c97ff; }
+.sb-ctl { background: #ffab19; }
+.sb.in { margin-left: 1.2rem; }
+.sb-ctl.end { min-height: .9rem; width: 7rem; padding: .15rem; }
