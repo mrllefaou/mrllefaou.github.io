@@ -1,29 +1,490 @@
-<!DOCTYPE html> 
-<html>
+<!DOCTYPE html>
 <html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Site de M. Le Faou – Cours de SNT et de Maths</title>
+  <meta name="description" content="Cours, activités et exercices de SNT et de mathématiques pour les élèves de M. Le Faou.">
+  <link rel="icon" href="favicon.ico">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg2: #131a33;
+      --text: #eef2ff;
+      --muted: #a3adc8;
+      --snt: #3b82f6;
+      --snt2: #22d3ee;
+      --maths: #f59e0b;
+      --maths2: #f43f5e;
+      --glass: rgba(255, 255, 255, .06);
+      --border: rgba(255, 255, 255, .12);
+      --radius: 22px;
+    }
 
-	<head>
- 	<meta charset="utf-8">
-		<title>Site perso mr le faou</title>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-		<!-- mon icon -->
-		<link rel="shortcut icon" href="favicon.ico">
+    html, body { height: 100%; }
 
-		<!-- mon template.css -->
-		<link rel="stylesheet" href="mon_css.css" media="screen">
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 80% -10%, #1e2a5a 0%, transparent 60%),
+                  radial-gradient(900px 700px at -10% 110%, #3a1d3f 0%, transparent 60%),
+                  var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
 
+    /* ----- Fond animé ----- */
+    #reseau {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: .45;
+      z-index: 0;
+      pointer-events: none;
+      animation: flotter 18s ease-in-out infinite alternate;
+    }
+    .blob.b1 { width: 420px; height: 420px; background: var(--snt); top: -120px; left: -100px; }
+    .blob.b2 { width: 380px; height: 380px; background: var(--maths2); bottom: -140px; right: -80px; animation-delay: -6s; }
+    .blob.b3 { width: 260px; height: 260px; background: var(--snt2); top: 40%; right: 20%; opacity: .25; animation-delay: -12s; }
+
+    @keyframes flotter {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(60px, 40px) scale(1.12); }
+      100% { transform: translate(-40px, 80px) scale(.95); }
+    }
+
+    /* Symboles qui flottent */
+    .symboles { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .symboles span {
+      position: absolute;
+      bottom: -60px;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .13);
+      animation: monter linear infinite;
+    }
+    @keyframes monter {
+      from { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      to   { transform: translateY(-115vh) rotate(25deg); opacity: 0; }
+    }
+
+    /* ----- Contenu ----- */
+    main {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      width: min(1100px, 100% - 2.5rem);
+      margin: 0 auto;
+      padding: clamp(3rem, 8vh, 6rem) 0 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero { text-align: center; margin-bottom: clamp(2.5rem, 6vh, 4rem); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .45rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      font-size: .9rem;
+      color: var(--muted);
+      opacity: 0;
+      animation: apparaitre .8s ease .1s forwards;
+    }
+    .badge .point {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, .7);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(74, 222, 128, .6); }
+      70%  { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+    }
+
+    h1 {
+      margin-top: 1.4rem;
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+    h1 .mot {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(40px) rotate(4deg);
+      animation: monterMot .8s cubic-bezier(.2, .8, .2, 1) forwards;
+    }
+    h1 .degrade {
+      background: linear-gradient(90deg, var(--snt2), var(--snt), #a78bfa, var(--maths2), var(--maths), var(--snt2));
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: monterMot .8s cubic-bezier(.2, .8, .2, 1) forwards, defiler 8s linear infinite;
+    }
+    @keyframes monterMot { to { opacity: 1; transform: none; } }
+    @keyframes defiler { to { background-position: 300% 0; } }
+
+    .sous-titre {
+      margin-top: 1.2rem;
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      color: var(--muted);
+      min-height: 1.8em;
+    }
+    .sous-titre .tape { color: var(--text); font-weight: 600; }
+    .curseur {
+      display: inline-block;
+      width: 2px; height: 1.1em;
+      margin-left: 3px;
+      background: var(--snt2);
+      vertical-align: -.15em;
+      animation: clignoter 1s steps(1) infinite;
+    }
+    @keyframes clignoter { 50% { opacity: 0; } }
+
+    @keyframes apparaitre { to { opacity: 1; transform: none; } }
+
+    /* ----- Cartes matières ----- */
+    .matieres {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: clamp(1.2rem, 3vw, 2rem);
+      perspective: 1000px;
+    }
+    .matieres li {
+      opacity: 0;
+      transform: translateY(50px);
+      animation: apparaitre .9s cubic-bezier(.2, .8, .2, 1) forwards;
+    }
+    .matieres li:nth-child(1) { animation-delay: .9s; }
+    .matieres li:nth-child(2) { animation-delay: 1.1s; }
+
+    .carte {
+      --c1: var(--snt);
+      --c2: var(--snt2);
+      --rx: 0deg;
+      --ry: 0deg;
+      --mx: 50%;
+      --my: 50%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      height: 100%;
+      padding: clamp(1.6rem, 3vw, 2.2rem);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
+      backdrop-filter: blur(12px);
+      color: inherit;
+      text-decoration: none;
+      overflow: hidden;
+      transform: rotateX(var(--rx)) rotateY(var(--ry));
+      transform-style: preserve-3d;
+      transition: transform .25s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .carte.maths { --c1: var(--maths); --c2: var(--maths2); }
+
+    /* halo qui suit la souris */
+    .carte::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(400px circle at var(--mx) var(--my), color-mix(in srgb, var(--c1) 35%, transparent), transparent 60%);
+      opacity: 0;
+      transition: opacity .3s ease;
+      pointer-events: none;
+    }
+    /* bordure lumineuse */
+    .carte::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, var(--c1), var(--c2));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity .3s ease;
+      pointer-events: none;
+    }
+    .carte:hover, .carte:focus-visible {
+      box-shadow: 0 25px 60px -20px color-mix(in srgb, var(--c1) 60%, transparent);
+      outline: none;
+    }
+    .carte:hover::before, .carte:hover::after,
+    .carte:focus-visible::before, .carte:focus-visible::after { opacity: 1; }
+
+    .carte-haut { display: flex; align-items: center; justify-content: space-between; }
+
+    .icone {
+      width: 64px; height: 64px;
+      display: grid; place-items: center;
+      font-size: 2rem;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--c1), var(--c2));
+      box-shadow: 0 10px 30px -8px var(--c1);
+      transform: translateZ(40px);
+      transition: transform .4s cubic-bezier(.2, .8, .2, 1);
+    }
+    .carte:hover .icone { transform: translateZ(40px) rotate(-8deg) scale(1.08); }
+
+    .niveau {
+      font-size: .85rem;
+      padding: .3rem .8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .08);
+      color: var(--muted);
+    }
+
+    .carte h2 {
+      font-size: clamp(1.9rem, 4vw, 2.5rem);
+      font-weight: 800;
+      transform: translateZ(30px);
+    }
+    .carte p { color: var(--muted); line-height: 1.6; transform: translateZ(20px); }
+
+    .tags { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; }
+    .tags li {
+      opacity: 1; transform: none; animation: none;
+      font-size: .82rem;
+      padding: .3rem .7rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .entrer {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-weight: 700;
+      color: var(--c2);
+    }
+    .entrer .fleche { transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
+    .carte:hover .entrer .fleche { transform: translateX(8px); }
+
+    /* ----- Pied de page ----- */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 1.5rem 1rem 2rem;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    /* ----- Accessibilité : moins d'animations si demandé ----- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      .symboles, #reseau { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .blob { opacity: .3; }
+      .carte { transform: none !important; }
+    }
+  </style>
+</head>
 <body>
-<a href="index.html"><h1 data-name="Site de mr Le Faou">Site de mr Le Faou</h1></a>
-	
-<ul id="nav">
-		<li class="nav-link">
-		<a href="snt/snt.html"><h1 data-name="SNT">SNT</h1></a>
-	</li>
-	<li class="nav-link">
-		<a href="maths/maths.html"><h1 data-name="Maths">Maths</h1></a>
-	</li>
-</ul>
 
-<footer> &copy; Copyright 2019-2027</footer>
+  <!-- Décor animé -->
+  <div class="blob b1" aria-hidden="true"></div>
+  <div class="blob b2" aria-hidden="true"></div>
+  <div class="blob b3" aria-hidden="true"></div>
+  <canvas id="reseau" aria-hidden="true"></canvas>
+  <div class="symboles" id="symboles" aria-hidden="true"></div>
+
+  <main>
+    <section class="hero">
+      <span class="badge"><span class="point"></span><span><span id="salut">Bonjour</span> et bienvenue !</span></span>
+      <h1>
+        <span class="mot" style="animation-delay:.2s">Le</span>
+        <span class="mot" style="animation-delay:.3s">site</span>
+        <span class="mot" style="animation-delay:.4s">de</span><br>
+        <span class="mot degrade" style="animation-delay:.55s">M.&nbsp;Le&nbsp;Faou</span>
+      </h1>
+      <p class="sous-titre">Ici, tu trouves <span class="tape" id="tape"></span><span class="curseur" aria-hidden="true"></span></p>
+    </section>
+
+    <ul class="matieres">
+      <li>
+        <a class="carte snt" href="snt/snt.html">
+          <span class="carte-haut">
+            <span class="icone" aria-hidden="true">💻</span>
+            <span class="niveau">Seconde</span>
+          </span>
+          <h2>SNT</h2>
+          <p>Sciences Numériques et Technologie : comprendre le numérique qui nous entoure.</p>
+          <ul class="tags">
+            <li>Internet</li><li>Web</li><li>Python</li><li>IA</li><li>Réseaux sociaux</li>
+          </ul>
+          <span class="entrer">Entrer dans le cours <span class="fleche" aria-hidden="true">→</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="carte maths" href="maths/maths.html">
+          <span class="carte-haut">
+            <span class="icone" aria-hidden="true">📐</span>
+            <span class="niveau">3ème · Terminale</span>
+          </span>
+          <h2>Maths</h2>
+          <p>Cours, activités, QCM et exercices pour t'entraîner à ton rythme.</p>
+          <ul class="tags">
+            <li>3ème</li><li>STI2D</li><li>STMG</li><li>Maths complémentaires</li>
+          </ul>
+          <span class="entrer">Entrer dans le cours <span class="fleche" aria-hidden="true">→</span></span>
+        </a>
+      </li>
+    </ul>
+  </main>
+
+  <footer>&copy; Copyright 2019-2027 · M. Le Faou</footer>
+
+  <script>
+    (function () {
+      var calme = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* Salutation selon l'heure */
+      var h = new Date().getHours();
+      document.getElementById('salut').textContent = (h >= 18 || h < 5) ? 'Bonsoir' : 'Bonjour';
+
+      /* Effet machine à écrire */
+      var phrases = ['tes cours.', 'tes activités.', 'tes exercices.', 'tes QCM.', 'tout pour réviser.'];
+      var zone = document.getElementById('tape');
+      if (calme) {
+        zone.textContent = 'tes cours, tes activités et tes exercices.';
+      } else {
+        var i = 0, j = 0, efface = false;
+        (function taper() {
+          var p = phrases[i];
+          zone.textContent = p.slice(0, j);
+          var delai = efface ? 40 : 85;
+          if (!efface && j === p.length) { efface = true; delai = 1600; }
+          else if (efface && j === 0) { efface = false; i = (i + 1) % phrases.length; delai = 350; }
+          j += efface ? -1 : 1;
+          setTimeout(taper, delai);
+        })();
+      }
+
+      /* Cartes qui s'inclinent avec la souris */
+      document.querySelectorAll('.carte').forEach(function (carte) {
+        carte.addEventListener('pointermove', function (e) {
+          var r = carte.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width;
+          var y = (e.clientY - r.top) / r.height;
+          carte.style.setProperty('--mx', (x * 100) + '%');
+          carte.style.setProperty('--my', (y * 100) + '%');
+          if (!calme) {
+            carte.style.setProperty('--ry', ((x - .5) * 10) + 'deg');
+            carte.style.setProperty('--rx', ((.5 - y) * 10) + 'deg');
+          }
+        });
+        carte.addEventListener('pointerleave', function () {
+          carte.style.setProperty('--rx', '0deg');
+          carte.style.setProperty('--ry', '0deg');
+        });
+      });
+
+      if (calme) return;
+
+      /* Symboles SNT / Maths qui montent */
+      var liste = ['0', '1', '</>', 'π', '∑', '√', '{ }', 'x²', '∞', '#', 'if', '%', '∫', '01'];
+      var conteneur = document.getElementById('symboles');
+      var nb = window.innerWidth < 600 ? 10 : 22;
+      for (var k = 0; k < nb; k++) {
+        var s = document.createElement('span');
+        s.textContent = liste[k % liste.length];
+        s.style.left = (Math.random() * 100) + '%';
+        s.style.fontSize = (14 + Math.random() * 26) + 'px';
+        s.style.animationDuration = (14 + Math.random() * 16) + 's';
+        s.style.animationDelay = (-Math.random() * 30) + 's';
+        conteneur.appendChild(s);
+      }
+
+      /* Réseau de points connectés (comme Internet !) */
+      var canvas = document.getElementById('reseau');
+      var ctx = canvas.getContext('2d');
+      var points = [], souris = { x: -999, y: -999 }, L, H, dpr;
+
+      function initialiser() {
+        dpr = window.devicePixelRatio || 1;
+        L = window.innerWidth; H = window.innerHeight;
+        canvas.width = L * dpr; canvas.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        var n = Math.min(90, Math.floor(L * H / 16000));
+        points = [];
+        for (var a = 0; a < n; a++) {
+          points.push({ x: Math.random() * L, y: Math.random() * H,
+                        vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4 });
+        }
+      }
+
+      function dessiner() {
+        ctx.clearRect(0, 0, L, H);
+        for (var a = 0; a < points.length; a++) {
+          var p = points[a];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > L) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+
+          var dxs = p.x - souris.x, dys = p.y - souris.y, ds = Math.sqrt(dxs * dxs + dys * dys);
+          if (ds < 140) {
+            ctx.strokeStyle = 'rgba(34,211,238,' + (1 - ds / 140) * .5 + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(souris.x, souris.y); ctx.stroke();
+          }
+          for (var b = a + 1; b < points.length; b++) {
+            var q = points[b], dx = p.x - q.x, dy = p.y - q.y, d = dx * dx + dy * dy;
+            if (d < 13000) {
+              ctx.strokeStyle = 'rgba(148,163,255,' + (1 - d / 13000) * .18 + ')';
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+            }
+          }
+          ctx.fillStyle = 'rgba(200,210,255,.55)';
+          ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2); ctx.fill();
+        }
+        requestAnimationFrame(dessiner);
+      }
+
+      window.addEventListener('resize', initialiser);
+      window.addEventListener('pointermove', function (e) { souris.x = e.clientX; souris.y = e.clientY; });
+      window.addEventListener('pointerleave', function () { souris.x = souris.y = -999; });
+      initialiser();
+      dessiner();
+    })();
+  </script>
 </body>
 </html>
