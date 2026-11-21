@@ -6,6 +6,7 @@
   <title>Site de M. Le Faou – Cours de SNT et de Maths</title>
   <meta name="description" content="Cours, activités et exercices de SNT et de mathématiques pour les élèves de M. Le Faou.">
   <link rel="icon" href="favicon.ico">
+  <script src="commun/theme.js"></script>
   <style>
     :root {
       --bg: #0b1020;
@@ -389,6 +390,36 @@
       font-size: .85rem;
     }
 
+    /* ----- Mode clair ----- */
+    html.theme-clair {
+      --bg: #f3f6fc;
+      --bg2: #ffffff;
+      --text: #1c2333;
+      --muted: #5b6478;
+      --glass: rgba(255, 255, 255, .7);
+      --border: rgba(20, 30, 60, .12);
+    }
+    html.theme-clair body {
+      background: radial-gradient(1200px 800px at 80% -10%, #dbe6ff 0%, transparent 60%),
+                  radial-gradient(900px 700px at -10% 110%, #fbe3ee 0%, transparent 60%),
+                  var(--bg);
+    }
+    html.theme-clair .blob { opacity: .25; }
+    html.theme-clair .blob.b3 { opacity: .14; }
+    html.theme-clair .symboles span { color: rgba(20, 30, 60, .12); }
+    html.theme-clair .carte {
+      background: linear-gradient(160deg, rgba(255,255,255,.92), rgba(255,255,255,.7));
+      box-shadow: 0 10px 30px -12px rgba(20, 30, 60, .2);
+    }
+    html.theme-clair .niveau, html.theme-clair .tags li { background: rgba(20, 30, 60, .05); }
+    html.theme-clair .carte.snt .entrer { color: #0e7490; }
+    html.theme-clair .carte.maths .entrer { color: #be123c; }
+    html.theme-clair .formule { fill: rgba(180, 83, 9, .6); }
+    html.theme-clair .binaire { fill: rgba(14, 116, 144, .45); }
+    html.theme-clair .synapse { stroke: rgba(14, 116, 144, .25); }
+    html.theme-clair .electron { fill: var(--snt); }
+    html.theme-clair .curseur { background: var(--snt); }
+
     /* ----- Accessibilité : moins d'animations si demandé ----- */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -635,6 +666,8 @@
       }
 
       function dessiner() {
+        var clair = document.documentElement.classList.contains('theme-clair');
+        var lien = clair ? '30,41,99' : '148,163,255';
         ctx.clearRect(0, 0, L, H);
         for (var a = 0; a < points.length; a++) {
           var p = points[a];
@@ -651,11 +684,11 @@
           for (var b = a + 1; b < points.length; b++) {
             var q = points[b], dx = p.x - q.x, dy = p.y - q.y, d = dx * dx + dy * dy;
             if (d < 13000) {
-              ctx.strokeStyle = 'rgba(148,163,255,' + (1 - d / 13000) * .18 + ')';
+              ctx.strokeStyle = 'rgba(' + lien + ',' + (1 - d / 13000) * .18 + ')';
               ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
             }
           }
-          ctx.fillStyle = 'rgba(200,210,255,.55)';
+          ctx.fillStyle = clair ? 'rgba(30,41,99,.35)' : 'rgba(200,210,255,.55)';
           ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2); ctx.fill();
         }
         requestAnimationFrame(dessiner);

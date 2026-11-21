@@ -1,6 +1,6 @@
 /* ===== Fond animé commun (SNT + Maths) – même univers que la page d'accueil ===== */
 @media screen {
-  :root {
+  html:not(.theme-clair) {
     --bg: #0b1020;
     --surface: rgba(22, 30, 52, .88);
     --border: rgba(255, 255, 255, .12);
@@ -8,14 +8,13 @@
     color-scheme: dark;
   }
 
-  body { background: var(--bg); }
 
   /* Les blocs laissent deviner le fond, sans gêner la lecture */
   .card, .topbar, .chapter-card, .seance-item, .qcm-actions, .auto-bar {
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
   }
-  .topbar { background: rgba(11, 16, 32, .72); }
+  html:not(.theme-clair) .topbar { background: rgba(11, 16, 32, .72); }
 
   /* Bandeau de titre : reflet lumineux qui passe */
   .hero { position: relative; overflow: hidden; }
@@ -50,6 +49,23 @@
     to { opacity: 1; transform: none; }
   }
 }
+
+/* ----- Mode clair ----- */
+@media screen {
+  html.theme-clair {
+    --bg: #f3f6fc;
+    --surface: rgba(255, 255, 255, .88);
+    --border: rgba(20, 30, 60, .12);
+  }
+  html.theme-clair .topbar { background: rgba(255, 255, 255, .75); }
+}
+html.theme-clair .fond-deco {
+  background: radial-gradient(1100px 750px at 85% -10%, #dbe6ff 0%, transparent 60%),
+              radial-gradient(900px 700px at -10% 110%, #fbe3ee 0%, transparent 60%);
+}
+html.theme-clair .fond-blob { opacity: .22; }
+html.theme-clair .fond-blob.b3 { opacity: .12; }
+html.theme-clair .fond-symbole { color: rgba(20, 30, 60, .10); }
 
 /* ----- Décor fixe derrière le contenu ----- */
 .fond-deco {

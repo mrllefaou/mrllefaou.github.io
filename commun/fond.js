@@ -53,6 +53,9 @@
     }
 
     function dessiner() {
+      var clair = document.documentElement.classList.contains('theme-clair');
+      var lien = clair ? '30,41,99' : '148,163,255';
+      var point = clair ? 'rgba(30,41,99,.35)' : 'rgba(200,210,255,.45)';
       ctx.clearRect(0, 0, L, H);
       ctx.lineWidth = 1;
       for (var a = 0; a < points.length; a++) {
@@ -69,11 +72,11 @@
         for (var b = a + 1; b < points.length; b++) {
           var q = points[b], dx = p.x - q.x, dy = p.y - q.y, d = dx * dx + dy * dy;
           if (d < 14000) {
-            ctx.strokeStyle = 'rgba(148,163,255,' + (1 - d / 14000) * .13 + ')';
+            ctx.strokeStyle = 'rgba(' + lien + ',' + (1 - d / 14000) * .13 + ')';
             ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
           }
         }
-        ctx.fillStyle = 'rgba(200,210,255,.45)';
+        ctx.fillStyle = point;
         ctx.beginPath(); ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2); ctx.fill();
       }
       requestAnimationFrame(dessiner);
