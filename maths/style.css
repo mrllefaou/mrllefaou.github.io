@@ -1393,3 +1393,10 @@ figure.carte img { display: block; width: 100%; height: auto; border-radius: 10p
 @media screen { html:not(.theme-clair) .note.carte-avert strong.title { color: var(--accent); } }
 .am-sec li > p:first-child { margin-top: 0; }
 .am-sec li > p:last-child { margin-bottom: 0; }
+.am-img { display: block; max-width: 100%; height: auto; margin: .6rem 0; background: #fff; border-radius: 8px; padding: 4px; }
+.am-sec p > .am-img, .am-sec li > .am-img { display: inline-block; vertical-align: middle; margin: .4rem .6rem .4rem 0; }
+.am-prop { display: flex; align-items: center; gap: .6rem; }
+.am-prop .am-tab { margin: 0; }
+.am-arrow { font-weight: 700; color: var(--primary); border: 2px solid var(--primary); border-radius: 999px; padding: .15rem .7rem; white-space: nowrap; }
+.am-arrow::before { content: "↓ "; }
+.am-sec .katex-display { display: block; max-width: 100%; }
