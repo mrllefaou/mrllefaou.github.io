@@ -1391,3 +1391,5 @@ figure.carte img { display: block; width: 100%; height: auto; border-radius: 10p
 .note.carte-avert { background: var(--accent-soft); border-left-color: var(--accent); margin: 1rem 0 0; }
 .note.carte-avert strong.title { color: #b45309; }
 @media screen { html:not(.theme-clair) .note.carte-avert strong.title { color: var(--accent); } }
+.am-sec li > p:first-child { margin-top: 0; }
+.am-sec li > p:last-child { margin-bottom: 0; }
