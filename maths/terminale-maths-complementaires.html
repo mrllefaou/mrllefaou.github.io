@@ -42,26 +42,104 @@
       </li>
     </ul>
 
-    <h2 style="margin-top:2.5rem">📚 Les chapitres <small style="color:var(--muted);font-weight:600">(0)</small></h2>
-    <p style="color:var(--muted);margin:.25rem 0 0">Choisis un chapitre pour retrouver ses séances : cours, activités et exercices.</p>
+    <h2 id="chapitres" style="margin-top:2.5rem">📚 Les chapitres <small style="color:var(--muted);font-weight:600">(11)</small></h2>
+    <p style="color:var(--muted);margin:.25rem 0 0">Pour chaque chapitre, une carte mentale qui résume le cours (définitions, propriétés, méthodes et exemples).</p>
 
-    <ul class="chapter-grid">
-      <!-- Modèle de carte chapitre à dupliquer :
+    <div class="note carte-avert" role="note">
+      <strong class="title">⚠️ À savoir</strong>
+      <p>Les cartes mentales <strong>ne remplacent pas le cours</strong>. Il est important de <strong>réviser le cours</strong> lui-même (définitions, propriétés, exemples et exercices) : les cartes mentales sont un <strong>support complémentaire</strong> de révision.</p>
+    </div>
+
+    <ul class="chapter-grid" id="chapitres-liste">
       <li>
-        <a class="chapter-card" href="CHAPITRE.html" style="--c:#7c3aed">
-          <span class="ch-top"><span class="ch-num">Chapitre 1</span><span class="ch-icon" aria-hidden="true">📐</span></span>
-          <span class="ch-title">Titre du chapitre</span>
-          <span class="ch-desc">Description courte du chapitre.</span>
-          <span class="ch-foot"><span class="status ok">3 séances</span></span>
+        <a class="chapter-card" href="tmc-carte-chapitre1.html" style="--c:#2563eb">
+          <span class="ch-top"><span class="ch-num">Chapitre 1</span><span class="ch-icon" aria-hidden="true">🔢</span></span>
+          <span class="ch-title">Suites et limites</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
         </a>
       </li>
-      -->
+      <li>
+        <a class="chapter-card" href="tmc-carte-chapitre2.html" style="--c:#0891b2">
+          <span class="ch-top"><span class="ch-num">Chapitre 2</span><span class="ch-icon" aria-hidden="true">📉</span></span>
+          <span class="ch-title">Limites de fonctions et continuité</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="tmc-carte-chapitre3.html" style="--c:#059669">
+          <span class="ch-top"><span class="ch-num">Chapitre 3</span><span class="ch-icon" aria-hidden="true">📐</span></span>
+          <span class="ch-title">Compléments sur la dérivation</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="tmc-carte-chapitre4.html" style="--c:#dc2626">
+          <span class="ch-top"><span class="ch-num">Chapitre 4</span><span class="ch-icon" aria-hidden="true">🎲</span></span>
+          <span class="ch-title">Lois de probabilités discrètes</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="tmc-carte-chapitre5.html" style="--c:#d97706">
+          <span class="ch-top"><span class="ch-num">Chapitre 5</span><span class="ch-icon" aria-hidden="true">🔁</span></span>
+          <span class="ch-title">Suites arithmético-géométriques</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="tmc-carte-chapitre6.html" style="--c:#7c3aed">
+          <span class="ch-top"><span class="ch-num">Chapitre 6</span><span class="ch-icon" aria-hidden="true">📈</span></span>
+          <span class="ch-title">Exponentielle et logarithme népérien</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="tmc-carte-chapitre7.html" style="--c:#4f46e5">
+          <span class="ch-top"><span class="ch-num">Chapitre 7</span><span class="ch-icon" aria-hidden="true">⚡</span></span>
+          <span class="ch-title">Primitives et équations différentielles</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="tmc-carte-chapitre8.html" style="--c:#ea580c">
+          <span class="ch-top"><span class="ch-num">Chapitre 8</span><span class="ch-icon" aria-hidden="true">∫</span></span>
+          <span class="ch-title">Intégration</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="tmc-carte-chapitre9.html" style="--c:#475569">
+          <span class="ch-top"><span class="ch-num">Chapitre 9</span><span class="ch-icon" aria-hidden="true">📊</span></span>
+          <span class="ch-title">Séries statistiques à deux variables</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="tmc-carte-chapitre10.html" style="--c:#be123c">
+          <span class="ch-top"><span class="ch-num">Chapitre 10</span><span class="ch-icon" aria-hidden="true">🔔</span></span>
+          <span class="ch-title">Lois à densité</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="tmc-carte-chapitre11.html" style="--c:#0d9488">
+          <span class="ch-top"><span class="ch-num">Chapitre 11</span><span class="ch-icon" aria-hidden="true">〰️</span></span>
+          <span class="ch-title">Convexité</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
     </ul>
-
-    <div class="card empty-state">
-      <span class="big" aria-hidden="true">🚧</span>
-      Les chapitres de Terminale Maths complémentaires seront bientôt disponibles.
-    </div>
 
     <nav class="pager" aria-label="Navigation entre niveaux">
       <a class="btn secondary" href="terminale-stmg.html">← Terminale STMG</a>
