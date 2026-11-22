@@ -16,4 +16,20 @@ User-agent: meta-externalagent
 Disallow: /
 
 User-agent: *
+# Fichiers qui ne peuvent pas porter la consigne « noindex » (images, PDF, archives, scripts) :
+# les moteurs ne doivent pas les explorer.
+Disallow: /commun/
+Disallow: /outils/
+Disallow: /maths/cartes/
+Disallow: /maths/docs/
+Disallow: /snt/img/
+Disallow: /snt/fichiers/
+Disallow: /*.pdf$
+Disallow: /*.zip$
+Disallow: /*.enc$
+Disallow: /*.jpg$
+Disallow: /*.png$
+Disallow: /*.webp$
+Disallow: /*.mp4$
+Disallow: /*.json$
 Allow: /
