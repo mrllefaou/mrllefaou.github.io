@@ -1,0 +1,82 @@
+/* ===== QCM enseignant SNT : écran + impression (sujet / corrigé) ===== */
+
+.qcm-outils {
+  display: flex; flex-wrap: wrap; gap: .6rem; align-items: center;
+  margin: 1.25rem 0;
+  padding: .9rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.qcm-outils .groupe { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
+.qcm-outils .groupe button {
+  border: 0; background: transparent; color: var(--text);
+  padding: .45rem .95rem; font: inherit; font-weight: 600; font-size: .92rem; cursor: pointer;
+}
+.qcm-outils .groupe button[aria-pressed="true"] { background: var(--primary); color: #fff; }
+.qcm-outils .bascule { display: inline-flex; align-items: center; gap: .45rem; font-weight: 600; font-size: .95rem; cursor: pointer; }
+.qcm-outils .bascule input { width: 1.1rem; height: 1.1rem; accent-color: var(--primary); }
+.qcm-outils .espace { flex: 1; }
+.qcm-outils .btn { margin: 0; }
+
+.qcm-liste { list-style: none; margin: 0; padding: 0; counter-reset: q; display: grid; gap: .9rem; }
+.qcm-q {
+  counter-increment: q;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.15rem;
+  box-shadow: var(--shadow);
+  break-inside: avoid;
+}
+.qcm-q .enonce { display: flex; gap: .7rem; font-weight: 600; margin: 0 0 .7rem; }
+.qcm-q .enonce::before {
+  content: counter(q);
+  flex: none; display: grid; place-items: center;
+  width: 1.8rem; height: 1.8rem; border-radius: 8px;
+  background: var(--primary-soft); color: var(--primary); font-weight: 800; font-size: .95rem;
+}
+.qcm-q .choix { list-style: none; margin: 0; padding: 0 0 0 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: .45rem .9rem; }
+.qcm-q .choix li { display: flex; gap: .55rem; align-items: baseline; }
+.qcm-q .choix li::before {
+  content: ""; flex: none; width: .95rem; height: .95rem; transform: translateY(.12rem);
+  border: 2px solid var(--muted); border-radius: 3px;
+}
+.qcm-q .choix.courts { grid-template-columns: repeat(4, 1fr); }
+.qcm-q .lettre { font-weight: 700; color: var(--muted); }
+.qcm-q .explication { display: none; margin: .7rem 0 0 2.5rem; font-size: .92rem; color: var(--muted); }
+
+/* Réponses visibles (case « Afficher les réponses » ou corrigé imprimé) */
+.avec-reponses .qcm-q .choix li.bonne { color: var(--ok); font-weight: 600; }
+.avec-reponses .qcm-q .choix li.bonne::before { border-color: var(--ok); background: var(--ok); box-shadow: inset 0 0 0 2px var(--surface); }
+.avec-reponses .qcm-q .explication { display: block; }
+
+.qcm-entete-copie, .qcm-bareme { display: none; }
+
+@media (max-width: 640px) { .qcm-q .choix, .qcm-q .choix.courts { grid-template-columns: 1fr; padding-left: 0; } .qcm-q .explication { margin-left: 0; } }
+
+/* ----- Impression : une feuille d'élève sobre, A4 ----- */
+@media print {
+  @page { size: A4; margin: 9mm 12mm; }
+  html, body { background: #fff !important; color: #000 !important; font-size: 9.5pt; line-height: 1.2; }
+  .topbar, .pager, .qcm-outils, .qcm-consigne-ecran, .bouton-theme, footer, .fond-anime, canvas { display: none !important; }
+  main { max-width: none; padding: 0; margin: 0; }
+  .hero { background: none !important; color: #000 !important; border: 0; border-bottom: 2px solid #000; border-radius: 0; padding: 0 0 2.5mm; margin: 0 0 3mm; box-shadow: none; }
+  .hero .eyebrow { color: #000; opacity: 1; }
+  .hero h1 { font-size: 14pt; }
+  .hero .meta { font-size: 9.5pt; }
+  .qcm-entete-copie { display: grid; grid-template-columns: 2fr 2fr 1fr 1fr; gap: 3mm; margin: 0 0 3mm; font-size: 9.5pt; }
+  .qcm-entete-copie span { border-bottom: 1px solid #000; padding-bottom: 4mm; }
+  .qcm-bareme { display: block; margin: 0 0 2.5mm; font-size: 9.5pt; font-style: italic; }
+  .qcm-liste { gap: 1.5mm; }
+  .qcm-q { border: 0; border-bottom: 1px solid #bbb; border-radius: 0; box-shadow: none; padding: 0 0 1.5mm; background: none; }
+  .qcm-q .enonce { margin-bottom: 1mm; }
+  .qcm-q .enonce::before { background: none; color: #000; border: 1.5px solid #000; width: 6mm; height: 6mm; border-radius: 1.5mm; font-size: 9pt; }
+  .qcm-q .choix { gap: .5mm 6mm; padding-left: 9mm; }
+  .qcm-q .choix li::before { border: 1.5px solid #000; }
+  .qcm-q .lettre { color: #000; }
+  .avec-reponses .qcm-q .choix li.bonne { color: #000; font-weight: 700; }
+  .avec-reponses .qcm-q .choix li.bonne::before { background: #000; border-color: #000; box-shadow: inset 0 0 0 1.5px #fff; }
+  .avec-reponses .qcm-q .explication { color: #333; font-size: 9pt; margin: 1mm 0 0 9mm; }
+}

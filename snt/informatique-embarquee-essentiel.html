@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L’essentiel – Informatique embarquée · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 6, Informatique embarquée : l’essentiel à retenir sur une fiche imprimable.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="essentiel.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <script src="../commun/impression.js"></script>
+  <script src="../commun/recherche.js"></script>
+  <script src="../commun/suivi.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="informatique-embarquee.html">Chapitre 6 – Informatique embarquée</a><span class="sep">›</span>
+        <span>L’essentiel</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="background:linear-gradient(135deg,#7c3aed,#1c2333)">
+      <p class="eyebrow">SNT · Chapitre 6</p>
+      <h1>L’essentiel – Informatique embarquée</h1>
+      <p class="meta">Ce qu’il faut retenir du chapitre, sur une fiche à relire ou à imprimer.</p>
+      <div class="ess-actions"><button type="button" class="btn" onclick="window.print()">🖨️ Imprimer ou enregistrer en PDF</button></div>
+    </section>
+
+    <div class="note ess-avert" role="note"><strong class="title">⚠️ À savoir</strong><p>Cette fiche <strong>ne remplace pas le cours</strong>. Il est important de <strong>réviser le cours</strong> lui-même (séances, documents, activités et TP) : la fiche « L’essentiel » est un <strong>support complémentaire</strong> de révision.</p></div>
+
+    <p class="ess-lead">Un <b>système embarqué</b> est un système électronique et informatique <b>intégré à un objet</b> pour accomplir une tâche précise. Il perçoit le monde avec des <b>capteurs</b>, traite l’information et agit avec des <b>actionneurs</b>.</p>
+
+    <div class="ess-grille">
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">⚙️</span> Le modèle d’un système embarqué</h2>
+<div class="ess-flux" style="grid-template-columns:1fr auto 1fr auto 1fr">
+          <div class="poste"><strong>🌡️ Capteurs</strong><small>recueillent des informations sur le monde physique</small></div>
+          <div class="fleches"><span class="aller">→</span></div>
+          <div class="poste"><strong>💻 Système informatique</strong><small>matériel + logiciel : traite les informations</small></div>
+          <div class="fleches"><span class="aller">→</span></div>
+          <div class="poste"><strong>⚡ Actionneurs</strong><small>agissent sur le monde physique</small></div>
+        </div>
+        <p style="margin:.7rem 0 0">Exemple : le radar d’une porte automatique (capteur) détecte un mouvement, le programme décide, le moteur (actionneur) ouvre la porte. Certains systèmes ont une <b>interface homme-machine</b> (IHM) : écran, boutons, commande vocale.</p>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🧱</span> Les contraintes</h2>
+<ul class="ess-liste">
+          <li><b>Criticité</b> : des résultats exacts (avion, matériel médical).</li>
+          <li><b>Réactivité</b> : des temps de réponse précis, souvent en <b>temps réel</b>.</li>
+          <li><b>Autonomie</b> : fonctionner longtemps sans intervention humaine.</li>
+          <li><b>Fiabilité et sécurité</b> : continuité de service, résistance aux attaques.</li>
+          <li>Une puissance de calcul et une consommation d’énergie <b>au plus juste</b>.</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🚗</span> La voiture autonome</h2>
+<ul class="ess-liste">
+          <li>Capteurs : caméras, radars, lidar, GPS… ; actionneurs : direction, freins, accélérateur.</li>
+          <li>La norme <b>SAE</b> définit 6 niveaux, de <b>0</b> (conduite manuelle) à <b>5</b> (totalement autonome partout).</li>
+          <li>Aujourd’hui : niveau 2 courant (le conducteur reste responsable), niveau 3 sur autoroute sous conditions, robotaxis de niveau 4 dans quelques villes.</li>
+          <li>Risque : tromper les capteurs ou pirater le système.</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">📶</span> Les objets connectés</h2>
+<ul class="ess-liste">
+          <li>Un <b>objet connecté</b> est un système embarqué qui <b>communique avec un réseau</b> (Wi-Fi, Bluetooth, réseau mobile) : montre, enceinte, thermostat, compteur Linky…</li>
+          <li>Leur ensemble forme l’<b>Internet des objets</b> (IoT) : environ <b>21 milliards</b> d’objets fin 2025.</li>
+          <li>Avantages : confort, santé, économies d’énergie. Risques : <b>sécurité</b> (piratage) et <b>données personnelles</b> collectées en continu.</li>
+          <li>La carte <b>micro:bit</b> est un système embarqué programmable : capteurs (accéléromètre, boussole, température, luminosité), actionneurs (écran de LED), boutons.</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">✅</span> Je sais…</h2>
+        <ul class="ess-savoir">
+          <li>définir un système embarqué ;</li>
+          <li>identifier capteurs, actionneurs et interface d’un objet ;</li>
+          <li>citer des exemples de systèmes embarqués ;</li>
+          <li>citer les contraintes de l’informatique embarquée ;</li>
+          <li>décrire les niveaux d’autonomie d’une voiture ;</li>
+          <li>expliquer le rôle d’une interface homme-machine ;</li>
+          <li>définir un objet connecté et l’Internet des objets ;</li>
+          <li>citer des avantages et des risques des objets connectés ;</li>
+          <li>programmer une action simple sur une carte micro:bit ;</li>
+          <li>expliquer pourquoi la sécurité est essentielle pour ces systèmes.</li>
+        </ul>
+      </section>
+    </div>
+
+    <nav class="pager" aria-label="Navigation">
+      <a class="btn secondary" href="informatique-embarquee.html">← Retour au chapitre</a>
+    </nav>
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, séances terminées, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+</body>
+</html>

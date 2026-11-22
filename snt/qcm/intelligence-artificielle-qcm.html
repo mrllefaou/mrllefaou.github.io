@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QCM – Intelligence artificielle · SNT</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../qcm-ens.css">
+  <script src="../../commun/acces.js"></script>
+  <script src="../../commun/theme.js"></script>
+  <script src="../../commun/impression.js"></script>
+  <script src="../../commun/recherche.js"></script>
+  <script src="../../commun/suivi.js"></script>
+  <link rel="stylesheet" href="../../commun/fond.css">
+  <script src="../../commun/fond.js" defer></script>
+  <script src="../qcm-ens.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="../qcm.html">QCM enseignant</a><span class="sep">›</span>
+        <span>QCM – Intelligence artificielle</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="background:linear-gradient(135deg,#4f46e5,#1c2333)">
+      <p class="eyebrow">SNT · Chapitre 9 – Intelligence artificielle · <span class="qcm-version">Sujet A</span></p>
+      <h1>QCM – Intelligence artificielle</h1>
+      <p class="meta">10 questions · une seule bonne réponse par question · 10 minutes</p>
+    </section>
+
+    <section class="card lock" id="lock" aria-labelledby="t-lock">
+      <h2 id="t-lock"><span class="num tp">🔒</span> Accès réservé à l’enseignant</h2>
+      <p>Ce QCM est réservé à l’enseignant. Saisis le mot de passe enseignant pour l’afficher.</p>
+      <form id="lock-form" class="lock-form" autocomplete="off">
+        <label for="pw" class="lock-label">Mot de passe</label>
+        <div class="lock-row">
+          <input type="password" id="pw" name="pw" required autocomplete="off" autocapitalize="off" spellcheck="false">
+          <button type="submit" class="btn" id="lock-btn">Déverrouiller</button>
+        </div>
+        <p class="lock-msg" id="lock-msg" role="alert"></p>
+      </form>
+      <noscript><p class="lock-msg">JavaScript est nécessaire pour déverrouiller cette page.</p></noscript>
+    </section>
+
+    <div id="content" hidden></div>
+
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, séances terminées, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+  <!-- Le contenu de la correction est chiffré (AES-256-GCM, clé dérivée du mot de passe par PBKDF2) :
+       il ne devient lisible qu'avec le mot de passe enseignant. -->
+  <script>
+  (function () {
+    var SALT = "slIZ3MQYbIAz15CVcNq/cw==", ITER = 600000;
+    var PAYLOAD = "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";
+    var CLE = "corrections-mdp"; /* mot de passe gardé le temps de l'onglet, pour ouvrir les autres corrections */
+    var form = document.getElementById("lock-form"), msg = document.getElementById("lock-msg");
+    var btn = document.getElementById("lock-btn"), pwEl = document.getElementById("pw");
+    function b64(s) { var b = atob(s), a = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return a; }
+    function ouvrir(mdp) {
+      var enc = new TextEncoder();
+      return crypto.subtle.importKey("raw", enc.encode(mdp), "PBKDF2", false, ["deriveKey"])
+        .then(function (km) {
+          return crypto.subtle.deriveKey({ name: "PBKDF2", salt: b64(SALT), iterations: ITER, hash: "SHA-256" }, km, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+        })
+        .then(function (key) { var d = b64(PAYLOAD); return crypto.subtle.decrypt({ name: "AES-GCM", iv: d.slice(0, 12) }, key, d.slice(12)); })
+        .then(function (buf) {
+          var box = document.getElementById("content");
+          box.innerHTML = new TextDecoder().decode(buf); box.hidden = false;
+          document.getElementById("lock").hidden = true;
+          try { sessionStorage.setItem(CLE, mdp); } catch (e) {}
+          document.dispatchEvent(new Event("contenu-dechiffre"));
+        });
+    }
+    if (!window.crypto || !crypto.subtle) { msg.textContent = "Ce navigateur ne permet pas le déverrouillage (page non sécurisée ?)."; return; }
+    var memo = null; try { memo = sessionStorage.getItem(CLE); } catch (e) {}
+    if (memo) ouvrir(memo).catch(function () { try { sessionStorage.removeItem(CLE); } catch (e) {} });
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      msg.textContent = ""; btn.disabled = true; btn.textContent = "Vérification…";
+      ouvrir(pwEl.value).catch(function () {
+        msg.textContent = "Mot de passe incorrect.";
+        btn.disabled = false; btn.textContent = "Déverrouiller"; pwEl.select();
+      });
+    });
+  })();
+  </script>
+
+</body>
+</html>

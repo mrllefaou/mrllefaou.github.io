@@ -4,7 +4,7 @@
 import html, json, pathlib, re
 
 RACINE = pathlib.Path(__file__).resolve().parent.parent
-EXCLUS = {'acces.html', '404.html', 'mapage.html', 'web-seance1-sans-css.html',
+EXCLUS = {'acces.html', '404.html', 'mapage.html', 'web-seance1-sans-css.html', 'qcm.html',
           'python-evaluation-conditions-groupe1.html', 'corrections.html'}
 
 def texte(fragment):

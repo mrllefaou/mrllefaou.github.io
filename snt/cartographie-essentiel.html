@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L’essentiel – Cartographie et localisation · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 5, Cartographie et localisation : l’essentiel à retenir sur une fiche imprimable.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="essentiel.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <script src="../commun/impression.js"></script>
+  <script src="../commun/recherche.js"></script>
+  <script src="../commun/suivi.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="cartographie.html">Chapitre 5 – Cartographie et localisation</a><span class="sep">›</span>
+        <span>L’essentiel</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="background:linear-gradient(135deg,#dc2626,#1c2333)">
+      <p class="eyebrow">SNT · Chapitre 5</p>
+      <h1>L’essentiel – Cartographie et localisation</h1>
+      <p class="meta">Ce qu’il faut retenir du chapitre, sur une fiche à relire ou à imprimer.</p>
+      <div class="ess-actions"><button type="button" class="btn" onclick="window.print()">🖨️ Imprimer ou enregistrer en PDF</button></div>
+    </section>
+
+    <div class="note ess-avert" role="note"><strong class="title">⚠️ À savoir</strong><p>Cette fiche <strong>ne remplace pas le cours</strong>. Il est important de <strong>réviser le cours</strong> lui-même (séances, documents, activités et TP) : la fiche « L’essentiel » est un <strong>support complémentaire</strong> de révision.</p></div>
+
+    <p class="ess-lead">Un récepteur <b>GPS</b> calcule sa position grâce aux signaux de <b>satellites</b>. Les <b>cartes numériques</b> superposent des <b>couches</b> d’informations, et des <b>algorithmes</b> sur des <b>graphes</b> calculent les itinéraires.</p>
+
+    <div class="ess-grille">
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🛰️</span> Se localiser par satellites</h2>
+<ul class="ess-liste">
+          <li>Le récepteur mesure sa <b>distance</b> à plusieurs satellites à partir du <b>temps</b> mis par leurs signaux : c’est la <b>trilatération</b>.</li>
+          <li>Il faut au moins <b>4 satellites</b> : 3 pour la position, 1 pour synchroniser l’horloge.</li>
+          <li>Systèmes : <b>GPS</b> (États-Unis), <b>Galileo</b> (Europe, précis au mètre, garantit l’<b>indépendance</b> européenne), Glonass (Russie), Beidou (Chine).</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">📡</span> Les trames NMEA 0183</h2>
+<p style="margin:0 0 .35rem">Le récepteur transmet ses données selon le protocole <b>NMEA 0183</b>, en lignes de texte appelées <b>trames</b> :</p>
+        <p style="font-family:var(--mono);font-size:.9rem;margin:0 0 .35rem;word-break:break-all">$GPGLL,4631.35,N,634.44,E,205532,A</p>
+        <ul class="ess-liste">
+          <li><b>GP</b> : GPS · <b>GLL</b> : latitude-longitude · <b>205532</b> : 20 h 55 min 32 s UTC · <b>A</b> : données valides.</li>
+          <li><b>4631.35,N</b> = 46° 31,35′ Nord. Secondes = partie décimale des minutes × 60 : 0,35 × 60 = 21″, soit <b>46° 31′ 21″ N</b>.</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">🗺️</span> Les cartes numériques</h2>
+<ul class="ess-liste">
+          <li>Une carte numérique rassemble toutes les <b>échelles</b> et superpose des <b>couches</b> d’information : vue aérienne, routes, cadastre, données statistiques…</li>
+          <li><b>Carte matricielle</b> : une image en pixels, zoomer l’agrandit. <b>Carte vectorielle</b> : des objets positionnés par leurs coordonnées, zoomer fait apparaître des détails (OpenStreetMap, Géoportail).</li>
+          <li>Les données viennent de services géographiques, de satellites, d’avions, de voitures et des utilisateurs. Leur traitement s’appelle la <b>géomatique</b>.</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">🧭</span> Calculer un itinéraire</h2>
+<ul class="ess-liste">
+          <li>Un réseau routier se représente par un <b>graphe</b> : les lieux sont les <b>sommets</b>, les routes les <b>arêtes</b>, chacune avec une valeur (distance ou durée).</li>
+          <li>L’<b>algorithme de Dijkstra</b> (1959) trouve le plus court chemin entre deux sommets en explorant pas à pas les chemins possibles.</li>
+          <li>Le plus <b>court</b> n’est pas toujours le plus <b>rapide</b> : il dépend des vitesses autorisées et du trafic. Pour passer d’une distance à une durée : <b>t = d ÷ v</b>.</li>
+          <li>Les applications estiment le trafic grâce à la géolocalisation des téléphones des usagers.</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">✅</span> Je sais…</h2>
+        <ul class="ess-savoir">
+          <li>expliquer le principe de la trilatération ;</li>
+          <li>citer plusieurs systèmes de positionnement et l’intérêt de Galileo ;</li>
+          <li>lire une trame NMEA ;</li>
+          <li>convertir des minutes décimales en minutes et secondes ;</li>
+          <li>distinguer carte matricielle et carte vectorielle ;</li>
+          <li>utiliser les couches et outils de Géoportail ;</li>
+          <li>représenter un itinéraire par un graphe ;</li>
+          <li>appliquer l’algorithme de Dijkstra ;</li>
+          <li>distinguer chemin le plus court et le plus rapide ;</li>
+          <li>mesurer les enjeux de la géolocalisation pour la vie privée.</li>
+        </ul>
+      </section>
+    </div>
+
+    <nav class="pager" aria-label="Navigation">
+      <a class="btn secondary" href="cartographie.html">← Retour au chapitre</a>
+    </nav>
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, séances terminées, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+</body>
+</html>

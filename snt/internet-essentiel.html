@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L’essentiel – Internet · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 1, Internet : l’essentiel à retenir sur une fiche imprimable.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="essentiel.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <script src="../commun/impression.js"></script>
+  <script src="../commun/recherche.js"></script>
+  <script src="../commun/suivi.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="internet.html">Chapitre 1 – Internet</a><span class="sep">›</span>
+        <span>L’essentiel</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="background:linear-gradient(135deg,#2563eb,#1c2333)">
+      <p class="eyebrow">SNT · Chapitre 1</p>
+      <h1>L’essentiel – Internet</h1>
+      <p class="meta">Ce qu’il faut retenir du chapitre, sur une fiche à relire ou à imprimer.</p>
+      <div class="ess-actions"><button type="button" class="btn" onclick="window.print()">🖨️ Imprimer ou enregistrer en PDF</button></div>
+    </section>
+
+    <div class="note ess-avert" role="note"><strong class="title">⚠️ À savoir</strong><p>Cette fiche <strong>ne remplace pas le cours</strong>. Il est important de <strong>réviser le cours</strong> lui-même (séances, documents, activités et TP) : la fiche « L’essentiel » est un <strong>support complémentaire</strong> de révision.</p></div>
+
+    <p class="ess-lead"><b>Internet</b> est un <b>réseau de réseaux</b> qui relie des milliards de machines. Les données y circulent découpées en <b>paquets</b>, adressés grâce aux <b>adresses IP</b> et acheminés par des <b>routeurs</b> selon le protocole <b>TCP/IP</b>.</p>
+
+    <div class="ess-grille">
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">📦</span> Paquets et adresses IP</h2>
+<ul class="ess-liste">
+          <li>Un fichier est découpé en <b>paquets</b> envoyés séparément, puis reconstitué à l’arrivée.</li>
+          <li>Chaque machine a une <b>adresse IP</b> (<i>Internet Protocol</i>) qui l’identifie.</li>
+          <li><b>IPv4</b> : 4 nombres de 0 à 255 (ex. 88.232.28.174), environ 4,3 milliards d’adresses.</li>
+          <li><b>IPv6</b> : 8 blocs hexadécimaux (ex. 3bec:c504:…:1eee), un nombre gigantesque d’adresses.</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🏠</span> IP publique et IP privée</h2>
+<ul class="ess-liste">
+          <li><b>IP publique</b> : celle de la box, attribuée par le <b>FAI</b> ; c’est elle que voient les sites.</li>
+          <li><b>IP privée</b> : attribuée par la box à chaque appareil du <b>réseau local</b> (ex. 192.168.1.40).</li>
+          <li>Commandes utiles : <code>ping</code> (temps de réponse), <code>tracert</code> (routeurs traversés), <code>ipconfig</code> (IP privée).</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">🔁</span> Le protocole TCP/IP et le routage</h2>
+<div class="ess-flux">
+          <div class="poste"><strong>IP</strong><small>achemine les paquets de l’émetteur au destinataire</small></div>
+          <div class="fleches"><span class="aller">paquets numérotés →</span><span class="retour">← accusés de réception</span></div>
+          <div class="poste"><strong>TCP</strong><small>numérote, contrôle et renvoie les paquets perdus</small></div>
+        </div>
+        <p style="margin:.7rem 0 0">Les paquets ne prennent pas forcément le même chemin : sur chaque <b>routeur</b>, une <b>table de routage</b> choisit le chemin le plus rapide. Le <b>TTL</b> limite le nombre de routeurs qu’un paquet peut encore traverser.</p>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🖥️</span> Client-serveur et DNS</h2>
+<ul class="ess-liste">
+          <li>Le <b>client</b> envoie une <b>requête</b> ; le <b>serveur</b> renvoie une <b>réponse</b>.</li>
+          <li>Le <b>DNS</b> (<i>Domain Name System</i>) traduit un nom de domaine (google.fr) en adresse IP : plus facile à retenir qu’une suite de nombres.</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🔗</span> Le pair-à-pair (P2P)</h2>
+<ul class="ess-liste">
+          <li>Chaque machine (un <b>pair</b>) est à la fois <b>client et serveur</b>.</li>
+          <li>Un <b>tracker</b> donne la liste des pairs ; les fragments sont téléchargés en parallèle, puis partagés à son tour.</li>
+          <li>Partager un contenu protégé est illégal : surveillance par l’<b>Arcom</b> (ex-Hadopi).</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🌊</span> Accès et trafic</h2>
+<ul class="ess-liste">
+          <li><b>Haut débit</b> (moins de 30 Mbit/s) : ADSL, 3G, 4G. <b>Très haut débit</b> (plus de 30 Mbit/s) : fibre optique, 5G. Le <b>Wi-Fi</b> relie localement un appareil à un point d’accès.</li>
+          <li>Au cœur d’Internet, des <b>câbles sous-marins</b> en fibre optique transportent l’essentiel des données.</li>
+          <li>Le trafic croît très vite : environ <b>9 zettaoctets</b> par an estimés en 2026 ; la majorité du temps en ligne se passe sur mobile.</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🕰️</span> Repères</h2>
+<ol class="ess-frise">
+          <li><b>1969</b><span><b>ARPANET</b>, ancêtre d’Internet, relie les premiers ordinateurs aux États-Unis.</span></li>
+          <li><b>1974</b><span>Le protocole <b>TCP/IP</b> est publié (Vinton Cerf et Robert Kahn).</span></li>
+          <li><b>1983</b><span>ARPANET adopte TCP/IP ; création du DNS.</span></li>
+          <li><b>1989</b><span>Invention du <b>Web</b>, un service qui utilise Internet.</span></li>
+        </ol>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">✅</span> Je sais…</h2>
+        <ul class="ess-savoir">
+          <li>expliquer le rôle des paquets et des adresses IP ;</li>
+          <li>distinguer IPv4 et IPv6 ;</li>
+          <li>distinguer IP publique et IP privée ;</li>
+          <li>expliquer les rôles de TCP et d’IP ;</li>
+          <li>expliquer le routage et le rôle d’un routeur ;</li>
+          <li>expliquer le rôle du DNS ;</li>
+          <li>distinguer client-serveur et pair-à-pair ;</li>
+          <li>utiliser ping, tracert et ipconfig ;</li>
+          <li>distinguer haut et très haut débit ;</li>
+          <li>citer les grandes étapes de l’histoire d’Internet.</li>
+        </ul>
+      </section>
+    </div>
+
+    <nav class="pager" aria-label="Navigation">
+      <a class="btn secondary" href="internet.html">← Retour au chapitre</a>
+    </nav>
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, séances terminées, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+</body>
+</html>

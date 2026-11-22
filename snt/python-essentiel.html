@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L’essentiel – Programmation en Python · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 4, Programmation en Python : l’essentiel à retenir sur une fiche imprimable.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="essentiel.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <script src="../commun/impression.js"></script>
+  <script src="../commun/recherche.js"></script>
+  <script src="../commun/suivi.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="python.html">Chapitre 4 – Programmation en Python</a><span class="sep">›</span>
+        <span>L’essentiel</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="background:linear-gradient(135deg,#d97706,#1c2333)">
+      <p class="eyebrow">SNT · Chapitre 4</p>
+      <h1>L’essentiel – Programmation en Python</h1>
+      <p class="meta">Ce qu’il faut retenir du chapitre, sur une fiche à relire ou à imprimer.</p>
+      <div class="ess-actions"><button type="button" class="btn" onclick="window.print()">🖨️ Imprimer ou enregistrer en PDF</button></div>
+    </section>
+
+    <div class="note ess-avert" role="note"><strong class="title">⚠️ À savoir</strong><p>Cette fiche <strong>ne remplace pas le cours</strong>. Il est important de <strong>réviser le cours</strong> lui-même (séances, documents, activités et TP) : la fiche « L’essentiel » est un <strong>support complémentaire</strong> de révision.</p></div>
+
+    <p class="ess-lead"><b>Informatique</b> = <b>information</b> + <b>automatique</b>. Un <b>programme</b> est une suite d’<b>instructions</b>, écrites dans un <b>langage de programmation</b> (ici Python), exécutées dans l’ordre par la machine.</p>
+
+    <div class="ess-grille">
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">📦</span> Variables et types</h2>
+<ul class="ess-liste">
+          <li>Une <b>variable</b> a un <b>nom</b>, un <b>type</b> et une <b>valeur</b>, stockée dans la <b>mémoire vive</b> (RAM).</li>
+          <li>Types : <code>int</code> (entier), <code>float</code> (décimal), <code>str</code> (texte), <code>bool</code> (vrai/faux).</li>
+          <li>Le signe <code>=</code> <b>affecte</b> une valeur (ce n’est pas le « = » des maths).</li>
+        </ul>
+        <pre style="background:#0c1220;color:#e6edf7;border-radius:8px;padding:.5rem .7rem;margin:.4rem 0 0;font-size:.85rem;line-height:1.45;overflow-x:auto">age = 16          # int
+masse = 75.4      # float
+prenom = "Michel" # str</pre>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">⌨️</span> Entrées, sorties, opérations</h2>
+<ul class="ess-liste">
+          <li><code>print()</code> affiche : <b>flux de sortie</b>. <code>input()</code> lit une saisie : <b>flux d’entrée</b> (texte, à convertir avec <code>int()</code> ou <code>float()</code>).</li>
+          <li>Opérateurs : <code>+ - * /</code>, <code>**</code> (puissance) ; <code>+</code> entre deux textes = <b>concaténation</b>.</li>
+        </ul>
+        <pre style="background:#0c1220;color:#e6edf7;border-radius:8px;padding:.5rem .7rem;margin:.4rem 0 0;font-size:.85rem;line-height:1.45;overflow-x:auto">a = int(input("Saisir un entier : "))
+print("Le double vaut", 2 * a)</pre>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🔀</span> Conditions</h2>
+<pre style="background:#0c1220;color:#e6edf7;border-radius:8px;padding:.5rem .7rem;margin:.4rem 0 0;font-size:.85rem;line-height:1.45;overflow-x:auto">if note >= 10:
+    print("Admis")
+elif note >= 8:
+    print("Rattrapage")
+else:
+    print("Refusé")</pre>
+        <p style="margin:.4rem 0 0">Comparaisons : <code>==</code> (égal), <code>!=</code> (différent), <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>. Le bloc est <b>indenté</b> et l’en-tête finit par <code>:</code>.</p>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🔁</span> Boucles</h2>
+<pre style="background:#0c1220;color:#e6edf7;border-radius:8px;padding:.5rem .7rem;margin:.4rem 0 0;font-size:.85rem;line-height:1.45;overflow-x:auto">for i in range(0, 5):   # i = 0, 1, 2, 3, 4
+    print(i)
+
+n = 1
+while n &lt; 100:          # tant que c’est vrai
+    n = n * 2</pre>
+        <p style="margin:.4rem 0 0"><code>for</code> : nombre de répétitions <b>connu</b>. <code>while</code> : on répète <b>tant que</b> l’assertion est vraie (attention aux boucles infinies).</p>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🧩</span> Fonctions et bibliothèques</h2>
+<pre style="background:#0c1220;color:#e6edf7;border-radius:8px;padding:.5rem .7rem;margin:.4rem 0 0;font-size:.85rem;line-height:1.45;overflow-x:auto">def somme(nb1, nb2, nb3):
+    return nb1 + nb2 + nb3
+
+print(somme(1, 2, 3))   # affiche 6
+
+from random import *
+de = randint(1, 6)       # entier entre 1 et 6</pre>
+        <p style="margin:.4rem 0 0"><code>def</code> définit une fonction réutilisable ; <code>return</code> renvoie le résultat. Une <b>bibliothèque</b> (module) regroupe des fonctions déjà écrites.</p>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">📋</span> Listes</h2>
+<pre style="background:#0c1220;color:#e6edf7;border-radius:8px;padding:.5rem .7rem;margin:.4rem 0 0;font-size:.85rem;line-height:1.45;overflow-x:auto">notes = [12, 15, 9]
+print(notes[0])        # 12 : le 1er élément est au rang 0
+notes.append(18)       # ajoute 18 à la fin
+for n in notes:
+    print(n)</pre>
+        <p style="margin:.4rem 0 0">Une <b>liste</b> stocke plusieurs valeurs, repérées par leur <b>rang</b> (indice), en commençant à <b>0</b>.</p>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">🕰️</span> Repères</h2>
+<ol class="ess-frise">
+          <li><b>XVIIᵉ</b><span>Blaise Pascal invente la <b>Pascaline</b>, machine à calculer à rouages.</span></li>
+          <li><b>1940</b><span>Alan <b>Turing</b> et ses machines pour décrypter les messages militaires nazis.</span></li>
+          <li><b>1947</b><span>Invention du <b>transistor</b> : naissance de l’électronique et de l’informatique moderne.</span></li>
+        </ol>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">✅</span> Je sais…</h2>
+        <ul class="ess-savoir">
+          <li>expliquer ce qu’est un programme ;</li>
+          <li>créer une variable et choisir son type ;</li>
+          <li>afficher avec print() et lire avec input() ;</li>
+          <li>utiliser les opérateurs et la concaténation ;</li>
+          <li>écrire une condition if / elif / else ;</li>
+          <li>choisir entre une boucle for et une boucle while ;</li>
+          <li>définir et appeler une fonction ;</li>
+          <li>importer une bibliothèque (random) ;</li>
+          <li>créer une liste, lire un élément, ajouter un élément ;</li>
+          <li>respecter l’indentation et les deux-points.</li>
+        </ul>
+      </section>
+    </div>
+
+    <nav class="pager" aria-label="Navigation">
+      <a class="btn secondary" href="python.html">← Retour au chapitre</a>
+    </nav>
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, séances terminées, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+</body>
+</html>

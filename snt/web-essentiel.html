@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L’essentiel – Le Web · SNT</title>
+  <meta name="description" content="SNT Seconde – Chapitre 2, Le Web : l’essentiel à retenir sur une fiche imprimable.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="essentiel.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <script src="../commun/impression.js"></script>
+  <script src="../commun/recherche.js"></script>
+  <script src="../commun/suivi.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="snt.html">SNT<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="web.html">Chapitre 2 – Le Web</a><span class="sep">›</span>
+        <span>L’essentiel</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="background:linear-gradient(135deg,#0ea5e9,#1c2333)">
+      <p class="eyebrow">SNT · Chapitre 2</p>
+      <h1>L’essentiel – Le Web</h1>
+      <p class="meta">Ce qu’il faut retenir du chapitre, sur une fiche à relire ou à imprimer.</p>
+      <div class="ess-actions"><button type="button" class="btn" onclick="window.print()">🖨️ Imprimer ou enregistrer en PDF</button></div>
+    </section>
+
+    <div class="note ess-avert" role="note"><strong class="title">⚠️ À savoir</strong><p>Cette fiche <strong>ne remplace pas le cours</strong>. Il est important de <strong>réviser le cours</strong> lui-même (séances, documents, activités et TP) : la fiche « L’essentiel » est un <strong>support complémentaire</strong> de révision.</p></div>
+
+    <p class="ess-lead">Le <b>Web</b> est un ensemble de pages reliées par des <b>liens hypertextes</b>. C’est un service qui utilise le réseau <b>Internet</b> : un <b>navigateur</b> demande les pages à des <b>serveurs</b> grâce au protocole <b>HTTP(S)</b>.</p>
+
+    <div class="ess-grille">
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🕰️</span> Repères</h2>
+<ol class="ess-frise">
+          <li><b>1965</b><span>Ted Nelson invente le concept d’<b>hypertexte</b>.</span></li>
+          <li><b>1989</b><span>Tim Berners-Lee invente le <b>Web</b> au CERN.</span></li>
+          <li><b>1993</b><span>Le Web passe dans le domaine public ; premier navigateur grand public, <b>Mosaic</b>.</span></li>
+          <li><b>1995</b><span>JavaScript et PHP : des sites interactifs et dynamiques.</span></li>
+          <li><b>2001</b><span>Les pages sont standardisées grâce au <b>DOM</b>.</span></li>
+          <li><b>2010</b><span>Des technologies pour les applications sur mobiles.</span></li>
+        </ol>
+      </section>
+      <section class="card ess-bloc">
+        <h2><span class="ico" aria-hidden="true">🔗</span> Décortiquer une URL</h2>
+<p>Chaque page a une adresse unique, son <b>URL</b> :</p>
+        <p class="ess-url"><span class="p1">https://<small>protocole</small></span><span class="p2">www.education.gouv.fr<small>nom de domaine</small></span><span class="p3">/le-lycee<small>chemin</small></span></p>
+        <p style="margin-bottom:0">Le <b>S</b> de HTTPS : les échanges sont <b>chiffrés</b> et l’identité du site est vérifiée par un <b>certificat</b>. Cela ne garantit pas que le contenu est fiable.</p>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">🔁</span> Que se passe-t-il quand j’ouvre une page ?</h2>
+<div class="ess-flux">
+          <div class="poste"><strong>💻 Client</strong><small>le navigateur</small></div>
+          <div class="fleches"><span class="aller">① requête HTTP(S) : « envoie-moi cette page » →</span><span class="retour">← ② réponse : fichiers HTML, CSS, images</span></div>
+          <div class="poste"><strong>🗄️ Serveur</strong><small>l’ordinateur qui héberge le site</small></div>
+        </div>
+        <p style="margin:.7rem 0 0">③ Le navigateur lit le <b>HTML</b> (le contenu et sa structure) et le <b>CSS</b> (la mise en forme) pour <b>afficher</b> la page.</p>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">📖</span> Vocabulaire</h2>
+<dl class="ess-vocab">
+          <div><dt>Internet</dt><dd>Le réseau mondial qui relie les ordinateurs entre eux.</dd></div>
+          <div><dt>Web</dt><dd>Un service d’Internet : des pages reliées par des liens.</dd></div>
+          <div><dt>Lien hypertexte</dt><dd>Élément cliquable qui mène vers une autre ressource.</dd></div>
+          <div><dt>HTML / CSS</dt><dd>Langages des pages : le contenu (HTML) et le style (CSS), normalisés par le <b>W3C</b>.</dd></div>
+          <div><dt>Moteur de recherche</dt><dd>Des <b>robots</b> parcourent et <b>indexent</b> les pages ; un <b>algorithme</b> les classe (ex. PageRank).</dd></div>
+          <div><dt>Cookie</dt><dd>Petit fichier déposé par un site dans le navigateur. Un <b>cookie tiers</b> vient d’un autre site (souvent publicitaire) et suit la navigation.</dd></div>
+          <div><dt>Hameçonnage</dt><dd>Faux message ou faux site qui imite un vrai pour voler des identifiants.</dd></div>
+          <div><dt>Navigation privée</dt><dd>N’enregistre ni historique ni cookies sur l’appareil, mais ne rend pas anonyme sur le réseau.</dd></div>
+        </dl>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">⚖️</span> Publier dans les règles</h2>
+<ul class="ess-liste">
+          <li>On est <b>responsable</b> de ce que l’on publie, même sous pseudonyme.</li>
+          <li><b>Droit d’auteur</b> : le droit moral est perpétuel ; les droits patrimoniaux durent jusqu’à <b>70 ans</b> après la mort de l’auteur. Citer l’auteur ne suffit pas : il faut son autorisation.</li>
+          <li><b>Droit à l’image</b> : il faut l’accord d’une personne reconnaissable pour publier sa photo.</li>
+          <li><b>Licences Creative Commons</b> : l’auteur indique ce qu’on a le droit de faire de son œuvre (BY, NC, ND, SA).</li>
+          <li><b>Droit à l’oubli</b> : on peut demander le déréférencement d’informations personnelles.</li>
+        </ul>
+      </section>
+      <section class="card ess-bloc ess-large">
+        <h2><span class="ico" aria-hidden="true">✅</span> Je sais…</h2>
+        <ul class="ess-savoir">
+          <li>citer les grandes étapes du développement du Web ;</li>
+          <li>distinguer Internet et le Web ;</li>
+          <li>décomposer une URL ;</li>
+          <li>distinguer le contenu (HTML) et le style (CSS) d’une page ;</li>
+          <li>écrire et modifier une page HTML simple ;</li>
+          <li>expliquer le dialogue client / serveur ;</li>
+          <li>avoir un regard critique sur les résultats d’un moteur de recherche ;</li>
+          <li>régler les cookies et la confidentialité de mon navigateur ;</li>
+          <li>repérer une tentative d’hameçonnage ;</li>
+          <li>publier en respectant le droit d’auteur et le droit à l’image.</li>
+        </ul>
+      </section>
+    </div>
+
+    <nav class="pager" aria-label="Navigation">
+      <a class="btn secondary" href="web.html">← Retour au chapitre</a>
+    </nav>
+  </main>
+
+  <footer>SNT · Seconde · Sciences Numériques et Technologie
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, séances terminées, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+  </footer>
+
+</body>
+</html>
