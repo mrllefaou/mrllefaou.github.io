@@ -1388,3 +1388,6 @@ figure.carte img { display: block; width: 100%; height: auto; border-radius: 10p
   figure.carte { margin: 0; max-width: none; }
   figure.carte img { width: 210mm; height: 297mm; object-fit: contain; border-radius: 0; box-shadow: none; }
 }
+.note.carte-avert { background: var(--accent-soft); border-left-color: var(--accent); margin: 1rem 0 0; }
+.note.carte-avert strong.title { color: #b45309; }
+@media screen { html:not(.theme-clair) .note.carte-avert strong.title { color: var(--accent); } }
