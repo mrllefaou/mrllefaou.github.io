@@ -7,8 +7,8 @@
   function lire() { try { return localStorage.getItem(CLE); } catch (e) { return null; } }
   function ecrire(v) { try { localStorage.setItem(CLE, v); } catch (e) {} }
 
-  /* Par défaut : mode sombre. On applique le choix enregistré tout de suite. */
-  if (lire() === 'clair') racine.classList.add('theme-clair');
+  /* Par défaut : mode clair. Le mode sombre s'applique seulement si l'élève l'a choisi. */
+  if (lire() !== 'sombre') racine.classList.add('theme-clair');
 
   function installer() {
     if (document.querySelector('.bouton-theme')) return;
