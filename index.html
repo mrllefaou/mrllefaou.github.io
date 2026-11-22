@@ -574,10 +574,10 @@
       document.getElementById('salut').textContent = (h >= 18 || h < 5) ? 'Bonsoir' : 'Bonjour';
 
       /* Effet machine à écrire */
-      var phrases = ['tes cours.', 'tes activités.', 'tes exercices.', 'tes QCM.', 'tout pour réviser.'];
+      var phrases = ['des cours.', 'des activités.', 'des cartes mentales.', 'des fiches.', 'des QCM.', 'de quoi réviser.', 'des aide-mémoires.'];
       var zone = document.getElementById('tape');
       if (calme) {
-        zone.textContent = 'tes cours, tes activités et tes exercices.';
+        zone.textContent = 'des cours, des activités, des cartes mentales, des fiches, des QCM et des aide-mémoires pour réviser.';
       } else {
         var i = 0, j = 0, efface = false;
         (function taper() {
