@@ -1375,3 +1375,16 @@ html:has(.qcm) { scroll-padding-top: 4.5rem; scroll-padding-bottom: 7rem; }
   opacity: .85;
 }
 .mentions-donnees strong { font-weight: 600; }
+/* ===== Cartes mentales ===== */
+.carte-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.25rem 0 0; }
+.carte-actions .btn { cursor: pointer; font: inherit; font-weight: 700; border: 0; }
+.carte-actions .btn.secondary { border: 1px solid var(--border); }
+figure.carte { margin: 1rem auto 0; max-width: 900px; border: 0; padding: 0; background: none; }
+figure.carte img { display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.18); }
+@media print {
+  @page { size: A4 portrait; margin: 0; }
+  .carte-page header, .carte-page footer, .carte-page .hero, .carte-page .carte-actions, .carte-page .pager { display: none !important; }
+  .carte-page main { padding: 0; margin: 0; max-width: none; }
+  figure.carte { margin: 0; max-width: none; }
+  figure.carte img { width: 210mm; height: 297mm; object-fit: contain; border-radius: 0; box-shadow: none; }
+}

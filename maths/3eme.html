@@ -71,26 +71,107 @@
       </li>
     </ul>
 
-    <h2 style="margin-top:2.5rem">📚 Les chapitres <small style="color:var(--muted);font-weight:600">(0)</small></h2>
-    <p style="color:var(--muted);margin:.25rem 0 0">Choisis un chapitre pour retrouver ses séances : cours, activités et exercices.</p>
+    <h2 id="chapitres" style="margin-top:2.5rem">📚 Les chapitres <small style="color:var(--muted);font-weight:600">(12)</small></h2>
+    <p style="color:var(--muted);margin:.25rem 0 0">Pour chaque chapitre, une carte mentale qui résume le cours (définitions, propriétés, méthodes et exemples).</p>
 
-    <ul class="chapter-grid">
-      <!-- Modèle de carte chapitre à dupliquer :
+    <ul class="chapter-grid" id="chapitres-liste">
       <li>
-        <a class="chapter-card" href="CHAPITRE.html" style="--c:#2563eb">
-          <span class="ch-top"><span class="ch-num">Chapitre 1</span><span class="ch-icon" aria-hidden="true">📐</span></span>
-          <span class="ch-title">Titre du chapitre</span>
-          <span class="ch-desc">Description courte du chapitre.</span>
-          <span class="ch-foot"><span class="status ok">3 séances</span></span>
+        <a class="chapter-card" href="3eme-carte-chapitre1.html" style="--c:#2563eb">
+          <span class="ch-top"><span class="ch-num">Chapitre 1</span><span class="ch-icon" aria-hidden="true">📈</span></span>
+          <span class="ch-title">Les fonctions</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
         </a>
       </li>
-      -->
+      <li>
+        <a class="chapter-card" href="3eme-carte-chapitre2.html" style="--c:#059669">
+          <span class="ch-top"><span class="ch-num">Chapitre 2</span><span class="ch-icon" aria-hidden="true">📐</span></span>
+          <span class="ch-title">Triangles et théorème de Thalès</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="3eme-carte-chapitre3.html" style="--c:#d97706">
+          <span class="ch-top"><span class="ch-num">Chapitre 3</span><span class="ch-icon" aria-hidden="true">✏️</span></span>
+          <span class="ch-title">Calcul littéral</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="3eme-carte-chapitre4.html" style="--c:#dc2626">
+          <span class="ch-top"><span class="ch-num">Chapitre 4</span><span class="ch-icon" aria-hidden="true">📏</span></span>
+          <span class="ch-title">Trigonométrie</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="3eme-carte-chapitre5.html" style="--c:#0891b2">
+          <span class="ch-top"><span class="ch-num">Chapitre 5</span><span class="ch-icon" aria-hidden="true">📊</span></span>
+          <span class="ch-title">Statistiques</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="3eme-carte-chapitre6.html" style="--c:#7c3aed">
+          <span class="ch-top"><span class="ch-num">Chapitre 6</span><span class="ch-icon" aria-hidden="true">🌍</span></span>
+          <span class="ch-title">Géométrie dans l’espace</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="3eme-carte-chapitre7.html" style="--c:#db2777">
+          <span class="ch-top"><span class="ch-num">Chapitre 7</span><span class="ch-icon" aria-hidden="true">⚖️</span></span>
+          <span class="ch-title">Équations et inéquations</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="3eme-carte-chapitre8.html" style="--c:#4f46e5">
+          <span class="ch-top"><span class="ch-num">Chapitre 8</span><span class="ch-icon" aria-hidden="true">🎲</span></span>
+          <span class="ch-title">Probabilités</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="3eme-carte-chapitre9.html" style="--c:#0d9488">
+          <span class="ch-top"><span class="ch-num">Chapitre 9</span><span class="ch-icon" aria-hidden="true">📉</span></span>
+          <span class="ch-title">Fonctions linéaires et affines</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="3eme-carte-chapitre10.html" style="--c:#9333ea">
+          <span class="ch-top"><span class="ch-num">Chapitre 10</span><span class="ch-icon" aria-hidden="true">🔷</span></span>
+          <span class="ch-title">Transformations et pavages</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="3eme-carte-chapitre11.html" style="--c:#ea580c">
+          <span class="ch-top"><span class="ch-num">Chapitre 11</span><span class="ch-icon" aria-hidden="true">🔢</span></span>
+          <span class="ch-title">Puissances</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="chapter-card" href="3eme-carte-chapitre12.html" style="--c:#be123c">
+          <span class="ch-top"><span class="ch-num">Chapitre 12</span><span class="ch-icon" aria-hidden="true">📐</span></span>
+          <span class="ch-title">Réciproque du théorème de Thalès</span>
+          <span class="ch-desc">L’essentiel du cours en une fiche A4 à télécharger ou imprimer.</span>
+          <span class="ch-foot"><span class="status ok">🧠 Carte mentale</span></span>
+        </a>
+      </li>
     </ul>
-
-    <div class="card empty-state">
-      <span class="big" aria-hidden="true">🚧</span>
-      Les chapitres de 3ème seront bientôt disponibles.
-    </div>
 
     <nav class="pager" aria-label="Navigation entre niveaux">
       <span></span>
