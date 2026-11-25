@@ -384,7 +384,7 @@
         <ol class="etapes-pdf">
           <li>Clique sur <strong>« Créer ma fiche en PDF »</strong>.</li>
           <li>Dans la fenêtre qui s'ouvre, choisis la destination <strong>« Enregistrer au format PDF »</strong> (et non une imprimante ou un service en ligne), puis <strong>Enregistrer</strong>.</li>
-          <li>Envoie le fichier PDF à ton professeur par la <strong>messagerie de l'ENT</strong>.</li>
+          <li>Envoie le fichier PDF à ton professeur <strong>par mail</strong>.</li>
         </ol>
         <div class="message" id="message" role="status" aria-live="polite"></div>
         <p class="rgpd">🔒 Tes réponses ne sont envoyées nulle part : elles restent sur ton appareil. Le PDF est fabriqué par ton navigateur, sur ton appareil. Pendant que tu remplis la fiche, tes réponses sont gardées dans ce navigateur pour ne pas les perdre : sur un ordinateur partagé, clique sur « Tout effacer » une fois ton PDF enregistré.</p>
@@ -405,7 +405,7 @@
         <li><a href="https://www.bretagne-alternance.com" target="_blank" rel="noopener"><strong>Bretagne Alternance</strong><span>Trouver une entreprise pour un CAP ou un bac pro en apprentissage.</span></a></li>
         <li><a href="https://formations.mer.gouv.fr" target="_blank" rel="noopener"><strong>Formations et métiers de la mer</strong><span>Les formations des lycées maritimes.</span></a></li>
         <li><a href="https://laventureduvivant.fr" target="_blank" rel="noopener"><strong>L'aventure du vivant</strong><span>Les formations de l'enseignement agricole.</span></a></li>
-        <li><a href="https://educonnect.education.gouv.fr" target="_blank" rel="noopener"><strong>ÉduConnect</strong><span>Pour saisir les intentions et les vœux d'orientation avec ta famille.</span></a></li>
+        <li><a href="https://www.horizons21.fr" target="_blank" rel="noopener"><strong>Horizons21</strong><span>Tester des combinaisons de spécialités du lycée général et voir les études et métiers auxquels elles mènent.</span></a></li>
       </ul>
       <p class="source">La fiche d'orientation reprend le document « Mon projet d'orientation après la 3e » distribué en classe. Contenus rédigés à partir des sources ci-dessus (consultées en novembre 2026).</p>
     </section>
@@ -710,7 +710,7 @@
       var titre = document.title;
       document.title = ('Fiche orientation ' + d.classe + ' - ' + d.nom.toUpperCase() + ' ' + d.prenom).replace(/[\\/:*?"<>|]+/g, ' ');
       document.body.classList.add('impr-fiche');
-      montrer('info', '📄 Choisis « Enregistrer au format PDF », enregistre le fichier, puis envoie-le à ton professeur par la messagerie de l\'ENT.');
+      montrer('info', '📄 Choisis « Enregistrer au format PDF », enregistre le fichier, puis envoie-le à ton professeur par mail.');
       window.print();
       setTimeout(function () { document.body.classList.remove('impr-fiche'); document.title = titre; }, 800);
     });
