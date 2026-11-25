@@ -144,6 +144,9 @@
     .message.ok { background: var(--ok-soft); color: var(--ok); }
     .message.ko { background: var(--cap-soft); color: var(--err); }
     .message.info { background: var(--ori-soft); }
+    .etapes-pdf { margin: .9rem 0 0; padding-left: 1.3rem; font-size: .95rem; }
+    .etapes-pdf li { margin: .2rem 0; }
+    #fiche-impression { display: none; }
     .piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
     .rgpd { font-size: .82rem; color: var(--muted); margin-top: 1rem; }
 
@@ -160,12 +163,22 @@
       .metiers { max-height: none; }
     }
 
-    /* Impression de la fiche seule */
+    /* Impression : la fiche seule, mise en page comme le document papier */
     @media print {
-      body.impr-fiche main > *:not(#fiche) { display: none !important; }
-      body.impr-fiche #fiche .boutons, body.impr-fiche #fiche .message, body.impr-fiche #fiche .rgpd, body.impr-fiche #fiche .intro-fiche { display: none !important; }
-      .fiche input[type="text"], .fiche textarea { border: 1px solid #999 !important; }
-      .fiche fieldset { break-inside: avoid; }
+      body.impr-fiche .topbar, body.impr-fiche main > *:not(#fiche), body.impr-fiche footer, body.impr-fiche noscript { display: none !important; }
+      body.impr-fiche #fiche > :not(#fiche-impression) { display: none !important; }
+      body.impr-fiche #fiche { border: 0 !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; background: #fff !important; }
+      body.impr-fiche #fiche-impression { display: block !important; color: #000; font-size: 10.5pt; line-height: 1.35; }
+      #fiche-impression h1 { font-size: 16pt; margin: 0 0 .2rem; }
+      #fiche-impression h2 { font-size: 12pt; margin: .9rem 0 .3rem; display: block; }
+      #fiche-impression p { margin: .2rem 0; }
+      #fiche-impression table { width: 100%; border-collapse: collapse; margin-top: .3rem; }
+      #fiche-impression th, #fiche-impression td { border: 1px solid #666; padding: .3rem .4rem; text-align: left; vertical-align: top; white-space: pre-wrap; }
+      #fiche-impression th { background: #eee !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      #fiche-impression .lettre { font-weight: 800; text-align: center; width: 2em; }
+      #fiche-impression .n-impr { font-size: 9pt; color: #333; }
+      #fiche-impression .bloc-texte { border: 1px solid #666; padding: .4rem; min-height: 3.5em; white-space: pre-wrap; }
+      @page { size: A4; margin: 14mm; }
     }
   </style>
 </head>
@@ -332,7 +345,6 @@
       </div>
 
       <form class="fiche" id="form-fiche" novalidate>
-        <div class="piege" aria-hidden="true"><label>Ne pas remplir <input type="text" name="site_web" tabindex="-1" autocomplete="off"></label></div>
 
         <fieldset>
           <legend>Mon identité</legend>
@@ -366,14 +378,19 @@
         </fieldset>
 
         <div class="boutons">
-          <button type="submit" class="btn principal" id="btn-envoyer">📨 Envoyer ma fiche au professeur</button>
-          <button type="button" class="btn" id="btn-imprimer">🖨️ Imprimer / PDF</button>
-          <button type="button" class="btn" id="btn-csv">⬇️ Télécharger (CSV)</button>
+          <button type="submit" class="btn principal" id="btn-pdf">📄 Créer ma fiche en PDF</button>
           <button type="button" class="btn" id="btn-effacer">🗑️ Tout effacer</button>
         </div>
+        <ol class="etapes-pdf">
+          <li>Clique sur <strong>« Créer ma fiche en PDF »</strong>.</li>
+          <li>Dans la fenêtre qui s'ouvre, choisis la destination <strong>« Enregistrer au format PDF »</strong> (et non une imprimante ou un service en ligne), puis <strong>Enregistrer</strong>.</li>
+          <li>Envoie le fichier PDF à ton professeur par la <strong>messagerie de l'ENT</strong>.</li>
+        </ol>
         <div class="message" id="message" role="status" aria-live="polite"></div>
-        <p class="rgpd">🔒 Tes réponses sont enregistrées dans ce navigateur pendant que tu remplis la fiche (pense à cliquer sur « Tout effacer » sur un ordinateur partagé). Quand tu cliques sur « Envoyer », elles sont transmises par mail à ton professeur uniquement (via le service d'envoi FormSubmit), pour préparer le conseil de classe ; elles ne servent à rien d'autre et sont supprimées en fin d'année scolaire.</p>
-      </form>
+        <p class="rgpd">🔒 Tes réponses ne sont envoyées nulle part : elles restent sur ton appareil. Le PDF est fabriqué par ton navigateur, sur ton appareil. Pendant que tu remplis la fiche, tes réponses sont gardées dans ce navigateur pour ne pas les perdre : sur un ordinateur partagé, clique sur « Tout effacer » une fois ton PDF enregistré.</p>
+        </form>
+        <div id="fiche-impression" aria-hidden="true"></div>
+
     </section>
 
     <!-- ===== 5. Ressources ===== -->
@@ -398,19 +415,6 @@
 
   <script>
   (function () {
-    /* =====================================================================
-       RÉGLAGE DE L'ENVOI PAR MAIL (service gratuit FormSubmit.co)
-       Chaque fiche envoyée arrive dans la boîte mail ci-dessous.
-       - 1er envoi : FormSubmit envoie un mail « Activate form » à cette
-         adresse. Cliquer sur « Activate » (une seule fois).
-       - Dans ce mail d'activation, FormSubmit donne aussi un code aléatoire :
-         on peut le mettre à la place de l'adresse ci-dessous pour ne plus
-         afficher l'adresse dans le code de la page.
-       Laisser vide ('') pour désactiver l'envoi (téléchargement/impression seulement).
-       ===================================================================== */
-    var DESTINATAIRE = 'lionel.lefaou@likes.org';
-    var URL_ENVOI = DESTINATAIRE ? 'https://formsubmit.co/ajax/' + DESTINATAIRE : '';
-
     function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
     function norm(t) { return (t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’'·\-]/g, ' '); }
 
@@ -665,30 +669,6 @@
       return '';
     }
 
-    /* ---------- CSV ---------- */
-    var COLS = ['nom', 'prenom', 'classe', 'prof_principal', 'matieres', 'points_forts', 'loisirs',
-      'A_type', 'A_filiere', 'A_metier', 'A_lycee', 'B_type', 'B_filiere', 'B_metier', 'B_lycee',
-      'C_type', 'C_filiere', 'C_metier', 'C_lycee', 'remarques'];
-    function csv(d) {
-      var cell = function (v) { v = String(v == null ? '' : v); if (/^[=+\-@]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; };
-      return '﻿' + COLS.join(';') + '\r\n' + COLS.map(function (c) { return cell(d[c]); }).join(';') + '\r\n';
-    }
-    function telechargerCSV() {
-      var d = donnees();
-      var nomFichier = ('orientation_' + (d.classe || '') + '_' + (d.nom || 'eleve') + '_' + (d.prenom || '')).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\w\-]+/g, '_') + '.csv';
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(new Blob([csv(d)], { type: 'text/csv;charset=utf-8' }));
-      a.download = nomFichier; document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
-    }
-    document.getElementById('btn-csv').addEventListener('click', telechargerCSV);
-
-    document.getElementById('btn-imprimer').addEventListener('click', function () {
-      document.body.classList.add('impr-fiche');
-      window.print();
-      setTimeout(function () { document.body.classList.remove('impr-fiche'); }, 500);
-    });
-
     document.getElementById('btn-effacer').addEventListener('click', function () {
       if (!window.confirm('Effacer toutes les réponses de la fiche ?')) return;
       form.reset(); document.getElementById('classe').value = '305';
@@ -697,52 +677,42 @@
       montrer('info', 'La fiche a été effacée.');
     });
 
-    /* ---------- Envoi ---------- */
+    /* ---------- Création du PDF (tout se passe dans le navigateur) ---------- */
+    function cellule(v) { return v ? esc(v) : '&nbsp;'; }
+    function construireImpression(d) {
+      var plans = ['A', 'B', 'C'].map(function (p) {
+        return '<tr><td class="lettre">' + p + '</td><td>' + cellule(d[p + '_type']) + '</td><td>' + cellule(d[p + '_filiere']) +
+          '</td><td>' + cellule(d[p + '_metier']) + '</td><td>' + cellule(d[p + '_lycee']) + '</td></tr>';
+      }).join('');
+      document.getElementById('fiche-impression').innerHTML =
+        '<h1>Mon projet d\'orientation après la 3e</h1>' +
+        '<p class="n-impr">Cette fiche résume mes projets après la 3e. Elle sera présentée au conseil de classe.</p>' +
+        '<p><strong>Professeur principal :</strong> ' + cellule(d.prof_principal) + '</p>' +
+        '<table><tr><th>Nom</th><th>Prénom</th><th>Classe</th></tr><tr><td>' + cellule(d.nom) + '</td><td>' + cellule(d.prenom) + '</td><td>' + cellule(d.classe) + '</td></tr></table>' +
+        '<h2>1. Mon profil</h2>' +
+        '<table><tr><th>Mes matières préférées</th><th>Mes points forts (qualités, compétences)</th><th>Ce que j\'aime faire en dehors du collège</th></tr>' +
+        '<tr><td>' + cellule(d.matieres) + '</td><td>' + cellule(d.points_forts) + '</td><td>' + cellule(d.loisirs) + '</td></tr></table>' +
+        '<h2>2. Mes vœux d\'orientation</h2>' +
+        '<p class="n-impr">Le plan A est mon premier choix, les plans B et C sont d\'autres pistes possibles. Au moins un des trois plans est une formation en lycée professionnel.</p>' +
+        '<table><tr><th>Plan</th><th>Type de lycée</th><th>Filière</th><th>Métier visé</th><th>Lycée envisagé (nom, ville)</th></tr>' + plans + '</table>' +
+        '<h2>3. Mes remarques, idées, questions</h2>' +
+        '<div class="bloc-texte">' + cellule(d.remarques) + '</div>' +
+        '<p class="n-impr" style="margin-top:.8rem">Fiche créée le ' + new Date().toLocaleDateString('fr-FR') + '.</p>';
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var erreur = verifier();
       if (erreur) { montrer('ko', '⚠️ ' + esc(erreur)); return; }
       var d = donnees();
-      if (!URL_ENVOI) {
-        montrer('info', 'L\'envoi en ligne n\'est pas encore activé. Clique sur <strong>« Télécharger (CSV) »</strong> ou <strong>« Imprimer / PDF »</strong> et remets ta fiche à ton professeur (par l\'ENT par exemple).');
-        return;
-      }
-      var btn = document.getElementById('btn-envoyer');
-      btn.disabled = true; btn.textContent = '⏳ Envoi en cours…';
-      if (d.site_web) return; /* champ piège rempli : robot */
-      /* Contenu du mail : un tableau lisible, champ par champ */
-      var LIBELLES = { nom: 'Nom', prenom: 'Prénom', classe: 'Classe', prof_principal: 'Professeur principal',
-        matieres: 'Matières préférées', points_forts: 'Points forts', loisirs: 'En dehors du collège',
-        A_type: 'Plan A – type de lycée', A_filiere: 'Plan A – filière', A_metier: 'Plan A – métier visé', A_lycee: 'Plan A – lycée envisagé',
-        B_type: 'Plan B – type de lycée', B_filiere: 'Plan B – filière', B_metier: 'Plan B – métier visé', B_lycee: 'Plan B – lycée envisagé',
-        C_type: 'Plan C – type de lycée', C_filiere: 'Plan C – filière', C_metier: 'Plan C – métier visé', C_lycee: 'Plan C – lycée envisagé',
-        remarques: 'Remarques, idées, questions' };
-      var corps = {
-        _subject: 'Fiche orientation – ' + d.classe + ' – ' + d.nom.toUpperCase() + ' ' + d.prenom,
-        _template: 'table',
-        _captcha: 'false'
-      };
-      COLS.forEach(function (c) { corps[LIBELLES[c]] = d[c] || '—'; });
-      /* Une ligne prête à coller dans Excel (colonnes séparées par des points-virgules) */
-      corps['Ligne pour le tableur'] = COLS.map(function (c) { return (d[c] || '').replace(/[;\r\n]+/g, ' '); }).join(';');
-      fetch(URL_ENVOI, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(corps)
-      })
-        .then(function (r) { return r.json().catch(function () { return {}; }); })
-        .then(function (rep) {
-          if (rep && String(rep.success) === 'true') {
-            montrer('ok', '✅ Merci ' + esc(d.prenom) + ' ! Ta fiche a bien été envoyée à ton professeur. Tu peux aussi l\'imprimer pour la garder.');
-            try { localStorage.removeItem(CLE); } catch (err) {}
-          } else {
-            montrer('ko', '❌ La fiche n\'a pas pu être envoyée' + (rep && rep.message ? ' (' + esc(rep.message) + ')' : '') + '. Clique sur « Télécharger (CSV) » ou « Imprimer / PDF » et remets ta fiche à ton professeur.');
-          }
-        })
-        .catch(function () {
-          montrer('ko', '❌ L\'envoi n\'a pas fonctionné (connexion ?). Réessaie, ou clique sur « Télécharger (CSV) » et remets le fichier à ton professeur.');
-        })
-        .then(function () { btn.disabled = false; btn.textContent = '📨 Envoyer ma fiche au professeur'; });
+      construireImpression(d);
+      /* Le titre de la page devient le nom proposé pour le fichier PDF */
+      var titre = document.title;
+      document.title = ('Fiche orientation ' + d.classe + ' - ' + d.nom.toUpperCase() + ' ' + d.prenom).replace(/[\\/:*?"<>|]+/g, ' ');
+      document.body.classList.add('impr-fiche');
+      montrer('info', '📄 Choisis « Enregistrer au format PDF », enregistre le fichier, puis envoie-le à ton professeur par la messagerie de l\'ENT.');
+      window.print();
+      setTimeout(function () { document.body.classList.remove('impr-fiche'); document.title = titre; }, 800);
     });
   })();
   </script>
