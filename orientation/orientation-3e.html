@@ -69,6 +69,18 @@
     .frise li.actuel .badge-now { display: inline-block; }
     .frise p { margin: .15rem 0 0; }
 
+    /* Guide IDÉO */
+    .table-guide { overflow-x: auto; margin-top: .8rem; }
+    .table-guide table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+    .table-guide th, .table-guide td { text-align: left; padding: .45rem .7rem; border-bottom: 1px solid var(--border); }
+    .table-guide th { background: var(--ori-soft); }
+    .table-guide td:last-child, .table-guide th:last-child { text-align: right; white-space: nowrap; font-weight: 700; color: var(--ori); }
+    @media screen { html:not(.theme-clair) .table-guide td:last-child { color: #5eead4; } }
+    .retenir { padding-left: 1.1rem; margin: 0; }
+    .retenir li { margin: .45rem 0; }
+    .retenir .p, .metier .guide-p { font-size: .75rem; font-weight: 700; padding: .05rem .45rem; border-radius: 999px; background: var(--ori-soft); color: var(--ori); white-space: nowrap; }
+    @media screen { html:not(.theme-clair) .retenir .p, html:not(.theme-clair) .metier .guide-p { color: #5eead4; } }
+
     /* Recherche de métiers */
     .barre-metier { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .6rem; }
     .barre-metier input[type="search"] {
@@ -176,6 +188,7 @@
     <ul class="sommaire" aria-label="Sommaire">
       <li><a href="#voies">🧭 Les voies après la 3e</a></li>
       <li><a href="#calendrier">📅 Le calendrier</a></li>
+      <li><a href="#guide">📘 Le guide IDÉO</a></li>
       <li><a href="#metiers">🔎 Explorer les métiers</a></li>
       <li><a href="#fiche">📝 Ma fiche d'orientation</a></li>
       <li><a href="#ressources">📚 Ressources et sources</a></li>
@@ -224,11 +237,11 @@
       </div>
 
       <div class="encadre">
-        <p><strong>🔁 L'apprentissage</strong> : un CAP ou un bac pro peut se préparer en alternance entre un CFA et une entreprise, avec un contrat de travail et un salaire. Il faut trouver un employeur, alors on commence à chercher tôt.</p>
+        <p><strong>🔁 L'apprentissage</strong> : un CAP ou un bac pro peut se préparer en alternance entre un CFA et une entreprise, avec un contrat de travail et un salaire. C'est possible dès 15 ans si tu as terminé ta 3e, et tu passes le même diplôme qu'en lycée. Il faut trouver un employeur : commence à chercher tôt.</p>
         <p><strong>🔀 Les passerelles</strong> : changer de voie ou de spécialité en cours de route, c'est possible. Ton choix de 3e n'est pas un choix « pour la vie ».</p>
         <p><strong>⚠️ Recrutements particuliers</strong> : certaines formations ont leur propre recrutement (par exemple l'École des mousses à Brest, la 2de STHR hôtellerie-restauration, les sections internationales). Renseigne-toi dès maintenant.</p>
       </div>
-      <p class="source">Sources : <a href="https://orientation.bretagne.bzh/publications/guide-que-faire-apres-la-3e" target="_blank" rel="noopener">Région Bretagne, guide « Que faire après la 3e ? »</a> · <a href="https://www.onisep.fr/formation/apres-la-3-la-voie-professionnelle/les-diplomes-de-la-voie-pro" target="_blank" rel="noopener">Onisep, Les diplômes de la voie pro</a> · <a href="https://www.education.gouv.fr/que-faire-apres-la-troisieme-12506" target="_blank" rel="noopener">Ministère de l'Éducation nationale</a></p>
+      <p class="source">Sources : <a href="https://orientation.bretagne.bzh/publications/guide-que-faire-apres-la-3e" target="_blank" rel="noopener">Région Bretagne, guide « Que faire après la 3e ? » 2025-2026</a> (p. 8-9, 15-19, 60-62) · <a href="https://www.onisep.fr/formation/apres-la-3-la-voie-professionnelle/les-diplomes-de-la-voie-pro" target="_blank" rel="noopener">Onisep, Les diplômes de la voie pro</a> · <a href="https://www.education.gouv.fr/que-faire-apres-la-troisieme-12506" target="_blank" rel="noopener">Ministère de l'Éducation nationale</a></p>
     </section>
 
     <!-- ===== 2. Calendrier ===== -->
@@ -248,7 +261,45 @@
         <li data-n="6" data-mois="7,8"><span class="quand">Fin juin → juillet : affectation et inscription</span><span class="badge-now">On est ici</span>
           <p>Je reçois mon affectation, puis <strong>je m'inscris au lycée dans les délais</strong> — sinon je peux perdre ma place.</p></li>
       </ol>
-      <p class="source">Source : Région Bretagne (IDÉO), « Le calendrier de l'orientation de 3e ». Les dates exactes sont données par le collège.</p>
+      <p class="source">Source : Région Bretagne (IDÉO), guide « Que faire après la 3e ? » 2025-2026, p. 6-7. Les dates exactes sont données par le collège.</p>
+    </section>
+
+    <!-- ===== Le guide IDÉO ===== -->
+    <section class="card" id="guide">
+      <h2>📘 Le guide « Que faire après la 3e ? » de la Région Bretagne</h2>
+      <p>Tu reçois ce guide au collège (édition 2025-2026). Il liste <strong>toutes les formations de Bretagne</strong>, lycée par lycée. Voici où chercher, puis l'essentiel à retenir. <a href="https://orientation.bretagne.bzh/publications/guide-que-faire-apres-la-3e" target="_blank" rel="noopener">Consulter le guide en ligne ↗</a></p>
+
+      <div class="table-guide">
+        <table>
+          <thead><tr><th>Je cherche…</th><th>Pages</th></tr></thead>
+          <tbody>
+            <tr><td>Le calendrier de l'orientation</td><td>6-7</td></tr>
+            <tr><td>Le schéma des études après la 3e</td><td>8-9</td></tr>
+            <tr><td>Les stages, les portes ouvertes</td><td>13</td></tr>
+            <tr><td>La voie pro : CAP, bac pro, apprentissage</td><td>15-21</td></tr>
+            <tr><td>La liste des bacs pro et des familles de métiers</td><td>22-23</td></tr>
+            <tr><td>Les CAP et bacs pro de Bretagne, secteur par secteur</td><td>26-59</td></tr>
+            <tr><td>La voie générale et technologique</td><td>60-63</td></tr>
+            <tr><td>Les options de 2de, les bacs technos, les spécialités</td><td>66-88</td></tr>
+            <tr><td>Les sections sportives, linguistiques, Ulis</td><td>89-94</td></tr>
+            <tr><td>Les CIO et les lieux d'information près de chez toi</td><td>96-97</td></tr>
+            <tr><td>Les questions fréquentes (secteur, place au lycée, redoublement…)</td><td>98-99</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin:1.2rem 0 .4rem">💡 Ce qu'il faut retenir</h3>
+      <ul class="retenir">
+        <li><strong>CAP</strong> : en général 2 ans (parfois 1 ou 3). Il en existe près de 200 en France. <span class="p">p. 19</span></li>
+        <li><strong>Bac pro</strong> : en 2de pro, tu choisis l'une des <strong>15 familles de métiers</strong> et tu te spécialises en 1re. Certains bacs pro ne sont dans aucune famille : tu te spécialises alors dès la 2de, comme en apprentissage. <span class="p">p. 19, 22</span></li>
+        <li><strong>En début de 2de pro ou de CAP</strong>, des tests de français et de maths permettent aux professeurs de t'aider, avec des cours en petits groupes. <span class="p">p. 15</span></li>
+        <li><strong>Apprentissage</strong> : il faut signer avec un employeur entre 3 mois avant et 3 mois après le début de la formation, donc <strong>entre juillet et novembre 2026</strong> pour une rentrée en septembre 2026. Sites utiles : <a href="https://www.bretagne-alternance.com" target="_blank" rel="noopener">bretagne-alternance.com</a>, <a href="https://www.francetravail.fr" target="_blank" rel="noopener">francetravail.fr</a>. <span class="p">p. 16-17</span></li>
+        <li><strong>On peut changer de voie</strong> en cours de route, par exemple passer d'un CAP à un bac pro de la même spécialité. Un « stage passerelle » est parfois demandé. <span class="p">p. 18</span></li>
+        <li><strong>2de générale et technologique</strong> : la même pour tous. Le choix entre bac général et l'un des <strong>8 bacs technologiques</strong> se fait en fin de 2de. Exceptions : la 2de STHR (hôtellerie-restauration) et le BT Métiers de la musique commencent dès la 2de. <span class="p">p. 60-62</span></li>
+        <li><strong>Quel lycée ?</strong> Pour la 2de générale et technologique, le lycée public dépend en général de ton adresse (la « sectorisation »). Ce n'est pas le cas pour les lycées professionnels ni pour les lycées privés sous contrat. <span class="p">p. 98</span></li>
+        <li><strong>Une formation absente de Bretagne ?</strong> Tu peux la suivre ailleurs en France, par exemple en étant interne. <span class="p">p. 99</span></li>
+      </ul>
+      <p class="source">Source : Région Bretagne, IDÉO, guide « Que faire après la 3e ? », édition 2025-2026 (données Onisep et GREF Bretagne de septembre 2025). Ces informations sont résumées avec nos propres mots, car le guide ne peut pas être reproduit sans l'accord de la Région Bretagne.</p>
     </section>
 
     <!-- ===== 3. Métiers ===== -->
@@ -269,7 +320,7 @@
       </div>
       <p class="compteur" id="compteur" aria-live="polite"></p>
       <ul class="metiers" id="liste-metiers"></ul>
-      <p class="source">Ces exemples sont simplifiés : il existe souvent plusieurs chemins vers un même métier. Pour la liste complète (plus de 1 000 métiers) : <a href="https://www.onisep.fr/recherche/metiers" target="_blank" rel="noopener">Onisep, 1 000 métiers à découvrir</a> et <a href="https://orientation.bretagne.bzh/" target="_blank" rel="noopener">le site orientation de la Région Bretagne</a>.</p>
+      <p class="source">Ces exemples sont simplifiés : il existe souvent plusieurs chemins vers un même métier. Pour la liste complète (plus de 1 000 métiers) : <a href="https://www.onisep.fr/recherche/metiers" target="_blank" rel="noopener">Onisep, 1 000 métiers à découvrir</a> et <a href="https://orientation.bretagne.bzh/" target="_blank" rel="noopener">le site orientation de la Région Bretagne</a>. 📘 = pages du guide IDÉO où trouver les lycées et CFA de Bretagne.</p>
     </section>
 
     <!-- ===== 4. Fiche ===== -->
@@ -321,7 +372,7 @@
           <button type="button" class="btn" id="btn-effacer">🗑️ Tout effacer</button>
         </div>
         <div class="message" id="message" role="status" aria-live="polite"></div>
-        <p class="rgpd">🔒 Tes réponses sont enregistrées dans ce navigateur pendant que tu remplis la fiche (pense à cliquer sur « Tout effacer » sur un ordinateur partagé). Quand tu cliques sur « Envoyer », elles sont transmises uniquement à ton professeur, pour préparer le conseil de classe ; elles ne servent à rien d'autre et sont supprimées en fin d'année scolaire.</p>
+        <p class="rgpd">🔒 Tes réponses sont enregistrées dans ce navigateur pendant que tu remplis la fiche (pense à cliquer sur « Tout effacer » sur un ordinateur partagé). Quand tu cliques sur « Envoyer », elles sont transmises par mail à ton professeur uniquement (via le service d'envoi FormSubmit), pour préparer le conseil de classe ; elles ne servent à rien d'autre et sont supprimées en fin d'année scolaire.</p>
       </form>
     </section>
 
@@ -330,10 +381,13 @@
       <h2>📚 Pour aller plus loin · Sources</h2>
       <ul class="ressources">
         <li><a href="https://orientation.bretagne.bzh/" target="_blank" rel="noopener"><strong>Orientation Bretagne (IDÉO)</strong><span>Le service public de l'orientation de la Région Bretagne : fiches métiers, formations en Bretagne, stages, portes ouvertes.</span></a></li>
-        <li><a href="https://orientation.bretagne.bzh/publications/guide-que-faire-apres-la-3e" target="_blank" rel="noopener"><strong>Guide « Que faire après la 3e ? »</strong><span>Région Bretagne · toutes les formations après la 3e en Bretagne, à lire en ligne ou à télécharger.</span></a></li>
+        <li><a href="https://orientation.bretagne.bzh/publications/guide-que-faire-apres-la-3e" target="_blank" rel="noopener"><strong>Guide « Que faire après la 3e ? » 2025-2026</strong><span>Région Bretagne (IDÉO) · toutes les formations après la 3e en Bretagne, lycée par lycée. Le guide papier est distribué au collège.</span></a></li>
         <li><a href="https://www.onisep.fr/recherche/metiers" target="_blank" rel="noopener"><strong>Onisep · 1 000 métiers</strong><span>Des fiches métiers détaillées avec les études pour y arriver.</span></a></li>
         <li><a href="https://www.onisep.fr/formation/apres-la-3-la-voie-professionnelle" target="_blank" rel="noopener"><strong>Onisep · La voie professionnelle</strong><span>CAP, bac pro, apprentissage : comment ça marche ?</span></a></li>
         <li><a href="https://www.onisep.fr/orientation/le-college/apres-la-3-telechargez-le-guide-gratuit" target="_blank" rel="noopener"><strong>Onisep · Guide national « Après la 3e »</strong><span>Le guide gratuit à télécharger.</span></a></li>
+        <li><a href="https://www.bretagne-alternance.com" target="_blank" rel="noopener"><strong>Bretagne Alternance</strong><span>Trouver une entreprise pour un CAP ou un bac pro en apprentissage.</span></a></li>
+        <li><a href="https://formations.mer.gouv.fr" target="_blank" rel="noopener"><strong>Formations et métiers de la mer</strong><span>Les formations des lycées maritimes.</span></a></li>
+        <li><a href="https://laventureduvivant.fr" target="_blank" rel="noopener"><strong>L'aventure du vivant</strong><span>Les formations de l'enseignement agricole.</span></a></li>
         <li><a href="https://educonnect.education.gouv.fr" target="_blank" rel="noopener"><strong>ÉduConnect</strong><span>Pour saisir les intentions et les vœux d'orientation avec ta famille.</span></a></li>
       </ul>
       <p class="source">La fiche d'orientation reprend le document « Mon projet d'orientation après la 3e » distribué en classe. Contenus rédigés à partir des sources ci-dessus (consultées en novembre 2026).</p>
@@ -345,11 +399,17 @@
   <script>
   (function () {
     /* =====================================================================
-       RÉGLAGE : adresse de l'application Google Apps Script qui reçoit les
-       fiches (voir outils/orientation-google-sheet.gs). Tant qu'elle est vide,
-       le bouton « Envoyer » propose de télécharger ou d'imprimer la fiche.
+       RÉGLAGE DE L'ENVOI PAR MAIL (service gratuit FormSubmit.co)
+       Chaque fiche envoyée arrive dans la boîte mail ci-dessous.
+       - 1er envoi : FormSubmit envoie un mail « Activate form » à cette
+         adresse. Cliquer sur « Activate » (une seule fois).
+       - Dans ce mail d'activation, FormSubmit donne aussi un code aléatoire :
+         on peut le mettre à la place de l'adresse ci-dessous pour ne plus
+         afficher l'adresse dans le code de la page.
+       Laisser vide ('') pour désactiver l'envoi (téléchargement/impression seulement).
        ===================================================================== */
-    var URL_ENVOI = '';
+    var DESTINATAIRE = 'lionel.lefaou@likes.org';
+    var URL_ENVOI = DESTINATAIRE ? 'https://formsubmit.co/ajax/' + DESTINATAIRE : '';
 
     function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
     function norm(t) { return (t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’'·\-]/g, ' '); }
@@ -379,7 +439,7 @@
       ['Peintre en bâtiment', 'Bâtiment, travaux publics', 'cap pro', 'CAP Peintre applicateur de revêtements, bac pro Aménagement et finition du bâtiment.', 'peinture decoration chantier'],
       ['Couvreur / Couvreuse', 'Bâtiment, travaux publics', 'cap pro', 'CAP Couvreur, puis bac pro du bâtiment.', 'toit ardoise chantier hauteur'],
       ['Conducteur / Conductrice de travaux', 'Bâtiment, travaux publics', 'pro gt', 'Bac pro du bâtiment ou bac STI2D, puis BTS Bâtiment ou Travaux publics.', 'chantier chef equipe construction'],
-      ['Géomètre-topographe', 'Bâtiment, travaux publics', 'pro gt', 'Bac pro Technicien géomètre-topographe ou bac STI2D, puis BTS.', 'mesure plan terrain maths'],
+      ['Géomètre-topographe', 'Bâtiment, travaux publics', 'pro gt', 'Bac pro Géomètre (ex-Technicien géomètre-topographe) ou bac STI2D, puis BTS.', 'mesure plan terrain maths'],
       ['Architecte', 'Bâtiment, travaux publics', 'gt', 'Bac général, puis école d\'architecture (5 ans après le bac).', 'dessin plan maison conception'],
 
       ['Mécanicien / Mécanicienne automobile', 'Mécanique, industrie', 'cap pro', 'CAP Maintenance des véhicules, bac pro Maintenance des véhicules.', 'voiture garage moteur auto'],
@@ -417,14 +477,14 @@
       ['Conseiller / Conseillère bancaire', 'Commerce, gestion', 'gt', 'Bac STMG ou général, puis BTS Banque ou BUT.', 'banque argent client'],
       ['Agent immobilier / Agente immobilière', 'Commerce, gestion', 'gt', 'Bac STMG ou général, puis BTS Professions immobilières.', 'maison vente location client'],
 
-      ['Agent / Agente logistique (magasinier)', 'Transport, logistique', 'cap pro', 'CAP Opérateur/opératrice logistique, bac pro Logistique.', 'entrepot stock colis cariste'],
+      ['Agent / Agente logistique (magasinier)', 'Transport, logistique', 'cap pro', 'CAP Opérateur/opératrice logistique, bac pro Métiers de la logistique.', 'entrepot stock colis cariste'],
       ['Conducteur / Conductrice routier', 'Transport, logistique', 'cap pro', 'CAP Conducteur routier marchandises, bac pro Conducteur transport routier marchandises.', 'camion route permis'],
 
-      ['Marin pêcheur / Marin pêcheuse', 'Mer', 'cap pro', 'CAP Matelot, bac pro Conduite et gestion des entreprises maritimes (en lycée maritime).', 'bateau peche mer ocean bretagne'],
+      ['Marin pêcheur / Marin pêcheuse', 'Mer', 'cap pro', 'CAP Maritime, bac pro Conduite et gestion des entreprises maritimes – pêche (en lycée maritime).', 'bateau peche mer ocean bretagne'],
       ['Mécanicien / Mécanicienne de marine', 'Mer', 'pro', 'Bac pro Électromécanicien marine (en lycée maritime).', 'bateau moteur navire mer'],
       ['Marin de la Marine nationale', 'Sécurité, défense', 'cap pro gt', 'École des mousses à Brest dès 16 ans après la 3e (recrutement spécifique), ou engagement après un CAP, un bac pro ou un bac.', 'armee bateau navire brest mer militaire'],
       ['Ostréiculteur / Ostréicultrice (cultures marines)', 'Mer', 'pro', 'Bac pro Cultures marines.', 'huitres mer coquillages bretagne'],
-      ['Technicien / Technicienne du nautisme', 'Mer', 'cap pro', 'CAP Réparation et entretien des embarcations de plaisance, bac pro Maintenance nautique.', 'bateau voile moteur port'],
+      ['Technicien / Technicienne du nautisme', 'Mer', 'cap pro', 'CAP Maintenance nautique, bac pro Maintenance nautique.', 'bateau voile moteur port'],
 
       ['Agriculteur / Agricultrice, éleveur / éleveuse', 'Agriculture, animaux, nature', 'cap pro', 'CAP agricole Métiers de l\'agriculture, bac pro Conduite et gestion de l\'entreprise agricole (en lycée agricole).', 'ferme vaches tracteur animaux campagne'],
       ['Paysagiste', 'Agriculture, animaux, nature', 'cap pro', 'CAP agricole Jardinier paysagiste, bac pro Aménagements paysagers.', 'jardin plantes nature exterieur'],
@@ -454,6 +514,13 @@
       ['Avocat / Avocate', 'Droit, administration', 'gt', 'Bac général, puis 5 ans de droit et école d\'avocats.', 'justice droit loi parler'],
       ['Agent administratif / Agente administrative', 'Droit, administration', 'pro gt', 'Bac pro AGOrA ou bac STMG, puis concours de la fonction publique.', 'mairie bureau administration']
     ];
+    /* Pages du guide IDÉO 2025-2026 où trouver les formations de Bretagne du domaine */
+    var GUIDE_P = {
+      'Alimentation, hôtellerie': '30-31, 48-49', 'Bâtiment, travaux publics': '35-37, 58', 'Mécanique, industrie': '33-34, 50-51, 57',
+      'Numérique, électronique': '43-44', 'Arts, communication': '32, 42', 'Santé, social': '53-54', 'Beauté, bien-être': '38',
+      'Commerce, gestion': '39-41, 46-47', 'Transport, logistique': '56', 'Mer': '21, 52', 'Agriculture, animaux, nature': '20, 27-29',
+      'Sécurité, défense': '45, 52', 'Énergie, environnement': '43-45', 'Enseignement, sport': '60-63, 92-93', 'Droit, administration': '46-47, 60-63'
+    };
     var metiers = M.map(function (m) { return { nom: m[0], dom: m[1], voies: m[2].split(' '), acces: m[3], n: norm(m[0] + ' ' + m[1] + ' ' + m[3] + ' ' + m[4]) }; });
 
     var domaines = [];
@@ -485,7 +552,7 @@
         var nomCourt = m.nom.split(' / ')[0];
         return '<li class="metier"><span class="dom">' + esc(m.dom) + '</span><h3>' + esc(m.nom) + '</h3>' +
           '<span class="pastilles">' + m.voies.map(function (v) { return '<span class="pastille ' + v + '">' + LIB[v] + '</span>'; }).join('') + '</span>' +
-          '<p class="acces">' + esc(m.acces) + '</p>' +
+          '<p class="acces">' + esc(m.acces) + (GUIDE_P[m.dom] ? ' <span class="guide-p" title="Pages du guide IDÉO « Que faire après la 3e ? »">📘 guide p. ' + GUIDE_P[m.dom] + '</span>' : '') + '</p>' +
           '<span class="actions"><a href="' + onisep(nomCourt) + '" target="_blank" rel="noopener">Fiche Onisep ↗</a>' +
           '<select data-metier="' + esc(nomCourt) + '" aria-label="Ajouter ' + esc(nomCourt) + ' à ma fiche"><option value="">+ Ajouter à ma fiche…</option><option>A</option><option>B</option><option>C</option></select></span></li>';
       }).join('') + (etat.q ? '<li class="aucun">Tu ne trouves pas ? <a href="' + onisep(etat.q) + '" target="_blank" rel="noopener">Chercher « ' + esc(etat.q) + ' » sur l\'Onisep →</a></li>' : '');
@@ -507,8 +574,8 @@
     var TYPES = [['gt', 'Général et techno.'], ['pro', 'Professionnel (bac pro)'], ['cap', 'CAP']];
     var SUGG = {
       gt: ['2de générale et technologique', 'Bac général – spé maths, physique-chimie, SVT', 'Bac général – spé SES, HGGSP, langues', 'Bac général – spé NSI, maths', 'Bac STMG (management, gestion)', 'Bac STI2D (industrie, développement durable)', 'Bac ST2S (santé, social)', 'Bac STL (laboratoire)', 'Bac STD2A (design, arts appliqués)', 'Bac STAV (agronomie, vivant)', '2de spécifique STHR (hôtellerie-restauration)'],
-      pro: ['2de pro Métiers de la relation client', '2de pro Métiers de la gestion administrative, du transport et de la logistique', '2de pro Métiers de la construction durable, du bâtiment et des travaux publics', '2de pro Métiers des transitions numérique et énergétique', '2de pro Métiers de l\'alimentation', '2de pro Métiers de l\'hôtellerie-restauration', '2de pro Métiers de la maintenance des matériels et des véhicules', '2de pro Métiers de la réalisation d\'ensembles mécaniques et industriels', '2de pro Métiers du pilotage et de la maintenance d\'installations automatisées', '2de pro Métiers de la beauté et du bien-être', '2de pro Métiers du bois', '2de pro Métiers de la mer', '2de pro Métiers de l\'aéronautique', 'Bac pro Accompagnement, soins et services à la personne (ASSP)', 'Bac pro Animation – enfance et personnes âgées', 'Bac pro Métiers de la sécurité', 'Bac pro Métiers de l\'électricité (MELEC)', 'Bac pro CIEL (cybersécurité, informatique, réseaux, électronique)', 'Bac pro Conduite et gestion de l\'entreprise agricole', 'Bac pro Aménagements paysagers', 'Bac pro Métiers de la coiffure'],
-      cap: ['CAP Cuisine', 'CAP Boulanger', 'CAP Pâtissier', 'CAP Commercialisation et services en HCR', 'CAP Électricien', 'CAP Maçon', 'CAP Menuisier fabricant', 'CAP Maintenance des véhicules', 'CAP Métiers de la coiffure', 'CAP Esthétique cosmétique parfumerie', 'CAP Accompagnant éducatif petite enfance', 'CAP Équipier polyvalent du commerce', 'CAP Opérateur/opératrice logistique', 'CAP Agent de sécurité', 'CAP agricole Jardinier paysagiste', 'CAP agricole Métiers de l\'agriculture', 'CAP Fleuriste', 'CAP Matelot']
+      pro: ['2de pro Métiers de la relation client', '2de pro Métiers de la gestion administrative, du transport et de la logistique', '2de pro Métiers de la construction durable, du bâtiment et des travaux publics', '2de pro Métiers des transitions numérique et énergétique', '2de pro Métiers de l\'alimentation', '2de pro Métiers de l\'hôtellerie-restauration', '2de pro Métiers de la maintenance des matériels et des véhicules', '2de pro Métiers de la réalisation d\'ensembles mécaniques et industriels', '2de pro Métiers du pilotage et de la maintenance d\'installations automatisées', '2de pro Métiers de la beauté et du bien-être', '2de pro Métiers du bois', '2de pro Métiers de la mer', '2de pro Métiers de l\'aéronautique', '2de pro Métiers des études et de la modélisation numérique du bâtiment', '2de pro Métiers des industries graphiques et de la communication', '2de pro Métiers de l\'agencement, de la menuiserie et de l\'ameublement', 'Bac pro Accompagnement, soins et services à la personne (ASSP)', 'Bac pro Animation – enfance et personnes âgées', 'Bac pro Métiers de la sécurité', 'Bac pro Métiers de l\'électricité (MELEC)', 'Bac pro CIEL (cybersécurité, informatique, réseaux, électronique)', 'Bac pro Conduite et gestion de l\'entreprise agricole', 'Bac pro Aménagements paysagers', 'Bac pro Métiers de la coiffure'],
+      cap: ['CAP Cuisine', 'CAP Boulanger', 'CAP Pâtissier', 'CAP Commercialisation et services en HCR', 'CAP Électricien', 'CAP Maçon', 'CAP Menuisier fabricant', 'CAP Maintenance des véhicules', 'CAP Métiers de la coiffure', 'CAP Esthétique cosmétique parfumerie', 'CAP Accompagnant éducatif petite enfance', 'CAP Équipier polyvalent du commerce', 'CAP Opérateur/opératrice logistique', 'CAP Agent de sécurité', 'CAP agricole Jardinier paysagiste', 'CAP agricole Métiers de l\'agriculture', 'CAP Fleuriste', 'CAP Maritime']
     };
     var zonePlans = document.getElementById('plans');
     var titre2 = '<h3 style="margin:1.2rem 0 0">2. Mes vœux d\'orientation</h3>';
@@ -642,12 +709,35 @@
       }
       var btn = document.getElementById('btn-envoyer');
       btn.disabled = true; btn.textContent = '⏳ Envoi en cours…';
-      var corps = new URLSearchParams();
-      Object.keys(d).forEach(function (k) { corps.append(k, d[k]); });
-      fetch(URL_ENVOI, { method: 'POST', mode: 'no-cors', body: corps })
-        .then(function () {
-          montrer('ok', '✅ Merci ' + esc(d.prenom) + ' ! Ta fiche a bien été envoyée à ton professeur. Tu peux aussi l\'imprimer pour la garder.');
-          try { localStorage.removeItem(CLE); } catch (err) {}
+      if (d.site_web) return; /* champ piège rempli : robot */
+      /* Contenu du mail : un tableau lisible, champ par champ */
+      var LIBELLES = { nom: 'Nom', prenom: 'Prénom', classe: 'Classe', prof_principal: 'Professeur principal',
+        matieres: 'Matières préférées', points_forts: 'Points forts', loisirs: 'En dehors du collège',
+        A_type: 'Plan A – type de lycée', A_filiere: 'Plan A – filière', A_metier: 'Plan A – métier visé', A_lycee: 'Plan A – lycée envisagé',
+        B_type: 'Plan B – type de lycée', B_filiere: 'Plan B – filière', B_metier: 'Plan B – métier visé', B_lycee: 'Plan B – lycée envisagé',
+        C_type: 'Plan C – type de lycée', C_filiere: 'Plan C – filière', C_metier: 'Plan C – métier visé', C_lycee: 'Plan C – lycée envisagé',
+        remarques: 'Remarques, idées, questions' };
+      var corps = {
+        _subject: 'Fiche orientation – ' + d.classe + ' – ' + d.nom.toUpperCase() + ' ' + d.prenom,
+        _template: 'table',
+        _captcha: 'false'
+      };
+      COLS.forEach(function (c) { corps[LIBELLES[c]] = d[c] || '—'; });
+      /* Une ligne prête à coller dans Excel (colonnes séparées par des points-virgules) */
+      corps['Ligne pour le tableur'] = COLS.map(function (c) { return (d[c] || '').replace(/[;\r\n]+/g, ' '); }).join(';');
+      fetch(URL_ENVOI, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(corps)
+      })
+        .then(function (r) { return r.json().catch(function () { return {}; }); })
+        .then(function (rep) {
+          if (rep && String(rep.success) === 'true') {
+            montrer('ok', '✅ Merci ' + esc(d.prenom) + ' ! Ta fiche a bien été envoyée à ton professeur. Tu peux aussi l\'imprimer pour la garder.');
+            try { localStorage.removeItem(CLE); } catch (err) {}
+          } else {
+            montrer('ko', '❌ La fiche n\'a pas pu être envoyée' + (rep && rep.message ? ' (' + esc(rep.message) + ')' : '') + '. Clique sur « Télécharger (CSV) » ou « Imprimer / PDF » et remets ta fiche à ton professeur.');
+          }
         })
         .catch(function () {
           montrer('ko', '❌ L\'envoi n\'a pas fonctionné (connexion ?). Réessaie, ou clique sur « Télécharger (CSV) » et remets le fichier à ton professeur.');
