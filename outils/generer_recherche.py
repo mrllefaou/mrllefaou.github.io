@@ -33,7 +33,7 @@ for f in sorted(RACINE.rglob('*.html')):
     pages.append({
         'u': rel,
         't': h1 or titre,
-        'r': 'Maths' if rel.startswith('maths/') else ('SNT' if rel.startswith('snt/') else 'Accueil'),
+        'r': 'Maths' if rel.startswith('maths/') else ('SNT' if rel.startswith('snt/') else ('Orientation' if rel.startswith('orientation/') else 'Accueil')),
         'e': eyebrow,
         'd': html.unescape(desc) or meta,
         'h': titres[:600],

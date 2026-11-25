@@ -187,6 +187,7 @@
     }
     .matieres li:nth-child(1) { animation-delay: .9s; }
     .matieres li:nth-child(2) { animation-delay: 1.1s; }
+    .matieres li:nth-child(3) { animation-delay: 1.3s; }
 
     .carte {
       --c1: var(--snt);
@@ -213,6 +214,16 @@
       transition: transform .25s ease, border-color .3s ease, box-shadow .3s ease;
     }
     .carte.maths { --c1: var(--maths); --c2: var(--maths2); }
+    .carte.orientation { --c1: #0d9488; --c2: #34d399; }
+
+    /* Orientation : boussole et chemins */
+    .chemin { fill: none; stroke: rgba(52, 211, 153, .4); stroke-width: 1.6; stroke-dasharray: 5 6; animation: pointilles 4s linear infinite; }
+    .boussole { fill: none; stroke: rgba(52, 211, 153, .55); stroke-width: 1.4; }
+    .aiguille { transform-origin: 262px 70px; animation: chercherNord 6s ease-in-out infinite; }
+    .aiguille path { fill: #34d399; }
+    @keyframes chercherNord { 0%, 100% { transform: rotate(-25deg); } 50% { transform: rotate(35deg); } }
+    .etape { fill: #0d9488; }
+    .etiquette-plan { font: 800 13px system-ui, sans-serif; fill: rgba(167, 243, 208, .75); }
 
     /* halo qui suit la souris */
     .carte::before {
@@ -428,6 +439,8 @@
     html.theme-clair .niveau, html.theme-clair .tags li { background: rgba(20, 30, 60, .05); }
     html.theme-clair .carte.snt .entrer { color: #0e7490; }
     html.theme-clair .carte.maths .entrer { color: #be123c; }
+    html.theme-clair .carte.orientation .entrer { color: #0f766e; }
+    html.theme-clair .etiquette-plan { fill: rgba(15, 118, 110, .7); }
     html.theme-clair .formule { fill: rgba(180, 83, 9, .6); }
     html.theme-clair .binaire { fill: rgba(14, 116, 144, .45); }
     html.theme-clair .synapse { stroke: rgba(14, 116, 144, .25); }
@@ -558,11 +571,38 @@
           <span class="entrer">Entrer dans le cours <span class="fleche" aria-hidden="true">→</span></span>
         </a>
       </li>
+      <li>
+        <a class="carte orientation" href="orientation/orientation-3e.html">
+          <span class="deco" aria-hidden="true">
+            <svg viewBox="0 0 320 240" preserveAspectRatio="xMaxYMid meet">
+              <path class="chemin" d="M150 225 C 190 200, 200 170, 230 160" />
+              <path class="chemin" d="M150 225 C 210 215, 250 205, 300 200" />
+              <path class="chemin" d="M150 225 C 170 170, 160 140, 185 115" />
+              <circle class="etape" cx="230" cy="160" r="5" /><text class="etiquette-plan" x="238" y="158">A</text>
+              <circle class="etape" cx="300" cy="200" r="5" /><text class="etiquette-plan" x="296" y="190">B</text>
+              <circle class="etape" cx="185" cy="115" r="5" /><text class="etiquette-plan" x="192" y="112">C</text>
+              <circle class="boussole" cx="262" cy="70" r="34" />
+              <circle class="boussole" cx="262" cy="70" r="26" style="stroke-dasharray:2 5" />
+              <g class="aiguille"><path d="M262 44 L268 70 L262 76 L256 70 Z" /></g>
+            </svg>
+          </span>
+          <span class="carte-haut">
+            <span class="icone" aria-hidden="true">🧭</span>
+            <span class="niveau">3ème</span>
+          </span>
+          <h2>Orientation 3e</h2>
+          <p>Découvrir les métiers et les formations, et construire ton plan A, B et C pour l'après-collège.</p>
+          <ul class="tags">
+            <li>Métiers</li><li>Bac pro</li><li>CAP</li><li>2de GT</li><li>Ma fiche</li>
+          </ul>
+          <span class="entrer">Préparer mon orientation <span class="fleche" aria-hidden="true">→</span></span>
+        </a>
+      </li>
     </ul>
   </main>
 
   <footer>
-    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, séances terminées, accès au site) sont enregistrées uniquement dans ton navigateur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
+    <p class="mentions-donnees"><strong>Données personnelles et cookies</strong> · Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité. Tes préférences (thème clair ou sombre, réponses aux QCM, séances terminées, accès au site) sont enregistrées uniquement dans ton navigateur. Seule exception : la fiche d’orientation de 3e, que tu choisis d’envoyer à ton professeur. Certaines pages intègrent l’éditeur Python de withcode.uk ; ce service, comme les liens vers d’autres sites (vidéos YouTube comprises), est soumis à ses propres conditions.</p>
   </footer>
 
   <script>
