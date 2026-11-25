@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orientation 3e – Métiers, formations et ma fiche d'orientation</title>
+  <meta name="description" content="Orientation après la 3e : les voies (générale et technologique, bac pro, CAP), le calendrier, un moteur de recherche de métiers et la fiche d'orientation plan A, plan B, plan C.">
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../maths/style.css">
+  <script src="../commun/acces.js"></script>
+  <script src="../commun/theme.js"></script>
+  <script src="../commun/impression.js"></script>
+  <script src="../commun/recherche.js"></script>
+  <link rel="stylesheet" href="../commun/fond.css">
+  <script src="../commun/fond.js" defer></script>
+  <style>
+    :root { --ori: #0d9488; --ori2: #10b981; --ori-soft: #e3f7f3; --pro: #d97706; --pro-soft: #fff4dc; --gt: #2563eb; --gt-soft: #e8efff; --cap: #db2777; --cap-soft: #fde8f1; --err: #b91c1c; }
+    @media screen { html:not(.theme-clair) { --ori-soft: #0f2f2c; --pro-soft: #33290f; --gt-soft: #1f2d4d; --cap-soft: #3a1a2b; --err: #f87171; } }
+
+    main { max-width: 1000px; }
+    .topbar-inner { max-width: 1000px; }
+
+    /* Sommaire */
+    .sommaire { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: 1.25rem 0 0; }
+    .sommaire a {
+      display: inline-flex; align-items: center; gap: .4rem; padding: .45rem .9rem; border-radius: 999px;
+      background: var(--surface); border: 1px solid var(--border); text-decoration: none; color: var(--text);
+      font-weight: 600; font-size: .92rem; box-shadow: var(--shadow); transition: transform .2s ease, border-color .2s ease;
+    }
+    .sommaire a:hover { transform: translateY(-2px); border-color: var(--ori); }
+
+    section[id] { scroll-margin-top: 4.5rem; }
+    .source { font-size: .85rem; color: var(--muted); margin: .9rem 0 0; }
+    .source a { color: inherit; }
+
+    /* Les voies */
+    .voies { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .voie { --c: var(--gt); --cs: var(--gt-soft); border: 1px solid var(--border); border-top: 5px solid var(--c); border-radius: var(--radius); padding: 1rem 1.1rem; background: var(--surface); }
+    .voie.pro { --c: var(--pro); --cs: var(--pro-soft); }
+    .voie.cap { --c: var(--cap); --cs: var(--cap-soft); }
+    .voie h3 { margin: 0 0 .2rem; font-size: 1.15rem; }
+    .voie .duree { display: inline-block; font-size: .8rem; font-weight: 700; padding: .15rem .6rem; border-radius: 999px; background: var(--cs); color: var(--c); }
+    .voie ul { padding-left: 1.1rem; margin: .7rem 0 0; }
+    .voie li { margin: .25rem 0; }
+    .encadre { margin-top: 1rem; padding: .9rem 1rem; border-radius: 12px; background: var(--ori-soft); border-left: 4px solid var(--ori); }
+    .encadre p { margin: .3rem 0; }
+
+    /* Schéma des parcours */
+    .schema { display: grid; grid-template-columns: auto 1fr 1fr 1fr; gap: .4rem; margin-top: 1rem; font-size: .88rem; text-align: center; }
+    .schema .an { font-weight: 700; color: var(--muted); align-self: center; text-align: right; padding-right: .3rem; }
+    .schema .bloc { padding: .45rem .3rem; border-radius: 8px; background: var(--gt-soft); color: var(--text); }
+    .schema .bloc.pro { background: var(--pro-soft); }
+    .schema .bloc.cap { background: var(--cap-soft); }
+    .schema .bloc.fin { font-weight: 700; }
+    .schema .vide { visibility: hidden; }
+
+    /* Calendrier */
+    .frise { list-style: none; padding: 0; margin: 1rem 0 0; position: relative; }
+    .frise::before { content: ""; position: absolute; left: 15px; top: 6px; bottom: 6px; width: 3px; background: var(--border); border-radius: 3px; }
+    .frise li { position: relative; padding: 0 0 1rem 2.8rem; }
+    .frise li::before {
+      content: attr(data-n); position: absolute; left: 0; top: 0; width: 33px; height: 33px; border-radius: 50%;
+      display: grid; place-items: center; font-weight: 800; font-size: .9rem; background: var(--surface); border: 3px solid var(--ori); color: var(--ori);
+    }
+    .frise li.actuel::before { background: var(--ori); color: #fff; box-shadow: 0 0 0 6px color-mix(in srgb, var(--ori) 25%, transparent); }
+    .frise .quand { font-weight: 800; }
+    .frise .badge-now { display: none; margin-left: .4rem; font-size: .75rem; font-weight: 700; padding: .1rem .55rem; border-radius: 999px; background: var(--ori); color: #fff; vertical-align: .1em; }
+    .frise li.actuel .badge-now { display: inline-block; }
+    .frise p { margin: .15rem 0 0; }
+
+    /* Guide IDÉO */
+    .table-guide { overflow-x: auto; margin-top: .8rem; }
+    .table-guide table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+    .table-guide th, .table-guide td { text-align: left; padding: .45rem .7rem; border-bottom: 1px solid var(--border); }
+    .table-guide th { background: var(--ori-soft); }
+    .table-guide td:last-child, .table-guide th:last-child { text-align: right; white-space: nowrap; font-weight: 700; color: var(--ori); }
+    @media screen { html:not(.theme-clair) .table-guide td:last-child { color: #5eead4; } }
+    .retenir { padding-left: 1.1rem; margin: 0; }
+    .retenir li { margin: .45rem 0; }
+    .retenir .p, .metier .guide-p { font-size: .75rem; font-weight: 700; padding: .05rem .45rem; border-radius: 999px; background: var(--ori-soft); color: var(--ori); white-space: nowrap; }
+    @media screen { html:not(.theme-clair) .retenir .p, html:not(.theme-clair) .metier .guide-p { color: #5eead4; } }
+
+    /* Recherche de métiers */
+    .barre-metier { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .6rem; }
+    .barre-metier input[type="search"] {
+      flex: 1 1 260px; font: inherit; padding: .7rem 1rem; border-radius: 12px; border: 2px solid var(--border);
+      background: var(--bg); color: var(--text);
+    }
+    .barre-metier input[type="search"]:focus { outline: none; border-color: var(--ori); }
+    .filtres { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .7rem; }
+    .filtres button {
+      font: 600 .85rem system-ui, sans-serif; padding: .35rem .75rem; border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    }
+    .filtres button[aria-pressed="true"] { background: var(--ori); border-color: var(--ori); color: #fff; }
+    .filtres .sep { width: 100%; height: 0; }
+    .compteur { font-size: .9rem; color: var(--muted); margin: .8rem 0 .3rem; }
+    .metiers { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: .75rem; max-height: 640px; overflow-y: auto; padding-right: .2rem; }
+    .metier { border: 1px solid var(--border); border-radius: 12px; padding: .8rem .9rem; background: var(--surface); display: flex; flex-direction: column; gap: .35rem; }
+    .metier h3 { margin: 0; font-size: 1.02rem; }
+    .metier .dom { font-size: .78rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+    .metier .acces { font-size: .9rem; margin: 0; }
+    .pastilles { display: flex; gap: .3rem; flex-wrap: wrap; }
+    .pastille { font-size: .72rem; font-weight: 700; padding: .1rem .5rem; border-radius: 999px; }
+    .pastille.cap { background: var(--cap-soft); color: var(--cap); }
+    .pastille.pro { background: var(--pro-soft); color: var(--pro); }
+    .pastille.gt { background: var(--gt-soft); color: var(--gt); }
+    @media screen { html:not(.theme-clair) .pastille.cap { color: #f9a8d4; } html:not(.theme-clair) .pastille.pro { color: #fcd34d; } html:not(.theme-clair) .pastille.gt { color: #93c5fd; } }
+    .metier .actions { margin-top: auto; display: flex; gap: .4rem; flex-wrap: wrap; align-items: center; font-size: .85rem; }
+    .metier .actions a { font-weight: 600; }
+    .metier .actions select { font: inherit; font-size: .82rem; padding: .2rem .3rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+    .aucun { padding: 1rem; border-radius: 12px; background: var(--ori-soft); }
+
+    /* Formulaire */
+    .fiche fieldset { border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1rem 1.1rem; margin: 1rem 0 0; }
+    .fiche legend { font-weight: 800; padding: 0 .4rem; font-size: 1.05rem; }
+    .champs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .8rem; }
+    .champ { display: flex; flex-direction: column; gap: .25rem; }
+    .champ label, .champ .lbl { font-weight: 600; font-size: .92rem; }
+    .champ .aide { font-size: .8rem; color: var(--muted); }
+    .fiche input[type="text"], .fiche textarea {
+      font: inherit; font-size: .98rem; padding: .55rem .7rem; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--bg); color: var(--text); width: 100%;
+    }
+    .fiche textarea { min-height: 90px; resize: vertical; }
+    .fiche input:focus, .fiche textarea:focus { outline: 2px solid var(--ori); outline-offset: 1px; }
+    .requis { color: var(--err); }
+    .plan { border-left: 5px solid var(--ori); }
+    .plan legend .lettre { display: inline-grid; place-items: center; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: var(--ori); color: #fff; margin-right: .3rem; }
+    .types { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .types label { display: inline-flex; align-items: center; gap: .35rem; padding: .4rem .7rem; border: 1px solid var(--border); border-radius: 999px; cursor: pointer; font-weight: 600; font-size: .9rem; }
+    .types input { accent-color: var(--ori); }
+    .types label:has(input:checked) { border-color: var(--ori); background: var(--ori-soft); }
+    .regle { margin: 1rem 0 0; padding: .7rem 1rem; border-radius: 10px; background: var(--pro-soft); font-weight: 600; }
+    .regle.ok { background: var(--ok-soft); color: var(--ok); }
+    .regle.ko { background: var(--cap-soft); color: var(--err); }
+    .boutons { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; }
+    .btn { font: 700 .98rem system-ui, sans-serif; padding: .7rem 1.2rem; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
+    .btn.principal { background: linear-gradient(135deg, var(--ori), var(--ori2)); border-color: transparent; color: #fff; }
+    .btn:disabled { opacity: .6; cursor: wait; }
+    .message { margin-top: 1rem; padding: .8rem 1rem; border-radius: 10px; display: none; }
+    .message.visible { display: block; }
+    .message.ok { background: var(--ok-soft); color: var(--ok); }
+    .message.ko { background: var(--cap-soft); color: var(--err); }
+    .message.info { background: var(--ori-soft); }
+    .etapes-pdf { margin: .9rem 0 0; padding-left: 1.3rem; font-size: .95rem; }
+    .etapes-pdf li { margin: .2rem 0; }
+    #fiche-impression { display: none; }
+    .piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .rgpd { font-size: .82rem; color: var(--muted); margin-top: 1rem; }
+
+    /* Ressources */
+    .ressources { list-style: none; padding: 0; margin: .8rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: .75rem; }
+    .ressources a { display: block; height: 100%; padding: .8rem .9rem; border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text); background: var(--surface); transition: border-color .2s ease, transform .2s ease; }
+    .ressources a:hover { border-color: var(--ori); transform: translateY(-2px); }
+    .ressources strong { display: block; color: var(--ori); }
+    @media screen { html:not(.theme-clair) .ressources strong { color: #5eead4; } }
+    .ressources span { font-size: .88rem; color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .schema { font-size: .75rem; }
+      .metiers { max-height: none; }
+    }
+
+    /* Impression : la fiche seule, mise en page comme le document papier */
+    @media print {
+      body.impr-fiche .topbar, body.impr-fiche main > *:not(#fiche), body.impr-fiche footer, body.impr-fiche noscript { display: none !important; }
+      body.impr-fiche #fiche > :not(#fiche-impression) { display: none !important; }
+      body.impr-fiche #fiche { border: 0 !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; background: #fff !important; }
+      body.impr-fiche #fiche-impression { display: block !important; color: #000; font-size: 10.5pt; line-height: 1.35; }
+      #fiche-impression h1 { font-size: 16pt; margin: 0 0 .2rem; }
+      #fiche-impression h2 { font-size: 12pt; margin: .9rem 0 .3rem; display: block; }
+      #fiche-impression p { margin: .2rem 0; }
+      #fiche-impression table { width: 100%; border-collapse: collapse; margin-top: .3rem; }
+      #fiche-impression th, #fiche-impression td { border: 1px solid #666; padding: .3rem .4rem; text-align: left; vertical-align: top; white-space: pre-wrap; }
+      #fiche-impression th { background: #eee !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      #fiche-impression .lettre { font-weight: 800; text-align: center; width: 2em; }
+      #fiche-impression .n-impr { font-size: 9pt; color: #333; }
+      #fiche-impression .bloc-texte { border: 1px solid #666; padding: .4rem; min-height: 3.5em; white-space: pre-wrap; }
+      @page { size: A4; margin: 14mm; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="orientation-3e.html">Orientation<span>.</span></a>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="../index.html">Accueil du site</a><span class="sep">›</span><span>Orientation 3e</span></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="background: linear-gradient(135deg, #0d9488, #2563eb)">
+      <p class="eyebrow">Classe de 3e · Préparer l'après-collège</p>
+      <h1>Orientation 3e</h1>
+      <p class="meta">Découvrir les métiers et les formations · Construire mon plan A, mon plan B et mon plan C</p>
+    </section>
+
+    <ul class="sommaire" aria-label="Sommaire">
+      <li><a href="#voies">🧭 Les voies après la 3e</a></li>
+      <li><a href="#calendrier">📅 Le calendrier</a></li>
+      <li><a href="#guide">📘 Le guide IDÉO</a></li>
+      <li><a href="#metiers">🔎 Explorer les métiers</a></li>
+      <li><a href="#fiche">📝 Ma fiche d'orientation</a></li>
+      <li><a href="#ressources">📚 Ressources et sources</a></li>
+    </ul>
+
+    <!-- ===== 1. Les voies ===== -->
+    <section class="card" id="voies">
+      <h2>🧭 Que faire après la 3e ?</h2>
+      <p>À la fin de la 3e, tu choisis entre <strong>deux grandes voies</strong> : la voie générale et technologique, ou la voie professionnelle (bac pro ou CAP). Aucune voie n'est « meilleure » qu'une autre : la bonne, c'est celle qui correspond à tes goûts, à ta façon d'apprendre et à ton projet.</p>
+
+      <div class="voies">
+        <article class="voie gt">
+          <h3>2de générale et technologique</h3>
+          <span class="duree">3 ans jusqu'au bac</span>
+          <ul>
+            <li>La 2de est une année pour <strong>découvrir</strong> : on choisit sa suite à la fin de l'année.</li>
+            <li>Puis <strong>bac général</strong> (des spécialités : maths, SES, SVT, NSI, langues…) ou <strong>bac technologique</strong> (STMG, STI2D, ST2S, STL, STD2A, STAV…).</li>
+            <li>Mène surtout à des <strong>études après le bac</strong> (BTS, BUT, université, écoles).</li>
+          </ul>
+        </article>
+        <article class="voie pro">
+          <h3>Bac professionnel</h3>
+          <span class="duree">3 ans · en lycée pro ou en apprentissage</span>
+          <ul>
+            <li>La 2de pro se fait souvent par <strong>famille de métiers</strong> (ex. métiers de la relation client, du bâtiment, de l'alimentation…), puis on choisit sa spécialité.</li>
+            <li>Des cours généraux, des cours pro en atelier et des <strong>stages en entreprise</strong> chaque année.</li>
+            <li>Après : travailler, ou continuer (BTS notamment).</li>
+          </ul>
+        </article>
+        <article class="voie cap">
+          <h3>CAP</h3>
+          <span class="duree">2 ans en général · en lycée pro ou en apprentissage</span>
+          <ul>
+            <li>Un diplôme qui prépare à un <strong>métier précis</strong> (cuisine, coiffure, électricité, petite enfance…).</li>
+            <li>Beaucoup de pratique, des stages en entreprise.</li>
+            <li>Après : travailler, ou préparer un bac pro (en entrant en 1re pro).</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="schema" aria-label="Schéma des parcours après la 3e">
+        <span class="an"></span><span class="bloc fin">Voie générale et techno.</span><span class="bloc pro fin">Bac pro</span><span class="bloc cap fin">CAP</span>
+        <span class="an">1re année</span><span class="bloc">2de GT</span><span class="bloc pro">2de pro</span><span class="bloc cap">1re année de CAP</span>
+        <span class="an">2e année</span><span class="bloc">1re générale ou techno.</span><span class="bloc pro">1re pro</span><span class="bloc cap">2e année → CAP</span>
+        <span class="an">3e année</span><span class="bloc">Terminale → bac</span><span class="bloc pro">Terminale pro → bac pro</span><span class="bloc cap">Emploi ou 1re pro</span>
+      </div>
+
+      <div class="encadre">
+        <p><strong>🔁 L'apprentissage</strong> : un CAP ou un bac pro peut se préparer en alternance entre un CFA et une entreprise, avec un contrat de travail et un salaire. C'est possible dès 15 ans si tu as terminé ta 3e, et tu passes le même diplôme qu'en lycée. Il faut trouver un employeur : commence à chercher tôt.</p>
+        <p><strong>🔀 Les passerelles</strong> : changer de voie ou de spécialité en cours de route, c'est possible. Ton choix de 3e n'est pas un choix « pour la vie ».</p>
+        <p><strong>⚠️ Recrutements particuliers</strong> : certaines formations ont leur propre recrutement (par exemple l'École des mousses à Brest, la 2de STHR hôtellerie-restauration, les sections internationales). Renseigne-toi dès maintenant.</p>
+      </div>
+      <p class="source">Sources : <a href="https://orientation.bretagne.bzh/publications/guide-que-faire-apres-la-3e" target="_blank" rel="noopener">Région Bretagne, guide « Que faire après la 3e ? » 2025-2026</a> (p. 8-9, 15-19, 60-62) · <a href="https://www.onisep.fr/formation/apres-la-3-la-voie-professionnelle/les-diplomes-de-la-voie-pro" target="_blank" rel="noopener">Onisep, Les diplômes de la voie pro</a> · <a href="https://www.education.gouv.fr/que-faire-apres-la-troisieme-12506" target="_blank" rel="noopener">Ministère de l'Éducation nationale</a></p>
+    </section>
+
+    <!-- ===== 2. Calendrier ===== -->
+    <section class="card" id="calendrier">
+      <h2>📅 Le calendrier de l'orientation en 3e</h2>
+      <ol class="frise" id="frise">
+        <li data-n="1" data-mois="9,10,11,12"><span class="quand">Octobre → janvier : je m'informe</span><span class="badge-now">On est ici</span>
+          <p>Je découvre les voies, les métiers et les formations (cette page, le CDI, le CIO, les journées portes ouvertes). Je peux demander un entretien avec mon professeur principal ou le psychologue de l'Éducation nationale. Je fais mon stage d'observation.</p></li>
+        <li data-n="2" data-mois="1,2"><span class="quand">Janvier → février : je choisis</span><span class="badge-now">On est ici</span>
+          <p>Je lis le guide « Que faire après la 3e ? » reçu au collège. J'indique mes <strong>intentions provisoires</strong> sur ÉduConnect ou sur la fiche du collège. Pour l'apprentissage, je commence à chercher une entreprise.</p></li>
+        <li data-n="3" data-mois="3,4"><span class="quand">Mars → avril : le conseil de classe donne un avis</span><span class="badge-now">On est ici</span>
+          <p>Le conseil de classe du 2e trimestre donne un avis provisoire sur mes choix.</p></li>
+        <li data-n="4" data-mois="5"><span class="quand">Mai : mes vœux définitifs</span><span class="badge-now">On est ici</span>
+          <p>Je classe mes vœux par ordre de préférence et je fais mes demandes d'affectation (lycées) avec ma famille.</p></li>
+        <li data-n="5" data-mois="6"><span class="quand">Juin : la décision</span><span class="badge-now">On est ici</span>
+          <p>Le conseil de classe propose une orientation. En cas de désaccord, ma famille rencontre le chef d'établissement.</p></li>
+        <li data-n="6" data-mois="7,8"><span class="quand">Fin juin → juillet : affectation et inscription</span><span class="badge-now">On est ici</span>
+          <p>Je reçois mon affectation, puis <strong>je m'inscris au lycée dans les délais</strong> — sinon je peux perdre ma place.</p></li>
+      </ol>
+      <p class="source">Source : Région Bretagne (IDÉO), guide « Que faire après la 3e ? » 2025-2026, p. 6-7. Les dates exactes sont données par le collège.</p>
+    </section>
+
+    <!-- ===== Le guide IDÉO ===== -->
+    <section class="card" id="guide">
+      <h2>📘 Le guide « Que faire après la 3e ? » de la Région Bretagne</h2>
+      <p>Tu reçois ce guide au collège (édition 2025-2026). Il liste <strong>toutes les formations de Bretagne</strong>, lycée par lycée. Voici où chercher, puis l'essentiel à retenir. <a href="https://orientation.bretagne.bzh/publications/guide-que-faire-apres-la-3e" target="_blank" rel="noopener">Consulter le guide en ligne ↗</a></p>
+
+      <div class="table-guide">
+        <table>
+          <thead><tr><th>Je cherche…</th><th>Pages</th></tr></thead>
+          <tbody>
+            <tr><td>Le calendrier de l'orientation</td><td>6-7</td></tr>
+            <tr><td>Le schéma des études après la 3e</td><td>8-9</td></tr>
+            <tr><td>Les stages, les portes ouvertes</td><td>13</td></tr>
+            <tr><td>La voie pro : CAP, bac pro, apprentissage</td><td>15-21</td></tr>
+            <tr><td>La liste des bacs pro et des familles de métiers</td><td>22-23</td></tr>
+            <tr><td>Les CAP et bacs pro de Bretagne, secteur par secteur</td><td>26-59</td></tr>
+            <tr><td>La voie générale et technologique</td><td>60-63</td></tr>
+            <tr><td>Les options de 2de, les bacs technos, les spécialités</td><td>66-88</td></tr>
+            <tr><td>Les sections sportives, linguistiques, Ulis</td><td>89-94</td></tr>
+            <tr><td>Les CIO et les lieux d'information près de chez toi</td><td>96-97</td></tr>
+            <tr><td>Les questions fréquentes (secteur, place au lycée, redoublement…)</td><td>98-99</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin:1.2rem 0 .4rem">💡 Ce qu'il faut retenir</h3>
+      <ul class="retenir">
+        <li><strong>CAP</strong> : en général 2 ans (parfois 1 ou 3). Il en existe près de 200 en France. <span class="p">p. 19</span></li>
+        <li><strong>Bac pro</strong> : en 2de pro, tu choisis l'une des <strong>15 familles de métiers</strong> et tu te spécialises en 1re. Certains bacs pro ne sont dans aucune famille : tu te spécialises alors dès la 2de, comme en apprentissage. <span class="p">p. 19, 22</span></li>
+        <li><strong>En début de 2de pro ou de CAP</strong>, des tests de français et de maths permettent aux professeurs de t'aider, avec des cours en petits groupes. <span class="p">p. 15</span></li>
+        <li><strong>Apprentissage</strong> : il faut signer avec un employeur entre 3 mois avant et 3 mois après le début de la formation, donc <strong>entre juillet et novembre 2026</strong> pour une rentrée en septembre 2026. Sites utiles : <a href="https://www.bretagne-alternance.com" target="_blank" rel="noopener">bretagne-alternance.com</a>, <a href="https://www.francetravail.fr" target="_blank" rel="noopener">francetravail.fr</a>. <span class="p">p. 16-17</span></li>
+        <li><strong>On peut changer de voie</strong> en cours de route, par exemple passer d'un CAP à un bac pro de la même spécialité. Un « stage passerelle » est parfois demandé. <span class="p">p. 18</span></li>
+        <li><strong>2de générale et technologique</strong> : la même pour tous. Le choix entre bac général et l'un des <strong>8 bacs technologiques</strong> se fait en fin de 2de. Exceptions : la 2de STHR (hôtellerie-restauration) et le BT Métiers de la musique commencent dès la 2de. <span class="p">p. 60-62</span></li>
+        <li><strong>Quel lycée ?</strong> Pour la 2de générale et technologique, le lycée public dépend en général de ton adresse (la « sectorisation »). Ce n'est pas le cas pour les lycées professionnels ni pour les lycées privés sous contrat. <span class="p">p. 98</span></li>
+        <li><strong>Une formation absente de Bretagne ?</strong> Tu peux la suivre ailleurs en France, par exemple en étant interne. <span class="p">p. 99</span></li>
+      </ul>
+      <p class="source">Source : Région Bretagne, IDÉO, guide « Que faire après la 3e ? », édition 2025-2026 (données Onisep et GREF Bretagne de septembre 2025). Ces informations sont résumées avec nos propres mots, car le guide ne peut pas être reproduit sans l'accord de la Région Bretagne.</p>
+    </section>
+
+    <!-- ===== 3. Métiers ===== -->
+    <section class="card" id="metiers">
+      <h2>🔎 Explorer les métiers</h2>
+      <p>Tape un métier, un mot (« animaux », « ordinateur », « cuisine »…) ou choisis un domaine. Pour chaque métier, tu vois par quelle voie on peut y aller après la 3e. Clique sur <strong>Fiche Onisep</strong> pour tout savoir (salaire, études, vidéos), ou ajoute-le directement à ta fiche.</p>
+
+      <div class="barre-metier" role="search">
+        <label for="q" class="piege">Rechercher un métier</label>
+        <input type="search" id="q" placeholder="Ex. : boulanger, infirmière, informatique, mer…" autocomplete="off">
+      </div>
+      <div class="filtres" id="filtres-dom" aria-label="Filtrer par domaine"></div>
+      <div class="filtres" id="filtres-voie" aria-label="Filtrer par voie">
+        <button type="button" data-voie="" aria-pressed="true">Toutes les voies</button>
+        <button type="button" data-voie="cap" aria-pressed="false">Accessible avec un CAP</button>
+        <button type="button" data-voie="pro" aria-pressed="false">Accessible avec un bac pro</button>
+        <button type="button" data-voie="gt" aria-pressed="false">Par la voie générale et techno.</button>
+      </div>
+      <p class="compteur" id="compteur" aria-live="polite"></p>
+      <ul class="metiers" id="liste-metiers"></ul>
+      <p class="source">Ces exemples sont simplifiés : il existe souvent plusieurs chemins vers un même métier. Pour la liste complète (plus de 1 000 métiers) : <a href="https://www.onisep.fr/recherche/metiers" target="_blank" rel="noopener">Onisep, 1 000 métiers à découvrir</a> et <a href="https://orientation.bretagne.bzh/" target="_blank" rel="noopener">le site orientation de la Région Bretagne</a>. 📘 = pages du guide IDÉO où trouver les lycées et CFA de Bretagne.</p>
+    </section>
+
+    <!-- ===== 4. Fiche ===== -->
+    <section class="card" id="fiche">
+      <h2>📝 Mon projet d'orientation après la 3e</h2>
+      <div class="intro-fiche">
+        <p>Cette fiche résume tes projets après la 3e. Elle sera présentée au conseil de classe : remplis-la avec soin et sincérité.</p>
+        <p>Rien n'est définitif ici : cette fiche sert à exprimer tes idées et à donner au professeur une vue d'ensemble de ton projet. Le <strong>plan A</strong> est ton premier choix, les <strong>plans B et C</strong> sont d'autres pistes possibles.</p>
+      </div>
+
+      <form class="fiche" id="form-fiche" novalidate>
+
+        <fieldset>
+          <legend>Mon identité</legend>
+          <div class="champs">
+            <div class="champ"><label for="nom">Nom <span class="requis">*</span></label><input type="text" id="nom" name="nom" required autocomplete="family-name"></div>
+            <div class="champ"><label for="prenom">Prénom <span class="requis">*</span></label><input type="text" id="prenom" name="prenom" required autocomplete="given-name"></div>
+            <div class="champ"><label for="classe">Classe <span class="requis">*</span></label><input type="text" id="classe" name="classe" value="305" required></div>
+            <div class="champ"><label for="prof_principal">Professeur principal</label><input type="text" id="prof_principal" name="prof_principal"></div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>1. Mon profil</legend>
+          <div class="champs">
+            <div class="champ"><label for="matieres">Mes matières préférées</label><textarea id="matieres" name="matieres"></textarea></div>
+            <div class="champ"><label for="points_forts">Mes points forts (qualités, compétences)</label><textarea id="points_forts" name="points_forts"></textarea></div>
+            <div class="champ"><label for="loisirs">Ce que j'aime faire en dehors du collège</label><textarea id="loisirs" name="loisirs"></textarea></div>
+          </div>
+        </fieldset>
+
+        <div id="plans"></div>
+
+        <p class="regle" id="regle">Obligatoire : au moins un de tes trois plans doit être une formation en lycée professionnel (bac pro ou CAP).</p>
+
+        <fieldset>
+          <legend>3. Mes remarques, idées, questions</legend>
+          <div class="champ">
+            <label for="remarques">Pourquoi ces choix ? Ce qui me fait hésiter, ce que je dois encore vérifier, les questions que je me pose…</label>
+            <textarea id="remarques" name="remarques" style="min-height:130px"></textarea>
+          </div>
+        </fieldset>
+
+        <div class="boutons">
+          <button type="submit" class="btn principal" id="btn-pdf">📄 Créer ma fiche en PDF</button>
+          <button type="button" class="btn" id="btn-effacer">🗑️ Tout effacer</button>
+        </div>
+        <ol class="etapes-pdf">
+          <li>Clique sur <strong>« Créer ma fiche en PDF »</strong>.</li>
+          <li>Dans la fenêtre qui s'ouvre, choisis la destination <strong>« Enregistrer au format PDF »</strong> (et non une imprimante ou un service en ligne), puis <strong>Enregistrer</strong>.</li>
+          <li>Envoie le fichier PDF à ton professeur par la <strong>messagerie de l'ENT</strong>.</li>
+        </ol>
+        <div class="message" id="message" role="status" aria-live="polite"></div>
+        <p class="rgpd">🔒 Tes réponses ne sont envoyées nulle part : elles restent sur ton appareil. Le PDF est fabriqué par ton navigateur, sur ton appareil. Pendant que tu remplis la fiche, tes réponses sont gardées dans ce navigateur pour ne pas les perdre : sur un ordinateur partagé, clique sur « Tout effacer » une fois ton PDF enregistré.</p>
+        </form>
+        <div id="fiche-impression" aria-hidden="true"></div>
+
+    </section>
+
+    <!-- ===== 5. Ressources ===== -->
+    <section class="card" id="ressources">
+      <h2>📚 Pour aller plus loin · Sources</h2>
+      <ul class="ressources">
+        <li><a href="https://orientation.bretagne.bzh/" target="_blank" rel="noopener"><strong>Orientation Bretagne (IDÉO)</strong><span>Le service public de l'orientation de la Région Bretagne : fiches métiers, formations en Bretagne, stages, portes ouvertes.</span></a></li>
+        <li><a href="https://orientation.bretagne.bzh/publications/guide-que-faire-apres-la-3e" target="_blank" rel="noopener"><strong>Guide « Que faire après la 3e ? » 2025-2026</strong><span>Région Bretagne (IDÉO) · toutes les formations après la 3e en Bretagne, lycée par lycée. Le guide papier est distribué au collège.</span></a></li>
+        <li><a href="https://www.onisep.fr/recherche/metiers" target="_blank" rel="noopener"><strong>Onisep · 1 000 métiers</strong><span>Des fiches métiers détaillées avec les études pour y arriver.</span></a></li>
+        <li><a href="https://www.onisep.fr/formation/apres-la-3-la-voie-professionnelle" target="_blank" rel="noopener"><strong>Onisep · La voie professionnelle</strong><span>CAP, bac pro, apprentissage : comment ça marche ?</span></a></li>
+        <li><a href="https://www.onisep.fr/orientation/le-college/apres-la-3-telechargez-le-guide-gratuit" target="_blank" rel="noopener"><strong>Onisep · Guide national « Après la 3e »</strong><span>Le guide gratuit à télécharger.</span></a></li>
+        <li><a href="https://www.bretagne-alternance.com" target="_blank" rel="noopener"><strong>Bretagne Alternance</strong><span>Trouver une entreprise pour un CAP ou un bac pro en apprentissage.</span></a></li>
+        <li><a href="https://formations.mer.gouv.fr" target="_blank" rel="noopener"><strong>Formations et métiers de la mer</strong><span>Les formations des lycées maritimes.</span></a></li>
+        <li><a href="https://laventureduvivant.fr" target="_blank" rel="noopener"><strong>L'aventure du vivant</strong><span>Les formations de l'enseignement agricole.</span></a></li>
+        <li><a href="https://educonnect.education.gouv.fr" target="_blank" rel="noopener"><strong>ÉduConnect</strong><span>Pour saisir les intentions et les vœux d'orientation avec ta famille.</span></a></li>
+      </ul>
+      <p class="source">La fiche d'orientation reprend le document « Mon projet d'orientation après la 3e » distribué en classe. Contenus rédigés à partir des sources ci-dessus (consultées en novembre 2026).</p>
+    </section>
+  </main>
+
+  <noscript><p style="text-align:center;padding:1rem">Active JavaScript pour utiliser la recherche de métiers et envoyer ta fiche. Tu peux aussi remplir la fiche papier.</p></noscript>
+
+  <script>
+  (function () {
+    function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function norm(t) { return (t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’'·\-]/g, ' '); }
+
+    /* ---------- Calendrier : étape du moment ---------- */
+    var mois = new Date().getMonth() + 1;
+    document.querySelectorAll('#frise li').forEach(function (li) {
+      if (li.dataset.mois.split(',').indexOf(String(mois)) > -1) li.classList.add('actuel');
+    });
+
+    /* ---------- Métiers ----------
+       [nom, domaine, voies (cap/pro/gt), accès après la 3e, mots-clés] */
+    var M = [
+      ['Boulanger / Boulangère', 'Alimentation, hôtellerie', 'cap pro', 'CAP Boulanger, puis bac pro Boulanger-pâtissier.', 'pain cuisine artisan'],
+      ['Pâtissier / Pâtissière', 'Alimentation, hôtellerie', 'cap pro', 'CAP Pâtissier, bac pro Boulanger-pâtissier.', 'gateau dessert sucre cuisine'],
+      ['Boucher / Bouchère', 'Alimentation, hôtellerie', 'cap pro', 'CAP Boucher, bac pro Boucher charcutier traiteur.', 'viande artisan commerce'],
+      ['Cuisinier / Cuisinière', 'Alimentation, hôtellerie', 'cap pro gt', 'CAP Cuisine, bac pro Cuisine, ou 2de STHR (bac techno hôtellerie-restauration).', 'restaurant chef cuisine'],
+      ['Serveur / Serveuse', 'Alimentation, hôtellerie', 'cap pro', 'CAP Commercialisation et services en HCR, bac pro Commercialisation et services en restauration.', 'restaurant salle bar client'],
+      ['Réceptionniste d\'hôtel', 'Alimentation, hôtellerie', 'pro gt', 'Bac STHR ou bac pro, puis BTS Management en hôtellerie-restauration.', 'hotel accueil tourisme langues'],
+      ['Conducteur / Conductrice de ligne en agroalimentaire', 'Industrie', 'pro', 'Bac pro Pilote de ligne de production.', 'usine machine production alimentation'],
+
+      ['Maçon / Maçonne', 'Bâtiment, travaux publics', 'cap pro', 'CAP Maçon, bac pro Technicien du bâtiment : organisation et réalisation du gros œuvre.', 'construction chantier maison'],
+      ['Électricien / Électricienne', 'Bâtiment, travaux publics', 'cap pro', 'CAP Électricien, bac pro Métiers de l\'électricité et de ses environnements connectés (MELEC).', 'electricite courant maison chantier'],
+      ['Plombier-chauffagiste / Plombière-chauffagiste', 'Bâtiment, travaux publics', 'cap pro', 'CAP Monteur en installations sanitaires ou thermiques, bac pro Installateur en chauffage, climatisation et énergies renouvelables.', 'eau chauffage salle de bain energie'],
+      ['Menuisier / Menuisière', 'Bâtiment, travaux publics', 'cap pro', 'CAP Menuisier fabricant ou installateur, bac pro Technicien menuisier agenceur.', 'bois meuble atelier'],
+      ['Charpentier / Charpentière', 'Bâtiment, travaux publics', 'cap pro', 'CAP Charpentier bois, bac pro Technicien constructeur bois.', 'bois toit construction'],
+      ['Peintre en bâtiment', 'Bâtiment, travaux publics', 'cap pro', 'CAP Peintre applicateur de revêtements, bac pro Aménagement et finition du bâtiment.', 'peinture decoration chantier'],
+      ['Couvreur / Couvreuse', 'Bâtiment, travaux publics', 'cap pro', 'CAP Couvreur, puis bac pro du bâtiment.', 'toit ardoise chantier hauteur'],
+      ['Conducteur / Conductrice de travaux', 'Bâtiment, travaux publics', 'pro gt', 'Bac pro du bâtiment ou bac STI2D, puis BTS Bâtiment ou Travaux publics.', 'chantier chef equipe construction'],
+      ['Géomètre-topographe', 'Bâtiment, travaux publics', 'pro gt', 'Bac pro Géomètre (ex-Technicien géomètre-topographe) ou bac STI2D, puis BTS.', 'mesure plan terrain maths'],
+      ['Architecte', 'Bâtiment, travaux publics', 'gt', 'Bac général, puis école d\'architecture (5 ans après le bac).', 'dessin plan maison conception'],
+
+      ['Mécanicien / Mécanicienne automobile', 'Mécanique, industrie', 'cap pro', 'CAP Maintenance des véhicules, bac pro Maintenance des véhicules.', 'voiture garage moteur auto'],
+      ['Carrossier / Carrossière', 'Mécanique, industrie', 'cap pro', 'CAP Carrossier automobile, bac pro Carrossier peintre automobile.', 'voiture garage peinture auto'],
+      ['Mécanicien / Mécanicienne en matériel agricole', 'Mécanique, industrie', 'cap pro', 'CAP ou bac pro Maintenance des matériels (option matériels agricoles).', 'tracteur machine agriculture moteur'],
+      ['Technicien / Technicienne de maintenance industrielle', 'Mécanique, industrie', 'pro gt', 'Bac pro Maintenance des systèmes de production connectés, ou bac STI2D, puis BTS.', 'usine machine reparation robot'],
+      ['Chaudronnier / Chaudronnière, soudeur / soudeuse', 'Mécanique, industrie', 'cap pro', 'CAP Réalisations industrielles en chaudronnerie ou soudage, bac pro Technicien en chaudronnerie industrielle.', 'metal soudure atelier navire'],
+      ['Mécanicien / Mécanicienne aéronautique', 'Mécanique, industrie', 'cap pro', 'CAP Aéronautique, bac pro Aéronautique.', 'avion helicoptere moteur'],
+      ['Ingénieur / Ingénieure', 'Mécanique, industrie', 'gt', 'Bac général (spécialités scientifiques) ou bac STI2D, puis école d\'ingénieurs (5 ans après le bac).', 'sciences maths conception innovation'],
+
+      ['Développeur / Développeuse informatique', 'Numérique, électronique', 'pro gt', 'Bac général (spé NSI, maths) ou bac STI2D, ou bac pro CIEL, puis BTS SIO ou BUT Informatique.', 'ordinateur programmation code application jeux site web'],
+      ['Technicien / Technicienne réseaux et cybersécurité', 'Numérique, électronique', 'pro gt', 'Bac pro Cybersécurité, informatique et réseaux, électronique (CIEL), ou bac STI2D, puis BTS CIEL.', 'ordinateur internet hacker securite reseau'],
+      ['Installateur / Installatrice fibre optique', 'Numérique, électronique', 'pro', 'Bac pro CIEL ou bac pro MELEC.', 'internet telecom cable chantier'],
+      ['Développeur / Développeuse de jeux vidéo', 'Numérique, électronique', 'gt', 'Bac général (spé NSI, maths), puis BUT, licence ou école spécialisée.', 'jeux video ordinateur programmation'],
+      ['Graphiste', 'Arts, communication', 'pro gt', 'Bac STD2A puis DN MADE, ou bac pro Réalisation de produits imprimés et plurimédia.', 'dessin design image ordinateur'],
+
+      ['Infirmier / Infirmière', 'Santé, social', 'gt', 'Bac général ou bac ST2S, puis 3 ans en institut de formation en soins infirmiers (IFSI).', 'hopital soin malade sante'],
+      ['Aide-soignant / Aide-soignante', 'Santé, social', 'pro', 'Bac pro Accompagnement, soins et services à la personne (ASSP), puis diplôme d\'État d\'aide-soignant.', 'hopital soin personnes agees sante'],
+      ['Auxiliaire de puériculture', 'Santé, social', 'pro', 'Bac pro ASSP, puis diplôme d\'État d\'auxiliaire de puériculture.', 'bebe enfant creche maternite'],
+      ['Accompagnant / Accompagnante éducatif petite enfance', 'Santé, social', 'cap', 'CAP Accompagnant éducatif petite enfance (AEPE).', 'enfant creche ecole maternelle atsem'],
+      ['Animateur / Animatrice', 'Santé, social', 'pro gt', 'Bac pro Animation – enfance et personnes âgées, puis BPJEPS.', 'enfant centre loisirs jeux'],
+      ['Éducateur / Éducatrice spécialisé(e)', 'Santé, social', 'gt', 'Bac (ST2S ou général), puis diplôme d\'État d\'éducateur spécialisé (3 ans).', 'jeunes handicap aider social'],
+      ['Médecin', 'Santé, social', 'gt', 'Bac général (spécialités scientifiques), puis 9 à 11 ans d\'études de santé.', 'hopital docteur sante soin'],
+      ['Masseur-kinésithérapeute', 'Santé, social', 'gt', 'Bac général, puis 1 an d\'université et 4 ans en institut de kinésithérapie.', 'sport reeducation sante soin'],
+      ['Opticien / Opticienne', 'Santé, social', 'gt', 'Bac général ou techno (STL, STI2D), puis BTS Opticien-lunetier.', 'lunettes vue commerce sante'],
+      ['Prothésiste dentaire', 'Santé, social', 'pro', 'Bac pro Technicien en prothèse dentaire.', 'dents laboratoire precision'],
+      ['Vétérinaire', 'Agriculture, animaux, nature', 'gt', 'Bac général (spécialités scientifiques), puis école vétérinaire (environ 6 ans).', 'animaux chien chat soin'],
+
+      ['Coiffeur / Coiffeuse', 'Beauté, bien-être', 'cap pro', 'CAP Métiers de la coiffure, bac pro Métiers de la coiffure.', 'cheveux salon beaute mode'],
+      ['Esthéticien / Esthéticienne', 'Beauté, bien-être', 'cap pro', 'CAP Esthétique cosmétique parfumerie, bac pro Esthétique cosmétique parfumerie.', 'maquillage soin beaute institut ongles'],
+
+      ['Vendeur / Vendeuse', 'Commerce, gestion', 'cap pro', 'CAP Équipier polyvalent du commerce, bac pro Métiers du commerce et de la vente.', 'magasin client commerce boutique'],
+      ['Assistant / Assistante de gestion', 'Commerce, gestion', 'pro gt', 'Bac pro Assistance à la gestion des organisations et de leurs activités (AGOrA), ou bac STMG.', 'bureau secretariat entreprise ordinateur'],
+      ['Comptable', 'Commerce, gestion', 'gt', 'Bac STMG ou général, puis BTS Comptabilité et gestion.', 'chiffres argent entreprise maths'],
+      ['Conseiller / Conseillère bancaire', 'Commerce, gestion', 'gt', 'Bac STMG ou général, puis BTS Banque ou BUT.', 'banque argent client'],
+      ['Agent immobilier / Agente immobilière', 'Commerce, gestion', 'gt', 'Bac STMG ou général, puis BTS Professions immobilières.', 'maison vente location client'],
+
+      ['Agent / Agente logistique (magasinier)', 'Transport, logistique', 'cap pro', 'CAP Opérateur/opératrice logistique, bac pro Métiers de la logistique.', 'entrepot stock colis cariste'],
+      ['Conducteur / Conductrice routier', 'Transport, logistique', 'cap pro', 'CAP Conducteur routier marchandises, bac pro Conducteur transport routier marchandises.', 'camion route permis'],
+
+      ['Marin pêcheur / Marin pêcheuse', 'Mer', 'cap pro', 'CAP Maritime, bac pro Conduite et gestion des entreprises maritimes – pêche (en lycée maritime).', 'bateau peche mer ocean bretagne'],
+      ['Mécanicien / Mécanicienne de marine', 'Mer', 'pro', 'Bac pro Électromécanicien marine (en lycée maritime).', 'bateau moteur navire mer'],
+      ['Marin de la Marine nationale', 'Sécurité, défense', 'cap pro gt', 'École des mousses à Brest dès 16 ans après la 3e (recrutement spécifique), ou engagement après un CAP, un bac pro ou un bac.', 'armee bateau navire brest mer militaire'],
+      ['Ostréiculteur / Ostréicultrice (cultures marines)', 'Mer', 'pro', 'Bac pro Cultures marines.', 'huitres mer coquillages bretagne'],
+      ['Technicien / Technicienne du nautisme', 'Mer', 'cap pro', 'CAP Maintenance nautique, bac pro Maintenance nautique.', 'bateau voile moteur port'],
+
+      ['Agriculteur / Agricultrice, éleveur / éleveuse', 'Agriculture, animaux, nature', 'cap pro', 'CAP agricole Métiers de l\'agriculture, bac pro Conduite et gestion de l\'entreprise agricole (en lycée agricole).', 'ferme vaches tracteur animaux campagne'],
+      ['Paysagiste', 'Agriculture, animaux, nature', 'cap pro', 'CAP agricole Jardinier paysagiste, bac pro Aménagements paysagers.', 'jardin plantes nature exterieur'],
+      ['Fleuriste', 'Agriculture, animaux, nature', 'cap', 'CAP Fleuriste, puis brevet professionnel.', 'fleurs boutique creation'],
+      ['Horticulteur / Horticultrice', 'Agriculture, animaux, nature', 'cap pro', 'CAP agricole Métiers de l\'agriculture, bac pro Productions horticoles.', 'plantes serre fleurs legumes'],
+      ['Technicien forestier / Technicienne forestière', 'Agriculture, animaux, nature', 'pro gt', 'Bac pro Forêt ou bac STAV, puis BTSA Gestion forestière.', 'foret arbres nature bois'],
+      ['Soigneur animalier / Soigneuse animalière', 'Agriculture, animaux, nature', 'pro', 'Souvent un bac pro agricole, puis une formation spécialisée (certificat de spécialisation).', 'animaux zoo chien soin'],
+
+      ['Policier / Policière', 'Sécurité, défense', 'pro gt', 'Concours de gardien de la paix (niveau bac : bac pro ou bac général/techno).', 'police securite ordre'],
+      ['Gendarme', 'Sécurité, défense', 'pro gt', 'Concours de sous-officier de gendarmerie (niveau bac).', 'gendarmerie securite armee'],
+      ['Sapeur-pompier professionnel / Sapeuse-pompière', 'Sécurité, défense', 'pro gt', 'Bac pro Métiers de la sécurité, puis concours.', 'pompier secours feu sport'],
+      ['Agent / Agente de sécurité', 'Sécurité, défense', 'cap pro', 'CAP Agent de sécurité, bac pro Métiers de la sécurité.', 'surveillance securite'],
+
+      ['Photographe', 'Arts, communication', 'pro gt', 'Bac pro Photographie, ou bac général puis école.', 'photo image appareil'],
+      ['Journaliste', 'Arts, communication', 'gt', 'Bac général, puis études longues et école de journalisme.', 'ecrire information media video'],
+      ['Designer', 'Arts, communication', 'gt', 'Bac STD2A ou général, puis DN MADE ou école d\'art.', 'dessin creation mode objet'],
+      ['Ébéniste', 'Arts, communication', 'cap pro', 'CAP Ébéniste, puis brevet des métiers d\'art.', 'bois meuble artisan art'],
+      ['Bijoutier-joaillier / Bijoutière-joaillière', 'Arts, communication', 'cap', 'CAP Art et techniques de la bijouterie-joaillerie.', 'bijoux or creation artisan'],
+
+      ['Professeur / Professeure des écoles', 'Enseignement, sport', 'gt', 'Bac général, puis études à l\'université et concours.', 'enfants ecole enseigner'],
+      ['Éducateur sportif / Éducatrice sportive', 'Enseignement, sport', 'pro gt', 'Après le bac : BPJEPS ou licence STAPS.', 'sport coach entrainement'],
+
+      ['Installateur / Installatrice en énergies renouvelables', 'Énergie, environnement', 'pro gt', 'Bac pro MELEC ou bac pro Installateur en chauffage, climatisation et énergies renouvelables, puis BTS.', 'solaire eolien ecologie electricite climat'],
+      ['Technicien / Technicienne de laboratoire', 'Énergie, environnement', 'gt', 'Bac STL ou général, puis BTS ou BUT.', 'chimie biologie sciences analyses'],
+      ['Agent / Agente de propreté et d\'hygiène', 'Énergie, environnement', 'cap pro', 'CAP Agent de propreté et d\'hygiène, bac pro Hygiène, propreté, stérilisation.', 'nettoyage hopital entreprise'],
+
+      ['Avocat / Avocate', 'Droit, administration', 'gt', 'Bac général, puis 5 ans de droit et école d\'avocats.', 'justice droit loi parler'],
+      ['Agent administratif / Agente administrative', 'Droit, administration', 'pro gt', 'Bac pro AGOrA ou bac STMG, puis concours de la fonction publique.', 'mairie bureau administration']
+    ];
+    /* Pages du guide IDÉO 2025-2026 où trouver les formations de Bretagne du domaine */
+    var GUIDE_P = {
+      'Alimentation, hôtellerie': '30-31, 48-49', 'Bâtiment, travaux publics': '35-37, 58', 'Mécanique, industrie': '33-34, 50-51, 57',
+      'Numérique, électronique': '43-44', 'Arts, communication': '32, 42', 'Santé, social': '53-54', 'Beauté, bien-être': '38',
+      'Commerce, gestion': '39-41, 46-47', 'Transport, logistique': '56', 'Mer': '21, 52', 'Agriculture, animaux, nature': '20, 27-29',
+      'Sécurité, défense': '45, 52', 'Énergie, environnement': '43-45', 'Enseignement, sport': '60-63, 92-93', 'Droit, administration': '46-47, 60-63'
+    };
+    var metiers = M.map(function (m) { return { nom: m[0], dom: m[1], voies: m[2].split(' '), acces: m[3], n: norm(m[0] + ' ' + m[1] + ' ' + m[3] + ' ' + m[4]) }; });
+
+    var domaines = [];
+    metiers.forEach(function (m) { if (domaines.indexOf(m.dom) < 0) domaines.push(m.dom); });
+    domaines.sort(function (a, b) { return a.localeCompare(b, 'fr'); });
+    var zoneDom = document.getElementById('filtres-dom');
+    zoneDom.innerHTML = '<button type="button" data-dom="" aria-pressed="true">Tous les domaines</button>' +
+      domaines.map(function (d) { return '<button type="button" data-dom="' + esc(d) + '" aria-pressed="false">' + esc(d) + '</button>'; }).join('');
+
+    var etat = { q: '', dom: '', voie: '' };
+    var LIB = { cap: 'CAP', pro: 'Bac pro', gt: 'Voie générale et techno.' };
+    var onisep = function (t) { return 'https://www.onisep.fr/recherche?context=metier&text=' + encodeURIComponent(t); };
+
+    function afficher() {
+      var mots = norm(etat.q).split(/[^a-z0-9]+/).filter(function (x) { return x.length > 1; });
+      var res = metiers.filter(function (m) {
+        if (etat.dom && m.dom !== etat.dom) return false;
+        if (etat.voie && m.voies.indexOf(etat.voie) < 0) return false;
+        return mots.every(function (w) { return m.n.indexOf(w) > -1; });
+      });
+      var ul = document.getElementById('liste-metiers');
+      document.getElementById('compteur').textContent = res.length + ' métier' + (res.length > 1 ? 's' : '') + ' affiché' + (res.length > 1 ? 's' : '');
+      if (!res.length) {
+        ul.innerHTML = '<li class="aucun">Aucun métier de cette liste ne correspond' + (etat.q ? ' à « ' + esc(etat.q) + ' »' : '') + '. ' +
+          (etat.q ? '<a href="' + onisep(etat.q) + '" target="_blank" rel="noopener">Chercher « ' + esc(etat.q) + ' » parmi les 1 000 métiers de l\'Onisep →</a>' : '') + '</li>';
+        return;
+      }
+      ul.innerHTML = res.map(function (m, i) {
+        var nomCourt = m.nom.split(' / ')[0];
+        return '<li class="metier"><span class="dom">' + esc(m.dom) + '</span><h3>' + esc(m.nom) + '</h3>' +
+          '<span class="pastilles">' + m.voies.map(function (v) { return '<span class="pastille ' + v + '">' + LIB[v] + '</span>'; }).join('') + '</span>' +
+          '<p class="acces">' + esc(m.acces) + (GUIDE_P[m.dom] ? ' <span class="guide-p" title="Pages du guide IDÉO « Que faire après la 3e ? »">📘 guide p. ' + GUIDE_P[m.dom] + '</span>' : '') + '</p>' +
+          '<span class="actions"><a href="' + onisep(nomCourt) + '" target="_blank" rel="noopener">Fiche Onisep ↗</a>' +
+          '<select data-metier="' + esc(nomCourt) + '" aria-label="Ajouter ' + esc(nomCourt) + ' à ma fiche"><option value="">+ Ajouter à ma fiche…</option><option>A</option><option>B</option><option>C</option></select></span></li>';
+      }).join('') + (etat.q ? '<li class="aucun">Tu ne trouves pas ? <a href="' + onisep(etat.q) + '" target="_blank" rel="noopener">Chercher « ' + esc(etat.q) + ' » sur l\'Onisep →</a></li>' : '');
+    }
+
+    document.getElementById('q').addEventListener('input', function (e) { etat.q = e.target.value; afficher(); });
+    function boutonsFiltre(zone, cle, attr) {
+      zone.addEventListener('click', function (e) {
+        var b = e.target.closest('button'); if (!b) return;
+        zone.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        etat[cle] = b.getAttribute(attr); afficher();
+      });
+    }
+    boutonsFiltre(zoneDom, 'dom', 'data-dom');
+    boutonsFiltre(document.getElementById('filtres-voie'), 'voie', 'data-voie');
+    afficher();
+
+    /* ---------- Fiche : plans A, B, C ---------- */
+    var TYPES = [['gt', 'Général et techno.'], ['pro', 'Professionnel (bac pro)'], ['cap', 'CAP']];
+    var SUGG = {
+      gt: ['2de générale et technologique', 'Bac général – spé maths, physique-chimie, SVT', 'Bac général – spé SES, HGGSP, langues', 'Bac général – spé NSI, maths', 'Bac STMG (management, gestion)', 'Bac STI2D (industrie, développement durable)', 'Bac ST2S (santé, social)', 'Bac STL (laboratoire)', 'Bac STD2A (design, arts appliqués)', 'Bac STAV (agronomie, vivant)', '2de spécifique STHR (hôtellerie-restauration)'],
+      pro: ['2de pro Métiers de la relation client', '2de pro Métiers de la gestion administrative, du transport et de la logistique', '2de pro Métiers de la construction durable, du bâtiment et des travaux publics', '2de pro Métiers des transitions numérique et énergétique', '2de pro Métiers de l\'alimentation', '2de pro Métiers de l\'hôtellerie-restauration', '2de pro Métiers de la maintenance des matériels et des véhicules', '2de pro Métiers de la réalisation d\'ensembles mécaniques et industriels', '2de pro Métiers du pilotage et de la maintenance d\'installations automatisées', '2de pro Métiers de la beauté et du bien-être', '2de pro Métiers du bois', '2de pro Métiers de la mer', '2de pro Métiers de l\'aéronautique', '2de pro Métiers des études et de la modélisation numérique du bâtiment', '2de pro Métiers des industries graphiques et de la communication', '2de pro Métiers de l\'agencement, de la menuiserie et de l\'ameublement', 'Bac pro Accompagnement, soins et services à la personne (ASSP)', 'Bac pro Animation – enfance et personnes âgées', 'Bac pro Métiers de la sécurité', 'Bac pro Métiers de l\'électricité (MELEC)', 'Bac pro CIEL (cybersécurité, informatique, réseaux, électronique)', 'Bac pro Conduite et gestion de l\'entreprise agricole', 'Bac pro Aménagements paysagers', 'Bac pro Métiers de la coiffure'],
+      cap: ['CAP Cuisine', 'CAP Boulanger', 'CAP Pâtissier', 'CAP Commercialisation et services en HCR', 'CAP Électricien', 'CAP Maçon', 'CAP Menuisier fabricant', 'CAP Maintenance des véhicules', 'CAP Métiers de la coiffure', 'CAP Esthétique cosmétique parfumerie', 'CAP Accompagnant éducatif petite enfance', 'CAP Équipier polyvalent du commerce', 'CAP Opérateur/opératrice logistique', 'CAP Agent de sécurité', 'CAP agricole Jardinier paysagiste', 'CAP agricole Métiers de l\'agriculture', 'CAP Fleuriste', 'CAP Maritime']
+    };
+    var zonePlans = document.getElementById('plans');
+    var titre2 = '<h3 style="margin:1.2rem 0 0">2. Mes vœux d\'orientation</h3>';
+    zonePlans.innerHTML = titre2 + ['A', 'B', 'C'].map(function (p) {
+      var sous = p === 'A' ? 'mon premier choix' : 'une autre piste possible';
+      return '<fieldset class="plan" data-plan="' + p + '"><legend><span class="lettre">' + p + '</span>Plan ' + p + ' — ' + sous + '</legend>' +
+        '<div class="champ"><span class="lbl">Type de lycée <span class="requis">*</span></span><div class="types" role="radiogroup">' +
+        TYPES.map(function (t) { return '<label><input type="radio" name="' + p + '_type" value="' + t[1] + '" data-t="' + t[0] + '"> ' + t[1] + '</label>'; }).join('') +
+        '</div></div>' +
+        '<div class="champs" style="margin-top:.8rem">' +
+        '<div class="champ"><label for="' + p + '_filiere">Filière <span class="requis">*</span></label><input type="text" id="' + p + '_filiere" name="' + p + '_filiere" list="sugg-' + p + '"><span class="aide">Lycée pro → la formation (ex. bac pro Métiers de l\'électricité, CAP Cuisine) ; lycée techno → la série (ex. STMG, STI2D) ; lycée général → les spécialités envisagées.</span><datalist id="sugg-' + p + '"></datalist></div>' +
+        '<div class="champ"><label for="' + p + '_metier">Métier visé</label><input type="text" id="' + p + '_metier" name="' + p + '_metier"><span class="aide">À remplir si tu as une idée.</span></div>' +
+        '<div class="champ"><label for="' + p + '_lycee">Lycée envisagé (nom, ville)</label><input type="text" id="' + p + '_lycee" name="' + p + '_lycee"></div>' +
+        '</div></fieldset>';
+    }).join('');
+
+    function majSuggestions(p) {
+      var r = document.querySelector('input[name="' + p + '_type"]:checked');
+      var liste = r ? SUGG[r.dataset.t] : SUGG.gt.concat(SUGG.pro, SUGG.cap);
+      document.getElementById('sugg-' + p).innerHTML = liste.map(function (s) { return '<option value="' + esc(s) + '">'; }).join('');
+    }
+
+    var form = document.getElementById('form-fiche');
+    var regle = document.getElementById('regle');
+    function aUnPlanPro() {
+      return ['A', 'B', 'C'].some(function (p) { var r = form.querySelector('input[name="' + p + '_type"]:checked'); return r && r.dataset.t !== 'gt'; });
+    }
+    function majRegle() {
+      var choisis = ['A', 'B', 'C'].filter(function (p) { return form.querySelector('input[name="' + p + '_type"]:checked'); }).length;
+      regle.classList.remove('ok', 'ko');
+      if (aUnPlanPro()) { regle.classList.add('ok'); regle.textContent = '✅ Au moins un de tes plans est une formation en lycée professionnel.'; }
+      else if (choisis === 3) { regle.classList.add('ko'); regle.textContent = '❌ Obligatoire : au moins un de tes trois plans doit être une formation en lycée professionnel (bac pro ou CAP).'; }
+      else regle.textContent = 'Obligatoire : au moins un de tes trois plans doit être une formation en lycée professionnel (bac pro ou CAP).';
+    }
+
+    /* Ajouter un métier depuis la recherche */
+    document.getElementById('liste-metiers').addEventListener('change', function (e) {
+      var s = e.target; if (!s.dataset.metier || !s.value) return;
+      var champ = document.getElementById(s.value + '_metier');
+      champ.value = s.dataset.metier;
+      sauver();
+      montrer('info', '« ' + s.dataset.metier + ' » a été ajouté au plan ' + s.value + ' de ta fiche. <a href="#fiche">Voir ma fiche ↓</a>');
+      s.value = '';
+    });
+
+    /* ---------- Brouillon dans le navigateur ---------- */
+    var CLE = 'orientation-3e-brouillon';
+    function donnees() {
+      var d = {};
+      new FormData(form).forEach(function (v, k) { d[k] = String(v).trim(); });
+      ['A', 'B', 'C'].forEach(function (p) { if (!d[p + '_type']) d[p + '_type'] = ''; });
+      return d;
+    }
+    function sauver() { try { localStorage.setItem(CLE, JSON.stringify(donnees())); } catch (e) {} }
+    function charger() {
+      var d; try { d = JSON.parse(localStorage.getItem(CLE) || 'null'); } catch (e) { d = null; }
+      if (!d) return;
+      Object.keys(d).forEach(function (k) {
+        var els = form.querySelectorAll('[name="' + k + '"]');
+        els.forEach(function (el) { if (el.type === 'radio') el.checked = el.value === d[k]; else el.value = d[k]; });
+      });
+    }
+    charger();
+    ['A', 'B', 'C'].forEach(majSuggestions);
+    majRegle();
+    form.addEventListener('input', sauver);
+    form.addEventListener('change', function (e) {
+      sauver();
+      if (e.target.type === 'radio') { majSuggestions(e.target.name.charAt(0)); majRegle(); }
+    });
+
+    /* ---------- Messages ---------- */
+    var msg = document.getElementById('message');
+    function montrer(type, html) { msg.className = 'message visible ' + type; msg.innerHTML = html; }
+
+    function verifier() {
+      var d = donnees(), manque = [];
+      if (!d.nom) manque.push('ton nom');
+      if (!d.prenom) manque.push('ton prénom');
+      if (!d.classe) manque.push('ta classe');
+      ['A', 'B', 'C'].forEach(function (p) {
+        if (!d[p + '_type']) manque.push('le type de lycée du plan ' + p);
+        if (!d[p + '_filiere']) manque.push('la filière du plan ' + p);
+      });
+      if (manque.length) return 'Il manque : ' + manque.join(', ') + '.';
+      if (!aUnPlanPro()) return 'Au moins un de tes trois plans doit être une formation en lycée professionnel (bac pro ou CAP).';
+      return '';
+    }
+
+    document.getElementById('btn-effacer').addEventListener('click', function () {
+      if (!window.confirm('Effacer toutes les réponses de la fiche ?')) return;
+      form.reset(); document.getElementById('classe').value = '305';
+      try { localStorage.removeItem(CLE); } catch (e) {}
+      ['A', 'B', 'C'].forEach(majSuggestions); majRegle();
+      montrer('info', 'La fiche a été effacée.');
+    });
+
+    /* ---------- Création du PDF (tout se passe dans le navigateur) ---------- */
+    function cellule(v) { return v ? esc(v) : '&nbsp;'; }
+    function construireImpression(d) {
+      var plans = ['A', 'B', 'C'].map(function (p) {
+        return '<tr><td class="lettre">' + p + '</td><td>' + cellule(d[p + '_type']) + '</td><td>' + cellule(d[p + '_filiere']) +
+          '</td><td>' + cellule(d[p + '_metier']) + '</td><td>' + cellule(d[p + '_lycee']) + '</td></tr>';
+      }).join('');
+      document.getElementById('fiche-impression').innerHTML =
+        '<h1>Mon projet d\'orientation après la 3e</h1>' +
+        '<p class="n-impr">Cette fiche résume mes projets après la 3e. Elle sera présentée au conseil de classe.</p>' +
+        '<p><strong>Professeur principal :</strong> ' + cellule(d.prof_principal) + '</p>' +
+        '<table><tr><th>Nom</th><th>Prénom</th><th>Classe</th></tr><tr><td>' + cellule(d.nom) + '</td><td>' + cellule(d.prenom) + '</td><td>' + cellule(d.classe) + '</td></tr></table>' +
+        '<h2>1. Mon profil</h2>' +
+        '<table><tr><th>Mes matières préférées</th><th>Mes points forts (qualités, compétences)</th><th>Ce que j\'aime faire en dehors du collège</th></tr>' +
+        '<tr><td>' + cellule(d.matieres) + '</td><td>' + cellule(d.points_forts) + '</td><td>' + cellule(d.loisirs) + '</td></tr></table>' +
+        '<h2>2. Mes vœux d\'orientation</h2>' +
+        '<p class="n-impr">Le plan A est mon premier choix, les plans B et C sont d\'autres pistes possibles. Au moins un des trois plans est une formation en lycée professionnel.</p>' +
+        '<table><tr><th>Plan</th><th>Type de lycée</th><th>Filière</th><th>Métier visé</th><th>Lycée envisagé (nom, ville)</th></tr>' + plans + '</table>' +
+        '<h2>3. Mes remarques, idées, questions</h2>' +
+        '<div class="bloc-texte">' + cellule(d.remarques) + '</div>' +
+        '<p class="n-impr" style="margin-top:.8rem">Fiche créée le ' + new Date().toLocaleDateString('fr-FR') + '.</p>';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var erreur = verifier();
+      if (erreur) { montrer('ko', '⚠️ ' + esc(erreur)); return; }
+      var d = donnees();
+      construireImpression(d);
+      /* Le titre de la page devient le nom proposé pour le fichier PDF */
+      var titre = document.title;
+      document.title = ('Fiche orientation ' + d.classe + ' - ' + d.nom.toUpperCase() + ' ' + d.prenom).replace(/[\\/:*?"<>|]+/g, ' ');
+      document.body.classList.add('impr-fiche');
+      montrer('info', '📄 Choisis « Enregistrer au format PDF », enregistre le fichier, puis envoie-le à ton professeur par la messagerie de l\'ENT.');
+      window.print();
+      setTimeout(function () { document.body.classList.remove('impr-fiche'); document.title = titre; }, 800);
+    });
+  })();
+  </script>
+</body>
+</html>
