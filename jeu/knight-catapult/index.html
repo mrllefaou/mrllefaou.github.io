@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Knight Catapult – Trigonométrie</title>
+<link rel="icon" href="../../favicon.ico">
+<script src="../../commun/acces.js"></script>
+<style>
+:root{
+  --parch:#f6ecd2; --parch2:#ead9b0; --ink:#2b2118; --wood:#7a4a24; --wood2:#5a3417;
+  --gold:#d9a400; --red:#c0392b; --blue:#2470b8; --green:#2e8b57; --purple:#7d3c98;
+  --ok:#1e8449; --ko:#b03a2e;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;
+  background:#1d2733 radial-gradient(circle at 50% 0,#33475e 0,#1d2733 70%) fixed;
+  color:var(--ink); min-height:100vh;
+}
+button{font:inherit;cursor:pointer}
+.topbar{
+  display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;
+  padding:.5rem .8rem;background:#141b24;color:#f3e7c9;border-bottom:3px solid var(--gold);
+}
+.back{
+  color:#f3e7c9;text-decoration:none;border:1px solid #f3e7c966;border-radius:8px;padding:.3rem .7rem;font-size:.9rem;
+}
+.back:hover{background:#ffffff14}
+.brand{font-weight:800;letter-spacing:.04em;font-size:1.1rem;margin-right:auto}
+.brand span{color:var(--gold)}
+.hud{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.pill{background:#ffffff12;border:1px solid #ffffff22;border-radius:999px;padding:.2rem .65rem;font-size:.85rem;white-space:nowrap}
+.pill b{color:var(--gold)}
+.iconbtn{background:#ffffff12;border:1px solid #ffffff33;color:#f3e7c9;border-radius:8px;padding:.25rem .55rem}
+
+main{max-width:1500px;margin:0 auto;padding:.8rem;display:grid;gap:.8rem;grid-template-columns:1fr}
+@media (min-width:1100px){ main{grid-template-columns:minmax(0,1.65fr) minmax(340px,1fr);align-items:start} }
+
+.scene-wrap{position:relative;border-radius:14px;overflow:hidden;border:3px solid #0b0f14;box-shadow:0 8px 30px #0008;background:#8fd3ff}
+canvas{display:block;width:100%;height:auto;aspect-ratio:1000/560;touch-action:manipulation}
+.castle-name{
+  position:absolute;left:50%;top:.5rem;transform:translateX(-50%);
+  background:#141b24cc;color:#f3e7c9;padding:.25rem .8rem;border-radius:999px;font-size:.9rem;font-weight:700;white-space:nowrap;
+}
+
+.panel{
+  background:var(--parch);border-radius:14px;border:3px solid var(--wood2);
+  box-shadow:0 8px 30px #0008, inset 0 0 40px #c9a86a55;padding:1rem;
+}
+.qhead{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.4rem}
+.badge{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:.2rem .55rem;border-radius:6px;color:#fff}
+.badge.angle{background:var(--purple)} .badge.long{background:var(--wood)}
+.knights{margin-left:auto;display:flex;gap:.25rem}
+.kn{font-size:.75rem;padding:.15rem .45rem;border-radius:6px;color:#fff;font-weight:700}
+.kn.off{opacity:.25;text-decoration:line-through}
+.qtext{font-size:1.02rem;line-height:1.5;margin:.3rem 0 .5rem}
+.hint{background:#fff6d6;border-left:4px solid var(--gold);padding:.35rem .6rem;border-radius:6px;font-size:.92rem;margin:.3rem 0}
+.figure{background:#fffaf0;border:1px dashed #b89a62;border-radius:10px;padding:.3rem;margin:.4rem 0}
+.figure:empty{display:none}
+.calc{margin-top:.6rem;background:#2b2118;border-radius:12px;padding:.45rem .55rem .6rem;color:#f3e7c9}
+.calc summary{cursor:pointer;font-weight:800;font-size:.92rem;padding:.15rem 0}
+.calc-screen{background:#dfe9d0;color:#1d2a12;border-radius:8px;padding:.3rem .5rem;margin:.4rem 0;font-family:Consolas,"Courier New",monospace}
+.calc-screen input{width:100%;border:0;background:transparent;font:inherit;font-size:1.1rem;outline:0;color:#1d2a12}
+#calcOut{text-align:right;font-size:1.25rem;font-weight:700;min-height:1.4em}
+#calcOut.err{font-size:.85rem;color:#9b1c1c}
+.calc-keys{display:grid;grid-template-columns:repeat(5,1fr);gap:.3rem}
+.calc-keys button{border:0;border-radius:7px;padding:.5rem 0;font-weight:700;font-size:1rem;background:#f3e7c9;color:#2b2118;box-shadow:0 2px 0 #9b8763}
+.calc-keys button.fn{background:#c9b6e4;box-shadow:0 2px 0 #7d6aa0;font-size:.92rem}
+.calc-keys button.op{background:#f0c36b;box-shadow:0 2px 0 #a07a2a}
+.calc-keys button.ctl{background:#e8a29a;box-shadow:0 2px 0 #9b4f46}
+.calc-keys button.eq{grid-column:span 5;background:#2e8b57;color:#fff;box-shadow:0 2px 0 #1b5a37}
+.calc-keys button:active{transform:translateY(2px);box-shadow:none}
+.scene-wrap{position:sticky;top:0;z-index:5}
+@media (min-width:1100px){ .scene-wrap{top:.8rem} }
+.figure svg{display:block;width:100%;max-width:380px;height:auto;margin:0 auto}
+.answer{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-top:.5rem}
+.answer label{font-weight:700}
+.inbox{display:flex;align-items:center;background:#fff;border:2px solid var(--wood2);border-radius:10px;overflow:hidden}
+.inbox input{border:0;outline:0;font:inherit;font-size:1.2rem;width:7.5rem;padding:.45rem .6rem;background:transparent}
+.inbox span{padding:0 .6rem;font-weight:700;color:#6b5434}
+.btn{border:0;border-radius:10px;padding:.6rem 1.1rem;font-weight:800;color:#fff;background:var(--red);box-shadow:0 4px 0 #7b241c;transition:transform .05s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #7b241c}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.gold{background:#c98f00;box-shadow:0 4px 0 #7a5700}
+.btn.blue{background:var(--blue);box-shadow:0 4px 0 #154a7a}
+.feedback{margin-top:.6rem;font-size:.95rem;line-height:1.45}
+.feedback .ok{color:var(--ok);font-weight:800}
+.feedback .ko{color:var(--ko);font-weight:800}
+.box{border-radius:10px;padding:.55rem .7rem;margin-top:.5rem}
+.rappel{background:#e8f1fb;border:1px solid #9cc0e6}
+.correction{background:#fdecea;border:1px solid #e6a39c}
+.success{background:#e6f6ec;border:1px solid #93d0aa}
+.box h4{margin:.1rem 0 .3rem;font-size:.95rem}
+.box p{margin:.2rem 0}
+.formulas{display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem;text-align:center;margin:.3rem 0}
+.formulas div{background:#fff;border-radius:8px;padding:.3rem;font-size:.9rem}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.9em;margin:0 .15em}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .2em}
+.ang{
+  display:inline-block;padding-top:.32em;line-height:1;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M4 18 L50 3 L96 18' fill='none' stroke='%232b2118' stroke-width='4'/%3E%3C/svg%3E") no-repeat top center/90% .36em;
+}
+.small{font-size:.85rem;color:#6b5434}
+.intro-ctrl{position:absolute;right:.6rem;bottom:.6rem;display:flex;gap:.4rem}
+.intro-ctrl button{border-radius:8px;padding:.45rem .8rem;font-weight:800;background:#141b24dd;color:#f3e7c9;border:1px solid #f3e7c966}
+.intro-ctrl button:hover{background:#141b24}
+@media (max-width:600px){.intro-ctrl{right:.3rem;bottom:.3rem}.intro-ctrl button{padding:.2rem .45rem;font-size:.75rem}}
+
+/* écrans */
+.overlay{position:fixed;inset:0;background:#0b0f14dd;display:flex;align-items:flex-start;justify-content:center;z-index:20;overflow:auto;padding:1rem}
+.overlay.hidden{display:none}
+.card{background:var(--parch);border:4px solid var(--wood2);border-radius:18px;max-width:860px;width:100%;padding:1.2rem 1.4rem;box-shadow:0 20px 60px #000a;margin:auto}
+.card h1{margin:.2rem 0;font-size:clamp(1.8rem,5vw,2.8rem);text-align:center;color:var(--wood2);letter-spacing:.03em}
+.card h1 span{color:var(--red)}
+.card .sub{text-align:center;margin:0 0 .8rem;color:#6b5434}
+.story{line-height:1.55}
+.levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin:1rem 0 .4rem}
+.level{background:#fff;border:3px solid var(--parch2);border-radius:14px;padding:.8rem;text-align:left;color:var(--ink)}
+.level:hover,.level:focus{border-color:var(--gold);outline:0}
+.level h3{margin:.1rem 0 .3rem;display:flex;justify-content:space-between;align-items:center}
+.level h3 small{background:var(--gold);color:#fff;border-radius:6px;padding:.1rem .4rem;font-size:.75rem}
+.level p{margin:.2rem 0;font-size:.88rem;line-height:1.4}
+.level .rec{color:#6b5434;font-size:.8rem;margin-top:.4rem}
+.rules{font-size:.92rem;line-height:1.5}
+.rules ul{margin:.3rem 0;padding-left:1.2rem}
+.trio{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin:.4rem 0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.5rem;margin:1rem 0}
+.stats div{background:#fff;border-radius:10px;padding:.6rem;text-align:center}
+.stats b{display:block;font-size:1.5rem;color:var(--wood2)}
+.center{text-align:center}
+.backbtn{display:inline-block;text-decoration:none}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="back" href="../jeu.html">← Jeux</a>
+  <div class="brand">KNIGHT <span>CATAPULT</span></div>
+  <div class="hud">
+    <span class="pill">Niveau : <b id="hudLevel">–</b></span>
+    <span class="pill">Château <b id="hudCastle">0</b>/<span id="hudTotal">10</span></span>
+    <span class="pill">Conquis : <b id="hudWon">0</b></span>
+    <span class="pill">Score : <b id="hudScore">0</b></span>
+    <span class="pill">⏱ <b id="hudTime">0:00</b></span>
+    <button class="iconbtn" id="musicBtn" type="button" title="Couper la musique">🎵</button>
+    <button class="iconbtn" id="muteBtn" type="button" title="Couper / remettre tout le son">🔊</button>
+  </div>
+</header>
+
+<main>
+  <div class="scene-wrap">
+    <canvas id="scene" width="1000" height="560"></canvas>
+    <div class="castle-name" id="castleName">Knight Catapult</div>
+    <div class="intro-ctrl" id="introCtrl" style="display:none"><button type="button" id="introNext">Suite ▸</button><button type="button" id="introSkip">Passer l'intro ⏭</button></div>
+  </div>
+
+  <section class="panel" id="panel">
+    <div class="qhead">
+      <span class="badge angle" id="qBadge">Angle</span>
+      <strong id="qTitle">Château 1</strong>
+      <div class="knights" id="knightsBox"></div>
+    </div>
+    <div class="qtext" id="qText"></div>
+    <div id="qHint"></div>
+    <div class="figure" id="figure"></div>
+    <div id="answerRow">
+    <div class="answer">
+      <label for="ans" id="ansLabel">Réponse :</label>
+      <div class="inbox"><input id="ans" type="text" inputmode="decimal" autocomplete="off" placeholder="?"><span id="ansUnit">°</span></div>
+      <button class="btn" id="fireBtn" type="button">🔥 Lancer !</button>
+      <button class="btn gold" id="nextBtn" type="button" style="display:none">Château suivant ➜</button>
+    </div>
+    <div class="small" style="margin-top:.35rem">Virgule ou point acceptés. Calculatrice en mode <b>degrés</b>.</div>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <details class="calc" id="calc" open>
+      <summary>🧮 Calculatrice (degrés)</summary>
+      <div class="calc-screen">
+        <input id="calcIn" type="text" inputmode="none" autocomplete="off" spellcheck="false" placeholder="ex. : cos⁻¹(15 ÷ 24)">
+        <div id="calcOut">&nbsp;</div>
+      </div>
+      <div class="calc-keys" id="calcKeys"></div>
+    </details>
+  </section>
+</main>
+
+<!-- ÉCRAN D'ACCUEIL -->
+<div class="overlay" id="startScreen">
+  <div class="card">
+    <h1>KNIGHT <span>CATAPULT</span></h1>
+    <p class="sub">Trigonométrie dans le triangle rectangle – niveau 3e</p>
+    <div class="trio">
+      <span class="kn" style="background:var(--red)">Sire Sinus</span>
+      <span class="kn" style="background:var(--blue)">Dame Cosinus</span>
+      <span class="kn" style="background:var(--green)">Sire Tangente</span>
+    </div>
+    <p class="story">Les Anglais de <b>Lord Arctan</b> se sont retranchés dans <b>10 châteaux</b> et refusent de laisser entrer les trois Chevaliers du Triangle Rectangle (et leurs noix de coco). Seule solution : la <b>catapulte</b> ! Son <b>socle</b>, son <b>montant</b> et la position du <b>bras</b> au moment du tir forment un triangle rectangle. Règle-la bien : le chevalier doit passer par-dessus la muraille et atterrir dans la cour. Trop haut, il file vers le soleil ; trop bas, il s'écrase contre le mur…</p>
+    <div class="rules">
+      <ul>
+        <li>Deux missions en alternance : <b>calculer un angle</b> (arrondi au degré) ou <b>calculer une longueur</b> (arrondie au mètre, ou valeur exacte quand elle est décimale).</li>
+        <li><b>3 chevaliers par château</b> = 3 essais. Après une erreur, un rappel du cours apparaît. Sans chevalier, le château est perdu et la correction s'affiche.</li>
+        <li>Points : 300 au 1er chevalier, 200 au 2e, 100 au 3e, +50 par réussite du premier coup enchaînée, × coefficient du niveau.</li>
+      </ul>
+    </div>
+    <div class="levels" id="levelsBox"></div>
+    <p class="center"><a class="btn blue backbtn" href="../jeu.html">← Retour aux jeux</a></p>
+  </div>
+</div>
+
+<!-- ÉCRAN DE FIN -->
+<div class="overlay hidden" id="endScreen">
+  <div class="card center">
+    <h1 id="endTitle">Victoire !</h1>
+    <p class="sub" id="endSub"></p>
+    <div class="stats" id="endStats"></div>
+    <p id="endRecord"></p>
+    <div class="trio">
+      <button class="btn" id="againBtn" type="button">Rejouer ce niveau</button>
+      <button class="btn blue" id="menuBtn" type="button">Changer de niveau</button>
+      <a class="btn gold backbtn" href="../jeu.html">← Retour aux jeux</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ===================== OUTILS ===================== */
+const D = Math.PI/180;
+const rnd = (a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick = a=>a[Math.floor(Math.random()*a.length)];
+const clamp = (x,a,b)=>Math.max(a,Math.min(b,x));
+const $ = id=>document.getElementById(id);
+function fr(x, d){ // nombre en écriture française
+  if(d===undefined){ d = 2; }
+  const p = Math.pow(10,d);
+  let v = Math.round(x*p)/p;
+  return String(v).replace('.',',');
+}
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+/* ===================== NIVEAUX ===================== */
+const LEVELS = {
+  ecuyer:{ name:"Écuyer", coef:1, tag:"Facile",
+    desc:"Le rapport trigonométrique à utiliser est indiqué. Valeurs entières. Longueurs obtenues par multiplication.",
+    hint:true, dec:false, top:false, nice:true,
+    lenCases:["sin-opp","cos-adj","tan-opp"] },
+  chevalier:{ name:"Chevalier", coef:1.5, tag:"Intermédiaire",
+    desc:"Sans indice : à toi de choisir sinus, cosinus ou tangente. Longueurs par multiplication, ou par division pour l'hypoténuse.",
+    hint:false, dec:false, top:false, nice:true,
+    lenCases:["sin-opp","cos-adj","tan-opp","sin-hyp","cos-hyp"] },
+  paladin:{ name:"Paladin", coef:2.5, tag:"Difficile",
+    desc:"Valeurs décimales, angle parfois au sommet de la catapulte, toutes les formules (dont adjacent = opposé ÷ tan).",
+    hint:false, dec:true, top:true, nice:false,
+    lenCases:["sin-opp","cos-adj","tan-opp","sin-hyp","cos-hyp","tan-adj"] }
+};
+const TOTAL = 10;
+const CASTLES = ["Tour d'Hypoténuse","Fort Adjacent","Castel Opposé","Donjon d'Arcsinus","Citadelle Tangente",
+  "Bastion Radian","Manoir de Thalès","Forteresse Pythagore","Château Trigonor","Palais de Lord Arctan"];
+const KNIGHTS = [
+  {name:"Sire Sinus", color:"#c0392b", plume:"#ff6b5b"},
+  {name:"Dame Cosinus", color:"#2470b8", plume:"#6fb6ff"},
+  {name:"Sire Tangente", color:"#2e8b57", plume:"#7ee0a6"}
+];
+const LETTERS = [["A","B","C"],["D","E","F"],["K","L","M"],["R","S","T"],["U","V","W"],["I","J","H"],["E","F","G"],["M","N","P"]];
+
+/* ===================== GÉNÉRATION DES CALCULS =====================
+   Triangle de la catapulte : P = pivot (au sol), R = pied du montant (angle droit), T = bout du bras.
+   socle = [PR] (horizontal), montant = [RT] (vertical), bras = [PT] (hypoténuse).
+   L'angle de tir est l'angle en P. En niveau Paladin, l'angle peut être demandé en T.  */
+const ABS = ["base","mont","bras"];
+function roles(V){ return V==="P" ? {opp:"mont",adj:"base",hyp:"bras"} : {opp:"base",adj:"mont",hyp:"bras"}; }
+
+function makeNames(){
+  const L = shuffle(pick(LETTERS).slice());
+  const n = {P:L[0], R:L[1], T:L[2]};
+  n.side = {base:n.P+n.R, mont:n.R+n.T, bras:n.P+n.T};
+  // nom du triangle : lettres dans un ordre au hasard
+  n.tri = shuffle([n.P,n.R,n.T]).join("");
+  return n;
+}
+function angName(q,V){ const n=q.n; return V==="P" ? n.R+n.P+n.T : n.R+n.T+n.P; }
+function angHTML(q,V){ return '<span class="ang">'+angName(q,V)+'</span>'; }
+
+function val(lv,a,b){ return lv.dec ? rnd(a*10,b*10)/10 : rnd(a,b); }
+
+function genAngle(lv){
+  for(let guard=0;guard<500;guard++){
+    const r = pick(["sin","cos","tan"]);
+    const V = (lv.top && Math.random()<0.5) ? "T" : "P";
+    const ro = roles(V);
+    let known = {}, ang;
+    if(r==="tan"){
+      const o = val(lv,3,20), a = val(lv,3,20);
+      if(o===a) continue;
+      ang = Math.atan(o/a)/D; known[ro.opp]=o; known[ro.adj]=a;
+    } else {
+      const h = val(lv,6,24), s = val(lv,2,23);
+      if(s>=h) continue;
+      ang = (r==="sin" ? Math.asin(s/h) : Math.acos(s/h))/D;
+      known.bras = h; known[r==="sin"?ro.opp:ro.adj] = s;
+    }
+    if(ang<15 || ang>75) continue;
+    const f = ang-Math.floor(ang);
+    if(Math.abs(f-0.5)<0.1) continue;
+    const q = {type:"angle", V, ratio:r, known, value:ang, expected:Math.round(ang), exact:false, n:makeNames()};
+    q.alpha = V==="P" ? ang : 90-ang;
+    return q;
+  }
+  return genAngle(LEVELS.ecuyer);
+}
+
+function genLength(lv){
+  for(let guard=0;guard<500;guard++){
+    const c = pick(lv.lenCases).split("-");      // ex. ["cos","hyp"]
+    const f = c[0], find = c[1];
+    const V = (lv.top && Math.random()<0.5) ? "T" : "P";
+    const ro = roles(V);
+    // côté connu selon le cas
+    const from = {
+      "sin-opp":"hyp","cos-adj":"hyp","tan-opp":"adj",
+      "sin-hyp":"opp","cos-hyp":"adj","tan-adj":"opp"}[f+"-"+find];
+    const op = (find==="hyp" || (f==="tan" && find==="adj")) ? "div" : "mul";
+    let g;
+    if(lv.nice && f!=="tan" && Math.random()<0.4) g = pick([30,60]);
+    else g = rnd(18,72);
+    if(f==="tan" && g===45) continue;
+    const k = lv.dec ? rnd(30,200)/10 : rnd(4,25);
+    const fv = Math[f](g*D);
+    const res = op==="mul" ? k*fv : k/fv;
+    if(res<1.5 || res>80) continue;
+    const r100 = res*100;
+    const exact = Math.abs(r100-Math.round(r100))<1e-6;
+    if(!exact){ const fp = res-Math.floor(res); if(Math.abs(fp-0.5)<0.08) continue; }
+    const q = {type:"long", V, ratio:f, op, g, find, from, n:makeNames(),
+      knownAbs: ro[from], knownVal:k, unknownAbs: ro[find],
+      value:res, exact, expected: exact ? Math.round(r100)/100 : Math.round(res)};
+    q.alpha = V==="P" ? g : 90-g;
+    return q;
+  }
+  return genLength(LEVELS.ecuyer);
+}
+
+/* ===================== ÉTAT DU JEU ===================== */
+let lvKey = "ecuyer", lv = LEVELS.ecuyer;
+let G = null;     // partie en cours
+let Q = null;     // question en cours
+let busy = false;
+
+let introSeen=false;
+function newGame(key,withIntro){
+  lvKey = key; lv = LEVELS[key];
+  G = {idx:0, won:0, score:0, streak:0, shots:0, hits:0, start:performance.now(), results:[], over:false};
+  $("hudLevel").textContent = lv.name;
+  $("hudTotal").textContent = TOTAL;
+  $("startScreen").classList.add("hidden");
+  $("endScreen").classList.add("hidden");
+  if(withIntro){ introSeen=true; startIntro(); } else nextCastle();
+}
+
+function nextCastle(){
+  G.idx++;
+  if(G.idx>TOTAL){ endGame(); return; }
+  musicLevel(G.idx); musicStart("battle");
+  Q = (G.idx%2===1) ? genAngle(lv) : genLength(lv);
+  Q.knightsLeft = 3; Q.done = false;
+  if(G.idx===1) G.start = performance.now();
+  resetScene();
+  S.knight = {k:0, load:1};
+  S.sayTok++;
+  later(500,()=>addBubble("g",pickNR(GREET),2.8));
+  later(3000,()=>addBubble(0,pickNR(LOAD),2.8));
+  renderQuestion();
+  updateHud();
+  $("castleName").style.display=""; $("castleName").textContent = "Château "+G.idx+" – "+CASTLES[G.idx-1];
+  $("feedback").innerHTML = "";
+  $("fireBtn").style.display = ""; $("fireBtn").disabled=false;
+  $("nextBtn").style.display = "none";
+  const inp = $("ans"); inp.value=""; inp.disabled=false;
+  if(window.matchMedia("(pointer:fine)").matches) inp.focus();
+}
+
+function updateHud(){
+  $("hudCastle").textContent = Math.min(G.idx,TOTAL);
+  $("hudWon").textContent = G.won;
+  $("hudScore").textContent = Math.round(G.score);
+  const box = $("knightsBox"); box.innerHTML="";
+  KNIGHTS.forEach((k,i)=>{
+    const s=document.createElement("span"); s.className="kn"+(i<3-(Q?Q.knightsLeft:3)?" off":"");
+    s.style.background=k.color; s.textContent=k.name.split(" ")[1]; s.title=k.name;
+    box.appendChild(s);
+  });
+}
+
+/* ===================== AFFICHAGE DE LA QUESTION ===================== */
+const SIDE_WORD = {base:"le socle", mont:"le montant", bras:"le bras"};
+const ROLE_WORD = {opp:"côté opposé", adj:"côté adjacent", hyp:"hypoténuse"};
+const RATIO_WORD = {sin:"le sinus", cos:"le cosinus", tan:"la tangente"};
+const RATIO_DEF = {sin:"opposé ÷ hypoténuse", cos:"adjacent ÷ hypoténuse", tan:"opposé ÷ adjacent"};
+function unitTxt(x){ return fr(x)+" m"; }
+
+function renderQuestion(){
+  const q=Q, n=q.n;
+  $("qTitle").textContent = "Château "+G.idx+" : "+CASTLES[G.idx-1];
+  const badge=$("qBadge");
+  const intro = "Le triangle "+n.tri+" est rectangle en "+n.R+". ";
+  let txt="";
+  if(q.type==="angle"){
+    badge.className="badge angle"; badge.textContent="Calcul d'angle";
+    const parts = ABS.filter(s=>q.known[s]!==undefined).map(s=>n.side[s]+" = "+unitTxt(q.known[s]));
+    txt = intro+"On donne "+parts.join(" et ")+".<br>";
+    if(q.V==="P") txt += "Calcule l'<b>angle de tir</b> "+angHTML(q,"P")+", <b>arrondi au degré</b>.";
+    else txt += "Calcule l'<b>angle au sommet</b> "+angHTML(q,"T")+" (entre le bras et le montant), <b>arrondi au degré</b>.";
+    $("ansLabel").innerHTML = angHTML(q,q.V)+" ≈";
+    $("ansUnit").textContent="°";
+  } else {
+    badge.className="badge long"; badge.textContent="Calcul de longueur";
+    const angLbl = q.V==="P" ? "l'angle de tir "+angHTML(q,"P") : "l'angle au sommet "+angHTML(q,"T");
+    txt = intro+"On veut "+angLbl+" = <b>"+q.g+"°</b> et on a "+n.side[q.knownAbs]+" = "+unitTxt(q.knownVal)+".<br>";
+    const ask = {base:"Quelle longueur "+n.side.base+" faut-il donner au <b>socle</b> ?",
+                 mont:"À quelle hauteur "+n.side.mont+" faut-il régler le <b>montant</b> ?",
+                 bras:"Quelle longueur "+n.side.bras+" faut-il donner au <b>bras</b> ?"}[q.unknownAbs];
+    txt += ask+" "+(q.exact ? "<b>Donne la valeur exacte</b> (elle est décimale)." : "<b>Arrondis au mètre.</b>");
+    $("ansLabel").innerHTML = n.side[q.unknownAbs]+(q.exact?" =":" ≈");
+    $("ansUnit").textContent="m";
+  }
+  $("qText").innerHTML = txt;
+  // indice niveau Écuyer
+  if(lv.hint){
+    $("qHint").innerHTML = '<div class="hint">💡 Indice : par rapport à l\'angle '+angHTML(q,q.V)+', utilise <b>'+RATIO_WORD[q.ratio]+'</b>.</div>';
+  } else $("qHint").innerHTML="";
+  $("figure").innerHTML = figureSVG(q);
+}
+
+function figureSVG(q){
+  const n=q.n, ro=roles(q.V);
+  const P=[316,190], R=[82,190], T=[82,40];
+  const col = {base:"#2b2118", mont:"#2b2118", bras:"#2b2118"};
+  const roleOf = {}; for(const k in ro) roleOf[ro[k]]=k;
+  const label = s=>{
+    if(q.type==="angle") return q.known[s]!==undefined ? fr(q.known[s])+" m" : "";
+    if(s===q.knownAbs) return fr(q.knownVal)+" m";
+    if(s===q.unknownAbs) return "?";
+    return "";
+  };
+  const angTxt = q.type==="angle" ? "?" : q.g+"°";
+  let s = '<svg viewBox="0 0 360 235" xmlns="http://www.w3.org/2000/svg" font-family="Trebuchet MS, sans-serif">';
+  s += '<polygon points="'+P+' '+R+' '+T+'" fill="#f3e2b8" stroke="none"/>';
+  s += '<line x1="'+P[0]+'" y1="'+P[1]+'" x2="'+R[0]+'" y2="'+R[1]+'" stroke="'+col.base+'" stroke-width="4"/>';
+  s += '<line x1="'+R[0]+'" y1="'+R[1]+'" x2="'+T[0]+'" y2="'+T[1]+'" stroke="'+col.mont+'" stroke-width="4"/>';
+  s += '<line x1="'+P[0]+'" y1="'+P[1]+'" x2="'+T[0]+'" y2="'+T[1]+'" stroke="'+col.bras+'" stroke-width="4"/>';
+  s += '<polyline points="96,190 96,176 82,176" fill="none" stroke="#2b2118" stroke-width="2"/>';
+  // arc de l'angle
+  if(q.V==="P"){
+    const a=Math.atan2(150,234), r=42;
+    s += '<path d="M'+(P[0]-r)+','+P[1]+' A'+r+','+r+' 0 0 1 '+(P[0]-r*Math.cos(a)).toFixed(1)+','+(P[1]-r*Math.sin(a)).toFixed(1)+'" fill="none" stroke="#d35400" stroke-width="3"/>';
+    s += '<text x="'+(P[0]-50)+'" y="'+(P[1]-8)+'" font-size="16" font-weight="bold" fill="#d35400" text-anchor="end">'+angTxt+'</text>';
+  } else {
+    const r=38, ux=234/Math.hypot(234,150), uy=150/Math.hypot(234,150);
+    s += '<path d="M'+T[0]+','+(T[1]+r)+' A'+r+','+r+' 0 0 0 '+(T[0]+r*ux).toFixed(1)+','+(T[1]+r*uy).toFixed(1)+'" fill="none" stroke="#d35400" stroke-width="3"/>';
+    s += '<text x="'+(T[0]+14)+'" y="'+(T[1]+64)+'" font-size="16" font-weight="bold" fill="#d35400">'+angTxt+'</text>';
+  }
+  // sommets
+  s += '<text x="'+(P[0]+10)+'" y="'+(P[1]+6)+'" font-size="20" font-weight="bold">'+n.P+'</text>';
+  s += '<text x="'+(R[0]-22)+'" y="'+(R[1]+18)+'" font-size="20" font-weight="bold">'+n.R+'</text>';
+  s += '<text x="'+(T[0]-22)+'" y="'+(T[1]-4)+'" font-size="20" font-weight="bold">'+n.T+'</text>';
+  // longueurs
+  const lb = (txt,x,y,anchor,c)=> txt ? '<text x="'+x+'" y="'+y+'" font-size="16" font-weight="bold" text-anchor="'+anchor+'" fill="'+c+'">'+txt+'</text>' : '';
+  const lc = s2 => (label(s2)==="?" ? "#c0392b" : "#2b2118");
+  s += lb(label("base"),199,212,"middle",lc("base"));
+  s += lb(label("mont"),70,120,"end",lc("mont"));
+  s += lb(label("bras"),210,104,"start",lc("bras"));
+  s += '<text x="354" y="16" font-size="11" fill="#8a7350" text-anchor="end">Figure non à l\'échelle</text>';
+  s += '</svg>';
+  return s;
+}
+
+/* ===================== VÉRIFICATION ===================== */
+function parseAnswer(str){
+  let s = String(str).trim().replace(/\s/g,"").replace(",",".").replace(/°|m$/g,"");
+  if(!/^-?\d+(\.\d+)?$/.test(s) && !/^-?\.\d+$/.test(s)) return null;
+  return parseFloat(s);
+}
+
+function isCorrect(q,x){
+  if(q.exact) return Math.abs(x-q.expected)<0.005;
+  return x===q.expected || Math.abs(x-q.value)<0.05;
+}
+
+// angle de tir (en P) obtenu avec la réponse de l'élève ; null si triangle impossible
+function effectiveAlpha(q,x){
+  if(q.type==="angle"){
+    if(x<=0 || x>=90) return null;
+    return q.V==="P" ? x : 90-x;
+  }
+  if(x<=0) return null;
+  const s={}; s[q.knownAbs]=q.knownVal; s[q.unknownAbs]=x;
+  if(s.bras!==undefined){
+    if(s.mont!==undefined){ if(s.mont>=s.bras) return null; return Math.asin(s.mont/s.bras)/D; }
+    if(s.base>=s.bras) return null; return Math.acos(s.base/s.bras)/D;
+  }
+  return Math.atan(s.mont/s.base)/D;
+}
+
+function diagnose(q,x){
+  // retourne un conseil ciblé
+  if(q.type==="angle"){
+    if(x<=0||x>=90) return "Dans un triangle rectangle, les angles aigus mesurent entre 0° et 90°.";
+    if(x<1.6) return "Ta réponse ressemble à un résultat en <b>radians</b> : passe ta calculatrice en mode <b>degrés</b>.";
+    if(x===Math.round(90-q.value)) return "Tu as trouvé l'angle de l'autre sommet ! Vérifie quel côté est <b>opposé</b> et lequel est <b>adjacent</b> à l'angle "+angHTML(q,q.V)+".";
+    if(Math.abs(x-q.value)<1.2) return "Tu y es presque : vérifie ton <b>arrondi au degré</b>.";
+    return "Repère l'hypoténuse (face à l'angle droit), puis le côté opposé et le côté adjacent à l'angle cherché, et choisis le bon rapport.";
+  }
+  if(effectiveAlpha(q,x)===null && q.unknownAbs!=="bras" ) return "Impossible : l'hypoténuse "+q.n.side.bras+" est toujours le plus long côté du triangle rectangle.";
+  if(effectiveAlpha(q,x)===null) return "Impossible : l'hypoténuse "+q.n.side.bras+" doit être plus longue que les deux autres côtés.";
+  const k=q.knownVal, g=q.g;
+  const near = v => Math.abs(x-v)<0.51;
+  if(near(q.op==="mul" ? k*Math[q.ratio](g) : k/Math[q.ratio](g))) return "Ta réponse ressemble à un calcul en <b>radians</b> : passe ta calculatrice en mode <b>degrés</b>.";
+  if(Math.abs(x-q.value)<1.01) return "Tu y es presque : vérifie ton arrondi"+(q.exact?" (ici, la valeur exacte est demandée).":" au mètre.");
+  const fv = Math[q.ratio](g*D);
+  if(near(q.op==="mul" ? k/fv : k*fv)) return "Bon rapport, mais attention en isolant la longueur : si "+ratioEq(q)+", alors "+isolate(q)+".";
+  for(const f of ["sin","cos","tan"]){ if(f===q.ratio) continue;
+    const v=Math[f](g*D); if(near(k*v)||near(k/v)) return "Ce n'est pas "+RATIO_WORD[f]+" qu'il faut utiliser ici : repère le côté opposé, le côté adjacent et l'hypoténuse par rapport à l'angle "+angHTML(q,q.V)+"."; }
+  return "Écris d'abord le rapport trigonométrique qui relie l'angle, le côté connu et le côté cherché, puis isole la longueur cherchée.";
+}
+
+const FN = {sin:"sin",cos:"cos",tan:"tan"};
+function ratioParts(q){ // numérateur et dénominateur (noms de segments) du rapport utilisé
+  const ro=roles(q.V), n=q.n;
+  const num = q.ratio==="cos" ? ro.adj : ro.opp;
+  const den = q.ratio==="tan" ? ro.adj : ro.hyp;
+  return {num, den, nn:n.side[num], dn:n.side[den]};
+}
+function fracHTML(a,b){ return '<span class="frac"><span>'+a+'</span><span>'+b+'</span></span>'; }
+function ratioEq(q){ const p=ratioParts(q); return FN[q.ratio]+"("+angHTML(q,q.V)+") = "+fracHTML(p.nn,p.dn); }
+function isolate(q){
+  const p=ratioParts(q), A=FN[q.ratio]+"("+angHTML(q,q.V)+")";
+  return q.op==="mul" ? p.nn+" = "+p.dn+" × "+A : p.dn+" = "+p.nn+" ÷ "+A;
+}
+
+function correctionHTML(q){
+  const n=q.n, ro=roles(q.V);
+  const roleOfAbs = {}; for(const k in ro) roleOfAbs[ro[k]]=k;
+  let h = '<h4>📜 Correction</h4><p>Dans le triangle '+n.tri+' rectangle en '+n.R+', par rapport à l\'angle '+angHTML(q,q.V)+' : ['+n.side[ro.hyp]+'] est l\'hypoténuse, ['+n.side[ro.opp]+'] le côté opposé et ['+n.side[ro.adj]+'] le côté adjacent.</p>';
+  const p = ratioParts(q);
+  h += '<p>On utilise <b>'+RATIO_WORD[q.ratio]+'</b> : '+ratioEq(q)+'</p>';
+  if(q.type==="angle"){
+    const a = q.known[p.num], b=q.known[p.den];
+    h += '<p>'+FN[q.ratio]+'('+angHTML(q,q.V)+') = '+fracHTML(fr(a),fr(b))+'</p>';
+    h += '<p>'+angHTML(q,q.V)+' = '+FN[q.ratio]+'<sup>−1</sup>('+fr(a)+' ÷ '+fr(b)+') ≈ '+fr(q.value,2)+'° donc <b>'+angHTML(q,q.V)+' ≈ '+q.expected+'°</b> (au degré près).</p>';
+    h += '<p class="small">Touche « '+FN[q.ratio]+'<sup>−1</sup> » (ou Arc'+FN[q.ratio]+') de la calculatrice, en mode degrés.</p>';
+  } else {
+    h += '<p>Donc '+isolate(q)+'</p>';
+    const calc = q.op==="mul" ? fr(q.knownVal)+' × '+FN[q.ratio]+'('+q.g+'°)' : fr(q.knownVal)+' ÷ '+FN[q.ratio]+'('+q.g+'°)';
+    if(q.exact) h += '<p>'+n.side[q.unknownAbs]+' = '+calc+' = <b>'+fr(q.expected)+' m</b> (valeur exacte).</p>';
+    else h += '<p>'+n.side[q.unknownAbs]+' = '+calc+' ≈ '+fr(q.value,2)+' donc <b>'+n.side[q.unknownAbs]+' ≈ '+q.expected+' m</b> (au mètre près).</p>';
+  }
+  return h;
+}
+
+function rappelHTML(){
+  return '<div class="box rappel"><h4>📘 Rappel du cours</h4>'+
+  '<p>Dans un triangle rectangle, pour un angle aigu :</p>'+
+  '<div class="formulas"><div>cos = '+fracHTML("adjacent","hypoténuse")+'</div><div>sin = '+fracHTML("opposé","hypoténuse")+'</div><div>tan = '+fracHTML("opposé","adjacent")+'</div></div>'+
+  '<p class="small">Moyen mnémotechnique : <b>CAH SOH TOA</b>. L\'hypoténuse est le côté face à l\'angle droit (le plus long).</p></div>';
+}
+
+/* ===================== TIR ===================== */
+function fire(){
+  if(busy || !Q || Q.done) return;
+  const x = parseAnswer($("ans").value);
+  if(x===null){ $("feedback").innerHTML='<span class="ko">Écris un nombre</span> (ex. : 34 ou 7,5).'; return; }
+  busy = true; $("fireBtn").disabled = true; $("ans").disabled = true;
+  audioInit();
+  G.shots++;
+  const ok = isCorrect(Q,x);
+  const alpha = effectiveAlpha(Q,x);
+  let outcome;
+  if(ok) outcome="win";
+  else if(alpha===null) outcome = (Q.type==="long" && Q.unknownAbs!=="bras") ? "high" : "low";
+  else outcome = (alpha - Q.alpha) > 0 ? "high" : "low";
+  const dev = alpha===null ? 12 : Math.abs(alpha-Q.alpha);
+  const kIdx = 3-Q.knightsLeft;
+  const knightName = KNIGHTS[kIdx].name;
+  $("feedback").innerHTML = '<span class="small">On règle la catapulte… '+knightName+' s\'accroche !</span>';
+  const armA = ok ? clamp(Q.alpha,14,78) : (alpha===null ? (outcome==="high"?80:12) : clamp(alpha,12,80));
+  S.sayTok++;
+  launch(armA, outcome, dev, ()=>afterShot(ok,x,outcome,kIdx));
+}
+
+function afterShot(ok,x,outcome,kIdx){
+  const fb=$("feedback"); const name=KNIGHTS[kIdx].name;
+  S.sayTok++;
+  if(ok){
+    S.guardTarget=0; addBubble("g","Fuyez ! Fuyez !",2.5); addBubble(kIdx,"Ce château est à nous !",2.6);
+    if(kIdx<2) later(2000,()=>addBubble(kIdx+1,pickNR(CHEER),2.6));
+  } else {
+    if(outcome==="high") addBubble("g",pickNR(TAUNT_HIGH),2.8);
+    else { addBubble(kIdx,"Ce n'est qu'une égratignure !",1.9); later(900,()=>addBubble("g",pickNR(TAUNT_LOW),2.8)); }
+    if(kIdx<2){
+      later(outcome==="high"?1300:2000,()=>addBubble(kIdx+1,pickNR(outcome==="high"?REACT_HIGH:REACT_LOW),2.8));
+      later(outcome==="high"?3800:4500,()=>addBubble("g",pickNR(GUARD_REPLY),2.8));
+    }
+  }
+  if(ok){
+    Q.done=true; G.won++; G.hits++;
+    const base=[300,200,100][kIdx];
+    if(kIdx===0) G.streak++; else G.streak=0;
+    const bonus = kIdx===0 ? 50*(G.streak-1) : 0;
+    const pts = Math.round((base+bonus)*lv.coef);
+    G.score += pts;
+    G.results.push(true);
+    let msg = '<div class="box success"><h4>🏰 Château conquis !</h4><p>'+name+' atterrit dans la cour. <b>+'+pts+' points</b>'+(bonus?' (série de '+G.streak+' réussites du premier coup)':'')+'.</p>';
+    if(Math.abs(x-Q.value)<0.05 && !Q.exact && x!==Q.expected) msg += '<p class="small">Accepté, mais l\'énoncé demandait un arrondi : '+(Q.type==="angle"?Q.expected+'°':Q.expected+' m')+'.</p>';
+    msg += '</div>';
+    fb.innerHTML = msg;
+    endCastleButtons();
+  } else {
+    Q.knightsLeft--; G.streak=0;
+    const what = outcome==="high" ? '<span class="ko">Trop haut !</span> '+name+' file droit vers le soleil.' : '<span class="ko">BONK !</span> '+name+' s\'écrase contre la muraille.';
+    let msg = '<p>'+what+'</p><p>👉 '+diagnose(Q,x)+'</p>';
+    if(Q.knightsLeft>0){
+      msg += '<p class="small">Encore '+Q.knightsLeft+' chevalier'+(Q.knightsLeft>1?'s':'')+' : '+KNIGHTS[3-Q.knightsLeft].name+' prend la relève.</p>';
+      if(Q.knightsLeft===2) msg += rappelHTML();
+      fb.innerHTML = msg;
+      loadKnight(3-Q.knightsLeft);
+      busy=false; $("fireBtn").disabled=false; $("ans").disabled=false; $("ans").select();
+    } else {
+      Q.done=true; G.results.push(false);
+      msg += '<div class="box correction">'+correctionHTML(Q)+'</div>';
+      fb.innerHTML = msg; sfx("lose");
+      S.knight=null; S.armTarget=REST;
+      later(1200,()=>addBubble("g","No, no, no ! Ce château reste anglais !",3.5));
+      endCastleButtons();
+    }
+  }
+  updateHud();
+}
+function endCastleButtons(){
+  busy=false;
+  $("fireBtn").style.display="none";
+  const nb=$("nextBtn"); nb.style.display="";
+  nb.textContent = G.idx>=TOTAL ? "Voir le bilan ➜" : "Château suivant ➜";
+  nb.focus();
+}
+
+function endGame(){
+  musicStop();
+  G.over=true;
+  const secs = Math.round((performance.now()-G.start)/1000);
+  const prec = G.shots? G.hits/G.shots : 0;
+  const final = Math.round(G.score*(0.5+0.5*prec));
+  G.final = final;
+  let rec=0; try{ rec = +localStorage.getItem("knightCatapult_record_"+lvKey)||0; }catch(e){}
+  let newRec = final>rec;
+  if(newRec){ try{ localStorage.setItem("knightCatapult_record_"+lvKey, final); }catch(e){} }
+  $("endTitle").textContent = G.won===TOTAL ? "Royaume libéré ! 👑" : (G.won>=TOTAL/2 ? "Belle campagne !" : "Lord Arctan résiste…");
+  $("endSub").textContent = "Niveau "+lv.name+" – "+G.won+" château"+(G.won>1?"x":"")+" conquis sur "+TOTAL;
+  $("endStats").innerHTML =
+    '<div><b>'+G.won+'/'+TOTAL+'</b>châteaux</div>'+
+    '<div><b>'+Math.round(prec*100)+' %</b>précision des tirs</div>'+
+    '<div><b>'+Math.floor(secs/60)+':'+String(secs%60).padStart(2,"0")+'</b>durée</div>'+
+    '<div><b>'+final+'</b>score final</div>';
+  $("endRecord").innerHTML = newRec ? "🏆 <b>Nouveau record</b> pour ce niveau !" : "Record du niveau : <b>"+rec+"</b>";
+  $("endScreen").classList.remove("hidden");
+  sfx(G.won>=TOTAL/2?"fanfare":"lose");
+}
+
+/* ===================== SCÈNE (canvas) ===================== */
+const cv=$("scene"), ctx=cv.getContext("2d");
+const W=1000,H=560, GROUND=470, PIV={x:360,y:418}, ARM=250, HYP=150, REST=5, POST0=40;
+const WALL={x1:600,x2:660,top:262}, KEEP={x1:820,x2:905,top:225}, SUN={x:875,y:88,r:42};
+const GUARD={x:632,y:262};
+const QX=[62,22];
+const S = {post:POST0, postTarget:POST0, arm:REST, armTarget:REST, bounce:0, knight:null, flight:null, launch:null,
+  parts:[], texts:[], bubbles:[], sayTok:0, flagOwn:0, flagTarget:0, castleHue:0, t:0, guard:1, guardTarget:1,
+  showCat:true, intro:null, clouds:[{x:120,y:90,s:1},{x:430,y:60,s:.8},{x:700,y:130,s:.6}]};
+
+function resetScene(){
+  S.post=S.postTarget=POST0; S.arm=S.armTarget=REST; S.bounce=0;
+  S.flight=null; S.launch=null; S.knight=null; S.bubbles=[]; S.texts=[];
+  S.flagOwn=0; S.flagTarget=0; S.guard=1; S.guardTarget=1; S.showCat=true;
+  S.castleHue = G ? (G.idx*37)%360 : 0;
+}
+function resize(){
+  const dpr = Math.min(window.devicePixelRatio||1, 2);
+  const w = cv.clientWidth||1000;
+  cv.width = Math.round(w*dpr); cv.height = Math.round(w*0.56*dpr);
+}
+window.addEventListener("resize",resize);
+
+function armTip(a){ return {x:PIV.x-ARM*Math.cos(a*D), y:PIV.y-ARM*Math.sin(a*D)}; }   // bout du bras (cuillère)
+function cupPos(a){ const t=armTip(a); return {x:t.x+Math.sin(a*D)*22, y:t.y-Math.cos(a*D)*22}; }
+function postGeo(b){ const R={x:PIV.x-HYP*Math.cos(b*D), y:PIV.y}; return {R, T:{x:R.x, y:PIV.y-HYP*Math.sin(b*D)}}; }
+function loadKnight(k){ S.knight={k, load:0}; S.armTarget=REST; }
+function cupKnightPos(){
+  const c=cupPos(S.arm), kn=S.knight;
+  if(!kn || kn.load>=1) return c;
+  const u=kn.load, sx=QX[0], sy=GROUND-18;
+  return {x:sx+(c.x-sx)*u, y:sy+(c.y-sy)*u-Math.sin(u*Math.PI)*60};
+}
+
+/* --- tir : 1) réglage du montant (le triangle), 2) on lâche le bras qui bascule et bute sur la traverse, 3) vol --- */
+function launch(postA,outcome,dev,cb){
+  S.postTarget=postA; S.armTarget=REST;
+  S.launch={stage:"set",t:0,postA,outcome,dev,cb};
+  sfx("creak");
+}
+function startFlight(L){
+  const s=cupPos(L.postA), k=S.knight?S.knight.k:0;
+  S.knight=null;
+  let path;
+  if(L.outcome==="win") path={kind:"win", x0:s.x, y0:s.y, xa:585, ya:135, x1:745, y1:GROUND-16, dur:1.5};
+  else if(L.outcome==="low"){
+    const yh = 292 + clamp(L.dev,0,12)/12*138;
+    const x1 = WALL.x1-16;
+    path={kind:"low", x0:s.x, y0:s.y, xa:s.x+(x1-s.x)*0.6, ya:Math.min(yh-120, s.y-60), x1, y1:yh, dur:1.2};
+  } else path={kind:"high", x0:s.x, y0:s.y, x1:SUN.x, y1:SUN.y, dur:1.6};
+  S.flight={path, t:0, k, cb:L.cb, phase:"fly", x:s.x, y:s.y, rot:0, scale:1, sx:1};
+  addBubble(k,pickNR(FLY),1.4);
+}
+function parab(p,u){
+  const x = p.x0+(p.x1-p.x0)*u;
+  let y;
+  if(x<=p.xa) y = p.ya+(p.y0-p.ya)*Math.pow((x-p.xa)/(p.x0-p.xa),2);
+  else y = p.ya+(p.y1-p.ya)*Math.pow((x-p.xa)/(p.x1-p.xa),2);
+  return {x,y};
+}
+
+/* --- bulles de dialogue --- */
+function addBubble(who,text,life,anchor){
+  S.bubbles = S.bubbles.filter(b=>b.who!==who);
+  text = text.replace(/ ([!?:;»])/g,"\u00a0$1");   // pas de « ! » seul en fin de ligne
+  S.bubbles.push({who,text,life,anchor});
+}
+function bubbleAnchor(b){
+  if(b.anchor) return b.anchor;
+  if(b.who==="g") return {x:GUARD.x, y:GUARD.y-48+(1-S.guard)*50};
+  if(typeof b.who==="number"){
+    const k=b.who;
+    if(S.intro) return {x:S.intro.kx[k], y:GROUND-48};
+    const f=S.flight;
+    if(f && f.k===k && f.scale>0.05) return {x:f.x, y:f.y-30};
+    if(S.knight && S.knight.k===k){ const p=cupKnightPos(); return {x:p.x, y:p.y-28}; }
+    if(Q){ const i=k-(3-Q.knightsLeft)-1; if(i>=0 && i<QX.length) return {x:QX[i], y:GROUND-46}; }
+  }
+  return {x:W/2,y:200};
+}
+// petites répliques programmées (annulées si un nouveau tir ou un nouveau château arrive entre-temps)
+function later(ms,fn){ const t=S.sayTok; setTimeout(()=>{ if(t===S.sayTok) fn(); },ms); }
+const lastPick={};
+function pickNR(a){ let v; do{ v=pick(a); }while(a.length>1 && lastPick[a[0]]===v); lastPick[a[0]]=v; return v; }
+const LOAD=["Que je trépasse si je faiblis !","Montjoie ! Saint-Denis !","Pour la France et pour la trigonométrie !","Par saint Pythagore, j'y vais !","Hardi, compagnons ! En avant !","Diantre… c'est haut, un château.","Mécréant d'Anglais, j'arrive !","Que Dieu guide mon hypoténuse !"];
+const FLY=["Youhouuuu !","Je voooole !","Ventre-saint-gris !","Taïaut !","Mamaaaan !"];
+const REACT_LOW=["Diantre ! Il s'est fracassé !","Palsambleu ! Quelle chute !","Par ma barbe ! Le calcul était faux…","Mécréant de mur ! À mon tour !","Fichtre ! Pauvre ami…"];
+const REACT_HIGH=["Il est parti rejoindre le soleil…","Adieu, noble ami ! Salue la lune pour nous !","Morbleu ! Bien trop haut !","Saperlipopette ! Il vole encore…"];
+const GUARD_REPLY=["Ha ! Essayez donc, French knight !","Je n'ai pas peur de vos triangles !","Ma vache est prête, je vous préviens !","Vous visez comme une hirondelle à vide !","Retournez à vos noix de coco !"];
+const CHEER=["Hourra ! Vive la trigonométrie !","Gloire à toi, noble ami !","Victoire ! Un tir parfait !"];
+
+/* --- introduction façon « Sacré Graal » --- */
+const INTRO=[
+  {w:"n", t:"Clop… clop… clop… (Non, ce ne sont pas des chevaux.)"},
+  {w:"g", t:"Halte ! Qui va là ?"},
+  {w:0, t:"Nous sommes les Chevaliers du Triangle Rectangle ! On veut passer !"},
+  {w:"g", t:"No, no, no ! Ce château appartient à Lord Arctan. Les Français n'entrent pas !"},
+  {w:1, t:"Mais enfin… nous avons des noix de coco !"},
+  {w:"g", t:"Des noix de coco ? En Angleterre ? Qui vous les a apportées, une hirondelle ?"},
+  {w:2, t:"Une hirondelle africaine ou européenne ?"},
+  {w:"g", t:"Euh… je ne sais pas ! Allez-vous-en, ou je vous lance une vache !"},
+  {w:0, t:"Très bien. Chevaliers… sortez la catapulte !", cat:true},
+  {w:"g", t:"Oh no… pas la trigonométrie !"},
+  {w:"n", t:"Lord Arctan tient 10 châteaux. Règle bien la catapulte : trop haut, c'est le soleil… trop bas, c'est le mur !"}
+];
+const GREET=["Encore vous ?!","No, no, no ! Pas de Français ici !","Retournez taper vos noix de coco ailleurs !","Ce château est anglais ! Go away !","Vous ne savez même pas ce qu'est une hypoténuse !"];
+const TAUNT_HIGH=["Bon voyage vers le soleil !","Il vole plus haut qu'une hirondelle !","Ha ha ! Trop haut, French knight !"];
+const TAUNT_LOW=["Ha ha ha ! Ma grand-mère vise mieux !","Ha ha ! Revenez quand vous saurez CAH SOH TOA !","Ha ha ha ! Le mur vous dit bonjour !"];
+
+function startIntro(){
+  musicStart("intro");
+  resetScene(); S.showCat=false; Q=null;
+  S.intro={i:-1, t:0, kx:[-60,-115,-170], clop:0, walking:true};
+  $("castleName").style.display="none";
+  $("qBadge").className="badge angle"; $("qBadge").textContent="Introduction";
+  $("qTitle").textContent="Les chevaliers arrivent…";
+  $("qText").innerHTML="Écoute bien les négociations… Clique sur <b>Suite</b> (ou sur la scène) pour avancer, ou <b>Passer l'intro</b>.";
+  $("qHint").innerHTML=""; $("figure").innerHTML=""; $("feedback").innerHTML="";
+  $("answerRow").style.display="none"; $("calc").style.display="none"; $("introCtrl").style.display="";
+  introShow(0);
+}
+function introShow(i){
+  const L=INTRO[i]; S.intro.i=i; S.intro.t=0;
+  if(L.cat){ S.showCat=true; burst(240,390,36,false); sfx("pop"); }
+  S.bubbles=[]; addBubble(L.w,L.t,999);
+}
+function introNext(){
+  if(!S.intro) return;
+  if(S.intro.walking){ S.intro.kx=[530,485,440]; S.intro.walking=false; }
+  if(S.intro.i>=INTRO.length-1){ endIntro(); return; }
+  introShow(S.intro.i+1);
+}
+function endIntro(){
+  if(!S.intro) return;
+  S.intro=null; $("introCtrl").style.display="none"; $("answerRow").style.display=""; $("calc").style.display="";
+  S.bubbles=[]; nextCastle();
+}
+function stepIntro(dt){
+  const I=S.intro; I.t+=dt;
+  if(I.walking){
+    const tg=[530,485,440]; let moving=false;
+    for(let i=0;i<3;i++){ if(I.kx[i]<tg[i]){ I.kx[i]=Math.min(tg[i],I.kx[i]+95*dt); moving=true; } }
+    if(!moving) I.walking=false;
+  }
+  const L=INTRO[I.i];
+  const need = 2.4 + L.t.length*0.05 + (I.i===0?1.5:0);
+  if(!I.walking && I.t>need) introNext();
+}
+
+/* --- animation --- */
+function step(dt){
+  S.t += dt;
+  const dPost=(S.postTarget-S.post)*Math.min(1,dt*5); S.post += dPost; S.winch=(S.winch||0)+dPost*0.15+(S.knight&&S.knight.load<1?dt*6:0);
+  const L=S.launch;
+  if(L){
+    L.t+=dt;
+    if(L.stage==="set" && L.t>0.8){ L.stage="swing"; L.t=0; sfx("whoosh"); }
+    else if(L.stage==="swing"){
+      const u=Math.min(1,L.t/0.22);
+      S.arm = REST+(L.postA-REST)*u*u;
+      if(u>=1){ S.arm=S.armTarget=L.postA; S.bounce=1; S.launch=null; sfx("thud"); startFlight(L); }
+    }
+  } else S.arm += (S.armTarget-S.arm)*Math.min(1,dt*3);
+  S.bounce=Math.max(0,S.bounce-dt*2.5);
+  if(S.knight && S.knight.load<1){ S.knight.load=Math.min(1,S.knight.load+dt*1.7); }
+  S.flagOwn += (S.flagTarget-S.flagOwn)*Math.min(1,dt*2.5);
+  S.guard += (S.guardTarget-S.guard)*Math.min(1,dt*3);
+  S.clouds.forEach(c=>{ c.x += dt*12*c.s; if(c.x>1100) c.x=-120; });
+  if(S.intro) stepIntro(dt);
+  // vol
+  const f=S.flight;
+  if(f && f.phase==="fly"){
+    f.t += dt;
+    const p=f.path, u=Math.min(1,f.t/p.dur);
+    if(p.kind==="high"){
+      const e=1-Math.pow(1-u,2);
+      f.x=p.x0+(p.x1-p.x0)*u; f.y=p.y0+(p.y1-p.y0)*e;
+      f.scale = u>0.75 ? 1-(u-0.75)/0.25*0.95 : 1;
+    } else { const pos=parab(p,u); f.x=pos.x; f.y=pos.y; }
+    f.rot = u*Math.PI*2;
+    if(Math.random()<0.5) S.parts.push({x:f.x,y:f.y,vx:-20+Math.random()*10,vy:Math.random()*10,life:.5,c:"#ffffffaa",r:3});
+    if(u>=1){
+      f.phase="end"; f.t=0;
+      if(p.kind==="win"){ f.rot=0; burst(f.x,f.y,40,true); S.flagTarget=1; addText("Dans le mille !",f.x-30,f.y-60,"#ffd84d"); sfx("fanfare"); }
+      else if(p.kind==="low"){
+        // impact : on fige la rotation (ramenée près de « couché ») pour une chute continue
+        const tgt=Math.PI/2; f.rot0 = tgt + (((f.rot-tgt+Math.PI)%(2*Math.PI))+2*Math.PI)%(2*Math.PI) - Math.PI;
+        f.rot=f.rot0; burst(f.x+14,f.y,18,false); addText("BONK !",f.x-20,f.y-40,"#ff5a4a"); sfx("bonk");
+      } else { f.scale=0; burst(SUN.x,SUN.y,24,true); addText("Trop haut !",SUN.x-110,SUN.y+80,"#fff3a0"); sfx("ding"); }
+    }
+  } else if(f && f.phase==="end"){
+    f.t += dt;
+    const p=f.path;
+    if(p.kind==="low"){
+      if(f.t<0.22){ f.sx=0.62; }                       // écrasé contre le mur
+      else {
+        const u=Math.min(1,(f.t-0.22)/0.6);
+        f.sx = 0.62+0.38*Math.min(1,u*3);
+        f.x = p.x1-22*u;
+        f.y = p.y1+(GROUND-16-p.y1)*u*u;                // glisse le long du mur
+        f.rot = f.rot0+(Math.PI/2-f.rot0)*u;
+        if(u>=1) f.dizzy=true;
+      }
+    }
+    if(p.kind==="win"){ f.y = p.y1 - Math.abs(Math.sin(f.t*7))*14*Math.max(0,1-f.t); }
+    if(f.t>1.0){
+      const cb=f.cb; f.cb=null;
+      if(p.kind==="high") S.flight=null; else f.phase="rest";
+      if(cb) cb();
+    }
+  }
+  S.parts.forEach(p=>{ p.x+=p.vx*dt; p.y+=p.vy*dt; p.vy+=(p.g||0)*dt; p.life-=dt; });
+  S.parts = S.parts.filter(p=>p.life>0);
+  S.texts.forEach(t=>{ t.y-=dt*25; t.life-=dt; });
+  S.texts = S.texts.filter(t=>t.life>0);
+  S.bubbles.forEach(b=>{ b.life-=dt; });
+  S.bubbles = S.bubbles.filter(b=>b.life>0);
+}
+function burst(x,y,n,confetti){
+  for(let i=0;i<n;i++){
+    const a=Math.random()*Math.PI*2, v=60+Math.random()*180;
+    S.parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-80,g:300,life:.8+Math.random()*.6,r:confetti?4:5,
+      c: confetti ? pick(["#ffd84d","#ff6b5b","#6fb6ff","#7ee0a6","#ffffff"]) : pick(["#a08c70","#7c6a52","#c9b79a"])});
+  }
+}
+function addText(txt,x,y,c){ S.texts.push({txt,x,y,c,life:1.6}); }
+
+/* --- dessin --- */
+function draw(){
+  const sc = cv.width/W;
+  ctx.setTransform(sc,0,0,sc,0,0);
+  const g=ctx.createLinearGradient(0,0,0,GROUND);
+  g.addColorStop(0,"#5ab6f2"); g.addColorStop(1,"#cdeeff");
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  ctx.save(); ctx.translate(SUN.x,SUN.y); ctx.rotate(S.t*0.3);
+  ctx.strokeStyle="#ffd84d"; ctx.lineWidth=5; ctx.lineCap="round";
+  for(let i=0;i<12;i++){ ctx.rotate(Math.PI/6); ctx.beginPath(); ctx.moveTo(SUN.r+8,0); ctx.lineTo(SUN.r+22,0); ctx.stroke(); }
+  ctx.restore();
+  ctx.fillStyle="#ffe066"; circle(SUN.x,SUN.y,SUN.r); ctx.fillStyle="#fff3a0"; circle(SUN.x-10,SUN.y-10,SUN.r*0.55);
+  S.clouds.forEach(c=>cloud(c.x,c.y,c.s));
+  ctx.fillStyle="#8cc77a"; hill(0,GROUND,380,120); hill(300,GROUND,520,90); hill(720,GROUND,420,110);
+  ctx.fillStyle="#6fae5d"; hill(-80,GROUND,300,70); hill(480,GROUND,380,60);
+  ctx.fillStyle="#5aa04a"; ctx.fillRect(0,GROUND,W,H-GROUND);
+  ctx.fillStyle="#7a5a32"; ctx.fillRect(0,GROUND+18,W,H-GROUND-18);
+  ctx.fillStyle="#4c8c3d"; for(let x=0;x<W;x+=22){ ctx.fillRect(x,GROUND-3,3,6); }
+  drawCastle();
+  drawCatapult();
+  drawQueue();
+  const f=S.flight;
+  if(f && f.scale>0.01){
+    drawKnight(f.x,f.y,f.scale,f.rot||0,KNIGHTS[f.k],{sx:f.sx});
+    if(f.dizzy){ for(let i=0;i<3;i++){ const a=S.t*4+i*2.1; star(f.x+Math.cos(a)*22,f.y-22+Math.sin(a)*6,5,"#ffd84d"); } }
+  }
+  S.parts.forEach(p=>{ ctx.globalAlpha=Math.max(0,Math.min(1,p.life*1.5)); ctx.fillStyle=p.c; ctx.fillRect(p.x-p.r/2,p.y-p.r/2,p.r,p.r); });
+  ctx.globalAlpha=1;
+  S.texts.forEach(t=>{
+    ctx.globalAlpha=Math.min(1,t.life); ctx.font="bold 34px Trebuchet MS, sans-serif"; ctx.textAlign="center";
+    ctx.lineWidth=6; ctx.strokeStyle="#2b2118"; ctx.strokeText(t.txt,t.x,t.y); ctx.fillStyle=t.c; ctx.fillText(t.txt,t.x,t.y);
+  });
+  ctx.globalAlpha=1;
+  S.bubbles.forEach(drawBubble);
+}
+function circle(x,y,r){ ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill(); }
+function cloud(x,y,s){ ctx.fillStyle="#ffffffe0"; ctx.beginPath(); ctx.arc(x,y,24*s,0,Math.PI*2); ctx.arc(x+28*s,y-14*s,30*s,0,Math.PI*2); ctx.arc(x+60*s,y,22*s,0,Math.PI*2); ctx.ellipse(x+30*s,y+8*s,52*s,18*s,0,0,Math.PI*2); ctx.fill(); }
+function hill(x,y,w,h){ ctx.beginPath(); ctx.moveTo(x,y); ctx.quadraticCurveTo(x+w/2,y-h*2,x+w,y); ctx.fill(); }
+function star(x,y,r,c){ ctx.fillStyle=c; ctx.beginPath(); for(let i=0;i<10;i++){ const a=i*Math.PI/5-Math.PI/2, rr=i%2?r*0.45:r; ctx.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr);} ctx.closePath(); ctx.fill(); }
+function rrect(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r); ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h); ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r); ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath(); }
+
+function wrapText(txt,maxW){
+  const words=txt.split(" "), lines=[]; let cur="";
+  words.forEach(w=>{ const t=cur?cur+" "+w:w; if(ctx.measureText(t).width>maxW && cur){ lines.push(cur); cur=w; } else cur=t; });
+  if(cur) lines.push(cur); return lines;
+}
+function drawBubble(b){
+  const narr = b.who==="n";
+  const z = clamp(560/(cv.clientWidth||1000),1,1.9);   // texte plus gros sur petit écran
+  ctx.font = (narr?"italic bold ":"bold ")+Math.round((narr?18:17)*z)+"px Trebuchet MS, sans-serif";
+  const lines = wrapText(b.text, (narr?600:250)*Math.min(z,1.45));
+  const lh=22*z, pad=11*z;
+  const bw = Math.max(...lines.map(l=>ctx.measureText(l).width))+pad*2, bh = lines.length*lh+pad*2-4;
+  ctx.globalAlpha = Math.min(1,b.life*3);
+  let bx,by,a=null;
+  if(narr){ bx=(W-bw)/2; by=16; }
+  else { a=bubbleAnchor(b); bx=clamp(a.x-bw/2,8,W-bw-8); by=Math.max(8,a.y-18-bh); }
+  ctx.fillStyle = narr ? "#f6ecd2" : (b.who==="g" ? "#fdeaea" : "#ffffff");
+  ctx.strokeStyle="#2b2118"; ctx.lineWidth=2.5;
+  rrect(bx,by,bw,bh,12); ctx.fill(); ctx.stroke();
+  if(a){
+    const tx=clamp(a.x,bx+16,bx+bw-16);
+    ctx.beginPath(); ctx.moveTo(tx-9,by+bh-1); ctx.lineTo(a.x,a.y); ctx.lineTo(tx+9,by+bh-1); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(tx-9,by+bh); ctx.lineTo(a.x,a.y); ctx.lineTo(tx+9,by+bh); ctx.stroke();
+  }
+  ctx.fillStyle = b.who==="g" ? "#8e1b12" : "#2b2118"; ctx.textAlign="left";
+  lines.forEach((l,i)=>ctx.fillText(l,bx+pad,by+pad+16*z+i*lh));
+  ctx.globalAlpha=1;
+}
+
+function stone(h,l){ return "hsl("+h+",14%,"+l+"%)"; }
+function drawCastle(){
+  const h=S.castleHue;
+  ctx.fillStyle=stone(h,48); ctx.fillRect(WALL.x2,340,KEEP.x1-WALL.x2,GROUND-340);
+  ctx.fillStyle=stone(h,42); for(let x=WALL.x2+6;x<KEEP.x1;x+=26){ for(let y=350;y<GROUND;y+=20){ ctx.fillRect(x+((y/20)%2?13:0),y,18,2);} }
+  for(let x=WALL.x2;x<KEEP.x1;x+=24){ ctx.fillStyle=stone(h,48); ctx.fillRect(x,328,14,14); }
+  ctx.fillStyle="#b89a62"; ctx.fillRect(WALL.x2,GROUND-4,KEEP.x1-WALL.x2,8);
+  ctx.fillStyle=stone(h,62); ctx.fillRect(KEEP.x1,KEEP.top,KEEP.x2-KEEP.x1,GROUND-KEEP.top);
+  for(let x=KEEP.x1;x<KEEP.x2;x+=22){ ctx.fillRect(x,KEEP.top-16,13,16); }
+  ctx.fillStyle="#2b2118"; roundWin(KEEP.x1+30,KEEP.top+40,22,34); roundWin(KEEP.x1+30,KEEP.top+120,22,34);
+  ctx.fillStyle=stone(h,52); for(let y=KEEP.top+12;y<GROUND;y+=22){ ctx.fillRect(KEEP.x1+4,y,KEEP.x2-KEEP.x1-8,2); }
+  const mx=KEEP.x1+42, mt=KEEP.top-90;
+  ctx.fillStyle="#3b2a1a"; ctx.fillRect(mx,mt,4,90);
+  const wave = Math.sin(S.t*4)*4;
+  const ownY = mt + (1-S.flagOwn)*62, enY = mt + S.flagOwn*62;
+  if(S.flagOwn<0.97) flagEN(mx+4,enY,wave);
+  if(S.flagOwn>0.03) flagFR(mx+4,ownY,wave);
+  // garde anglais sur le chemin de ronde (derrière les créneaux)
+  if(S.guard>0.02) drawGuard(GUARD.x, GUARD.y+(1-S.guard)*55);
+  ctx.fillStyle=stone(h,66); ctx.fillRect(WALL.x1,WALL.top,WALL.x2-WALL.x1,GROUND-WALL.top);
+  for(let x=WALL.x1;x<WALL.x2;x+=20){ ctx.fillRect(x,WALL.top-18,12,18); }
+  ctx.fillStyle=stone(h,56); for(let y=WALL.top+14;y<GROUND;y+=20){ ctx.fillRect(WALL.x1+3,y,WALL.x2-WALL.x1-6,2); for(let x=WALL.x1+((y/20)%2?10:22);x<WALL.x2;x+=24) ctx.fillRect(x,y-18,2,18);}
+  ctx.fillStyle="#3b2a1a"; roundWin(WALL.x1+16,GROUND-70,28,70);
+  ctx.strokeStyle="#6b4a2a"; ctx.lineWidth=2; for(let i=0;i<4;i++){ ctx.beginPath(); ctx.moveTo(WALL.x1+19+i*7,GROUND-60); ctx.lineTo(WALL.x1+19+i*7,GROUND); ctx.stroke(); }
+}
+function roundWin(x,y,w,h){ ctx.beginPath(); ctx.moveTo(x,y+h); ctx.lineTo(x,y+w/2); ctx.arc(x+w/2,y+w/2,w/2,Math.PI,0); ctx.lineTo(x+w,y+h); ctx.closePath(); ctx.fill(); }
+function flagShape(x,y,w){ ctx.beginPath(); ctx.moveTo(x,y); ctx.quadraticCurveTo(x+25,y+w,x+50,y+4); ctx.lineTo(x+50,y+30); ctx.quadraticCurveTo(x+25,y+26-w,x,y+28); ctx.closePath(); }
+function flagEN(x,y,w){ // Saint-Georges
+  ctx.save(); flagShape(x,y,w); ctx.fillStyle="#ffffff"; ctx.fill(); ctx.clip();
+  ctx.fillStyle="#cf142b"; ctx.fillRect(x+20,y-6,9,44); ctx.fillRect(x-2,y+10,56,8); ctx.restore();
+  ctx.strokeStyle="#99999966"; ctx.lineWidth=1; flagShape(x,y,w); ctx.stroke();
+}
+function flagFR(x,y,w){ // bannière fleurdelisée
+  flagShape(x,y,w); ctx.fillStyle="#1f4fa8"; ctx.fill();
+  ctx.fillStyle="#ffd84d"; ctx.font="bold 18px serif"; ctx.textAlign="center"; ctx.fillText("⚜",x+25,y+22);
+}
+function drawGuard(x,y){
+  // y = pied (niveau du chemin de ronde)
+  ctx.save(); ctx.translate(x,y);
+  ctx.strokeStyle="#6b4a2a"; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(14,-2); ctx.lineTo(14,-62); ctx.stroke();
+  ctx.fillStyle="#dfe6ec"; ctx.beginPath(); ctx.moveTo(14,-70); ctx.lineTo(18,-60); ctx.lineTo(10,-60); ctx.closePath(); ctx.fill();
+  ctx.fillStyle="#f4f4f4"; rrect(-11,-34,22,34,5); ctx.fill();               // tunique blanche
+  ctx.fillStyle="#cf142b"; ctx.fillRect(-2.5,-34,5,34); ctx.fillRect(-11,-24,22,5); // croix rouge
+  ctx.fillStyle="#f1c9a5"; circle(0,-42,9);                                    // tête
+  ctx.fillStyle="#2b2118"; ctx.fillRect(-4,-44,2,2); ctx.fillRect(3,-44,2,2);
+  ctx.fillStyle="#8a5a2c"; ctx.fillRect(-5,-38,10,2);                           // moustache
+  ctx.fillStyle="#8d969e"; ctx.beginPath(); ctx.ellipse(0,-49,15,4,0,0,Math.PI*2); ctx.fill(); // chapeau de fer
+  ctx.beginPath(); ctx.arc(0,-49,9,Math.PI,0); ctx.fill();
+  ctx.fillStyle="#f1c9a5"; circle(14,-30,4);                                   // main
+  ctx.restore();
+}
+
+function drawCatapult(){
+  if(!S.showCat) return;
+  const post=S.post;
+  const a = S.arm - (S.bounce ? Math.abs(Math.sin(S.t*30))*S.bounce*4 : 0);
+  const g=postGeo(post), R=g.R, T=g.T;
+  const BX1=100, BX2=388, BY=PIV.y;               // plateau
+  // roues
+  [[140,GROUND-14],[348,GROUND-14]].forEach(w=>{ ctx.fillStyle="#b2866a"; circle(w[0],w[1],22); ctx.strokeStyle="#7a5a3c"; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(w[0],w[1],22,0,Math.PI*2); ctx.stroke(); ctx.fillStyle="#8a6246"; circle(w[0],w[1],9); });
+  // chevalet (montant + traverse + jambes de force), réglable : il coulisse sur le plateau
+  const h=PIV.y-T.y, sp=Math.min(46,0.45*h+10);
+  plank(R.x-sp,BY,R.x-3,T.y+8,8,"#bb977b");
+  plank(R.x+sp,BY,R.x+3,T.y+8,8,"#bb977b");
+  ctx.fillStyle="#bb977b"; ctx.strokeStyle="#7a5a3c"; ctx.lineWidth=2;
+  ctx.fillRect(R.x-7,T.y+4,14,BY-T.y-4); ctx.strokeRect(R.x-7,T.y+4,14,BY-T.y-4);
+  // plateau
+  ctx.fillStyle="#bb977b"; ctx.fillRect(BX1,BY,BX2-BX1,30); ctx.strokeRect(BX1,BY,BX2-BX1,30);
+  // treuil (à l'arrière) + corde tant que le bras est armé
+  const WX=128, WY=BY-14;
+  ctx.fillStyle="#bb977b"; rrect(WX-13,WY-14,26,28,10); ctx.fill(); ctx.stroke();
+  ctx.fillStyle="#6c5242"; circle(WX,WY,10);
+  ctx.save(); ctx.translate(WX,WY); ctx.rotate(S.winch||0); ctx.strokeStyle="#9b6a3a"; ctx.lineWidth=4; ctx.lineCap="round";
+  ctx.beginPath(); ctx.moveTo(-17,0); ctx.lineTo(17,0); ctx.moveTo(0,-17); ctx.lineTo(0,17); ctx.stroke(); ctx.restore();
+  const armed = S.arm < REST+1.5 && !(S.launch && S.launch.stage==="swing");
+  // bras
+  const tp=armTip(a);
+  if(armed){
+    const k=(PIV.x-WX)/Math.cos(a*D)/ARM, rx=WX, ry=PIV.y-ARM*k*Math.sin(a*D);
+    ctx.strokeStyle="#a88b6a"; ctx.lineWidth=3; ctx.setLineDash([4,3]); ctx.beginPath(); ctx.moveTo(rx,ry); ctx.lineTo(WX,WY-8); ctx.stroke(); ctx.setLineDash([]);
+  }
+  // position du bras au moment du tir (hypoténuse PT) en pointillés
+  ctx.strokeStyle="#ffffffcc"; ctx.lineWidth=2; ctx.setLineDash([7,6]);
+  ctx.beginPath(); ctx.moveTo(PIV.x,PIV.y); ctx.lineTo(T.x,T.y); ctx.stroke(); ctx.setLineDash([]);
+  plank(PIV.x,PIV.y,tp.x,tp.y,13,"#946a4c");
+  // cuillère
+  ctx.save(); ctx.translate(tp.x,tp.y); ctx.rotate(a*D);
+  ctx.fillStyle="#a97e62"; ctx.strokeStyle="#2b2118"; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.ellipse(-4,-6,22,10,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+  ctx.fillStyle="#6c5242"; ctx.beginPath(); ctx.ellipse(-4,-9,16,5,0,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+  // traverse (butée) au sommet du montant, devant le bras
+  ctx.fillStyle="#a97e62"; ctx.strokeStyle="#7a5a3c"; ctx.lineWidth=2;
+  ctx.fillRect(R.x-22,T.y-6,44,14); ctx.strokeRect(R.x-22,T.y-6,44,14);
+  // pivot
+  ctx.fillStyle="#6c5242"; circle(PIV.x,PIV.y,7); ctx.fillStyle="#d8c08a"; circle(PIV.x,PIV.y,3);
+  // angle droit et angle de tir
+  ctx.strokeStyle="#fff"; ctx.lineWidth=2; ctx.strokeRect(R.x+8,R.y-15,13,13);
+  ctx.strokeStyle="#ffd84d"; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(PIV.x,PIV.y,44,Math.PI,Math.PI+post*D); ctx.stroke();
+  if(Q){
+    ctx.font="bold 20px Trebuchet MS"; ctx.textAlign="center"; ctx.lineWidth=4; ctx.strokeStyle="#2b2118"; ctx.fillStyle="#fff";
+    const L=(t,x,y)=>{ctx.strokeText(t,x,y);ctx.fillText(t,x,y);};
+    L(Q.n.P,PIV.x+20,PIV.y-6); L(Q.n.R,R.x-34,R.y-6); L(Q.n.T,T.x-34,T.y+2);
+  }
+  if(S.knight){ const p=cupKnightPos(); drawKnight(p.x,p.y,1,0,KNIGHTS[S.knight.k]); }
+}
+function plank(x1,y1,x2,y2,w,c){
+  ctx.lineCap="butt";
+  ctx.strokeStyle="#6b4e36"; ctx.lineWidth=w+3; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  ctx.strokeStyle=c; ctx.lineWidth=w; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  ctx.lineCap="round";
+}
+function beam(x1,y1,x2,y2,w,c){
+  ctx.lineCap="round";
+  ctx.strokeStyle="#3b2a1a"; ctx.lineWidth=w+4; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  ctx.strokeStyle=c; ctx.lineWidth=w; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+}
+function drawQueue(){
+  if(S.intro){
+    for(let i=2;i>=0;i--){
+      const x=S.intro.kx[i], walk=S.intro.walking;
+      const bob = walk ? Math.abs(Math.sin(S.t*9+i))*-5 : Math.sin(S.t*2+i)*1.5;
+      drawKnight(x,GROUND-18+bob,1,0,KNIGHTS[i],{coco: walk ? S.t*14+i : (S.intro.i===4 && i===1 ? S.t*10 : 0.2)});
+    }
+    return;
+  }
+  if(!Q) return;
+  const cur = 3-Q.knightsLeft;
+  for(let k=cur+1, i=0; k<=2; k++, i++){
+    const bob = Math.sin(S.t*3+i)*2;
+    drawKnight(QX[i],GROUND-18+bob,0.85,0,KNIGHTS[k],{coco:0.2});
+  }
+}
+function drawKnight(x,y,s,rot,K,opt){
+  opt=opt||{};
+  const sx=opt.sx||1;
+  ctx.save(); ctx.translate(x,y); ctx.rotate(rot); ctx.scale(s*sx,s*(2-sx));
+  ctx.fillStyle="#9aa3ad"; ctx.beginPath(); ctx.ellipse(0,6,13,12,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle=K.color; ctx.fillRect(-9,0,18,10);
+  ctx.fillStyle="#c9d1d9"; circle(0,-10,13);
+  ctx.fillStyle="#2b2f36"; ctx.fillRect(-1,-14,13,4); ctx.fillRect(4,-14,3,10);
+  ctx.fillStyle=K.plume; ctx.beginPath(); ctx.moveTo(-4,-22); ctx.quadraticCurveTo(-18,-36,-22,-18); ctx.quadraticCurveTo(-12,-26,-4,-20); ctx.fill();
+  ctx.fillStyle=K.color; ctx.beginPath(); ctx.moveTo(-18,0); ctx.lineTo(-6,0); ctx.lineTo(-6,10); ctx.quadraticCurveTo(-12,20,-12,20); ctx.quadraticCurveTo(-18,14,-18,10); ctx.closePath(); ctx.fill();
+  ctx.fillStyle="#ffd84d"; ctx.fillRect(-13,3,2,10); ctx.fillRect(-16,6,8,2);
+  if(opt.coco!==undefined){
+    // deux demi-noix de coco qu'on frappe l'une contre l'autre
+    const gap = 1+Math.abs(Math.sin(opt.coco))*8;
+    ctx.fillStyle="#6b3e1f";
+    ctx.beginPath(); ctx.arc(16-gap/2,4,7,Math.PI/2,Math.PI*1.5); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.arc(16+gap/2,4,7,-Math.PI/2,Math.PI/2); ctx.closePath(); ctx.fill();
+    ctx.fillStyle="#f3ead8"; ctx.fillRect(16-gap/2-1,-2,1.5,12); ctx.fillRect(16+gap/2-.5,-2,1.5,12);
+  } else {
+    ctx.strokeStyle="#6b4a2a"; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(8,14); ctx.lineTo(22,-6); ctx.stroke();
+    ctx.fillStyle="#dfe6ec"; ctx.beginPath(); ctx.moveTo(22,-6); ctx.lineTo(26,-14); ctx.lineTo(19,-9); ctx.fill();
+  }
+  ctx.restore();
+}
+
+let last=performance.now();
+function loop(now){
+  const dt=Math.min(0.05,(now-last)/1000); last=now;
+  step(dt); draw();
+  if(G && !G.over && !S.intro){ const s=Math.round((now-G.start)/1000); $("hudTime").textContent=Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); }
+  requestAnimationFrame(loop);
+}
+
+/* ===================== SONS (synthétisés) ===================== */
+let AC=null, muted=false, clopHi=false;
+function audioInit(){ if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } if(AC&&AC.state==="suspended") AC.resume(); }
+function tone(f1,f2,dur,type,vol,delay){
+  if(!AC||muted) return;
+  const t0=AC.currentTime+(delay||0), o=AC.createOscillator(), g=AC.createGain();
+  o.type=type||"sine"; o.frequency.setValueAtTime(f1,t0); if(f2) o.frequency.exponentialRampToValueAtTime(f2,t0+dur);
+  g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(vol||0.15,t0+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+  o.connect(g).connect(AC.destination); o.start(t0); o.stop(t0+dur+0.05);
+}
+function sfx(n){
+  if(n==="creak"){ tone(90,140,0.5,"sawtooth",0.05); }
+  if(n==="whoosh"){ tone(180,900,0.45,"sawtooth",0.06); tone(300,1200,0.4,"triangle",0.06,0.05); }
+  if(n==="bonk"){ tone(160,50,0.35,"square",0.18); tone(80,40,0.4,"sine",0.2); }
+  if(n==="ding"){ tone(1300,2200,0.6,"sine",0.12); tone(1950,3000,0.5,"sine",0.08,0.12); }
+  if(n==="fanfare"){ [587,740,880,1175].forEach((f,i)=>tone(f,0,0.28,"triangle",0.14,i*0.13)); tone(1175,0,0.6,"square",0.05,0.55); }
+  if(n==="thud"){ tone(130,55,0.2,"sine",0.25); tone(220,90,0.08,"square",0.06); }
+  if(n==="pop"){ tone(300,900,0.15,"triangle",0.12); }
+  if(n==="lose"){ [392,330,262].forEach((f,i)=>tone(f,0,0.35,"triangle",0.12,i*0.22)); }
+}
+$("muteBtn").addEventListener("click",()=>{ muted=!muted; $("muteBtn").textContent=muted?"🔇":"🔊"; musicVol(); });
+$("musicBtn").addEventListener("click",()=>{ audioInit(); MUS.on=!MUS.on; $("musicBtn").style.opacity=MUS.on?1:0.4; $("musicBtn").title=MUS.on?"Couper la musique":"Remettre la musique"; musicVol(); });
+
+/* ===================== MUSIQUE (synthétisée, sans fichier) =====================
+   - intro : flûte + bourdon façon cornemuse + tambourin ; noix de coco au galop pendant la marche
+   - bataille : cors, trompettes, timbales, caisse claire ; tempo et densité augmentent à chaque château */
+const MUS = {on:true, mode:null, bpm:100, level:1, step:0, next:0, timer:null, master:null, noise:null};
+const mtof = m => 440*Math.pow(2,(m-69)/12);
+function musicVol(){ if(MUS.master) MUS.master.gain.setTargetAtTime((MUS.on && !muted) ? 0.42 : 0, AC.currentTime, 0.08); }
+function musicInit(){
+  if(!AC || MUS.master) return;
+  const comp = AC.createDynamicsCompressor();
+  MUS.master = AC.createGain(); MUS.master.gain.value = 0;
+  MUS.master.connect(comp); comp.connect(AC.destination);
+  const len = Math.floor(AC.sampleRate*1.2), buf = AC.createBuffer(1,len,AC.sampleRate), d = buf.getChannelData(0);
+  for(let i=0;i<len;i++) d[i] = Math.random()*2-1;
+  MUS.noise = buf;
+  musicVol();
+}
+function musicStart(mode){
+  audioInit(); if(!AC) return; musicInit();
+  if(MUS.mode!==mode){ MUS.mode=mode; MUS.step=0; MUS.next=AC.currentTime+0.12; }
+  if(!MUS.timer) MUS.timer=setInterval(musicTick,25);
+  musicVol();
+}
+function musicStop(){ MUS.mode=null; }
+function musicLevel(n){ MUS.level=n; MUS.bpm = 92 + (n-1)*7; }        // 92 → 155 bpm au 10e château
+function musicTick(){
+  if(!AC || !MUS.mode) return;
+  const now=AC.currentTime;
+  if(MUS.next < now-0.25) MUS.next = now+0.05;                     // onglet en arrière-plan : on repart proprement
+  while(MUS.next < now+0.15){
+    const spb = 60/MUS.bpm/4;                                      // durée d'une double croche
+    if(MUS.on && !muted) (MUS.mode==="intro" ? introStep : battleStep)(MUS.step, MUS.next, spb);
+    MUS.next += spb; MUS.step++;
+  }
+}
+
+/* --- instruments --- */
+function env(g,t,a,peak,dur,rel){
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(peak,t+a);
+  g.gain.setValueAtTime(peak,t+Math.max(a,dur-rel)); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+}
+function brass(t,m,dur,vol){            // trompette : dents de scie + filtre qui « s'ouvre »
+  const f=mtof(m), g=AC.createGain(), lp=AC.createBiquadFilter();
+  lp.type="lowpass"; lp.Q.value=2;
+  lp.frequency.setValueAtTime(500,t); lp.frequency.exponentialRampToValueAtTime(3200,t+0.05); lp.frequency.exponentialRampToValueAtTime(1700,t+0.25);
+  [-7,7].forEach(dt=>{ const o=AC.createOscillator(); o.type="sawtooth"; o.frequency.value=f; o.detune.value=dt; o.connect(lp); o.start(t); o.stop(t+dur+0.05); });
+  const vib=AC.createOscillator(), vg=AC.createGain(); vib.frequency.value=5.5; vg.gain.value=f*0.004; vib.connect(vg);
+  env(g,t,0.025,vol,dur,0.07); lp.connect(g); g.connect(MUS.master);
+  vib.start(t+0.15); vib.stop(t+dur);
+}
+function horn(t,m,dur,vol){             // cor : son rond et sombre
+  const g=AC.createGain(), lp=AC.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=750; lp.Q.value=0.7;
+  ["sawtooth","triangle"].forEach(ty=>{ const o=AC.createOscillator(); o.type=ty; o.frequency.value=mtof(m); o.connect(lp); o.start(t); o.stop(t+dur+0.05); });
+  env(g,t,0.09,vol,dur,0.2); lp.connect(g); g.connect(MUS.master);
+}
+function noiseHit(t,dur,vol,type,freq,q){
+  const s=AC.createBufferSource(); s.buffer=MUS.noise;
+  const f=AC.createBiquadFilter(); f.type=type; f.frequency.value=freq; if(q) f.Q.value=q;
+  const g=AC.createGain(); g.gain.setValueAtTime(vol,t); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  s.connect(f); f.connect(g); g.connect(MUS.master); s.start(t, Math.random()*0.8); s.stop(t+dur+0.02);
+}
+function snare(t,vol){
+  noiseHit(t,0.13,vol,"highpass",1800);
+  const o=AC.createOscillator(), g=AC.createGain(); o.type="triangle"; o.frequency.setValueAtTime(220,t); o.frequency.exponentialRampToValueAtTime(140,t+0.05);
+  g.gain.setValueAtTime(vol*0.7,t); g.gain.exponentialRampToValueAtTime(0.0001,t+0.07); o.connect(g); g.connect(MUS.master); o.start(t); o.stop(t+0.1);
+}
+function timpani(t,m,vol){
+  const o=AC.createOscillator(), g=AC.createGain(); o.type="sine";
+  o.frequency.setValueAtTime(mtof(m)*1.5,t); o.frequency.exponentialRampToValueAtTime(mtof(m),t+0.06);
+  g.gain.setValueAtTime(vol,t); g.gain.exponentialRampToValueAtTime(0.0001,t+0.6);
+  o.connect(g); g.connect(MUS.master); o.start(t); o.stop(t+0.65);
+  noiseHit(t,0.05,vol*0.3,"lowpass",400);
+}
+function pipe(t,m,dur,vol){             // flûte médiévale
+  const f=mtof(m), g=AC.createGain();
+  const o=AC.createOscillator(); o.type="triangle"; o.frequency.value=f;
+  const o2=AC.createOscillator(); o2.type="sine"; o2.frequency.value=f*2;
+  const g2=AC.createGain(); g2.gain.value=0.25; o2.connect(g2); g2.connect(g);
+  const vib=AC.createOscillator(), vg=AC.createGain(); vib.frequency.value=6; vg.gain.value=f*0.006; vib.connect(vg); vg.connect(o.frequency); vg.connect(o2.frequency);
+  o.connect(g); env(g,t,0.03,vol,dur,0.06); g.connect(MUS.master);
+  noiseHit(t,0.04,vol*0.25,"bandpass",f*2,2);                      // souffle
+  [o,o2,vib].forEach(x=>{ x.start(t); x.stop(t+dur+0.05); });
+}
+function drone(t,dur,vol){              // bourdon façon cornemuse
+  const g=AC.createGain(), lp=AC.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=600;
+  [50,57].forEach(m=>{ const o=AC.createOscillator(); o.type="sawtooth"; o.frequency.value=mtof(m); o.connect(lp); o.start(t); o.stop(t+dur+0.1); });
+  env(g,t,0.06,vol,dur+0.05,0.06); lp.connect(g); g.connect(MUS.master);
+}
+// noix de coco : deux demi-coques creuses qui claquent (bruit filtré très résonant + petit « tok »)
+function coconut(t,hi,acc){
+  const v = acc ? 0.95 : 0.6;
+  noiseHit(t,0.045,v,"bandpass",hi?2300:1750,9);
+  noiseHit(t,0.02,v*0.5,"highpass",3500);
+  const o=AC.createOscillator(), g=AC.createGain(); o.type="sine";
+  o.frequency.setValueAtTime(hi?820:620,t); o.frequency.exponentialRampToValueAtTime(hi?560:420,t+0.05);
+  g.gain.setValueAtTime(v*0.55,t); g.gain.exponentialRampToValueAtTime(0.0001,t+0.07);
+  o.connect(g); g.connect(MUS.master); o.start(t); o.stop(t+0.09);
+}
+
+/* --- partition de l'intro (ré majeur, 4 mesures en boucle) --- */
+const INTRO_MEL=[
+  [[0,74,4],[4,76,2],[6,78,2],[8,79,4],[12,78,4]],
+  [[0,76,4],[4,74,4],[8,71,4],[12,69,4]],
+  [[0,71,2],[2,73,2],[4,74,4],[8,76,4],[12,78,4]],
+  [[0,76,4],[4,73,4],[8,74,8]]];
+function introStep(s,t,spb){
+  const bar=Math.floor(s/16)%4, pos=s%16;
+  const walking = S.intro && S.intro.walking;
+  if(pos===0) drone(t,16*spb,0.05);
+  INTRO_MEL[bar].forEach(n=>{ if(n[0]===pos) pipe(t,n[1],n[2]*spb*0.92,0.11); });
+  if(pos===4||pos===12) noiseHit(t,0.09,0.12,"highpass",7000);   // tambourin
+  if(pos===0||pos===8) timpani(t,38,0.18);
+  // galop des noix de coco : « clip-clop » sur chaque temps
+  if(walking && pos%4===0){ coconut(t,true,false); coconut(t+spb*0.55,false,true); }
+}
+
+/* --- partition de bataille (ré mineur, 8 mesures en boucle) --- */
+const CH=[50,50,46,48,50,53,48,45];                        // basses : Rém Rém Sib Do Rém Fa Do La
+const THIRD=[3,3,4,4,3,4,4,4];
+const BAT_MEL=[
+  [[0,62,2],[3,62,1],[4,62,2],[6,69,10]],
+  [[0,65,3],[3,64,1],[4,62,4],[8,69,4],[12,67,4]],
+  [[0,65,4],[4,62,4],[8,70,8]],
+  [[0,72,3],[3,70,1],[4,69,4],[8,67,4],[12,64,4]],
+  [[0,74,2],[3,74,1],[4,74,2],[6,69,6],[12,65,4]],
+  [[0,69,4],[4,72,4],[8,77,8]],
+  [[0,76,2],[2,74,2],[4,72,2],[6,70,2],[8,69,4],[12,67,4]],
+  [[0,69,4],[4,73,4],[8,76,4],[12,69,4]]];
+function battleStep(s,t,spb){
+  const L=MUS.level, bar=Math.floor(s/16)%8, pos=s%16, root=CH[bar];
+  // cors : accord tenu
+  if(pos===0){ horn(t,root,16*spb*0.97,0.09); horn(t,root+7,16*spb*0.97,0.07); if(L>=4) horn(t,root+12+THIRD[bar],16*spb*0.97,0.05); }
+  // timbales
+  if(pos===0) timpani(t,root-12,0.55);
+  if(pos===8) timpani(t,root-5,0.4);
+  if(L>=4 && (pos===12||pos===14)) timpani(t,root-12,0.25);
+  // caisse claire de marche
+  if(pos===4||pos===12) snare(t,0.32);
+  if(L>=2 && (pos===2||pos===6||pos===10||pos===14)) snare(t,0.1);
+  if(L>=5 && pos%2===1) snare(t,0.06);
+  if(L>=3 && bar===7 && pos>=8) snare(t,0.08+(pos-8)*0.03);       // roulement avant la reprise
+  // trompettes : appels au début, puis toute la mélodie, puis doublure à l'octave
+  const melOn = L>=3 || bar===0 || bar===1 || bar===4 || bar===5;
+  if(melOn) BAT_MEL[bar].forEach(n=>{ if(n[0]===pos){
+    brass(t,n[1],n[2]*spb*0.9,0.075);
+    if(L>=6) brass(t,n[1]-12,n[2]*spb*0.9,0.05);
+  }});
+  // cymbale
+  if(L>=8 && pos===0 && (bar===0||bar===4)) noiseHit(t,1.2,0.12,"highpass",6000);
+}
+
+/* ===================== CALCULATRICE (mode degrés) ===================== */
+const CALC_KEYS=[["sin","cos","tan","(",")"],["sin⁻¹","cos⁻¹","tan⁻¹","←","C"],["7","8","9","÷","×"],["4","5","6","−","+"],["1","2","3","0",","],["="]];
+function calcTokens(str){
+  const s=str.replace(/\s+/g,"").replace(/,/g,".").replace(/\*/g,"×").replace(/\//g,"÷").replace(/[-–]/g,"−").replace(/:/g,"÷")
+    .replace(/(sin|cos|tan)−1(?=\()/gi,"$1⁻¹")
+    .toLowerCase().replace(/arc(sin|cos|tan)/g,"$1⁻¹").replace(/(^|[^a-z])a(sin|cos|tan)/g,"$1$2⁻¹").replace(/(sin|cos|tan)\^\(?−1\)?/g,"$1⁻¹");
+  const out=[]; let i=0;
+  while(i<s.length){
+    const c=s[i];
+    if(/[0-9.]/.test(c)){ let j=i; while(j<s.length && /[0-9.]/.test(s[j])) j++; const t=s.slice(i,j); if((t.match(/\./g)||[]).length>1||t===".") throw "Nombre mal écrit"; out.push({t:"num",v:parseFloat(t)}); i=j; continue; }
+    const m=s.slice(i).match(/^(sin|cos|tan)(⁻¹)?/);
+    if(m){ out.push({t:"fn",v:m[1]+(m[2]?"-1":"")}); i+=m[0].length; continue; }
+    if("()+−×÷".includes(c)){ out.push({t:c}); i++; continue; }
+    if(c==="π"){ out.push({t:"num",v:Math.PI}); i++; continue; }
+    throw "Caractère non reconnu : "+c;
+  }
+  return out;
+}
+function calcFn(f,x){
+  const r=v=>Math.abs(v)<1e-12?0:v;
+  if(f==="sin") return r(Math.sin(x*D));
+  if(f==="cos") return r(Math.cos(x*D));
+  if(f==="tan"){ if(Math.abs(Math.cos(x*D))<1e-12) throw "tan("+fr(x)+"°) n'existe pas"; return r(Math.tan(x*D)); }
+  if(f==="sin-1"||f==="cos-1"){ if(x<-1-1e-12||x>1+1e-12) throw (f==="sin-1"?"sin⁻¹":"cos⁻¹")+" : le nombre doit être entre −1 et 1"; x=clamp(x,-1,1); return (f==="sin-1"?Math.asin(x):Math.acos(x))/D; }
+  if(f==="tan-1") return Math.atan(x)/D;
+}
+function calcEval(str){
+  const T=calcTokens(str); let i=0;
+  if(!T.length) throw "";
+  const peek=()=>T[i], next=()=>T[i++];
+  function expr(){ let v=term(); while(peek() && (peek().t==="+"||peek().t==="−")){ const o=next().t, r=term(); v = o==="+" ? v+r : v-r; } return v; }
+  function term(){ let v=unary();
+    for(;;){ const p=peek(); if(!p) break;
+      if(p.t==="×"||p.t==="÷"){ next(); const r=unary(); if(p.t==="÷"){ if(r===0) throw "Division par zéro"; v/=r; } else v*=r; }
+      else if(p.t==="num"||p.t==="fn"||p.t==="("){ v*=unary(); }      // multiplication implicite : 12cos(40)
+      else break; }
+    return v; }
+  function unary(){ const p=peek(); if(p && p.t==="−"){ next(); return -unary(); } if(p && p.t==="+"){ next(); return unary(); } return primary(); }
+  function primary(){ const p=next(); if(!p) throw "Calcul incomplet";
+    if(p.t==="num") return p.v;
+    if(p.t==="("){ const v=expr(); if(peek() && peek().t===")") next(); else if(peek()) throw "Parenthèse manquante"; return v; }
+    if(p.t==="fn"){ let x; if(peek() && peek().t==="("){ next(); x=expr(); if(peek() && peek().t===")") next(); else if(peek()) throw "Parenthèse manquante"; } else x=unary(); return calcFn(p.v,x); }
+    throw "Calcul incorrect"; }
+  const v=expr(); if(i<T.length) throw "Calcul incorrect";
+  if(!isFinite(v)) throw "Résultat impossible";
+  return v;
+}
+function calcShow(){
+  const out=$("calcOut"), src=$("calcIn").value;
+  try{ const v=calcEval(src); out.className=""; out.textContent="= "+String(Number(v.toPrecision(10))).replace(".",","); }
+  catch(e){ out.className=e?"err":""; out.textContent= e ? String(e) : "\u00a0"; }
+}
+function calcInsert(t){
+  const inp=$("calcIn"); const a=inp.selectionStart??inp.value.length, b=inp.selectionEnd??inp.value.length;
+  const focused = document.activeElement===inp;
+  const pa = focused ? a : inp.value.length, pb = focused ? b : inp.value.length;
+  inp.value = inp.value.slice(0,pa)+t+inp.value.slice(pb);
+  const c=pa+t.length; inp.setSelectionRange && inp.setSelectionRange(c,c);
+}
+(function buildCalc(){
+  const box=$("calcKeys");
+  CALC_KEYS.flat().forEach(k=>{
+    const b=document.createElement("button"); b.type="button"; b.textContent=k;
+    b.className = /sin|cos|tan/.test(k) ? "fn" : ("÷×−+()".includes(k) ? "op" : (k==="←"||k==="C" ? "ctl" : (k==="=" ? "eq" : "")));
+    b.addEventListener("click",()=>{
+      const inp=$("calcIn");
+      if(k==="=") calcShow();
+      else if(k==="C"){ inp.value=""; $("calcOut").className=""; $("calcOut").innerHTML="&nbsp;"; }
+      else if(k==="←"){ inp.value=inp.value.slice(0,-1); }
+      else if(/sin|cos|tan/.test(k)) calcInsert(k+"(");
+      else calcInsert(k);
+    });
+    box.appendChild(b);
+  });
+  $("calcIn").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); calcShow(); } });
+})();
+
+/* ===================== MENUS ===================== */
+function buildLevels(){
+  const box=$("levelsBox"); box.innerHTML="";
+  Object.keys(LEVELS).forEach(key=>{
+    const L=LEVELS[key];
+    let rec=0; try{ rec=+localStorage.getItem("knightCatapult_record_"+key)||0; }catch(e){}
+    const b=document.createElement("button"); b.type="button"; b.className="level";
+    b.innerHTML='<h3>'+L.name+' <small>'+L.tag+' · ×'+String(L.coef).replace(".",",")+'</small></h3><p>'+L.desc+'</p><div class="rec">Record : '+rec+'</div>';
+    b.addEventListener("click",()=>{ audioInit(); newGame(key,!introSeen); });
+    box.appendChild(b);
+  });
+}
+$("fireBtn").addEventListener("click",fire);
+$("ans").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); fire(); } });
+$("nextBtn").addEventListener("click",()=>{ S.flight=null; nextCastle(); });
+$("againBtn").addEventListener("click",()=>newGame(lvKey,false));
+$("introNext").addEventListener("click",introNext);
+$("introSkip").addEventListener("click",endIntro);
+cv.addEventListener("click",()=>{ if(S.intro) introNext(); });
+$("menuBtn").addEventListener("click",()=>{ buildLevels(); $("endScreen").classList.add("hidden"); $("startScreen").classList.remove("hidden"); });
+
+// démarrage
+buildLevels();
+resize();
+S.knight={k:0,load:1}; // décor derrière l'écran d'accueil
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
