@@ -188,6 +188,7 @@
     .matieres li:nth-child(1) { animation-delay: .9s; }
     .matieres li:nth-child(2) { animation-delay: 1.1s; }
     .matieres li:nth-child(3) { animation-delay: 1.3s; }
+    .matieres li:nth-child(4) { animation-delay: 1.5s; }
 
     .carte {
       --c1: var(--snt);
@@ -215,6 +216,16 @@
     }
     .carte.maths { --c1: var(--maths); --c2: var(--maths2); }
     .carte.orientation { --c1: #0d9488; --c2: #34d399; }
+    .carte.jeux { --c1: #e11d77; --c2: #a855f7; }
+    /* Décor de la carte Jeux : symboles qui flottent, étoiles qui scintillent */
+    .jeu-symbole { font: 700 26px Georgia, serif; fill: rgba(236, 72, 153, .35); animation: flotter 4s ease-in-out infinite; }
+    .jeu-symbole.s2 { animation-delay: -1.3s; fill: rgba(168, 85, 247, .35); }
+    .jeu-symbole.s3 { animation-delay: -2.6s; }
+    .jeu-etoile { fill: #facc15; opacity: .7; transform-box: fill-box; transform-origin: center; animation: scintiller 2.4s ease-in-out infinite; }
+    .jeu-etoile.e2 { animation-delay: -.8s; } .jeu-etoile.e3 { animation-delay: -1.6s; }
+    @keyframes flotter { 50% { transform: translateY(-8px); } }
+    @keyframes scintiller { 50% { transform: scale(.5); opacity: .3; } }
+    @media (prefers-reduced-motion: reduce) { .jeu-symbole, .jeu-etoile { animation: none; } }
 
     /* Orientation : boussole et chemins */
     .chemin { fill: none; stroke: rgba(52, 211, 153, .4); stroke-width: 1.6; stroke-dasharray: 5 6; animation: pointilles 4s linear infinite; }
@@ -441,6 +452,7 @@
     html.theme-clair .carte.snt .entrer { color: #0e7490; }
     html.theme-clair .carte.maths .entrer { color: #be123c; }
     html.theme-clair .carte.orientation .entrer { color: #0f766e; }
+    html.theme-clair .carte.jeux .entrer { color: #be185d; }
     html.theme-clair .etiquette-plan { fill: rgba(15, 118, 110, .7); }
     html.theme-clair .formule { fill: rgba(180, 83, 9, .6); }
     html.theme-clair .binaire { fill: rgba(14, 116, 144, .45); }
@@ -599,6 +611,31 @@
           <span class="entrer">Préparer mon orientation <span class="fleche" aria-hidden="true">→</span></span>
         </a>
       </li>
+      <li>
+        <a class="carte jeux" href="jeu/jeu.html">
+          <span class="deco" aria-hidden="true">
+            <svg viewBox="0 0 320 240" preserveAspectRatio="xMaxYMid meet">
+              <text class="jeu-symbole" x="200" y="60">√</text>
+              <text class="jeu-symbole s2" x="262" y="110">ζ</text>
+              <text class="jeu-symbole s3" x="215" y="200">π</text>
+              <text class="jeu-symbole s2" x="285" y="225">x²</text>
+              <path class="jeu-etoile" d="M250 40 l4 9 10 1 -8 6 3 10 -9 -6 -9 6 3 -10 -8 -6 10 -1z" />
+              <path class="jeu-etoile e2" d="M170 150 l3 6 7 1 -5 4 2 7 -7 -4 -7 4 2 -7 -5 -4 7 -1z" />
+              <path class="jeu-etoile e3" d="M300 160 l3 6 7 1 -5 4 2 7 -7 -4 -7 4 2 -7 -5 -4 7 -1z" />
+            </svg>
+          </span>
+          <span class="carte-haut">
+            <span class="icone" aria-hidden="true">🎮</span>
+            <span class="niveau">3ème · Seconde</span>
+          </span>
+          <h2>Jeux</h2>
+          <p>Des jeux de maths pour s'entraîner en s'amusant, sur ordinateur, tablette ou téléphone.</p>
+          <ul class="tags">
+            <li>Super Calcul Bros 2</li><li>Calcul littéral</li>
+          </ul>
+          <span class="entrer">Jouer <span class="fleche" aria-hidden="true">→</span></span>
+        </a>
+      </li>
     </ul>
   </main>
 
@@ -615,7 +652,7 @@
       document.getElementById('salut').textContent = (h >= 18 || h < 5) ? 'Bonsoir' : 'Bonjour';
 
       /* Effet machine à écrire */
-      var phrases = ['des cours.', 'des activités.', 'des cartes mentales.', 'des fiches.', 'des QCM.', 'de quoi réviser.', 'des aide-mémoires.'];
+      var phrases = ['des cours.', 'des activités.', 'des jeux.', 'des cartes mentales.', 'des fiches.', 'des QCM.', 'de quoi réviser.', 'des aide-mémoires.'];
       var zone = document.getElementById('tape');
       if (calme) {
         zone.textContent = 'des cours, des activités, des cartes mentales, des fiches, des QCM et des aide-mémoires pour réviser.';
