@@ -745,7 +745,6 @@ function parab(p,u){
 function addBubble(who,text,life,anchor){
   S.bubbles = S.bubbles.filter(b=>b.who!==who);
   text = text.replace(/ ([!?:;»])/g,"\u00a0$1");   // pas de « ! » seul en fin de ligne
-  if(S.finale) life*=1.3;                                  // on laisse le temps de lire
   S.bubbles.push({who,text,life,anchor});
 }
 function bubbleAnchor(b){
@@ -1342,31 +1341,32 @@ function launchCow(k,target){
   S.finale.cows.push({x0:a.x, y0:a.y-20, x1:e.x, y1:GROUND-30, t:0, dur:1.15, target, done:false});
   sfx("moo");
 }
-const FS=1.18;   // étirement du rythme de la scène finale (≈ 35 s)
+const LORDPOS=()=>({x:S.finale.lord.x,y:GROUND-62});
+const FS=1;   // rythme réglé à la main ci-dessous (temps de lecture adapté aux élèves)
 const FIN=[
-  [0.3, ()=>{ addBubble("n","Le Palais de Lord Arctan est tombé ! La bannière de France flotte sur le donjon.",4.2); sfx("cheer"); sfx("bells"); S.finale.fw=0.5; }],
+  [0.3, ()=>{ addBubble("n","Le Palais de Lord Arctan est tombé ! La bannière de France flotte sur le donjon.",6); sfx("cheer"); sfx("bells"); S.finale.fw=0.5; }],
   [4.5, ()=>sfx("cheer")],
-  [3.2, ()=>addBubble("lord","No, no, no ! Ce palais est à nous… enfin, il ÉTAIT à nous !",3.2,()=>({x:S.finale.lord.x,y:GROUND-62}))],
-  [5.8, ()=>addBubble("k0","Compagnons… lâchez les vaches !",2.4,()=>finKnightPos(0))],
-  [6.7, ()=>launchCow(0,0)],
-  [7.6, ()=>launchCow(1,1)],
-  [8.5, ()=>launchCow(2,2)],
-  [10.4,()=>addBubble("k2","Ha ! Chacun son tour de recevoir une vache !",2.6,()=>finKnightPos(2))],
-  [11.3,()=>musicStop()],
-  [11.6,()=>{ S.finale.lord.coco=true; S.finale.dark=true; dramaSting(); addBubble("lord","Vous avez le château… mais NOUS avons vos noix de coco !",3,()=>({x:S.finale.lord.x,y:GROUND-62})); }],
-  [14.6,()=>{ S.finale.lord.run=true; MUS.bpm=150; musicStart("intro"); addBubble("lord","Fuyez ! Fuyez ! Clop, clop, clop !",2.4,()=>({x:S.finale.lord.x,y:GROUND-62})); }],
-  [15.6,()=>addBubble("k1","Hé ! Il a volé nos noix de coco !",2.6,()=>finKnightPos(1))],
-  [18.2,()=>addBubble("k0","Poursuivons les Anglais ! Récupérons nos noix de coco !",3.2,()=>finKnightPos(0))],
-  [20.6,()=>{ S.finale.knights.forEach((p,k)=>{ p.st="jump"; p.jt=-k*0.35; p.jx0=p.x; p.jy0=p.y; }); }],
-  [21.8,()=>addBubble("k2","En avant ! Sans noix de coco, on va devoir galoper pour de vrai !",2.8,()=>finKnightPos(2))],
-  [24.8,()=>musicStop()],
-  [25.2,()=>addBubble("n","FIN… ou presque ! Les Anglais courent toujours avec les noix de coco…",4.6)],
-  [30.4,()=>endFinale()]
+  [6.6, ()=>addBubble("lord","No, no, no ! Ce palais est à nous… enfin, il ÉTAIT à nous !",5,LORDPOS)],
+  [11.8,()=>addBubble("k0","Compagnons… lâchez les vaches !",3.6,()=>finKnightPos(0))],
+  [13.0,()=>launchCow(0,0)],
+  [13.9,()=>launchCow(1,1)],
+  [14.8,()=>launchCow(2,2)],
+  [16.6,()=>addBubble("k2","Ha ! Chacun son tour de recevoir une vache !",4.4,()=>finKnightPos(2))],
+  [20.9,()=>musicStop()],
+  [21.2,()=>{ S.finale.lord.coco=true; S.finale.dark=true; dramaSting(); addBubble("lord","Vous avez le château… mais NOUS avons vos noix de coco !",5.2,LORDPOS); }],
+  [26.6,()=>{ S.finale.lord.run=true; MUS.bpm=150; musicStart("intro"); addBubble("lord","Fuyez ! Fuyez ! Clop, clop, clop !",3.6,LORDPOS); }],
+  [28.4,()=>addBubble("k1","Hé ! Il a volé nos noix de coco !",4,()=>finKnightPos(1))],
+  [32.6,()=>addBubble("k0","Poursuivons les Anglais ! Récupérons nos noix de coco !",5,()=>finKnightPos(0))],
+  [37.4,()=>{ S.finale.knights.forEach((p,k)=>{ p.st="jump"; p.jt=-k*0.35; p.jx0=p.x; p.jy0=p.y; }); }],
+  [38.2,()=>addBubble("k2","En avant ! Sans noix de coco, on va devoir galoper pour de vrai !",5,()=>finKnightPos(2))],
+  [42.6,()=>musicStop()],
+  [42.8,()=>addBubble("n","FIN… ou presque ! Les Anglais courent toujours avec les noix de coco…",4.6)],
+  [47.6,()=>endFinale()]
 ];
 function stepFinale(dt){
   const F=S.finale; F.t+=dt;
-  F.clear=clamp((F.t-0.6)/6,0,1) * (!F.dark ? 1 : F.t<14.6*FS ? Math.max(0.5,1-(F.t-11.6*FS)*0.3) : Math.min(0.85,0.5+(F.t-14.6*FS)*0.1));   // l'orage se dissipe… et le ciel se rassombrit pour le « drama »
-  if(F.fw!==undefined && F.t<10.5*FS){ F.fw-=dt; if(F.fw<=0){ F.fw=0.45+Math.random()*0.4; const fx=150+Math.random()*700, fy=60+Math.random()*150; burst(fx,fy,46,true); sfx("pop"); } }
+  F.clear=clamp((F.t-0.6)/6,0,1) * (!F.dark ? 1 : F.t<26.6 ? Math.max(0.5,1-(F.t-21.2)*0.3) : Math.min(0.85,0.5+(F.t-26.6)*0.1));   // l'orage se dissipe… et le ciel se rassombrit pour le « drama »
+  if(F.fw!==undefined && F.t<12){ F.fw-=dt; if(F.fw<=0){ F.fw=0.45+Math.random()*0.4; const fx=150+Math.random()*700, fy=60+Math.random()*150; burst(fx,fy,46,true); sfx("pop"); } }
   while(F.ev<FIN.length && F.t>=FIN[F.ev][0]*FS){ const f=FIN[F.ev][1]; F.ev++; f(); if(!S.finale) return; }
   F.cows.forEach(c=>{ if(c.done) return; c.t+=dt; if(c.t>=c.dur){ c.done=true; const e=F.english[c.target]; e.alive=false;
     burst(c.x1,c.y1,34,false); burst(c.x1,c.y1-10,14,true); addText("POUF !",c.x1,c.y1-50,"#ffffff"); sfx("bonk"); } });
