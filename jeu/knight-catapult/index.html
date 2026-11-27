@@ -187,7 +187,7 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:1000/560;touch-action:m
       <div class="calc-keys" id="calcKeys"></div>
       <p class="calc-help">⌨️ Au clavier : chiffres, <kbd>+</kbd> <kbd>-</kbd> <kbd>*</kbd> <kbd>/</kbd> <kbd>(</kbd> <kbd>)</kbd> et virgule ·
         <kbd>S</kbd> <kbd>C</kbd> <kbd>T</kbd> = sin, cos, tan · <kbd>Maj</kbd>+<kbd>S</kbd>/<kbd>C</kbd>/<kbd>T</kbd> = sin⁻¹, cos⁻¹, tan⁻¹ ·
-        <kbd>Entrée</kbd> = calculer · <kbd>Échap</kbd> = effacer. Tape directement, même sans cliquer dans la calculatrice.</p>
+        <kbd>Entrée</kbd> = calculer · <kbd>Échap</kbd> = effacer. Le curseur est déjà dans la calculatrice : clique sur la case réponse pour répondre.</p>
     </details>
   </section>
 </main>
@@ -211,6 +211,7 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:1000/560;touch-action:m
       </ul>
     </div>
     <div class="levels" id="levelsBox"></div>
+    <p class="small center">Version 7 · 27/11/2026</p>
     <p class="center"><a class="btn blue backbtn" href="../jeu.html">← Retour aux jeux</a></p>
   </div>
 </div>
@@ -388,7 +389,7 @@ function nextCastle(){
   $("fireBtn").style.display = ""; $("fireBtn").disabled=false;
   $("nextBtn").style.display = "none";
   const inp = $("ans"); inp.value=""; inp.disabled=false;
-  if(window.matchMedia("(pointer:fine)").matches) inp.focus();
+  $("calcIn").focus({preventScroll:true});
 }
 
 function updateHud(){
@@ -635,7 +636,7 @@ function afterShot(ok,x,outcome,kIdx){
       if(Q.knightsLeft===2) msg += rappelHTML();
       fb.innerHTML = msg;
       loadKnight(3-Q.knightsLeft);
-      busy=false; $("fireBtn").disabled=false; $("ans").disabled=false; $("ans").select();
+      busy=false; $("fireBtn").disabled=false; $("ans").disabled=false; $("calcIn").focus({preventScroll:true});
     } else {
       Q.done=true; G.results.push(false);
       msg += '<div class="box correction">'+correctionHTML(Q)+'</div>';
@@ -985,7 +986,7 @@ function stepWeather(dt){
   const L=S.intro?1:(S.castleL||1);
   S.fogT += dt;
   // pluie à partir du château 6, de plus en plus forte
-  const want = L>=6 ? (L-5)*55 : 0;
+  const want = L>=5 ? (L-4)*45 : 0;
   while(S.rain.length<want) S.rain.push({x:Math.random()*W*1.2, y:Math.random()*GROUND, v:520+Math.random()*260});
   if(S.rain.length>want) S.rain.length=want;
   S.rain.forEach(d=>{ d.y+=d.v*dt; d.x-=d.v*0.25*dt; if(d.y>GROUND+20){ if(Math.random()<0.3) S.parts.push({x:d.x,y:GROUND+4,vx:(Math.random()-.5)*40,vy:-40,g:300,life:.2,r:2,c:"#b8c4d6"}); d.y=-10-Math.random()*60; d.x=Math.random()*W*1.2; } });
@@ -997,8 +998,8 @@ function stepWeather(dt){
 function drawWeather(){
   const A=gloom(), L=S.intro?1:(S.castleL||1);
   // brume qui dérive (dès le château 4)
-  if(L>=4){
-    const k=(L-3)/7;
+  if(L>=3){
+    const k=(L-2)/8;
     for(let i=0;i<5;i++){
       const y=GROUND-30-i*42, x=((S.fogT*(8+i*4)+i*230)%(W+500))-250;
       const gr=ctx.createRadialGradient(x,y,10,x,y,260);
@@ -1320,6 +1321,7 @@ function sfx(n){
   if(n==="thud"){ tone(130,55,0.2,"sine",0.25); tone(220,90,0.08,"square",0.06); }
   if(n==="pop"){ tone(300,900,0.15,"triangle",0.12); }
   if(n==="thunder" && AC && !muted){ const len=AC.sampleRate*2.6, buf=AC.createBuffer(1,len,AC.sampleRate), d=buf.getChannelData(0); let v=0; for(let i=0;i<len;i++){ v=v*0.985+(Math.random()*2-1)*0.15; d[i]=v*Math.pow(1-i/len,2); } const src=AC.createBufferSource(); src.buffer=buf; const lp=AC.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=380; const g=AC.createGain(); g.gain.value=1.6; src.connect(lp); lp.connect(g); g.connect(AC.destination); src.start(); }
+  if(n==="rumble" && AC && !muted){ const len=AC.sampleRate*3, buf=AC.createBuffer(1,len,AC.sampleRate), d=buf.getChannelData(0); let v=0; for(let i=0;i<len;i++){ v=v*0.99+(Math.random()*2-1)*0.1; d[i]=v*Math.sin(Math.PI*i/len); } const src=AC.createBufferSource(); src.buffer=buf; const lp=AC.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=160; const g=AC.createGain(); g.gain.value=0.9; src.connect(lp); lp.connect(g); g.connect(AC.destination); src.start(); }
   if(n==="lose"){ [392,330,262].forEach((f,i)=>tone(f,0,0.35,"triangle",0.12,i*0.22)); }
 }
 $("muteBtn").addEventListener("click",()=>{ muted=!muted; $("muteBtn").textContent=muted?"🔇":"🔊"; musicVol(); });
@@ -1340,6 +1342,7 @@ function musicInit(){
   for(let i=0;i<len;i++) d[i] = Math.random()*2-1;
   MUS.noise = buf;
   musicVol();
+  ambInit();
 }
 function musicStart(mode){
   audioInit(); if(!AC) return; musicInit();
@@ -1348,7 +1351,7 @@ function musicStart(mode){
   musicVol();
 }
 function musicStop(){ MUS.mode=null; }
-function musicLevel(n){ MUS.level=n; MUS.bpm = 92 + (n-1)*7; }        // 92 → 155 bpm au 10e château
+function musicLevel(n){ const old=MUS.level; MUS.level=n; MUS.bpm = BPM[Math.min(9,n-1)]; if(Math.floor((old-1)/2)!==Math.floor((n-1)/2)) MUS.step=0; }  // nouveau mouvement : on repart au début
 function musicTick(){
   if(!AC || !MUS.mode) return;
   const now=AC.currentTime;
@@ -1440,39 +1443,164 @@ function introStep(s,t,spb){
   if(walking && pos%4===0){ coconut(t,true,false); coconut(t+spb*0.55,false,true); }
 }
 
-/* --- partition de bataille (ré mineur, 8 mesures en boucle) --- */
-const CH=[50,50,46,48,50,53,48,45];                        // basses : Rém Rém Sib Do Rém Fa Do La
-const THIRD=[3,3,4,4,3,4,4,4];
-const BAT_MEL=[
-  [[0,62,2],[3,62,1],[4,62,2],[6,69,10]],
-  [[0,65,3],[3,64,1],[4,62,4],[8,69,4],[12,67,4]],
-  [[0,65,4],[4,62,4],[8,70,8]],
-  [[0,72,3],[3,70,1],[4,69,4],[8,67,4],[12,64,4]],
-  [[0,74,2],[3,74,1],[4,74,2],[6,69,6],[12,65,4]],
-  [[0,69,4],[4,72,4],[8,77,8]],
-  [[0,76,2],[2,74,2],[4,72,2],[6,70,2],[8,69,4],[12,67,4]],
-  [[0,69,4],[4,73,4],[8,76,4],[12,69,4]]];
+/* --- partitions de bataille : un mouvement tous les 2 châteaux, de plus en plus sombre --- */
+function pluck(t,m,dur,vol){            // basse pincée / ostinato
+  const g=AC.createGain(), lp=AC.createBiquadFilter(); lp.type="lowpass"; lp.Q.value=4;
+  lp.frequency.setValueAtTime(1100,t); lp.frequency.exponentialRampToValueAtTime(180,t+Math.min(dur,0.25));
+  const o=AC.createOscillator(); o.type="sawtooth"; o.frequency.value=mtof(m); o.connect(lp);
+  g.gain.setValueAtTime(vol,t); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  lp.connect(g); g.connect(MUS.master); o.start(t); o.stop(t+dur+0.02);
+}
+function choir(t,m,dur,vol){            // nappe de chœur « aaah »
+  const g=AC.createGain(), bp=AC.createBiquadFilter(), lp=AC.createBiquadFilter();
+  bp.type="bandpass"; bp.frequency.value=850; bp.Q.value=1.2; lp.type="lowpass"; lp.frequency.value=2200;
+  [-9,0,9].forEach(dt=>{ const o=AC.createOscillator(); o.type="sawtooth"; o.frequency.value=mtof(m); o.detune.value=dt; o.connect(bp); o.start(t); o.stop(t+dur+0.1); });
+  env(g,t,Math.min(0.5,dur/3),vol,dur,Math.min(0.4,dur/3)); bp.connect(lp); lp.connect(g); g.connect(MUS.master);
+}
+function tom(t,m,vol){ const o=AC.createOscillator(), g=AC.createGain(); o.type="sine"; o.frequency.setValueAtTime(mtof(m)*1.6,t); o.frequency.exponentialRampToValueAtTime(mtof(m),t+0.08);
+  g.gain.setValueAtTime(vol,t); g.gain.exponentialRampToValueAtTime(0.0001,t+0.35); o.connect(g); g.connect(MUS.master); o.start(t); o.stop(t+0.4); noiseHit(t,0.04,vol*0.25,"lowpass",900); }
+const cymbal=(t,v)=>noiseHit(t,1.3,v,"highpass",6000);
+
+const MOVES=[
+  { name:"Départ (ré majeur, marche joyeuse)",
+    ch:[[50,4],[50,4],[43,4],[45,4],[50,4],[43,4],[45,4],[50,4]],
+    mel:[[[0,62,2],[2,66,2],[4,69,4],[8,74,6],[14,69,2]],[[0,71,2],[2,69,2],[4,66,4],[8,69,8]],
+         [[0,67,2],[2,71,2],[4,74,4],[8,71,4],[12,67,4]],[[0,69,6],[6,73,2],[8,76,8]],
+         [[0,74,2],[2,73,2],[4,71,2],[6,69,2],[8,66,4],[12,62,4]],[[0,67,4],[4,71,4],[8,74,4],[12,79,4]],
+         [[0,76,3],[3,74,1],[4,73,4],[8,69,4],[12,73,4]],[[0,74,8],[8,69,4],[12,62,4]]],
+    play(pos,bar,v,t,spb,root,third){
+      if(pos===0||pos===8) timpani(t,root-12,pos?0.35:0.5);
+      if(pos===4||pos===12) snare(t,0.28);
+      if(v && pos%4===2) snare(t,0.08);
+      if(v && bar===7 && pos>=12) snare(t,0.1+(pos-12)*0.04);
+      this.lead(t,pos,bar,spb,v);
+    },
+    lead(t,pos,bar,spb,v){ this.mel[bar].forEach(n=>{ if(n[0]===pos) brass(t,n[1],n[2]*spb*0.85,0.07); }); }
+  },
+  { name:"Bataille (ré mineur, marche militaire)",
+    ch:[[50,3],[50,3],[46,4],[48,4],[50,3],[53,4],[48,4],[45,4]],
+    mel:[[[0,62,2],[3,62,1],[4,62,2],[6,69,10]],[[0,65,3],[3,64,1],[4,62,4],[8,69,4],[12,67,4]],
+         [[0,65,4],[4,62,4],[8,70,8]],[[0,72,3],[3,70,1],[4,69,4],[8,67,4],[12,64,4]],
+         [[0,74,2],[3,74,1],[4,74,2],[6,69,6],[12,65,4]],[[0,69,4],[4,72,4],[8,77,8]],
+         [[0,76,2],[2,74,2],[4,72,2],[6,70,2],[8,69,4],[12,67,4]],[[0,69,4],[4,73,4],[8,76,4],[12,69,4]]],
+    play(pos,bar,v,t,spb,root,third){
+      if(pos===0) timpani(t,root-12,0.55);
+      if(pos===8) timpani(t,root-5,0.4);
+      if(v && (pos===12||pos===14)) timpani(t,root-12,0.25);
+      if(pos===4||pos===12) snare(t,0.32);
+      if(pos%4===2) snare(t,0.1);
+      if(v && pos%2===1) snare(t,0.05);
+      if(bar===7 && pos>=8) snare(t,0.08+(pos-8)*0.03);
+      this.mel[bar].forEach(n=>{ if(n[0]===pos){ brass(t,n[1],n[2]*spb*0.9,0.075); if(v) brass(t,n[1]-12,n[2]*spb*0.9,0.045); } });
+    }
+  },
+  { name:"Galop (sol mineur, rythme de cavalcade)",
+    ch:[[43,3],[43,3],[39,4],[38,4],[43,3],[48,3],[38,4],[38,4]],
+    mel:[[[0,67,4],[4,70,2],[6,69,2],[8,67,4],[12,62,4]],[[0,67,2],[2,69,2],[4,70,4],[8,72,4],[12,74,4]],
+         [[0,75,6],[6,74,2],[8,72,4],[12,70,4]],[[0,69,8],[8,66,4],[12,62,4]],
+         [[0,67,4],[4,70,2],[6,69,2],[8,67,4],[12,74,4]],[[0,72,4],[4,75,4],[8,74,4],[12,72,4]],
+         [[0,70,4],[4,69,4],[8,67,4],[12,66,4]],[[0,67,8],[8,62,8]]],
+    play(pos,bar,v,t,spb,root,third){
+      const p=pos%4;
+      if(p===0||p===2||p===3) pluck(t,root+(p===3?7:0),spb*1.6,p===0?0.16:0.1);   // da-da-DOUM
+      if(pos===0||pos===8) timpani(t,root-12,0.5);
+      if(p===2||p===3) snare(t,p===3?0.12:0.07);
+      if(pos===4||pos===12) snare(t,0.26);
+      if(v && bar%2===1 && pos>=12) tom(t,40+(15-pos)*3,0.35);
+      if(v && pos===0 && bar===0) cymbal(t,0.09);
+      this.mel[bar].forEach(n=>{ if(n[0]===pos){ horn(t,n[1]-12,n[2]*spb*0.9,0.11); brass(t,n[1],n[2]*spb*0.85,v?0.07:0.05); } });
+    }
+  },
+  { name:"Brume (do mineur, lent et menaçant)",
+    ch:[[48,3],[48,3],[44,4],[46,4],[48,3],[49,4],[44,4],[43,4]],
+    mel:[[[0,72,8],[8,75,8]],[[0,74,4],[4,72,4],[8,67,8]],[[0,68,8],[8,72,8]],[[0,70,6],[6,74,2],[8,77,8]],
+         [[0,79,8],[8,75,8]],[[0,73,6],[6,72,2],[8,68,8]],[[0,72,4],[4,68,4],[8,63,8]],[[0,67,8],[8,71,8]]],
+    play(pos,bar,v,t,spb,root,third){
+      if(pos===0){ choir(t,root+12,16*spb,0.05); choir(t,root+12+third,16*spb,0.04); choir(t,root+19,16*spb,0.035); }
+      if(pos%2===0) pluck(t,root-12,spb*1.8,0.11);                               // pulsation grave
+      if(pos===0) timpani(t,root-12,0.65);
+      if(pos===10) timpani(t,root-12,0.45);
+      if(pos===8) snare(t,0.22);
+      if(v && (pos===6||pos===14)) tom(t,38,0.3);
+      if(bar===7 && pos>=8 && pos%2===0) tom(t,45-(pos-8),0.4);
+      if(v && pos===0 && bar%4===0) cymbal(t,0.08);
+      this.mel[bar].forEach(n=>{ if(n[0]===pos){ brass(t,n[1],n[2]*spb*0.8,0.06); horn(t,n[1]-12,n[2]*spb*0.9,0.08); } });
+    }
+  },
+  { name:"Assaut final (ré mineur, épique et sombre)",
+    ch:[[50,3],[46,4],[48,4],[45,4],[50,3],[46,4],[43,3],[45,4]],
+    mel:[[[0,74,3],[3,74,1],[4,74,2],[6,77,2],[8,76,4],[12,74,4]],[[0,77,4],[4,76,2],[6,74,2],[8,70,8]],
+         [[0,72,3],[3,72,1],[4,72,2],[6,76,2],[8,79,4],[12,76,4]],[[0,73,8],[8,69,8]],
+         [[0,74,3],[3,74,1],[4,74,2],[6,81,2],[8,80,4],[12,81,4]],[[0,82,4],[4,81,2],[6,79,2],[8,77,8]],
+         [[0,79,4],[4,77,4],[8,74,4],[12,70,4]],[[0,73,4],[4,76,4],[8,81,8]]],
+    play(pos,bar,v,t,spb,root,third){
+      if(pos===0){ choir(t,root+12,16*spb,0.055); choir(t,root+12+third,16*spb,0.045); choir(t,root+19,16*spb,0.04); }
+      if(pos%2===0) pluck(t,root-12+(pos%8===6?12:0),spb*1.5,0.14);            // ostinato en croches
+      if(pos===0||pos===3||pos===8||pos===11) timpani(t,root-12,pos%8===0?0.6:0.35);
+      if(pos===4||pos===12) snare(t,0.34);
+      if(pos%2===1) snare(t,v?0.07:0.04);
+      if(pos===0 && bar%2===0) cymbal(t,0.11);
+      if(bar===7 && pos>=8) tom(t,50-(pos-8)*2,0.4);
+      this.mel[bar].forEach(n=>{ if(n[0]===pos){ brass(t,n[1],n[2]*spb*0.9,0.075); brass(t,n[1]-12,n[2]*spb*0.9,0.05); if(v) horn(t,n[1]-24,n[2]*spb*0.9,0.06); } });
+    }
+  }
+];
+const BPM=[96,102,110,116,124,132,112,118,142,152];
 function battleStep(s,t,spb){
-  const L=MUS.level, bar=Math.floor(s/16)%8, pos=s%16, root=CH[bar];
-  // cors : accord tenu
-  if(pos===0){ horn(t,root,16*spb*0.97,0.09); horn(t,root+7,16*spb*0.97,0.07); if(L>=4) horn(t,root+12+THIRD[bar],16*spb*0.97,0.05); }
-  // timbales
-  if(pos===0) timpani(t,root-12,0.55);
-  if(pos===8) timpani(t,root-5,0.4);
-  if(L>=4 && (pos===12||pos===14)) timpani(t,root-12,0.25);
-  // caisse claire de marche
-  if(pos===4||pos===12) snare(t,0.32);
-  if(L>=2 && (pos===2||pos===6||pos===10||pos===14)) snare(t,0.1);
-  if(L>=5 && pos%2===1) snare(t,0.06);
-  if(L>=3 && bar===7 && pos>=8) snare(t,0.08+(pos-8)*0.03);       // roulement avant la reprise
-  // trompettes : appels au début, puis toute la mélodie, puis doublure à l'octave
-  const melOn = L>=3 || bar===0 || bar===1 || bar===4 || bar===5;
-  if(melOn) BAT_MEL[bar].forEach(n=>{ if(n[0]===pos){
-    brass(t,n[1],n[2]*spb*0.9,0.075);
-    if(L>=6) brass(t,n[1]-12,n[2]*spb*0.9,0.05);
-  }});
-  // cymbale
-  if(L>=8 && pos===0 && (bar===0||bar===4)) noiseHit(t,1.2,0.12,"highpass",6000);
+  const L=MUS.level, M=MOVES[Math.min(4,Math.floor((L-1)/2))], v=(L-1)%2===1;
+  const bar=Math.floor(s/16)%8, pos=s%16, ch=M.ch[bar], root=ch[0], third=ch[1];
+  if(pos===0){ horn(t,root,16*spb*0.97,0.085); horn(t,root+7,16*spb*0.97,0.065); if(v) horn(t,root+12+third,16*spb*0.97,0.045); }
+  M.play(pos,bar,v,t,spb,root,third);
+}
+
+/* ===================== AMBIANCE SONORE (vent, pluie, oiseaux, corbeaux, tonnerre) ===================== */
+const AMB={g:null, t:3};
+function ambInit(){
+  if(!AC || AMB.g || !MUS.noise) return;
+  AMB.g=AC.createGain(); AMB.g.gain.value=muted?0:1; AMB.g.connect(AC.destination);
+  const w=AC.createBufferSource(); w.buffer=MUS.noise; w.loop=true;
+  AMB.windF=AC.createBiquadFilter(); AMB.windF.type="bandpass"; AMB.windF.Q.value=0.9; AMB.windF.frequency.value=400;
+  AMB.windG=AC.createGain(); AMB.windG.gain.value=0;
+  w.connect(AMB.windF); AMB.windF.connect(AMB.windG); AMB.windG.connect(AMB.g); w.start();
+  const r=AC.createBufferSource(); r.buffer=MUS.noise; r.loop=true; r.playbackRate.value=0.85;
+  const rh=AC.createBiquadFilter(); rh.type="highpass"; rh.frequency.value=1100;
+  const rl=AC.createBiquadFilter(); rl.type="lowpass"; rl.frequency.value=6500;
+  AMB.rainG=AC.createGain(); AMB.rainG.gain.value=0;
+  r.connect(rh); rh.connect(rl); rl.connect(AMB.rainG); AMB.rainG.connect(AMB.g); r.start();
+  setInterval(ambTick,200);
+}
+function ambTick(){
+  if(!AMB.g) return;
+  const now=AC.currentTime, L=S.intro?1:(S.castleL||1), A=gloom();
+  AMB.g.gain.setTargetAtTime(muted?0:1,now,0.2);
+  // vent qui souffle par rafales, de plus en plus fort
+  const base = 0.006 + 0.11*A;
+  AMB.windG.gain.setTargetAtTime(base*(0.65+0.35*Math.sin(now*0.37)+0.25*Math.sin(now*1.13)),now,0.6);
+  AMB.windF.frequency.setTargetAtTime(280+260*(0.5+0.5*Math.sin(now*0.23))+220*A,now,0.8);
+  // pluie à partir du château 5
+  AMB.rainG.gain.setTargetAtTime(L>=5 ? 0.035+0.035*(L-5) : 0, now, 1.2);
+  // oiseaux au début, corbeaux ensuite, grondements lointains avant l'orage
+  AMB.t-=0.2;
+  if(AMB.t<=0){
+    if(L<=3) birdSong(); else if(L<=8 && Math.random()<0.75) crow();
+    if(L>=7 && L<=8 && Math.random()<0.35) sfx("rumble");
+    AMB.t = L<=3 ? 2+Math.random()*4 : 5+Math.random()*7;
+  }
+}
+function birdSong(){
+  const t=AC.currentTime, n=2+Math.floor(Math.random()*4), f0=2500+Math.random()*1500;
+  for(let i=0;i<n;i++){ const st=t+i*0.14, o=AC.createOscillator(), g=AC.createGain(), f=f0*(0.9+Math.random()*0.25);
+    o.type="sine"; o.frequency.setValueAtTime(f,st); o.frequency.exponentialRampToValueAtTime(f*(Math.random()<.5?1.35:0.75),st+0.08);
+    g.gain.setValueAtTime(0.0001,st); g.gain.exponentialRampToValueAtTime(0.03,st+0.01); g.gain.exponentialRampToValueAtTime(0.0001,st+0.09);
+    o.connect(g); g.connect(AMB.g); o.start(st); o.stop(st+0.1); }
+}
+function crow(){
+  const t=AC.currentTime, n=2+Math.floor(Math.random()*2);
+  for(let i=0;i<n;i++){ const st=t+i*0.34, o=AC.createOscillator(), bp=AC.createBiquadFilter(), g=AC.createGain();
+    o.type="sawtooth"; o.frequency.setValueAtTime(540,st); o.frequency.exponentialRampToValueAtTime(380,st+0.22);
+    bp.type="bandpass"; bp.frequency.value=1300; bp.Q.value=3;
+    g.gain.setValueAtTime(0.0001,st); g.gain.exponentialRampToValueAtTime(0.06,st+0.03); g.gain.exponentialRampToValueAtTime(0.0001,st+0.26);
+    o.connect(bp); bp.connect(g); g.connect(AMB.g); o.start(st); o.stop(st+0.3); }
 }
 
 /* ===================== CALCULATRICE (mode degrés) ===================== */
