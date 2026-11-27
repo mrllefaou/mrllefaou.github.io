@@ -113,6 +113,7 @@
   .feedback.warn{background:#fff1c7;color:#8a5a00}
   .feedback.ko{background:#ffe0e3;color:#a1122a}
   .feedback sup{font-size:.7em}
+  .hint{display:block;margin-top:6px;padding:.35em .7em;border-radius:10px;background:#fff7d6;color:#6b4a00;border:2px dashed #e0b84f;font-weight:600}
   .shake{animation:shake .35s}
   @keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
   .help{font-size:.85rem;opacity:.75;text-align:center}
@@ -271,6 +272,7 @@
     <h2>📖 Correction</h2>
     <p class="sol-pen" id="solPen"></p>
     <div class="sol-consigne" id="solConsigne"></div>
+    <div class="hint" id="solHint"></div>
     <div class="sol" id="solSteps"></div>
     <div class="row"><button class="btn big" id="btnCont">Calcul suivant ▶</button></div>
   </div>
@@ -631,6 +633,23 @@ const GEN = {
     return Q("dev", `(${lin(a, b)})(${polyStr([d, c, 1])})`, polyStr([b * d, a * d + b * c, a * c + b, a]),
       [[`${ax}*x^2 + ${ax}*${cx} + ${ax}*${P(d)} + ${P(b)}*x^2 + ${P(b)}*${cx} + ${P(b)}*${P(d)}`, "chaque terme multiplie chaque terme"],
        [sumStr([[a, 3], [a * c, 2], [a * d, 1], [b, 2], [b * c, 1], [b * d, 0]]), "on calcule chaque produit"]]); },
+};
+
+/* Rappel du cours affiché après un essai raté (formulations du cours de 3e, chapitre 3) */
+const R1 = "Règle 1 : k × (a + b) = k × a + k × b", R2 = "Règle 2 : k × a + k × b = k × (a + b). Cherche le facteur commun k !";
+const R6 = "Règle 6 : (a + b)(c + d) = ac + ad + bc + bd";
+const HINTS = {
+  devEasy: R1, devSimple: R1, devX: R1,
+  devReduce: R1 + ". Puis on réduit : les x ensemble, les nombres ensemble.",
+  facEasy: R2, facSimple: R2, facX: R2 + " (ici, c'est x)", facKX: R2 + " (ici, un nombre fois x)",
+  devMinus: "Un − devant une parenthèse change le signe de chaque terme : −(a + b − c) = −a − b + c",
+  devTri: "k × (a + b + c) = ka + kb + kc, puis on ordonne : x³, x², x, nombres",
+  devDouble: R6, devTriProd: R6 + " : chaque terme de la 1re parenthèse multiplie chaque terme de la 2e",
+  devId1: "(a + b)² = a² + 2ab + b²", devId2: "(a − b)² = a² − 2ab + b²", devId3: "(a + b)(a − b) = a² − b²",
+  facId1: "a² + 2ab + b² = (a + b)²", facId2: "a² − 2ab + b² = (a − b)²", facId3: "a² − b² = (a − b)(a + b)",
+  facKId: "D'abord le facteur commun, puis une identité : a² ± 2ab + b² = (a ± b)² ou a² − b² = (a − b)(a + b)",
+  facCommon: R2 + " Ici, k est une parenthèse entière !", facSqPlus: "X² + X = X × X + X × 1 = X(X + 1), avec X la parenthèse qui se répète",
+  facK3: R2 + " Ici, k = un nombre × une parenthèse.",
 };
 
 /* Niveaux de difficulté : questions par monde, temps, bonus, pénalité, coefficient de score */
@@ -1254,7 +1273,7 @@ function zoneFor(n) { return Math.min(4, Math.floor(n / 4)); }
 function newQuestion() {
   const base = LV.warmup && G.correct < 2 ? ["devEasy", "facEasy"] : LV.pools[G.zone];
   const pool = base.filter(g => g !== G.lastGen);
-  const name = pick(pool); G.lastGen = name;
+  const name = pick(pool); G.lastGen = name; G.genName = name;
   G.q = GEN[name]();
   G.asked++;
   const dev = G.q.type === "dev";
@@ -1319,7 +1338,8 @@ function onWrong() {
   shake(els.ans);
   if (G.tries < MAX_TRIES) {
     const left = MAX_TRIES - G.tries;
-    setFeedback(`❌ Ce n'est pas ça… Encore <b>${left} essai${left > 1 ? "s" : ""}</b> !`, "ko");
+    setFeedback(`❌ Ce n'est pas ça… Encore <b>${left} essai${left > 1 ? "s" : ""}</b> !` +
+      (HINTS[G.genName] ? `<span class="hint">💡 Rappel du cours : ${esc(HINTS[G.genName])}</span>` : ""), "ko");
     els.ans.select();
     return;
   }
@@ -1340,6 +1360,8 @@ function showSolution() {
   if (SND.ctx) SND.ctx.suspend();
   $("solPen").textContent = `3 essais ratés : −${LV.penalty} s. Le jeu est en pause pendant que tu lis.`;
   $("solConsigne").textContent = q.type === "dev" ? "Développer, réduire et ordonner :" : "Factoriser :";
+  $("solHint").textContent = HINTS[G.genName] ? "💡 Rappel du cours : " + HINTS[G.genName] : "";
+  $("solHint").style.display = HINTS[G.genName] ? "" : "none";
   const lines = [], seen = new Set([q.text.replace(/\s/g, "")]);
   q.steps.forEach((st, i) => {
     const [e, note] = Array.isArray(st) ? st : [st, ""];
