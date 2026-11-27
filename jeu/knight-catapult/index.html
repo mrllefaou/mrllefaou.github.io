@@ -371,6 +371,7 @@ function nextCastle(){
   if(G.idx===1) G.start = performance.now();
   resetScene();
   S.knight = {k:0, load:1};
+  $("calcIn").value=""; $("calcOut").className=""; $("calcOut").innerHTML="&nbsp;";
   S.sayTok++;
   later(500,()=>addBubble("g",pickNR(GREET),2.8));
   later(3000,()=>addBubble(0,pickNR(LOAD),2.8));
@@ -673,7 +674,7 @@ function endGame(){
 /* ===================== SCÈNE (canvas) ===================== */
 const cv=$("scene"), ctx=cv.getContext("2d");
 const W=1000,H=560, GROUND=470, PIV={x:360,y:418}, ARM=250, HYP=150, REST=5, POST0=40;
-const WALL={x1:600,x2:660,top:262}, KEEP={x1:820,x2:905,top:225}, SUN={x:875,y:88,r:42};
+const WALL={x1:600,x2:660,top:262}, KEEP={x1:820,x2:905,top:225}, SUN={x:942,y:64,r:38};
 const GUARD={x:632,y:262};
 const QX=[62,22];
 const S = {post:POST0, postTarget:POST0, arm:REST, armTarget:REST, bounce:0, knight:null, flight:null, launch:null,
@@ -684,7 +685,7 @@ function resetScene(){
   S.post=S.postTarget=POST0; S.arm=S.armTarget=REST; S.bounce=0;
   S.flight=null; S.launch=null; S.knight=null; S.bubbles=[]; S.texts=[];
   S.flagOwn=0; S.flagTarget=0; S.guard=1; S.guardTarget=1; S.showCat=true;
-  S.castleHue = G ? (G.idx*37)%360 : 0;
+  S.castleL = G ? Math.max(1,G.idx) : 1; applyCastle();
 }
 function resize(){
   const dpr = Math.min(window.devicePixelRatio||1, 2);
@@ -714,9 +715,9 @@ function startFlight(L){
   const s=cupPos(L.postA), k=S.knight?S.knight.k:0;
   S.knight=null;
   let path;
-  if(L.outcome==="win") path={kind:"win", x0:s.x, y0:s.y, xa:585, ya:135, x1:745, y1:GROUND-16, dur:1.5};
+  if(L.outcome==="win") path={kind:"win", x0:s.x, y0:s.y, xa:585, ya:Math.min(135,WALL.top-125), x1:745, y1:GROUND-16, dur:1.5};
   else if(L.outcome==="low"){
-    const yh = 292 + clamp(L.dev,0,12)/12*138;
+    const top0 = WALL.top+28, yh = top0 + clamp(L.dev,0,12)/12*(GROUND-45-top0);
     const x1 = WALL.x1-16;
     path={kind:"low", x0:s.x, y0:s.y, xa:s.x+(x1-s.x)*0.6, ya:Math.min(yh-120, s.y-60), x1, y1:yh, dur:1.2};
   } else path={kind:"high", x0:s.x, y0:s.y, x1:SUN.x, y1:SUN.y, dur:1.6};
@@ -858,7 +859,7 @@ function step(dt){
         // impact : on fige la rotation (ramenée près de « couché ») pour une chute continue
         const tgt=Math.PI/2; f.rot0 = tgt + (((f.rot-tgt+Math.PI)%(2*Math.PI))+2*Math.PI)%(2*Math.PI) - Math.PI;
         f.rot=f.rot0; burst(f.x+14,f.y,18,false); addText("BONK !",f.x-20,f.y-40,"#ff5a4a"); sfx("bonk");
-      } else { f.scale=0; burst(SUN.x,SUN.y,24,true); addText("Trop haut !",SUN.x-110,SUN.y+80,"#fff3a0"); sfx("ding"); }
+      } else { f.scale=0; burst(SUN.x,SUN.y,24,true); addText("Trop haut !",SUN.x-130,SUN.y+90,"#fff3a0"); sfx("ding"); }
     }
   } else if(f && f.phase==="end"){
     f.t += dt;
@@ -953,7 +954,7 @@ function drawBubble(b){
   ctx.globalAlpha = Math.min(1,b.life*3);
   let bx,by,a=null;
   if(narr){ bx=(W-bw)/2; by=16; }
-  else { a=bubbleAnchor(b); bx=clamp(a.x-bw/2,8,W-bw-8); by=Math.max(8,a.y-18-bh); }
+  else { a=bubbleAnchor(b); bx=clamp(a.x-bw/2,8,W-bw-8); by=Math.max(46,a.y-18-bh); }
   ctx.fillStyle = narr ? "#f6ecd2" : (b.who==="g" ? "#fdeaea" : "#ffffff");
   ctx.strokeStyle="#2b2118"; ctx.lineWidth=2.5;
   rrect(bx,by,bw,bh,12); ctx.fill(); ctx.stroke();
@@ -967,30 +968,111 @@ function drawBubble(b){
   ctx.globalAlpha=1;
 }
 
-function stone(h,l){ return "hsl("+h+",14%,"+l+"%)"; }
+/* --- châteaux qui évoluent : du petit fort tout simple (1) à la forteresse gothique surarmée (10) --- */
+function castleSpec(){
+  const L=clamp(S.castleL||1,1,10), u=(L-1)/9;
+  return {L, u,
+    wallTop: Math.round(330-105*u),          // muraille de face (collision)
+    keepTop: Math.round(300-125*u),          // donjon
+    backTop: Math.round(385-70*u),           // mur du fond de la cour
+    midTop:  Math.round(262-95*(L-6)/4),     // tour du milieu (dès le château 6)
+    hue: L>=8 ? 250 : 38+(L-1)*3, sat: L>=8 ? 14 : 18, lum: 70-3.2*(L-1)};
+}
+function applyCastle(){ const c=castleSpec(); WALL.top=c.wallTop; KEEP.top=c.keepTop; GUARD.y=c.wallTop; S.cs=c; }
+function stoneC(c,dl){ return "hsl("+c.hue+","+c.sat+"%,"+Math.max(8,c.lum+dl)+"%)"; }
+function merlons(x1,x2,top,w,h,gap,gothic,col){
+  ctx.fillStyle=col;
+  for(let x=x1;x<x2-2;x+=w+gap){
+    const ww=Math.min(w,x2-x);
+    ctx.fillRect(x,top-h,ww,h);
+    if(gothic){ ctx.beginPath(); ctx.moveTo(x,top-h); ctx.lineTo(x+ww/2,top-h-9); ctx.lineTo(x+ww,top-h); ctx.fill(); }
+  }
+}
+function pointedWin(x,y,w,h){ ctx.beginPath(); ctx.moveTo(x,y+h); ctx.lineTo(x,y+w*0.5); ctx.quadraticCurveTo(x,y-w*0.2,x+w/2,y-w*0.55); ctx.quadraticCurveTo(x+w,y-w*0.2,x+w,y+w*0.5); ctx.lineTo(x+w,y+h); ctx.closePath(); ctx.fill(); }
+function cone(x1,x2,top,hgt,col){ ctx.fillStyle=col; ctx.beginPath(); ctx.moveTo(x1-6,top); ctx.lineTo((x1+x2)/2,top-hgt); ctx.lineTo(x2+6,top); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle="rgba(0,0,0,.18)"; ctx.lineWidth=1.5; for(let k=1;k<4;k++){ const yy=top-hgt*k/4, hw=(x2-x1+12)/2*(1-k/4); ctx.beginPath(); ctx.moveTo((x1+x2)/2-hw,yy); ctx.lineTo((x1+x2)/2+hw,yy); ctx.stroke(); } }
+function spire(x1,x2,top,hgt){
+  cone(x1,x2,top,hgt,"#3b3653");
+  [x1-4,x2+4].forEach(px=>{ ctx.fillStyle="#3b3653"; ctx.fillRect(px-4,top-14,8,14); ctx.beginPath(); ctx.moveTo(px-5,top-14); ctx.lineTo(px,top-36); ctx.lineTo(px+5,top-14); ctx.fill(); });
+  ctx.fillStyle="#d4a017"; circle((x1+x2)/2,top-hgt,4);
+}
+function machicolations(x1,x2,y,col){ ctx.fillStyle=col; ctx.fillRect(x1-4,y,x2-x1+8,7); for(let x=x1-2;x<x2;x+=10){ ctx.fillRect(x,y+7,6,7); } }
+function slit(x,y){ ctx.fillStyle="#1d1712"; ctx.fillRect(x,y,3,15); ctx.fillRect(x-3,y+6,9,3); }
+function cannon(x,y,dir){
+  ctx.save(); ctx.translate(x,y); ctx.scale(dir,1);
+  ctx.fillStyle="#24262b"; rrect(-30,-5,32,10,4); ctx.fill(); ctx.fillRect(-34,-6,6,12);
+  ctx.fillStyle="#555b63"; ctx.fillRect(-20,-5,3,10); ctx.restore();
+}
+function hangingBanner(x,y,w,h){
+  ctx.fillStyle="#ffffff"; ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+w,y); ctx.lineTo(x+w,y+h); ctx.lineTo(x+w/2,y+h-9); ctx.lineTo(x,y+h); ctx.closePath(); ctx.fill();
+  ctx.fillStyle="#cf142b"; ctx.fillRect(x+w/2-2.5,y,5,h-6); ctx.fillRect(x,y+h*0.32,w,5);
+  ctx.fillStyle="#6b4a2a"; ctx.fillRect(x-3,y-3,w+6,4);
+}
 function drawCastle(){
-  const h=S.castleHue;
-  ctx.fillStyle=stone(h,48); ctx.fillRect(WALL.x2,340,KEEP.x1-WALL.x2,GROUND-340);
-  ctx.fillStyle=stone(h,42); for(let x=WALL.x2+6;x<KEEP.x1;x+=26){ for(let y=350;y<GROUND;y+=20){ ctx.fillRect(x+((y/20)%2?13:0),y,18,2);} }
-  for(let x=WALL.x2;x<KEEP.x1;x+=24){ ctx.fillStyle=stone(h,48); ctx.fillRect(x,328,14,14); }
+  const c=S.cs||castleSpec(), L=c.L, goth=L>=8, wave=Math.sin(S.t*4)*4;
+  const dark=stoneC(c,-14), mid=stoneC(c,-7), light=stoneC(c,0), joint=stoneC(c,-10);
+  const winCol = goth ? "#ffcf5a" : "#2b2118";
+  // tour du milieu (derrière la cour) : à partir du château 6
+  if(L>=6){
+    const x1=690,x2=755,top=c.midTop;
+    ctx.fillStyle=mid; ctx.fillRect(x1,top,x2-x1,GROUND-top);
+    ctx.fillStyle=winCol; (goth?pointedWin:roundWin)(x1+24,top+30,16,26);
+    if(L>=8) spire(x1,x2,top,(x2-x1)*1.9); else cone(x1,x2,top,(x2-x1)*1.05,"#8e2a2a");
+  }
+  // mur du fond de la cour
+  const bt=c.backTop;
+  ctx.fillStyle=mid; ctx.fillRect(WALL.x2,bt,KEEP.x1-WALL.x2,GROUND-bt);
+  ctx.fillStyle=joint; for(let y=bt+12;y<GROUND;y+=20){ for(let x=WALL.x2+6+((y/20)%2?13:0);x<KEEP.x1-10;x+=26) ctx.fillRect(x,y,18,2); }
+  // gardes supplémentaires sur le chemin de ronde
+  const extra=[]; if(L>=4) extra.push(795); if(L>=7) extra.push(674); if(L>=10) extra.push(735);
+  extra.forEach(x=>{ if(S.guard>0.02) drawGuard(x, bt+(1-S.guard)*55); });
+  if(L>=2) merlons(WALL.x2,KEEP.x1,bt,12,12,10,goth,mid);
   ctx.fillStyle="#b89a62"; ctx.fillRect(WALL.x2,GROUND-4,KEEP.x1-WALL.x2,8);
-  ctx.fillStyle=stone(h,62); ctx.fillRect(KEEP.x1,KEEP.top,KEEP.x2-KEEP.x1,GROUND-KEEP.top);
-  for(let x=KEEP.x1;x<KEEP.x2;x+=22){ ctx.fillRect(x,KEEP.top-16,13,16); }
-  ctx.fillStyle="#2b2118"; roundWin(KEEP.x1+30,KEEP.top+40,22,34); roundWin(KEEP.x1+30,KEEP.top+120,22,34);
-  ctx.fillStyle=stone(h,52); for(let y=KEEP.top+12;y<GROUND;y+=22){ ctx.fillRect(KEEP.x1+4,y,KEEP.x2-KEEP.x1-8,2); }
-  const mx=KEEP.x1+42, mt=KEEP.top-90;
-  ctx.fillStyle="#3b2a1a"; ctx.fillRect(mx,mt,4,90);
-  const wave = Math.sin(S.t*4)*4;
-  const ownY = mt + (1-S.flagOwn)*62, enY = mt + S.flagOwn*62;
+  // donjon
+  const kt=KEEP.top, kw=KEEP.x2-KEEP.x1;
+  ctx.fillStyle=light; ctx.fillRect(KEEP.x1,kt,kw,GROUND-kt);
+  ctx.fillStyle=joint; for(let y=kt+14;y<GROUND;y+=22){ ctx.fillRect(KEEP.x1+4,y,kw-8,2); }
+  if(L>=2){ ctx.fillStyle=winCol;
+    const nW = Math.min(4, 1+Math.floor((GROUND-kt-60)/80));
+    for(let i=0;i<nW;i++) (goth?pointedWin:roundWin)(KEEP.x1+kw/2-11,kt+38+i*78,22,32);
+  }
+  if(L>=9){ // rosace
+    const rx=KEEP.x1+kw/2, ry=kt+ (L>=10?26:24);
+    ctx.fillStyle="#b23a48"; circle(rx,ry,13); ctx.strokeStyle="#ffcf5a"; ctx.lineWidth=2;
+    for(let a=0;a<8;a++){ ctx.beginPath(); ctx.moveTo(rx,ry); ctx.lineTo(rx+Math.cos(a*Math.PI/4)*13,ry+Math.sin(a*Math.PI/4)*13); ctx.stroke(); }
+  }
+  if(L>=3) { slit(KEEP.x1+12,kt+70); slit(KEEP.x2-15,kt+70); }
+  if(L>=6) machicolations(KEEP.x1,KEEP.x2,kt+2,dark);
+  if(L>=9) cannon(KEEP.x1-2,kt+ (GROUND-kt)*0.55,1);
+  let poleBase;
+  if(L>=8){ spire(KEEP.x1,KEEP.x2,kt,kw*1.05); poleBase=kt-kw*1.05; }
+  else if(L>=4){ cone(KEEP.x1,KEEP.x2,kt,kw*0.85,"#8e2a2a"); poleBase=kt-kw*0.85; }
+  else { merlons(KEEP.x1,KEEP.x2,kt,13,14,9,false,light); poleBase=kt-14; }
+  // drapeaux
+  const mx=(KEEP.x1+KEEP.x2)/2-2, mt=Math.max(12,poleBase-62);
+  ctx.fillStyle="#3b2a1a"; ctx.fillRect(mx,mt,4,poleBase-mt+2);
+  const fall=Math.min(40,poleBase-mt-30), ownY = mt + (1-S.flagOwn)*fall, enY = mt + S.flagOwn*fall;
   if(S.flagOwn<0.97) flagEN(mx+4,enY,wave);
   if(S.flagOwn>0.03) flagFR(mx+4,ownY,wave);
-  // garde anglais sur le chemin de ronde (derrière les créneaux)
+  // garde principal
   if(S.guard>0.02) drawGuard(GUARD.x, GUARD.y+(1-S.guard)*55);
-  ctx.fillStyle=stone(h,66); ctx.fillRect(WALL.x1,WALL.top,WALL.x2-WALL.x1,GROUND-WALL.top);
-  for(let x=WALL.x1;x<WALL.x2;x+=20){ ctx.fillRect(x,WALL.top-18,12,18); }
-  ctx.fillStyle=stone(h,56); for(let y=WALL.top+14;y<GROUND;y+=20){ ctx.fillRect(WALL.x1+3,y,WALL.x2-WALL.x1-6,2); for(let x=WALL.x1+((y/20)%2?10:22);x<WALL.x2;x+=24) ctx.fillRect(x,y-18,2,18);}
-  ctx.fillStyle="#3b2a1a"; roundWin(WALL.x1+16,GROUND-70,28,70);
-  ctx.strokeStyle="#6b4a2a"; ctx.lineWidth=2; for(let i=0;i<4;i++){ ctx.beginPath(); ctx.moveTo(WALL.x1+19+i*7,GROUND-60); ctx.lineTo(WALL.x1+19+i*7,GROUND); ctx.stroke(); }
+  // muraille de face
+  const wt=WALL.top, ww=WALL.x2-WALL.x1;
+  ctx.fillStyle=light; ctx.fillRect(WALL.x1,wt,ww,GROUND-wt);
+  ctx.fillStyle=joint; for(let y=wt+14;y<GROUND;y+=20){ ctx.fillRect(WALL.x1+3,y,ww-6,2); for(let x=WALL.x1+((y/20)%2?10:22);x<WALL.x2;x+=24) ctx.fillRect(x,y-18,2,18); }
+  if(L>=2) merlons(WALL.x1,WALL.x2,wt,12,18,8,goth,light);
+  if(L>=6) machicolations(WALL.x1,WALL.x2,wt+2,dark);
+  if(L>=3) slit(WALL.x1+28,wt+46);
+  if(L>=4) hangingBanner(WALL.x1+18,wt+(L>=6?24:16),24,Math.min(70,GROUND-wt-120));
+  if(L>=6) cannon(WALL.x1+2,wt+(L>=6?96:60),1);
+  if(L>=8) cannon(WALL.x1+2,wt+150,1);
+  if(goth){ // gargouille
+    ctx.fillStyle=dark; ctx.beginPath(); ctx.moveTo(WALL.x1,wt+18); ctx.lineTo(WALL.x1-16,wt+12); ctx.lineTo(WALL.x1-12,wt+22); ctx.lineTo(WALL.x1,wt+26); ctx.fill();
+    ctx.fillStyle="#ff4d3d"; circle(WALL.x1-12,wt+15,1.6);
+  }
+  ctx.fillStyle="#3b2a1a"; (goth?pointedWin:roundWin)(WALL.x1+16,GROUND-62,28,62);
+  ctx.strokeStyle="#6b4a2a"; ctx.lineWidth=2; for(let i=0;i<4;i++){ ctx.beginPath(); ctx.moveTo(WALL.x1+19+i*7,GROUND-52); ctx.lineTo(WALL.x1+19+i*7,GROUND); ctx.stroke(); }
+  if(L>=5){ ctx.strokeStyle="#2a2a2a"; ctx.lineWidth=1.5; for(let y=GROUND-48;y<GROUND;y+=8){ ctx.beginPath(); ctx.moveTo(WALL.x1+16,y); ctx.lineTo(WALL.x1+44,y); ctx.stroke(); } } // herse
 }
 function roundWin(x,y,w,h){ ctx.beginPath(); ctx.moveTo(x,y+h); ctx.lineTo(x,y+w/2); ctx.arc(x+w/2,y+w/2,w/2,Math.PI,0); ctx.lineTo(x+w,y+h); ctx.closePath(); ctx.fill(); }
 function flagShape(x,y,w){ ctx.beginPath(); ctx.moveTo(x,y); ctx.quadraticCurveTo(x+25,y+w,x+50,y+4); ctx.lineTo(x+50,y+30); ctx.quadraticCurveTo(x+25,y+26-w,x,y+28); ctx.closePath(); }
@@ -1407,7 +1489,7 @@ $("menuBtn").addEventListener("click",()=>{ buildLevels(); $("endScreen").classL
 // démarrage
 buildLevels();
 resize();
-S.knight={k:0,load:1}; // décor derrière l'écran d'accueil
+applyCastle(); S.knight={k:0,load:1}; // décor derrière l'écran d'accueil
 requestAnimationFrame(loop);
 })();
 </script>
