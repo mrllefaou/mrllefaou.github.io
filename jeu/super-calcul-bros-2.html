@@ -139,7 +139,36 @@
   .stat b{display:block;font-size:1.6rem;color:var(--jaune)}
   .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
 
+  .choose{font-weight:700;margin-top:14px}
+  .levels{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+  .lvl{font-family:var(--font);color:#fff;cursor:pointer;border:3px solid #fff;border-radius:16px;padding:12px 8px;
+    display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 5px 0 #12051f;transition:transform .1s}
+  .lvl:hover{transform:translateY(-3px)} .lvl:active{transform:translateY(2px);box-shadow:0 2px 0 #12051f}
+  .lvl b{font-size:1.2rem} .lvl small{font-size:.8rem;opacity:.9;line-height:1.35} .lv-ico{font-size:1.8rem}
+  .lvl.easy{background:linear-gradient(180deg,#3ddc84,#1f9a57)} .lvl.normal{background:linear-gradient(180deg,#3d7bff,#2348b8)}
+  .lvl.hard{background:linear-gradient(180deg,#ff4757,#9b1023)}
+  .rec{font-size:.78rem;background:rgba(0,0,0,.25);border-radius:99px;padding:.1em .6em;min-height:1.3em}
+  .rec:empty{display:none}
+  .sol-card{text-align:left}
+  .sol-card h2{text-align:center}
+  .sol-pen{text-align:center;color:#ffb3b3;font-weight:600}
+  .sol-consigne{font-weight:700;color:var(--jaune);margin-top:10px}
+  .sol{background:#fff9ef;color:var(--encre);border:3px solid #1b0b30;border-radius:14px;padding:10px 14px;margin-top:6px;
+    font-family:"Cambria Math","Times New Roman",Georgia,serif;font-size:clamp(1.05rem,3.4vw,1.4rem);display:grid;gap:6px}
+  .sol .ln{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+  .sol .ln.final{background:#d6ffe6;border-radius:8px;padding:2px 6px;font-weight:700}
+  .sol sup{font-size:.62em}
+  .sol .note{font-family:var(--font);font-size:.78rem;color:#6b5a7b;background:#f1e6ff;border-radius:99px;padding:.05em .6em}
+  .score-box{background:rgba(255,255,255,.08);border-radius:16px;padding:10px;margin:10px 0}
+  .score-lvl{font-weight:700;opacity:.9}
+  .score-big{font-size:clamp(2.4rem,9vw,3.6rem);font-weight:700;color:var(--jaune);text-shadow:0 4px 0 #12051f;line-height:1.1}
+  .score-rec{min-height:1.3em;font-weight:600}
+  .score-rec.new{color:#3ddc84;animation:pulse .6s infinite alternate}
+  .score-detail{margin:6px auto 0;border-collapse:collapse;font-size:.9rem}
+  .score-detail td{padding:2px 8px} .score-detail td:last-child{text-align:right;font-weight:700}
   @media (max-width:560px){
+    .levels{grid-template-columns:1fr}
+    .lvl{flex-direction:row;flex-wrap:wrap;justify-content:center;column-gap:10px}
     #app{padding:6px 6px 18px;gap:8px}
     .stage{border-radius:12px;border-width:3px}
     .panel{padding:10px;border-radius:16px}
@@ -209,12 +238,21 @@
     <p>Toi, <b>Racine</b>, grand dramaturge à tes heures perdues, tu dois le rattraper… à la force du calcul littéral ! Ta prochaine pièce ne sera pas une tragédie.</p>
     <ul>
       <li>🏃 Racine court tout seul : <b>chaque bonne réponse</b> le rapproche de Zêta.</li>
-      <li>⏱️ Tu commences avec <b>2 minutes</b>, et chaque bonne réponse rapporte <b>+30 s</b>.</li>
+      <li>⏱️ Un chrono tourne : chaque bonne réponse rapporte <b>du temps en plus</b>.</li>
       <li>🎯 <b>20 bonnes réponses</b> pour sauver Pi avant qu'elle n'atteigne les Abysses.</li>
-      <li>🔁 Tu as <b>3 essais</b> par calcul. Après 3 erreurs, la correction s'affiche et un nouveau calcul arrive.</li>
+      <li>🔁 Tu as <b>3 essais</b> par calcul. Après 3 erreurs, tu perds du temps, mais la correction détaillée s'affiche.</li>
+      <li>🏅 À la fin, un <b>score</b> tient compte de tes réponses, de ta précision, du temps restant et du niveau.</li>
       <li>✍️ Écris <code>x^2</code> pour x², <code>3*x</code> ou <code>3x</code> pour 3×x.</li>
     </ul>
-    <div class="row"><button class="btn big" id="btnStart">▶ Jouer</button></div>
+    <p class="choose">Choisis ton niveau :</p>
+    <div class="levels">
+      <button class="lvl easy" data-lvl="easy"><span class="lv-ico">🌱</span><b>Facile</b>
+        <small>3 min au départ · +40 s<br>calculs plus doux</small><span class="rec" data-rec="easy"></span></button>
+      <button class="lvl normal" data-lvl="normal"><span class="lv-ico">⚔️</span><b>Intermédiaire</b>
+        <small>2 min au départ · +30 s<br>le programme complet</small><span class="rec" data-rec="normal"></span></button>
+      <button class="lvl hard" data-lvl="hard"><span class="lv-ico">🔥</span><b>Hardcore</b>
+        <small>1 min 30 · +20 s<br>calculs costauds d'emblée</small><span class="rec" data-rec="hard"></span></button>
+    </div>
   </div>
 </div>
 
@@ -227,18 +265,35 @@
   </div>
 </div>
 
+<!-- Correction détaillée après 3 essais ratés -->
+<div class="overlay hidden" id="solScreen">
+  <div class="card sol-card">
+    <h2>📖 Correction</h2>
+    <p class="sol-pen" id="solPen"></p>
+    <div class="sol-consigne" id="solConsigne"></div>
+    <div class="sol" id="solSteps"></div>
+    <div class="row"><button class="btn big" id="btnCont">Calcul suivant ▶</button></div>
+  </div>
+</div>
+
 <!-- Fin de partie -->
 <div class="overlay hidden" id="endScreen">
   <div class="card">
     <h2 id="endTitle">Victoire !</h2>
     <p id="endText"></p>
+    <div class="score-box">
+      <div class="score-lvl" id="scLvl"></div>
+      <div class="score-big" id="scTotal">0</div>
+      <div class="score-rec" id="scRec"></div>
+      <table class="score-detail" id="scDetail"></table>
+    </div>
     <div class="stats">
       <div class="stat"><b id="stOk">0</b>bonnes réponses</div>
       <div class="stat"><b id="stKo">0</b>essais ratés</div>
       <div class="stat"><b id="stPct">0 %</b>de réussite</div>
       <div class="stat"><b id="stTime">0:00</b>de course</div>
     </div>
-    <div class="row"><button class="btn big" id="btnAgain">↻ Rejouer</button></div>
+    <div class="row"><button class="btn big" id="btnAgain">↻ Rejouer</button><button class="btn big alt" id="btnLevels">Changer de niveau</button></div>
   </div>
 </div>
 
@@ -476,83 +531,124 @@ const polyAsc = c => { // écriture dans l'ordre croissant des degrés, comme da
   return s || "0";
 };
 const sgn = (v, txt) => (v < 0 ? " - " : " + ") + txt;
+/* Outils pour écrire les étapes de correction */
+const term = (k, d) => { const c = new Array(d + 1).fill(0); c[d] = k; return polyStr(c); };
+const X = a => term(a, 1);                                  // ax
+const PM = s => (s.startsWith("-") ? `(${s})` : s);        // parenthèses autour d'un terme négatif
+const P = n => (n < 0 ? `(${n})` : String(n));
+const sq = a => (a === 1 ? "x^2" : `(${a}x)^2`);
+function sumStr(list) {                                     // somme non réduite, dans l'ordre donné
+  let s = "";
+  for (const [k, d] of list) { if (!k) continue; const t = term(Math.abs(k), d);
+    s += s === "" ? (k < 0 ? "-" : "") + t : (k < 0 ? " - " : " + ") + t; }
+  return s || "0";
+}
+const Q = (type, text, answer, steps) => ({ type, text, answer, steps: [...steps, answer] });
+const ID1 = "(a + b)² = a² + 2ab + b²", ID2 = "(a − b)² = a² − 2ab + b²", ID3 = "(a + b)(a − b) = a² − b²";
+const ID1f = "a² + 2ab + b² = (a + b)²", ID2f = "a² − 2ab + b² = (a − b)²", ID3f = "a² − b² = (a − b)(a + b)";
+const DIST = "k(a + b) = ka + kb", DDIST = "(a + b)(c + d) = ac + ad + bc + bd";
+
 const GEN = {
   // --- Échauffement : k(x + b) avec de petits nombres positifs
   devEasy() { const k = R(2, 5), a = R(1, 3), b = R(1, 6);
-    return { type: "dev", text: `${k}(${lin(a, b)})`, answer: polyStr([k * b, k * a]) }; },
+    return Q("dev", `${k}(${lin(a, b)})`, polyStr([k * b, k * a]), [[`${k}*${X(a)} + ${k}*${b}`, DIST]]); },
   facEasy() { const k = R(2, 5), b = R(1, 6);
-    return { type: "fac", text: polyStr([k * b, k]), answer: `${k}(${lin(1, b)})` }; },
-  // --- Simple distributivité : k(a+b) = ka + kb
+    return Q("fac", polyStr([k * b, k]), `${k}(${lin(1, b)})`, [[`${k}*x + ${k}*${b}`, `on fait apparaître le facteur commun ${k}`]]); },
+  // --- Simple distributivité
   devSimple() { const k = nz(2, 9), a = R(1, 6), b = nz(1, 9);
-    return { type: "dev", text: `${k}(${lin(a, b)})`, answer: polyStr([k * b, k * a]) }; },
-  // --- Développer, réduire et ordonner : 2(5x - 2) + 9 ou 8 - 4(7x - 3)
+    return Q("dev", `${k}(${lin(a, b)})`, polyStr([k * b, k * a]), [[`${k}*${X(a)} + ${k}*${P(b)}`, DIST]]); },
+  // --- 2(5x - 2) + 9 ou 8 - 4(7x - 3)
   devReduce() { const k = R(2, 7), a = R(1, 8), b = nz(1, 9), c = nz(1, 12);
-    if (Math.random() < .5) return { type: "dev", text: `${k}(${lin(a, b)})${sgn(c, Math.abs(c))}`, answer: polyStr([k * b + c, k * a]) };
-    return { type: "dev", text: `${c} - ${k}(${lin(a, b)})`, answer: polyStr([c - k * b, -k * a]) }; },
-  // --- Facteur commun numérique (avec facteur négatif parfois : -8x - 24)
+    if (Math.random() < .5) return Q("dev", `${k}(${lin(a, b)})${sgn(c, Math.abs(c))}`, polyStr([k * b + c, k * a]),
+      [[`${k}*${X(a)} + ${k}*${P(b)}${sgn(c, Math.abs(c))}`, DIST], [sumStr([[k * a, 1], [k * b, 0], [c, 0]]), "on réduit"]]);
+    return Q("dev", `${c} - ${k}(${lin(a, b)})`, polyStr([c - k * b, -k * a]),
+      [[`${c} - ${k}*${X(a)} - ${k}*${P(b)}`, "le − se distribue aussi"], [sumStr([[c, 0], [-k * a, 1], [-k * b, 0]]), "on réduit et on ordonne"]]); },
+  // --- Facteur commun numérique
   facSimple() { const k = Math.random() < .25 ? -R(2, 9) : R(2, 9); let a, b; do { a = R(1, 6); b = nz(1, 9); } while (gcd(a, b) !== 1);
-    return { type: "fac", text: polyStr([k * b, k * a]), answer: `${k}(${lin(a, b)})` }; },
+    return Q("fac", polyStr([k * b, k * a]), `${k}(${lin(a, b)})`, [[`${P(k)}*${X(a)} + ${P(k)}*${P(b)}`, `facteur commun ${k}`]]); },
   // --- kx(ax + b)
-  devX() { const k = nz(1, 6), a = R(1, 6), b = nz(1, 9);
-    return { type: "dev", text: `${mono(k, 1)}(${lin(a, b)})`, answer: polyStr([0, k * b, k * a]) }; },
+  devX() { const k = nz(1, 6), a = R(1, 6), b = nz(1, 9), kx = PM(X(k));
+    return Q("dev", `${X(k)}(${lin(a, b)})`, polyStr([0, k * b, k * a]), [[`${kx}*${X(a)} + ${kx}*${P(b)}`, DIST]]); },
   // --- 2x^2 + x = x(2x + 1)
   facX() { let a, b; do { a = R(1, 7); b = nz(1, 9); } while (gcd(a, b) !== 1);
-    return { type: "fac", text: polyStr([0, b, a]), answer: `x(${lin(a, b)})` }; },
+    return Q("fac", polyStr([0, b, a]), `x(${lin(a, b)})`, [[`x*${X(a)} + x*${P(b)}`, "facteur commun x"]]); },
   // --- 25x^2 + 5x = 5x(5x + 1)
   facKX() { const k = R(2, 6); let a, b; do { a = R(1, 5); b = nz(1, 6); } while (gcd(a, b) !== 1);
-    return { type: "fac", text: polyStr([0, k * b, k * a]), answer: `${k}x(${lin(a, b)})` }; },
-  // --- Supprimer les parenthèses : 2x - (-2 + 5x - 7x^2)
+    return Q("fac", polyStr([0, k * b, k * a]), `${k}x(${lin(a, b)})`, [[`${X(k)}*${X(a)} + ${X(k)}*${P(b)}`, `facteur commun ${k}x`]]); },
+  // --- 2x - (-2 + 5x - 7x^2)
   devMinus() { const p = nz(1, 6), q = nz(1, 9), r = nz(1, 7), t = nz(1, 7);
-    return { type: "dev", text: `${mono(p, 1)} - (${polyAsc([q, r, t])})`, answer: polyStr([-q, p - r, -t]) }; },
+    return Q("dev", `${X(p)} - (${polyAsc([q, r, t])})`, polyStr([-q, p - r, -t]),
+      [[sumStr([[p, 1], [-q, 0], [-r, 1], [-t, 2]]), "un − devant la parenthèse change tous les signes"], [`${sumStr([[-t, 2], [p, 1], [-r, 1], [-q, 0]])}`, "on ordonne"]]); },
   // --- -3x(-3 + 2x + 5x^2)
-  devTri() { const k = nz(1, 5), q = nz(1, 6), r = nz(1, 5), t = nz(1, 5);
-    return { type: "dev", text: `${mono(k, 1)}(${polyAsc([q, r, t])})`, answer: polyStr([0, k * q, k * r, k * t]) }; },
+  devTri() { const k = nz(1, 5), q = nz(1, 6), r = nz(1, 5), t = nz(1, 5), kx = PM(X(k));
+    return Q("dev", `${X(k)}(${polyAsc([q, r, t])})`, polyStr([0, k * q, k * r, k * t]),
+      [[`${kx}*${P(q)} + ${kx}*${PM(X(r))} + ${kx}*${PM(term(t, 2))}`, "on distribue sur les 3 termes"], [sumStr([[k * q, 1], [k * r, 2], [k * t, 3]]), "on réduit chaque produit"]]); },
   // --- Double distributivité
-  devDouble() { const a = nz(1, 3), c = R(1, 5), b = nz(1, 7), d = nz(1, 9);
-    return { type: "dev", text: `(${lin(a, b)})(${lin(c, d)})`, answer: polyStr([b * d, a * d + b * c, a * c]) }; },
+  devDouble() { const a = nz(1, 3), c = R(1, 5), b = nz(1, 7), d = nz(1, 9), ax = PM(X(a)), cx = PM(X(c));
+    return Q("dev", `(${lin(a, b)})(${lin(c, d)})`, polyStr([b * d, a * d + b * c, a * c]),
+      [[`${ax}*${cx} + ${ax}*${P(d)} + ${P(b)}*${cx} + ${P(b)}*${P(d)}`, DDIST], [sumStr([[a * c, 2], [a * d, 1], [b * c, 1], [b * d, 0]]), "on calcule chaque produit"]]); },
   // --- Identités remarquables (développer)
   devId1() { const a = R(1, 3), b = R(1, 9);
-    return { type: "dev", text: `(${lin(a, b)})^2`, answer: polyStr([b * b, 2 * a * b, a * a]) }; },
+    return Q("dev", `(${lin(a, b)})^2`, polyStr([b * b, 2 * a * b, a * a]), [[`${sq(a)} + 2*${X(a)}*${b} + ${b}^2`, ID1]]); },
   devId2() { const a = R(1, 3), b = R(1, 9);
-    return { type: "dev", text: `(${lin(a, -b)})^2`, answer: polyStr([b * b, -2 * a * b, a * a]) }; },
+    return Q("dev", `(${lin(a, -b)})^2`, polyStr([b * b, -2 * a * b, a * a]), [[`${sq(a)} - 2*${X(a)}*${b} + ${b}^2`, ID2]]); },
   devId3() { const a = R(1, 4), b = R(1, 9), f1 = lin(a, b), f2 = lin(a, -b);
-    return { type: "dev", text: Math.random() < .5 ? `(${f1})(${f2})` : `(${f2})(${f1})`, answer: polyStr([-b * b, 0, a * a]) }; },
+    return Q("dev", Math.random() < .5 ? `(${f1})(${f2})` : `(${f2})(${f1})`, polyStr([-b * b, 0, a * a]), [[`${sq(a)} - ${b}^2`, ID3]]); },
   // --- Identités remarquables (factoriser)
   facId3() { let a, b; do { a = R(1, 4); b = R(1, 9); } while (gcd(a, b) !== 1);
-    return { type: "fac", text: polyStr([-b * b, 0, a * a]), answer: `(${lin(a, -b)})(${lin(a, b)})` }; },
+    return Q("fac", polyStr([-b * b, 0, a * a]), `(${lin(a, -b)})(${lin(a, b)})`, [[`${sq(a)} - ${b}^2`, ID3f]]); },
   facId1() { let a, b; do { a = R(1, 3); b = R(1, 9); } while (gcd(a, b) !== 1);
-    return { type: "fac", text: polyStr([b * b, 2 * a * b, a * a]), answer: `(${lin(a, b)})^2` }; },
+    return Q("fac", polyStr([b * b, 2 * a * b, a * a]), `(${lin(a, b)})^2`, [[`${sq(a)} + 2*${X(a)}*${b} + ${b}^2`, ID1f]]); },
   facId2() { let a, b; do { a = R(1, 3); b = R(1, 9); } while (gcd(a, b) !== 1);
-    return { type: "fac", text: polyStr([b * b, -2 * a * b, a * a]), answer: `(${lin(a, -b)})^2` }; },
-  // --- 2x^2 + 8x + 8 = 2(x + 2)^2  (deux étapes)
+    return Q("fac", polyStr([b * b, -2 * a * b, a * a]), `(${lin(a, -b)})^2`, [[`${sq(a)} - 2*${X(a)}*${b} + ${b}^2`, ID2f]]); },
+  // --- 2x^2 + 8x + 8 = 2(x + 2)^2
   facKId() { const k = R(2, 5), a = R(1, 6);
-    if (Math.random() < .5) { const b = nz(1, 6); return { type: "fac", text: polyStr([k * b * b, 2 * k * b, k]), answer: `${k}(${lin(1, b)})^2` }; }
-    return { type: "fac", text: polyStr([-k * a * a, 0, k]), answer: `${k}(${lin(1, -a)})(${lin(1, a)})` }; },
+    if (Math.random() < .5) { const b = nz(1, 6), B = Math.abs(b);
+      return Q("fac", polyStr([k * b * b, 2 * k * b, k]), `${k}(${lin(1, b)})^2`,
+        [[`${k}(${polyStr([b * b, 2 * b, 1])})`, `1) facteur commun ${k}`], [`${k}(x^2 ${b < 0 ? "-" : "+"} 2*x*${B} + ${B}^2)`, "2) " + (b < 0 ? ID2f : ID1f)]]); }
+    return Q("fac", polyStr([-k * a * a, 0, k]), `${k}(${lin(1, -a)})(${lin(1, a)})`,
+      [[`${k}(x^2 - ${a * a})`, `1) facteur commun ${k}`], [`${k}(x^2 - ${a}^2)`, "2) " + ID3f]]); },
   // --- (2x + 3)(2x + 9) + (2x + 3)(x + 1)
   facCommon() { const s = Math.random() < .5 ? 1 : -1; let p, a, b, c, d, e;
     do { p = R(1, 3); a = nz(1, 7); b = R(1, 4); c = nz(1, 9); d = R(1, 4); e = nz(1, 9); }
     while (b + s * d === 0 || c + s * e === 0 || gcd(b + s * d, c + s * e) !== 1 || (b === d && c === e) || gcd(p, a) !== 1);
-    const f = lin(p, a);
-    return { type: "fac", text: `(${f})(${lin(b, c)})${sgn(s, `(${f})(${lin(d, e)})`)}`, answer: `(${f})(${lin(b + s * d, c + s * e)})` }; },
+    const f = lin(p, a), op = s > 0 ? " + " : " - ";
+    return Q("fac", `(${f})(${lin(b, c)})${sgn(s, `(${f})(${lin(d, e)})`)}`, `(${f})(${lin(b + s * d, c + s * e)})`,
+      [[`(${f})[(${lin(b, c)})${op}(${lin(d, e)})]`, `facteur commun (${f})`],
+       [`(${f})(${sumStr([[b, 1], [c, 0], [s * d, 1], [s * e, 0]])})`, s > 0 ? "on enlève les parenthèses" : "le − change les signes"], ]); },
   // --- (x + 2)^2 + (x + 2)
   facSqPlus() { let a, m; do { a = nz(1, 6); m = nz(1, 5); } while (a + m === 0);
-    const f = lin(1, a);
-    return { type: "fac", text: `(${f})^2${sgn(m, (Math.abs(m) === 1 ? "" : Math.abs(m)) + `(${f})`)}`, answer: `(${f})(${lin(1, a + m)})` }; },
+    const f = lin(1, a), op = m < 0 ? " - " : " + ", M = Math.abs(m);
+    return Q("fac", `(${f})^2${sgn(m, (M === 1 ? "" : M) + `(${f})`)}`, `(${f})(${lin(1, a + m)})`,
+      [[`(${f})*(${f})${op}${M}*(${f})`, "on fait apparaître le facteur commun"], [`(${f})[(${f})${op}${M}]`, `facteur commun (${f})`]]); },
   // --- 3(x + 1)(x + 3) - 6(x + 1)
   facK3() { const k = R(2, 5); let a, b, m; do { a = nz(1, 6); b = nz(1, 7); m = R(1, 4); } while (b - m === 0 || a === b);
     const f1 = lin(1, a);
-    return { type: "fac", text: `${k}(${f1})(${lin(1, b)}) - ${k * m}(${f1})`, answer: `${k}(${f1})(${lin(1, b - m)})` }; },
+    return Q("fac", `${k}(${f1})(${lin(1, b)}) - ${k * m}(${f1})`, `${k}(${f1})(${lin(1, b - m)})`,
+      [[`${k}(${f1})(${lin(1, b)}) - ${k}*${m}(${f1})`, `on fait apparaître ${k}(${f1})`], [`${k}(${f1})[(${lin(1, b)}) - ${m}]`, `facteur commun ${k}(${f1})`]]); },
   // --- (2x + 3)(x^2 + 2x + 1)
-  devTriProd() { const a = R(1, 3), b = nz(1, 5), c = nz(1, 4), d = nz(1, 5);
-    return { type: "dev", text: `(${lin(a, b)})(${polyStr([d, c, 1])})`, answer: polyStr([b * d, a * d + b * c, a * c + b, a]) }; },
+  devTriProd() { const a = R(1, 3), b = nz(1, 5), c = nz(1, 4), d = nz(1, 5), ax = PM(X(a)), cx = PM(X(c));
+    return Q("dev", `(${lin(a, b)})(${polyStr([d, c, 1])})`, polyStr([b * d, a * d + b * c, a * c + b, a]),
+      [[`${ax}*x^2 + ${ax}*${cx} + ${ax}*${P(d)} + ${P(b)}*x^2 + ${P(b)}*${cx} + ${P(b)}*${P(d)}`, "chaque terme multiplie chaque terme"],
+       [sumStr([[a, 3], [a * c, 2], [a * d, 1], [b, 2], [b * c, 1], [b * d, 0]]), "on calcule chaque produit"]]); },
 };
-const POOLS = [
-  ["devSimple", "facSimple", "devReduce"],                                   // Fantasmath : k(a+b)
-  ["devX", "facX", "devReduce", "facSimple", "devMinus"],                    // Plaines
-  ["devDouble", "devTri", "facKX", "devMinus", "facX"],                      // Forêt
-  ["devId1", "devId2", "devId3", "facId3", "facId1", "facId2", "devDouble"], // Désert : identités remarquables
-  ["facCommon", "facSqPlus", "facK3", "facKId", "devTriProd", "facId3"],     // Abysses
-];
+
+/* Niveaux de difficulté : questions par monde, temps, bonus, pénalité, coefficient de score */
+const LEVELS = {
+  easy: { name: "Facile", ico: "🌱", start: 180, bonus: 40, penalty: 5, mult: 1, warmup: true,
+    pools: [["devEasy", "facEasy"], ["devSimple", "facSimple", "devEasy"], ["devReduce", "devX", "facX"],
+            ["devDouble", "facKX", "devReduce"], ["devId1", "devId3", "facId3", "devDouble"]] },
+  normal: { name: "Intermédiaire", ico: "⚔️", start: 120, bonus: 30, penalty: 10, mult: 1.5, warmup: true,
+    pools: [["devSimple", "facSimple", "devReduce"], ["devX", "facX", "devReduce", "facSimple", "devMinus"],
+            ["devDouble", "devTri", "facKX", "devMinus", "facX"], ["devId1", "devId2", "devId3", "facId3", "facId1", "facId2", "devDouble"],
+            ["facCommon", "facSqPlus", "facK3", "facKId", "devTriProd", "facId3"]] },
+  hard: { name: "Hardcore", ico: "🔥", start: 90, bonus: 20, penalty: 15, mult: 2.5, warmup: false,
+    pools: [["devReduce", "devX", "facKX", "devMinus"], ["devTri", "devDouble", "devMinus", "facKX"],
+            ["devId1", "devId2", "devId3", "facId1", "facId2", "facId3"], ["facCommon", "facSqPlus", "facKId", "devDouble", "facId3"],
+            ["facK3", "devTriProd", "facCommon", "facKId", "facSqPlus"]] },
+};
+let LV = LEVELS.normal, LV_KEY = "normal";
+
 
 /* =====================================================================
    4. MUSIQUE ET BRUITAGES (Web Audio, tout est synthétisé)
@@ -1135,9 +1231,9 @@ function drawParts() {
 /* =====================================================================
    6. ÉTAT DU JEU
    ===================================================================== */
-const GOAL = 20, START_TIME = 120, BONUS = 30;
+const GOAL = 20;
 const G = {
-  state: "menu", paused: false, t: 0, time: START_TIME, elapsed: 0, correct: 0, wrong: 0, asked: 0,
+  state: "menu", paused: false, solOpen: false, t: 0, time: 120, elapsed: 0, correct: 0, wrong: 0, asked: 0,
   zone: 0, prevZone: 0, fade: 1, banner: 0, scroll: 0, speed: 150, boost: 0, ph: 0,
   jump: 0, trip: 0, gapDisp: 1, q: null, lastGen: "", locked: false, dustT: 0,
   talk: null, talkT: 0, nextTalk: 5, laugh: 0, endT: 0, flash: 0,
@@ -1156,7 +1252,7 @@ const PRAISE = ["Bravo !", "Excellent !", "Parfait !", "Bien joué !", "Calcul d
 function zoneFor(n) { return Math.min(4, Math.floor(n / 4)); }
 
 function newQuestion() {
-  const base = G.correct < 2 ? ["devEasy", "facEasy"] : POOLS[G.zone];
+  const base = LV.warmup && G.correct < 2 ? ["devEasy", "facEasy"] : LV.pools[G.zone];
   const pool = base.filter(g => g !== G.lastGen);
   const name = pick(pool); G.lastGen = name;
   G.q = GEN[name]();
@@ -1176,8 +1272,9 @@ function showTries() { els.tries.textContent = "●".repeat(MAX_TRIES - G.tries)
 function say(who, text, dur = 2.4) { G.talk = { who, text }; G.talkT = dur; }
 function setFeedback(html, cls) { els.fb.innerHTML = html; els.fb.className = "feedback " + (cls || ""); }
 
-function startGame() {
-  Object.assign(G, { state: "play", paused: false, time: START_TIME, elapsed: 0, correct: 0, wrong: 0, asked: 0, zone: 0, prevZone: 0,
+function startGame(lvl) {
+  if (typeof lvl === "string" && LEVELS[lvl]) { LV_KEY = lvl; LV = LEVELS[lvl]; }
+  Object.assign(G, { state: "play", paused: false, solOpen: false, time: LV.start, elapsed: 0, correct: 0, wrong: 0, asked: 0, zone: 0, prevZone: 0,
     fade: 1, banner: 2.6, boost: 0, jump: 0, trip: 0, gapDisp: 1, locked: false, lastGen: "", talk: null, nextTalk: 4, laugh: 0, endT: 0, flash: 0 });
   parts.length = 0;
   els.ans.disabled = false; els.btnOk.disabled = false;
@@ -1200,11 +1297,11 @@ function submit() {
 }
 
 function onCorrect() {
-  G.correct++; G.time += BONUS; G.jump = 1; G.boost = 380;
+  G.correct++; G.time += LV.bonus; G.jump = 1; G.boost = 380;
   SND.sGood();
   burst(175, GY - 120, 14, ["#ffd23f", "#3ddc84", "#7ee0ff", "#ff5fb0"]);
-  spawn({ kind: "text", text: "+30 s", x: 175, y: GY - 150, vy: -70, life: 1.2, max: 1.2, size: 34, color: "#3ddc84" });
-  setFeedback("✅ " + pick(PRAISE) + " <b>+30 s</b>", "ok");
+  spawn({ kind: "text", text: `+${LV.bonus} s`, x: 175, y: GY - 150, vy: -70, life: 1.2, max: 1.2, size: 34, color: "#3ddc84" });
+  setFeedback("✅ " + pick(PRAISE) + ` <b>+${LV.bonus} s</b>`, "ok");
   if (G.correct >= GOAL) { win(); return; }
   const z = zoneFor(G.correct);
   if (z !== G.zone) { G.prevZone = G.zone; G.zone = z; G.fade = 0; G.banner = 2.8; SND.setZone(z); SND.sZone(); }
@@ -1227,13 +1324,43 @@ function onWrong() {
     return;
   }
   G.locked = true;
-  setFeedback(`❌ 3 essais ratés ! La bonne réponse était : <b>${pretty(G.q.answer)}</b>`, "ko");
+  G.time = Math.max(0, G.time - LV.penalty);
+  spawn({ kind: "text", text: `−${LV.penalty} s`, x: 175, y: GY - 150, vy: -70, life: 1.2, max: 1.2, size: 34, color: "#ff4757" });
+  setFeedback(`❌ 3 essais ratés : <b>−${LV.penalty} s</b>. Regarde la correction !`, "ko");
   els.ans.disabled = true; els.btnOk.disabled = true;
-  setTimeout(() => {
-    if (G.state !== "play") return;
-    G.locked = false; els.ans.disabled = false; els.btnOk.disabled = false;
-    newQuestion(); els.ans.focus();
-  }, 2600);
+  updateHUD();
+  setTimeout(showSolution, 700);
+}
+
+/* Correction détaillée : le jeu est en pause pendant la lecture */
+function showSolution() {
+  if (G.state !== "play") return;
+  const q = G.q;
+  G.solOpen = true; G.paused = true;
+  if (SND.ctx) SND.ctx.suspend();
+  $("solPen").textContent = `3 essais ratés : −${LV.penalty} s. Le jeu est en pause pendant que tu lis.`;
+  $("solConsigne").textContent = q.type === "dev" ? "Développer, réduire et ordonner :" : "Factoriser :";
+  const lines = [], seen = new Set([q.text.replace(/\s/g, "")]);
+  q.steps.forEach((st, i) => {
+    const [e, note] = Array.isArray(st) ? st : [st, ""];
+    const key = e.replace(/\s/g, "");
+    if (seen.has(key) && i < q.steps.length - 1) return;
+    seen.add(key);
+    const last = i === q.steps.length - 1;
+    lines.push(`<div class="ln${last ? " final" : ""}"><span>= ${pretty(e)}</span>${note ? `<span class="note">${esc(note)}</span>` : ""}${last ? `<span class="note">✔ résultat</span>` : ""}</div>`);
+  });
+  $("solSteps").innerHTML = `<div class="ln"><span>${pretty(q.text)}</span></div>` + lines.join("");
+  $("solScreen").classList.remove("hidden");
+  setTimeout(() => $("btnCont").focus(), 50);
+}
+function closeSolution() {
+  if (!G.solOpen) return;
+  $("solScreen").classList.add("hidden");
+  G.solOpen = false; G.paused = false; last = performance.now();
+  if (SND.ctx) SND.ctx.resume();
+  G.locked = false; els.ans.disabled = false; els.btnOk.disabled = false;
+  setFeedback("", "");
+  newQuestion(); els.ans.focus();
 }
 
 function win() {
@@ -1247,7 +1374,33 @@ function lose() {
   say("pi", "Nooooon !", 3);
   setFeedback("⌛ Temps écoulé…", "ko"); updateHUD();
 }
+/* Score final : réponses, victoire, temps restant, précision et niveau */
+function computeScore(victory) {
+  const tot = G.correct + G.wrong, acc = tot ? G.correct / tot : 0;
+  const base = G.correct * 100, winB = victory ? 1000 : 0, timeB = victory ? Math.floor(G.time) * 10 : 0;
+  const accF = .5 + .5 * acc;
+  return { base, winB, timeB, acc, accF, total: Math.round((base + winB + timeB) * accF * LV.mult) };
+}
+function getRecord(k) { try { return +localStorage.getItem("scb2-record-" + k) || 0; } catch (e) { return 0; } }
+function setRecord(k, v) { try { localStorage.setItem("scb2-record-" + k, v); } catch (e) {} }
+function refreshRecords() {
+  document.querySelectorAll("[data-rec]").forEach(el => { const r = getRecord(el.dataset.rec); el.textContent = r ? `🏅 Record : ${r}` : ""; });
+}
 function showEnd(victory) {
+  const sc = computeScore(victory), rec = getRecord(LV_KEY), isNew = sc.total > rec;
+  if (isNew) setRecord(LV_KEY, sc.total);
+  $("scLvl").textContent = `${LV.ico} Niveau ${LV.name} · Score`;
+  $("scTotal").textContent = sc.total.toLocaleString("fr-FR");
+  const recEl = $("scRec");
+  recEl.className = "score-rec" + (isNew && sc.total > 0 ? " new" : "");
+  recEl.textContent = isNew && sc.total > 0 ? "🏅 Nouveau record !" : (rec ? `Record à battre : ${rec.toLocaleString("fr-FR")}` : "");
+  const fr = n => n.toLocaleString("fr-FR");
+  $("scDetail").innerHTML =
+    `<tr><td>Bonnes réponses (${G.correct} × 100)</td><td>${fr(sc.base)}</td></tr>` +
+    (victory ? `<tr><td>Princesse sauvée</td><td>+ ${fr(sc.winB)}</td></tr><tr><td>Temps restant (${Math.floor(G.time)} s × 10)</td><td>+ ${fr(sc.timeB)}</td></tr>` : "") +
+    `<tr><td>Précision ${Math.round(sc.acc * 100)} %</td><td>× ${sc.accF.toFixed(2).replace(".", ",")}</td></tr>` +
+    `<tr><td>Niveau ${LV.name}</td><td>× ${String(LV.mult).replace(".", ",")}</td></tr>`;
+  refreshRecords();
   $("endTitle").textContent = victory ? "🏆 Victoire !" : "💀 Perdu…";
   $("endText").innerHTML = victory
     ? `Rideau ! Pour une fois, une pièce de Racine finit bien : <b>Zêta</b> est vaincu et la <b>Princesse Pi</b> est sauvée. Il te restait <b>${fmt(G.time)}</b>.`
@@ -1267,7 +1420,7 @@ function updateHUD(force) {
   const urgent = G.state === "play" && G.time < 20;
   els.timer.classList.toggle("urgent", urgent); SND.urgent = urgent;
   if (force || hudCache.c !== G.correct || hudCache.z !== G.zone) {
-    els.score.textContent = `${G.correct} / ${GOAL}`;
+    els.score.textContent = `${LV.ico} ${G.correct} / ${GOAL}`;
     els.zone.textContent = ZONES[G.zone].name;
     const p = 100 * G.correct / GOAL;
     els.fill.style.width = p + "%"; els.tkHero.style.left = p + "%";
@@ -1276,7 +1429,7 @@ function updateHUD(force) {
 }
 
 function setPause(p) {
-  if (G.state !== "play") return;
+  if (G.state !== "play" || G.solOpen) return;
   G.paused = p;
   $("pauseScreen").classList.toggle("hidden", !p);
   els.expr.classList.toggle("blurred", p);
@@ -1457,15 +1610,21 @@ document.querySelectorAll(".key").forEach(b => {
     inp.focus(); updatePreview();
   });
 });
-$("btnStart").addEventListener("click", startGame);
-$("btnAgain").addEventListener("click", startGame);
+document.querySelectorAll(".lvl").forEach(b => b.addEventListener("click", () => startGame(b.dataset.lvl)));
+$("btnAgain").addEventListener("click", () => startGame(LV_KEY));
+$("btnLevels").addEventListener("click", () => { $("endScreen").classList.add("hidden"); refreshRecords(); $("startScreen").classList.remove("hidden"); });
+$("btnCont").addEventListener("click", closeSolution);
 $("btnPause").addEventListener("click", () => setPause(!G.paused));
 $("btnResume").addEventListener("click", () => setPause(false));
 $("btnMute").addEventListener("click", () => { SND.init(); const on = SND.toggle(); $("btnMute").textContent = on ? "🔊" : "🔇"; });
-document.addEventListener("keydown", e => { if (e.key === "Escape") setPause(!G.paused); });
+document.addEventListener("keydown", e => {
+  if (G.solOpen && (e.key === "Enter" || e.key === "Escape")) { e.preventDefault(); closeSolution(); return; }
+  if (e.key === "Escape") setPause(!G.paused);
+});
 document.addEventListener("visibilitychange", () => { if (document.hidden && G.state === "play" && !G.paused) setPause(true); });
 
 resize();
+refreshRecords();
 newQuestion(); G.asked = 0; els.qnum.textContent = "";
 requestAnimationFrame(frame);
 </script>
