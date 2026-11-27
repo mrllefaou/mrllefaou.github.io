@@ -276,10 +276,10 @@ function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(
 function pretty(s) {
   return esc(s)
     .replace(/\*\*/g, "^")
-    .replace(/\^\(?(-?\d+)\)?/g, "<sup>$1</sup>")
-    .replace(/([a-z])/gi, "<i>$1</i>")
     .replace(/-/g, "−")
-    .replace(/\*/g, " × ");
+    .replace(/\*/g, " × ")
+    .replace(/([a-z])/gi, "<i>$1</i>")                      // lettres en italique d'abord…
+    .replace(/\^\((−?\d+)\)|\^(−?\d+)/g, (m, a, b) => "<sup>" + (a || b) + "</sup>"); // …puis les exposants
 }
 
 /* =====================================================================
