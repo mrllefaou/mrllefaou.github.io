@@ -99,6 +99,8 @@
   .btn:active{transform:translateY(3px);box-shadow:0 1px 0 #1b0b30}
   .btn.big{font-size:clamp(1.2rem,3.4vw,1.6rem);padding:.5em 1.6em;background:var(--rouge)}
   .btn.alt{background:var(--bleu)}
+  .btn.quit{display:inline-block;text-decoration:none;background:#7a6a8f;font-size:clamp(.9rem,2.4vw,1.05rem)}
+  .btn.quit:hover{background:#8d7da3}
   .preview{font-size:.95rem;min-height:1.3em;color:#5b4a6b}
   .preview b{font-family:"Cambria Math","Times New Roman",Georgia,serif;font-size:1.2em;color:var(--encre)}
   .keys{display:grid;grid-template-columns:repeat(9,1fr);gap:6px}
@@ -254,6 +256,7 @@
       <button class="lvl hard" data-lvl="hard"><span class="lv-ico">🔥</span><b>Hardcore</b>
         <small>1 min 30 · +20 s<br>calculs costauds d'emblée</small><span class="rec" data-rec="hard"></span></button>
     </div>
+    <div class="row"><a class="btn quit" href="../jeu.html">← Retour aux jeux</a></div>
   </div>
 </div>
 
@@ -263,6 +266,7 @@
     <h2>⏸ Pause</h2>
     <p>Zêta fait une sieste… mais pas longtemps !</p>
     <div class="row"><button class="btn big" id="btnResume">Reprendre</button></div>
+    <div class="row"><a class="btn quit" href="../jeu.html">← Quitter la partie</a></div>
   </div>
 </div>
 
@@ -296,6 +300,7 @@
       <div class="stat"><b id="stTime">0:00</b>de course</div>
     </div>
     <div class="row"><button class="btn big" id="btnAgain">↻ Rejouer</button><button class="btn big alt" id="btnLevels">Changer de niveau</button></div>
+    <div class="row"><a class="btn quit" href="../jeu.html">← Retour aux jeux</a></div>
   </div>
 </div>
 
