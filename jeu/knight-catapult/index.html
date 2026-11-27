@@ -373,8 +373,9 @@ function nextCastle(){
   S.knight = {k:0, load:1};
   $("calcIn").value=""; $("calcOut").className=""; $("calcOut").innerHTML="&nbsp;";
   S.sayTok++;
-  later(500,()=>addBubble("g",pickNR(GREET),2.8));
-  later(3000,()=>addBubble(0,pickNR(LOAD),2.8));
+  later(500,()=>addBubble("g",GREET[G.idx-1],3));
+  // clin d'œil aux Visiteurs : réplique garantie au tout premier château
+  later(3300,()=>addBubble(0, G.idx===1 ? "Que je trépasse si je faiblis !" : say(LOAD),2.8));
   renderQuestion();
   updateHud();
   $("castleName").style.display=""; $("castleName").textContent = "Château "+G.idx+" – "+CASTLES[G.idx-1];
@@ -597,14 +598,14 @@ function afterShot(ok,x,outcome,kIdx){
   const fb=$("feedback"); const name=KNIGHTS[kIdx].name;
   S.sayTok++;
   if(ok){
-    S.guardTarget=0; addBubble("g","Fuyez ! Fuyez !",2.5); addBubble(kIdx,"Ce château est à nous !",2.6);
-    if(kIdx<2) later(2000,()=>addBubble(kIdx+1,pickNR(CHEER),2.6));
+    S.guardTarget=0; addBubble("g",say(GUARD_FLEE),2.5); addBubble(kIdx,say(WIN_LINE),2.6);
+    if(kIdx<2) later(2000,()=>addBubble(kIdx+1,say(CHEER),2.6));
   } else {
-    if(outcome==="high") addBubble("g",pickNR(TAUNT_HIGH),2.8);
-    else { addBubble(kIdx,"Ce n'est qu'une égratignure !",1.9); later(900,()=>addBubble("g",pickNR(TAUNT_LOW),2.8)); }
+    if(outcome==="high") addBubble("g",say(TAUNT_HIGH),2.8);
+    else { addBubble(kIdx,say(CRASH),1.9); later(900,()=>addBubble("g",say(TAUNT_LOW),2.8)); }
     if(kIdx<2){
-      later(outcome==="high"?1300:2000,()=>addBubble(kIdx+1,pickNR(outcome==="high"?REACT_HIGH:REACT_LOW),2.8));
-      later(outcome==="high"?3800:4500,()=>addBubble("g",pickNR(GUARD_REPLY),2.8));
+      later(outcome==="high"?1300:2000,()=>addBubble(kIdx+1,say(outcome==="high"?REACT_HIGH:REACT_LOW),2.8));
+      later(outcome==="high"?3800:4500,()=>addBubble("g",say(GUARD_REPLY),2.8));
     }
   }
   if(ok){
@@ -635,7 +636,7 @@ function afterShot(ok,x,outcome,kIdx){
       msg += '<div class="box correction">'+correctionHTML(Q)+'</div>';
       fb.innerHTML = msg; sfx("lose");
       S.knight=null; S.armTarget=REST;
-      later(1200,()=>addBubble("g","No, no, no ! Ce château reste anglais !",3.5));
+      later(1200,()=>addBubble("g",say(LOST),3.5));
       endCastleButtons();
     }
   }
@@ -679,7 +680,8 @@ const GUARD={x:632,y:262};
 const QX=[62,22];
 const S = {post:POST0, postTarget:POST0, arm:REST, armTarget:REST, bounce:0, knight:null, flight:null, launch:null,
   parts:[], texts:[], bubbles:[], sayTok:0, flagOwn:0, flagTarget:0, castleHue:0, t:0, guard:1, guardTarget:1,
-  showCat:true, intro:null, clouds:[{x:120,y:90,s:1},{x:430,y:60,s:.8},{x:700,y:130,s:.6}]};
+  showCat:true, intro:null, clouds:[{x:120,y:90,s:1},{x:430,y:60,s:.8},{x:700,y:130,s:.6},{x:-60,y:40,s:1.3},{x:280,y:120,s:1.1},{x:560,y:30,s:1.4},{x:820,y:110,s:1.2},{x:980,y:45,s:1.5},{x:360,y:20,s:1.6}],
+  rain:[], fogT:0, flash:0, nextBolt:8};
 
 function resetScene(){
   S.post=S.postTarget=POST0; S.arm=S.armTarget=REST; S.bounce=0;
@@ -722,7 +724,7 @@ function startFlight(L){
     path={kind:"low", x0:s.x, y0:s.y, xa:s.x+(x1-s.x)*0.6, ya:Math.min(yh-120, s.y-60), x1, y1:yh, dur:1.2};
   } else path={kind:"high", x0:s.x, y0:s.y, x1:SUN.x, y1:SUN.y, dur:1.6};
   S.flight={path, t:0, k, cb:L.cb, phase:"fly", x:s.x, y:s.y, rot:0, scale:1, sx:1};
-  addBubble(k,pickNR(FLY),1.4);
+  addBubble(k,say(FLY),1.4);
 }
 function parab(p,u){
   const x = p.x0+(p.x1-p.x0)*u;
@@ -755,12 +757,23 @@ function bubbleAnchor(b){
 function later(ms,fn){ const t=S.sayTok; setTimeout(()=>{ if(t===S.sayTok) fn(); },ms); }
 const lastPick={};
 function pickNR(a){ let v; do{ v=pick(a); }while(a.length>1 && lastPick[a[0]]===v); lastPick[a[0]]=v; return v; }
-const LOAD=["Que je trépasse si je faiblis !","Montjoie ! Saint-Denis !","Pour la France et pour la trigonométrie !","Par saint Pythagore, j'y vais !","Hardi, compagnons ! En avant !","Diantre… c'est haut, un château.","Mécréant d'Anglais, j'arrive !","Que Dieu guide mon hypoténuse !"];
-const FLY=["Youhouuuu !","Je voooole !","Ventre-saint-gris !","Taïaut !","Mamaaaan !"];
-const REACT_LOW=["Diantre ! Il s'est fracassé !","Palsambleu ! Quelle chute !","Par ma barbe ! Le calcul était faux…","Mécréant de mur ! À mon tour !","Fichtre ! Pauvre ami…"];
-const REACT_HIGH=["Il est parti rejoindre le soleil…","Adieu, noble ami ! Salue la lune pour nous !","Morbleu ! Bien trop haut !","Saperlipopette ! Il vole encore…"];
-const GUARD_REPLY=["Ha ! Essayez donc, French knight !","Je n'ai pas peur de vos triangles !","Ma vache est prête, je vous préviens !","Vous visez comme une hirondelle à vide !","Retournez à vos noix de coco !"];
-const CHEER=["Hourra ! Vive la trigonométrie !","Gloire à toi, noble ami !","Victoire ! Un tir parfait !"];
+// Chaque réservoir est tiré « sans remise » : on ne reprend une réplique qu'après les avoir toutes dites.
+const LOAD=["Montjoie ! Saint-Denis !","Pour la France et pour la trigonométrie !","Par saint Pythagore, j'y vais !","Hardi, compagnons ! En avant !","Diantre… c'est haut, un château.","Mécréant d'Anglais, j'arrive !","Que Dieu guide mon hypoténuse !","Sus à l'Anglois !","J'ai vérifié trois fois l'arrondi.","Calculatrice en mode degrés ? Parfait.","Pour l'honneur et pour l'angle droit !","Qui ne tente rien n'a rien !","Je n'ai pas peur des lapins blancs !","Par ma barbe, visons juste cette fois !","Okayyy ! Je suis prêt !","Un petit pas pour moi, un grand vol pour la France !","Si je reviens, je veux une tarte aux pommes.","Ma noix de coco porte-bonheur est dans ma poche."];
+const FLY=["Youhouuuu !","Je voooole !","Ventre-saint-gris !","Taïaut !","Mamaaaan !","Bleu ! Non, jaun… aaaah !","Okayyyy !","À l'abordage !","Montjoie !","Je suis une hirondelle !","Que le cosinus soit avec moi !","Quelle trajectoire !","Ça décoiffe !","Attention en bas !","Je vois ma maison d'ici !","Parabole en approche !","Hiiiii-haaaa !","Pardon, je passe !"];
+const REACT_LOW=["Diantre ! Il s'est fracassé !","Palsambleu ! Quelle chute !","Par ma barbe ! Le calcul était faux…","Mécréant de mur ! À mon tour !","Fichtre ! Pauvre ami…","C'est pas faux… il fallait viser plus haut.","Il a juste un peu mal au heaume.","Morbleu ! Ce mur est solide.","Saperlipopette ! Vérifions l'angle.","Courage, l'ami, on te vengera !","Il a confondu sinus et cosinus…","Hmm… l'angle était trop petit.","Quelqu'un a une compresse ?","Il dit qu'il voulait juste toucher le mur."];
+const REACT_HIGH=["Il est parti rejoindre le soleil…","Adieu, noble ami ! Salue la lune pour nous !","Morbleu ! Bien trop haut !","Saperlipopette ! Il vole encore…","Il est plus haut qu'une hirondelle !","On le reverra… peut-être en Bretagne.","Il voulait voir le Graal de plus près ?","Fichtre ! Il a raté la cour… et la terre.","Ouille, quel élan !","Il nous enverra une carte postale.","Trop d'angle ! Beaucoup trop d'angle !","Il cherchait peut-être le Saint-Graal là-haut."];
+const GUARD_REPLY=["Ha ! Essayez donc, French knight !","Je n'ai pas peur de vos triangles !","Ma vache est prête, je vous préviens !","Vous visez comme une hirondelle à vide !","Retournez à vos noix de coco !","Encore un lapin en bois, et je lance la vache !","Le Graal ? On en a déjà un, il est très joli !","Même Lord Arctan rit de vous !","Revenez avec un rapporteur !","Vos noix de coco font trop de bruit !","Allez, encore un essai, on s'amuse bien !","Je vous attends de pied ferme… et de casque aussi.","Ni ! Ni ! Apportez-nous un buisson !"];
+const CHEER=["Hourra ! Vive la trigonométrie !","Gloire à toi, noble ami !","Victoire ! Un tir parfait !","Hourra ! Gloire au sinus !","Bien joué, l'arrondi était parfait !","Montjoie ! Le château est à nous !","Je savais que tu y arriverais !","Ils fuient comme des lapins !","Que la fête commence !","Quel tir ! Digne de la Table Rectangle !"];
+const WIN_LINE=["Ce château est à nous !","Victoire ! Où est la cuisine ?","Hissez la bannière !","Pour la France et pour le cosinus !","L'hypoténuse a parlé !","Pas une égratignure !","On dirait Camelot… c'est juste une maquette.","Ha ! Qui rit maintenant ?","Le calcul était parfait !","Atterrissage en douceur… ou presque."];
+const GUARD_FLEE=["Fuyez ! Fuyez !","Au secours ! Ils savent calculer !","Retraite ! Lâchez la vache !","Sauve qui peut !","Courez ! C'est de la trigonométrie !","Mummy ! Ils ont un rapporteur !","On se replie au château suivant !"];
+const CRASH=["Ce n'est qu'une égratignure !","Aïe… mon heaume !","Rien de cassé… enfin presque.","Ce mur a triché !","Je l'ai fait exprès !","Je vois des étoiles… et des triangles.","Le mur était plus près que prévu.","Personne n'a rien vu !"];
+const LOST=["No, no, no ! Ce château reste anglais !","Revenez l'année prochaine !","Ce château, vous ne l'aurez pas !","Lord Arctan vous remercie de votre visite !"];
+const BAGS={};
+function say(arr){ // tirage sans remise
+  const key=arr[0]; let b=BAGS[key];
+  if(!b || !b.length){ const last=b&&b.last; b=shuffle(arr.slice()); if(b[0]===last && b.length>1) b.push(b.shift()); BAGS[key]=b; }
+  const v=b.shift(); b.last=v; return v;
+}
 
 /* --- introduction façon « Sacré Graal » --- */
 const INTRO=[
@@ -776,9 +789,19 @@ const INTRO=[
   {w:"g", t:"Oh no… pas la trigonométrie !"},
   {w:"n", t:"Lord Arctan tient 10 châteaux. Règle bien la catapulte : trop haut, c'est le soleil… trop bas, c'est le mur !"}
 ];
-const GREET=["Encore vous ?!","No, no, no ! Pas de Français ici !","Retournez taper vos noix de coco ailleurs !","Ce château est anglais ! Go away !","Vous ne savez même pas ce qu'est une hypoténuse !"];
-const TAUNT_HIGH=["Bon voyage vers le soleil !","Il vole plus haut qu'une hirondelle !","Ha ha ! Trop haut, French knight !"];
-const TAUNT_LOW=["Ha ha ha ! Ma grand-mère vise mieux !","Ha ha ! Revenez quand vous saurez CAH SOH TOA !","Ha ha ha ! Le mur vous dit bonjour !"];
+// accueil propre à chaque château (de plus en plus menaçant)
+const GREET=["Halte ! C'est un tout petit château… mais il est anglais !",
+  "Encore vous ?! Avec vos noix de coco ?",
+  "Le Graal ? On en a déjà un, il est très joli !",
+  "Mon collègue et moi, on garde ce fort. Go away !",
+  "Nous avons une herse maintenant. Et une vache en réserve !",
+  "Tirez donc ! Nos canons ne vous craignent pas !",
+  "Trois gardes, trois fois plus de moqueries !",
+  "Forteresse Pythagore : ici, même la pluie est anglaise !",
+  "Château Trigonor… le soleil n'ose plus venir ici.",
+  "Lord Arctan vous attend… No, no, no, il ne vous attend pas !"];
+const TAUNT_HIGH=["Bon voyage vers le soleil !","Il vole plus haut qu'une hirondelle !","Ha ha ! Trop haut, French knight !","Bonjour au soleil de notre part !","Il vole bien… mais pas chez nous !","Hé ! La cour, c'est en bas !","Encore un Français en orbite !","Ha ha ! Vous visez les nuages ?"];
+const TAUNT_LOW=["Ha ha ha ! Ma grand-mère vise mieux !","Ha ha ! Revenez quand vous saurez CAH SOH TOA !","Ha ha ha ! Le mur vous dit bonjour !","Toc toc ! Qui est là ? Pas vous !","Merci pour la décoration murale !","Votre père sentait le sureau !","Ce mur a mille ans, il en a vu d'autres !","Ha ha ! Le mur : 1, les Français : 0 !"];
 
 function startIntro(){
   musicStart("intro");
@@ -838,7 +861,8 @@ function step(dt){
   if(S.knight && S.knight.load<1){ S.knight.load=Math.min(1,S.knight.load+dt*1.7); }
   S.flagOwn += (S.flagTarget-S.flagOwn)*Math.min(1,dt*2.5);
   S.guard += (S.guardTarget-S.guard)*Math.min(1,dt*3);
-  S.clouds.forEach(c=>{ c.x += dt*12*c.s; if(c.x>1100) c.x=-120; });
+  S.clouds.forEach(c=>{ c.x += dt*12*c.s*(1+gloom()); if(c.x>1100) c.x=-160; });
+  stepWeather(dt);
   if(S.intro) stepIntro(dt);
   // vol
   const f=S.flight;
@@ -902,20 +926,30 @@ function addText(txt,x,y,c){ S.texts.push({txt,x,y,c,life:1.6}); }
 function draw(){
   const sc = cv.width/W;
   ctx.setTransform(sc,0,0,sc,0,0);
+  const A = gloom();                               // 0 = grand beau temps … 1 = ténèbres
   const g=ctx.createLinearGradient(0,0,0,GROUND);
-  g.addColorStop(0,"#5ab6f2"); g.addColorStop(1,"#cdeeff");
+  g.addColorStop(0,mix("#5ab6f2","#1b1e27",A)); g.addColorStop(1,mix("#cdeeff","#4a505c",A));
   ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  // soleil de plus en plus pâle et voilé
+  ctx.globalAlpha=1-0.55*A;
   ctx.save(); ctx.translate(SUN.x,SUN.y); ctx.rotate(S.t*0.3);
-  ctx.strokeStyle="#ffd84d"; ctx.lineWidth=5; ctx.lineCap="round";
-  for(let i=0;i<12;i++){ ctx.rotate(Math.PI/6); ctx.beginPath(); ctx.moveTo(SUN.r+8,0); ctx.lineTo(SUN.r+22,0); ctx.stroke(); }
+  ctx.strokeStyle=mix("#ffd84d","#c9c3a0",A); ctx.lineWidth=5; ctx.lineCap="round";
+  for(let i=0;i<12;i++){ ctx.rotate(Math.PI/6); ctx.beginPath(); ctx.moveTo(SUN.r+8,0); ctx.lineTo(SUN.r+22-10*A,0); ctx.stroke(); }
   ctx.restore();
-  ctx.fillStyle="#ffe066"; circle(SUN.x,SUN.y,SUN.r); ctx.fillStyle="#fff3a0"; circle(SUN.x-10,SUN.y-10,SUN.r*0.55);
-  S.clouds.forEach(c=>cloud(c.x,c.y,c.s));
-  ctx.fillStyle="#8cc77a"; hill(0,GROUND,380,120); hill(300,GROUND,520,90); hill(720,GROUND,420,110);
-  ctx.fillStyle="#6fae5d"; hill(-80,GROUND,300,70); hill(480,GROUND,380,60);
-  ctx.fillStyle="#5aa04a"; ctx.fillRect(0,GROUND,W,H-GROUND);
-  ctx.fillStyle="#7a5a32"; ctx.fillRect(0,GROUND+18,W,H-GROUND-18);
-  ctx.fillStyle="#4c8c3d"; for(let x=0;x<W;x+=22){ ctx.fillRect(x,GROUND-3,3,6); }
+  ctx.fillStyle=mix("#ffe066","#d8d2b0",A); circle(SUN.x,SUN.y,SUN.r); ctx.fillStyle=mix("#fff3a0","#ece6c8",A); circle(SUN.x-10,SUN.y-10,SUN.r*0.55);
+  ctx.globalAlpha=1;
+  // nuages : plus nombreux, plus gris
+  const nC = 3+Math.round(A*6);
+  cloudCol = A<0.05 ? "#ffffffe0" : mix("#ffffff","#5d636e",A)+"e8";
+  S.clouds.slice(0,nC).forEach(c=>cloud(c.x,c.y,c.s));
+  ctx.fillStyle=mix("#8cc77a","#4b5a4a",A); hill(0,GROUND,380,120); hill(300,GROUND,520,90); hill(720,GROUND,420,110);
+  ctx.fillStyle=mix("#6fae5d","#3d4a3d",A); hill(-80,GROUND,300,70); hill(480,GROUND,380,60);
+  ctx.fillStyle=mix("#5aa04a","#3b4a35",A); ctx.fillRect(0,GROUND,W,H-GROUND);
+  ctx.fillStyle=mix("#7a5a32","#46392a",A); ctx.fillRect(0,GROUND+18,W,H-GROUND-18);
+  ctx.fillStyle=mix("#4c8c3d","#34402f",A); for(let x=0;x<W;x+=22){ ctx.fillRect(x,GROUND-3,3,6); }
+  if(A>0.6){ ctx.fillStyle="rgba(150,160,170,"+(0.25*(A-0.6))+")"; for(let i=0;i<7;i++){ const px=(i*157+40)%W; ctx.beginPath(); ctx.ellipse(px,GROUND+30,46,6,0,0,Math.PI*2); ctx.fill(); } } // flaques
+  // assombrissement général du décor
+  if(A>0){ ctx.fillStyle="rgba(12,14,28,"+(0.28*A)+")"; ctx.fillRect(0,0,W,H); }
   drawCastle();
   drawCatapult();
   drawQueue();
@@ -924,6 +958,7 @@ function draw(){
     drawKnight(f.x,f.y,f.scale,f.rot||0,KNIGHTS[f.k],{sx:f.sx});
     if(f.dizzy){ for(let i=0;i<3;i++){ const a=S.t*4+i*2.1; star(f.x+Math.cos(a)*22,f.y-22+Math.sin(a)*6,5,"#ffd84d"); } }
   }
+  drawWeather();
   S.parts.forEach(p=>{ ctx.globalAlpha=Math.max(0,Math.min(1,p.life*1.5)); ctx.fillStyle=p.c; ctx.fillRect(p.x-p.r/2,p.y-p.r/2,p.r,p.r); });
   ctx.globalAlpha=1;
   S.texts.forEach(t=>{
@@ -933,8 +968,54 @@ function draw(){
   ctx.globalAlpha=1;
   S.bubbles.forEach(drawBubble);
 }
+/* --- météo --- */
+let cloudCol="#ffffffe0";
+function gloom(){ return S.intro ? 0 : clamp(((S.castleL||1)-1)/9,0,1); }
+function mix(c1,c2,t){
+  const a=parseInt(c1.slice(1),16), b=parseInt(c2.slice(1),16);
+  const r=Math.round(((a>>16)&255)*(1-t)+((b>>16)&255)*t), g=Math.round(((a>>8)&255)*(1-t)+((b>>8)&255)*t), bl=Math.round((a&255)*(1-t)+(b&255)*t);
+  return "#"+((1<<24)+(r<<16)+(g<<8)+bl).toString(16).slice(1);
+}
+function stepWeather(dt){
+  const L=S.intro?1:(S.castleL||1);
+  S.fogT += dt;
+  // pluie à partir du château 6, de plus en plus forte
+  const want = L>=6 ? (L-5)*55 : 0;
+  while(S.rain.length<want) S.rain.push({x:Math.random()*W*1.2, y:Math.random()*GROUND, v:520+Math.random()*260});
+  if(S.rain.length>want) S.rain.length=want;
+  S.rain.forEach(d=>{ d.y+=d.v*dt; d.x-=d.v*0.25*dt; if(d.y>GROUND+20){ if(Math.random()<0.3) S.parts.push({x:d.x,y:GROUND+4,vx:(Math.random()-.5)*40,vy:-40,g:300,life:.2,r:2,c:"#b8c4d6"}); d.y=-10-Math.random()*60; d.x=Math.random()*W*1.2; } });
+  // orage aux deux derniers châteaux
+  S.flash=Math.max(0,S.flash-dt*2.2);
+  if(L>=9){ S.nextBolt-=dt; if(S.nextBolt<=0){ S.flash=1; S.bolt={x:120+Math.random()*700,t:0.25}; S.nextBolt=(L>=10?5:8)+Math.random()*6; setTimeout(()=>sfx("thunder"),250+Math.random()*500); } }
+  if(S.bolt){ S.bolt.t-=dt; if(S.bolt.t<=0) S.bolt=null; }
+}
+function drawWeather(){
+  const A=gloom(), L=S.intro?1:(S.castleL||1);
+  // brume qui dérive (dès le château 4)
+  if(L>=4){
+    const k=(L-3)/7;
+    for(let i=0;i<5;i++){
+      const y=GROUND-30-i*42, x=((S.fogT*(8+i*4)+i*230)%(W+500))-250;
+      const gr=ctx.createRadialGradient(x,y,10,x,y,260);
+      gr.addColorStop(0,"rgba(205,212,222,"+(0.27*k)+")"); gr.addColorStop(1,"rgba(205,212,222,0)");
+      ctx.fillStyle=gr; ctx.fillRect(x-260,y-90,520,180);
+    }
+    ctx.fillStyle="rgba(190,198,210,"+(0.16*k)+")"; ctx.fillRect(0,GROUND-40,W,60);
+  }
+  // pluie
+  if(S.rain.length){
+    ctx.strokeStyle="rgba(190,205,225,"+(0.35+0.3*A)+")"; ctx.lineWidth=1.3; ctx.beginPath();
+    S.rain.forEach(d=>{ ctx.moveTo(d.x,d.y); ctx.lineTo(d.x+5,d.y-18); }); ctx.stroke();
+  }
+  // éclair
+  if(S.bolt){
+    ctx.strokeStyle="rgba(255,255,230,.9)"; ctx.lineWidth=3; ctx.beginPath();
+    let x=S.bolt.x, y=0; ctx.moveTo(x,y); while(y<260){ x+= (Math.random()-.5)*40; y+=30+Math.random()*25; ctx.lineTo(x,y); } ctx.stroke();
+  }
+  if(S.flash>0){ ctx.fillStyle="rgba(235,240,255,"+(0.45*S.flash)+")"; ctx.fillRect(0,0,W,H); }
+}
 function circle(x,y,r){ ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill(); }
-function cloud(x,y,s){ ctx.fillStyle="#ffffffe0"; ctx.beginPath(); ctx.arc(x,y,24*s,0,Math.PI*2); ctx.arc(x+28*s,y-14*s,30*s,0,Math.PI*2); ctx.arc(x+60*s,y,22*s,0,Math.PI*2); ctx.ellipse(x+30*s,y+8*s,52*s,18*s,0,0,Math.PI*2); ctx.fill(); }
+function cloud(x,y,s){ ctx.fillStyle=cloudCol; ctx.beginPath(); ctx.arc(x,y,24*s,0,Math.PI*2); ctx.arc(x+28*s,y-14*s,30*s,0,Math.PI*2); ctx.arc(x+60*s,y,22*s,0,Math.PI*2); ctx.ellipse(x+30*s,y+8*s,52*s,18*s,0,0,Math.PI*2); ctx.fill(); }
 function hill(x,y,w,h){ ctx.beginPath(); ctx.moveTo(x,y); ctx.quadraticCurveTo(x+w/2,y-h*2,x+w,y); ctx.fill(); }
 function star(x,y,r,c){ ctx.fillStyle=c; ctx.beginPath(); for(let i=0;i<10;i++){ const a=i*Math.PI/5-Math.PI/2, rr=i%2?r*0.45:r; ctx.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr);} ctx.closePath(); ctx.fill(); }
 function rrect(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r); ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h); ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r); ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath(); }
@@ -1233,6 +1314,7 @@ function sfx(n){
   if(n==="fanfare"){ [587,740,880,1175].forEach((f,i)=>tone(f,0,0.28,"triangle",0.14,i*0.13)); tone(1175,0,0.6,"square",0.05,0.55); }
   if(n==="thud"){ tone(130,55,0.2,"sine",0.25); tone(220,90,0.08,"square",0.06); }
   if(n==="pop"){ tone(300,900,0.15,"triangle",0.12); }
+  if(n==="thunder" && AC && !muted){ const len=AC.sampleRate*2.6, buf=AC.createBuffer(1,len,AC.sampleRate), d=buf.getChannelData(0); let v=0; for(let i=0;i<len;i++){ v=v*0.985+(Math.random()*2-1)*0.15; d[i]=v*Math.pow(1-i/len,2); } const src=AC.createBufferSource(); src.buffer=buf; const lp=AC.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=380; const g=AC.createGain(); g.gain.value=1.6; src.connect(lp); lp.connect(g); g.connect(AC.destination); src.start(); }
   if(n==="lose"){ [392,330,262].forEach((f,i)=>tone(f,0,0.35,"triangle",0.12,i*0.22)); }
 }
 $("muteBtn").addEventListener("click",()=>{ muted=!muted; $("muteBtn").textContent=muted?"🔇":"🔊"; musicVol(); });
