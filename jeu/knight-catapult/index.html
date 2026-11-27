@@ -72,7 +72,9 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:1000/560;touch-action:m
 .calc-keys button.op{background:#f0c36b;box-shadow:0 2px 0 #a07a2a}
 .calc-keys button.ctl{background:#e8a29a;box-shadow:0 2px 0 #9b4f46}
 .calc-keys button.eq{grid-column:span 5;background:#2e8b57;color:#fff;box-shadow:0 2px 0 #1b5a37}
-.calc-keys button:active{transform:translateY(2px);box-shadow:none}
+.calc-keys button:active,.calc-keys button.hit{transform:translateY(2px);box-shadow:none;filter:brightness(.92)}
+.calc-help{font-size:.78rem;line-height:1.6;margin:.5rem 0 0;color:#e9dcbc}
+.calc-help kbd{background:#f3e7c9;color:#2b2118;border-radius:4px;padding:0 .3rem;font-family:inherit;font-weight:700;box-shadow:0 1px 0 #9b8763}
 .scene-wrap{position:sticky;top:0;z-index:5}
 @media (min-width:1100px){ .scene-wrap{top:.8rem} }
 .figure svg{display:block;width:100%;max-width:380px;height:auto;margin:0 auto}
@@ -183,6 +185,9 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:1000/560;touch-action:m
         <div id="calcOut">&nbsp;</div>
       </div>
       <div class="calc-keys" id="calcKeys"></div>
+      <p class="calc-help">⌨️ Au clavier : chiffres, <kbd>+</kbd> <kbd>-</kbd> <kbd>*</kbd> <kbd>/</kbd> <kbd>(</kbd> <kbd>)</kbd> et virgule ·
+        <kbd>S</kbd> <kbd>C</kbd> <kbd>T</kbd> = sin, cos, tan · <kbd>Maj</kbd>+<kbd>S</kbd>/<kbd>C</kbd>/<kbd>T</kbd> = sin⁻¹, cos⁻¹, tan⁻¹ ·
+        <kbd>Entrée</kbd> = calculer · <kbd>Échap</kbd> = effacer. Tape directement, même sans cliquer dans la calculatrice.</p>
     </details>
   </section>
 </main>
@@ -1544,7 +1549,31 @@ function calcInsert(t){
     });
     box.appendChild(b);
   });
-  $("calcIn").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); calcShow(); } });
+  // ---- clavier ----
+  const KEYMAP={"/":"÷",":":"÷","*":"×","x":"×","-":"−","+":"+","(":"(",")":")",".":",",",":",","s":"sin(","c":"cos(","t":"tan(","S":"sin⁻¹(","C":"cos⁻¹(","T":"tan⁻¹("};
+  function flash(label){ const b=[...$("calcKeys").children].find(x=>x.textContent===label); if(b){ b.classList.add("hit"); setTimeout(()=>b.classList.remove("hit"),110); } }
+  function calcKey(e){
+    if(e.ctrlKey||e.metaKey||e.altKey) return false;
+    const k=e.key, inp=$("calcIn");
+    if(k==="Enter"){ calcShow(); flash("="); return true; }
+    if(k==="Escape"){ inp.value=""; $("calcOut").className=""; $("calcOut").innerHTML="&nbsp;"; flash("C"); return true; }
+    if(k==="Backspace" && document.activeElement!==inp){ inp.value=inp.value.slice(0,-1); flash("←"); return true; }
+    if(/^[0-9]$/.test(k)){ calcInsert(k); flash(k); return true; }
+    if(KEYMAP[k]!==undefined){ calcInsert(KEYMAP[k]); flash(KEYMAP[k].replace("(","")||k); return true; }
+    return false;
+  }
+  $("calcIn").addEventListener("keydown",e=>{
+    if(e.key==="Backspace"||e.key==="Delete"||e.key.startsWith("Arrow")||e.key==="Home"||e.key==="End"||e.key==="Tab") return; // édition normale
+    if(calcKey(e) || e.key.length===1) e.preventDefault();                                     // autres lettres ignorées
+  });
+  // frappe au clavier ailleurs que dans un champ : elle va dans la calculatrice
+  document.addEventListener("keydown",e=>{
+    const el=document.activeElement, tag=el&&el.tagName;
+    if(tag==="INPUT"||tag==="TEXTAREA"||tag==="SELECT") return;
+    if(!Q || S.intro || $("calc").style.display==="none" || !$("startScreen").classList.contains("hidden") || !$("endScreen").classList.contains("hidden")) return;
+    if(e.key==="Enter" && tag==="BUTTON" && !el.closest("#calcKeys")) return;   // Entrée sur un autre bouton : comportement normal
+    if(calcKey(e)){ e.preventDefault(); if(!$("calc").open) $("calc").open=true; }
+  });
 })();
 
 /* ===================== MENUS ===================== */
