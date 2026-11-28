@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="icon" href="../../favicon.ico">
+<script src="../../commun/acces.js"></script>
+<meta name="theme-color" content="#2a0f4a">
+<title>Super Calcul Dash 2 · Jeu de résolution d'équations · 3e – Terminale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --violet:#2a0f4a; --violet2:#4b1d7a; --rose:#ff5fb0; --jaune:#ffd23f;
+    --vert:#3ddc84; --rouge:#ff4757; --bleu:#3d7bff; --encre:#1b0b30;
+    --font:"Fredoka","Trebuchet MS","Segoe UI",system-ui,sans-serif;
+    --math:"Cambria Math","Times New Roman",Georgia,serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:#fff;background:radial-gradient(circle at 20% 0%,#5a2a9c 0%,#2a0f4a 45%,#12051f 100%) fixed;-webkit-tap-highlight-color:transparent}
+  #app{max-width:1100px;margin:0 auto;padding:10px 12px 24px;display:flex;flex-direction:column;gap:10px}
+
+  .topbar{display:flex;align-items:center;justify-content:center;position:relative}
+  .back{position:absolute;left:0;color:#fff;text-decoration:none;font-weight:600;font-size:.95rem;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.5);border-radius:99px;padding:.2em .8em}
+  .back:hover{background:rgba(255,255,255,.25)}
+  .logo{font-weight:700;font-size:clamp(1.3rem,3.6vw,2.2rem);letter-spacing:.5px;text-shadow:0 3px 0 #1b0b30,0 0 18px rgba(255,95,176,.6)}
+  .logo .c1{color:var(--jaune)} .logo .c2{color:#7ee0ff} .logo .c3{color:var(--rose)}
+  .logo .two{display:inline-block;background:var(--rouge);color:#fff;border:3px solid #1b0b30;border-radius:10px;padding:0 .35em;margin-left:.2em;transform:rotate(-8deg);box-shadow:0 3px 0 #1b0b30}
+
+  .stage{position:relative;width:min(100%, calc(54vh * 16 / 9));aspect-ratio:16/9;margin:0 auto;border-radius:18px;overflow:hidden;border:4px solid #1b0b30;box-shadow:0 8px 0 #1b0b30,0 18px 40px rgba(0,0,0,.5);background:#000}
+  canvas{display:block;width:100%;height:100%}
+  .hud{position:absolute;inset:8px 8px auto 8px;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;pointer-events:none}
+  .hud-left,.hud-right{display:flex;gap:6px;align-items:center}
+  .hud-right{pointer-events:auto}
+  .pill{background:rgba(27,11,48,.78);border:3px solid #fff;border-radius:999px;padding:.15em .7em;font-weight:700;font-size:clamp(.75rem,2.1vw,1.2rem);box-shadow:0 3px 0 rgba(0,0,0,.35);white-space:nowrap}
+  .timer{font-size:clamp(.95rem,2.8vw,1.6rem);min-width:4.4em;text-align:center}
+  .timer.urgent{background:var(--rouge);animation:pulse .5s infinite alternate}
+  @keyframes pulse{to{transform:scale(1.1)}}
+  .zone{font-size:clamp(.65rem,1.7vw,.95rem);align-self:center}
+  .icon{pointer-events:auto;font-size:clamp(.85rem,2.1vw,1.15rem);width:2.1em;height:2.1em;border-radius:50%;border:3px solid #fff;background:rgba(27,11,48,.78);color:#fff;cursor:pointer}
+  .icon.off{opacity:.45;text-decoration:line-through}
+  .track{position:absolute;left:12%;right:12%;bottom:10px;height:12px;border-radius:99px;background:rgba(27,11,48,.7);border:2px solid #fff}
+  .track-fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:99px;background:linear-gradient(90deg,var(--vert),var(--jaune));transition:width .5s}
+  .tk{position:absolute;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;display:grid;place-items:center;font-weight:700;border:3px solid #fff;font-size:15px;transition:left .5s}
+  .tk.hero{left:0;background:var(--bleu)} .tk.boss{left:100%;background:#6a1b9a}
+  .skip{position:absolute;right:10px;bottom:30px;font-family:var(--font);font-weight:700;font-size:clamp(.8rem,2vw,1rem);color:#fff;background:rgba(27,11,48,.8);border:3px solid #fff;border-radius:99px;padding:.3em .9em;cursor:pointer}
+  .skip.hidden{display:none}
+
+  .panel{width:min(100%, 820px);margin:0 auto;background:linear-gradient(180deg,#fff9ef,#ffeccc);color:var(--encre);border:4px solid #1b0b30;border-radius:20px;padding:14px 16px 16px;box-shadow:0 7px 0 #1b0b30;display:flex;flex-direction:column;gap:10px}
+  .q-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .consigne{font-weight:700;font-size:clamp(.95rem,2.4vw,1.15rem)}
+  .qnum{font-size:.9rem;color:#6b5a7b;display:flex;gap:8px;align-items:center}
+  .tries{letter-spacing:2px;font-size:1rem}
+  .expr{font-family:var(--math);font-size:clamp(1.4rem,4.6vw,2.3rem);text-align:center;background:#fff;border:3px dashed #c9a96b;border-radius:14px;padding:.3em .4em;min-height:2.2em;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;transition:filter .2s}
+  .expr.wait{font-family:var(--font);font-size:clamp(1rem,2.6vw,1.3rem);color:#8a7a99}
+  .expr.blurred{filter:blur(10px)}
+  sup{font-size:.62em}
+  .fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.82em;margin:0 .12em;line-height:1.15}
+  .fr>span:first-child{border-bottom:2px solid currentColor;padding:0 .2em .05em}
+  .fr>span:last-child{padding-top:.05em}
+  .sq>span{border-top:2px solid currentColor;padding:0 .08em;margin-left:.03em}
+  .ansrow{display:flex;gap:8px;flex-wrap:wrap}
+  #ans{flex:1;min-width:180px;font-family:"Consolas","Courier New",monospace;font-size:max(16px,1.25rem);padding:.5em .7em;border:3px solid #1b0b30;border-radius:12px;background:#fff;color:var(--encre);outline:none}
+  #ans:focus{box-shadow:0 0 0 4px rgba(61,123,255,.35)}
+  #ans:disabled{background:#eee}
+  .btn{font-family:var(--font);font-weight:700;font-size:clamp(1rem,2.6vw,1.2rem);cursor:pointer;color:#fff;background:var(--vert);border:3px solid #1b0b30;border-radius:12px;padding:.45em 1em;box-shadow:0 4px 0 #1b0b30;transition:transform .08s}
+  .btn:active{transform:translateY(3px);box-shadow:0 1px 0 #1b0b30}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn.none{background:#8a5cd6;font-size:clamp(.85rem,2.2vw,1rem)}
+  .btn.big{font-size:clamp(1.2rem,3.4vw,1.6rem);padding:.5em 1.6em;background:var(--rouge)}
+  .btn.alt{background:var(--bleu)}
+  .btn.quit{display:inline-block;text-decoration:none;background:#7a6a8f;font-size:clamp(.9rem,2.4vw,1.05rem)}
+  .btn.quit:hover{background:#8d7da3}
+  .preview{font-size:.95rem;min-height:1.3em;color:#5b4a6b}
+  .keys{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+  .key{font-family:"Consolas","Courier New",monospace;font-weight:700;font-size:1.05rem;padding:.4em 0;border-radius:10px;border:2px solid #1b0b30;background:#ffe29a;color:var(--encre);cursor:pointer;box-shadow:0 3px 0 #1b0b30;touch-action:manipulation}
+  .key:active{transform:translateY(2px);box-shadow:0 1px 0 #1b0b30}
+  .key.del{background:#ffb3b3}
+  .feedback{min-height:1.6em;font-weight:600;font-size:clamp(.95rem,2.4vw,1.1rem);text-align:center;border-radius:10px;padding:.2em .5em}
+  .feedback.ok{background:#d6ffe6;color:#0d6b35}
+  .feedback.warn{background:#fff1c7;color:#8a5a00}
+  .feedback.ko{background:#ffe0e3;color:#a1122a}
+  .hint{display:block;margin-top:6px;padding:.35em .7em;border-radius:10px;background:#fff7d6;color:#6b4a00;border:2px dashed #e0b84f;font-weight:600}
+  .shake{animation:shake .35s}
+  @keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+  .help{font-size:.85rem;opacity:.75;text-align:center;line-height:1.6}
+  .help code{background:#fff;border:1px solid #c9a96b;border-radius:5px;padding:0 .3em}
+
+  .overlay{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:16px;background:rgba(18,5,31,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+  .overlay.hidden{display:none}
+  .card{width:min(660px,100%);max-height:calc(100vh - 32px);overflow:auto;background:linear-gradient(180deg,#3b1670,#24093f);border:4px solid #fff;border-radius:24px;padding:22px 22px 24px;text-align:center;box-shadow:0 10px 0 #12051f,0 20px 60px rgba(0,0,0,.6)}
+  .card .logo{font-size:clamp(1.8rem,7vw,3rem);margin-bottom:6px}
+  .card h2{font-size:clamp(1.4rem,5vw,2rem);margin:4px 0 10px;color:var(--jaune);text-shadow:0 3px 0 #12051f}
+  .card p{line-height:1.45;margin:8px 0;font-size:clamp(.95rem,2.6vw,1.08rem)}
+  .card ul{list-style:none;text-align:left;margin:12px auto;max-width:520px;display:grid;gap:6px}
+  .card li{background:rgba(255,255,255,.08);border-radius:12px;padding:.45em .7em;font-size:clamp(.88rem,2.4vw,1rem)}
+  .card code{background:rgba(255,255,255,.16);border-radius:6px;padding:0 .35em;font-family:"Consolas","Courier New",monospace}
+  .credit{font-size:.8rem !important;opacity:.75}
+  .version{font-size:.75rem;opacity:.6;margin-top:10px}
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0}
+  .stat{background:rgba(255,255,255,.1);border-radius:14px;padding:.5em}
+  .stat b{display:block;font-size:1.6rem;color:var(--jaune)}
+  .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  .choose{font-weight:700;margin-top:14px}
+  .classes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+  .cls{font-family:var(--font);color:#fff;cursor:pointer;border:3px solid rgba(255,255,255,.55);border-radius:14px;padding:8px 4px;background:rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:center;gap:2px;transition:transform .1s}
+  .cls b{font-size:1.25rem} .cls small{font-size:.72rem;opacity:.85;line-height:1.3}
+  .cls.on{background:linear-gradient(180deg,#ffd23f,#e0a400);color:#1b0b30;border-color:#fff;box-shadow:0 4px 0 #12051f;transform:translateY(-2px)}
+  .levels{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+  .lvl{font-family:var(--font);color:#fff;cursor:pointer;border:3px solid #fff;border-radius:16px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 5px 0 #12051f;transition:transform .1s}
+  .lvl:hover{transform:translateY(-3px)} .lvl:active{transform:translateY(2px);box-shadow:0 2px 0 #12051f}
+  .lvl b{font-size:1.2rem} .lvl small{font-size:.8rem;opacity:.9;line-height:1.35} .lv-ico{font-size:1.8rem}
+  .lvl.easy{background:linear-gradient(180deg,#3ddc84,#1f9a57)} .lvl.normal{background:linear-gradient(180deg,#3d7bff,#2348b8)} .lvl.hard{background:linear-gradient(180deg,#ff4757,#9b1023)}
+  .rec{font-size:.78rem;background:rgba(0,0,0,.25);border-radius:99px;padding:.1em .6em;min-height:1.3em}
+  .rec:empty{display:none}
+  .sol-card{text-align:left}
+  .sol-card h2{text-align:center}
+  .sol-pen{text-align:center;color:#ffb3b3;font-weight:600}
+  .sol-eq{font-family:var(--math);font-size:clamp(1.15rem,3.6vw,1.5rem);text-align:center;background:rgba(255,255,255,.1);border-radius:12px;padding:6px;margin-top:8px}
+  .sol{background:#fff9ef;color:var(--encre);border:3px solid #1b0b30;border-radius:14px;padding:10px 14px;margin-top:8px;font-family:var(--math);font-size:clamp(1rem,3.2vw,1.3rem);display:grid;gap:7px}
+  .sol .ln{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px}
+  .sol .ln.final{background:#d6ffe6;border-radius:8px;padding:3px 8px;font-weight:700}
+  .sol .ln.txt{font-family:var(--font);font-size:.82em}
+  .sol .note{font-family:var(--font);font-size:.74rem;color:#6b5a7b;background:#f1e6ff;border-radius:99px;padding:.05em .6em}
+  .score-box{background:rgba(255,255,255,.08);border-radius:16px;padding:10px;margin:10px 0}
+  .score-lvl{font-weight:700;opacity:.9}
+  .score-big{font-size:clamp(2.4rem,9vw,3.6rem);font-weight:700;color:var(--jaune);text-shadow:0 4px 0 #12051f;line-height:1.1}
+  .score-rec{min-height:1.3em;font-weight:600}
+  .score-rec.new{color:#3ddc84;animation:pulse .6s infinite alternate}
+  .score-detail{margin:6px auto 0;border-collapse:collapse;font-size:.9rem}
+  .score-detail td{padding:2px 8px} .score-detail td:last-child{text-align:right;font-weight:700}
+  .work{display:flex;gap:12px;align-items:flex-start;justify-content:center;width:100%}
+  .work .panel{margin:0;flex:0 1 820px;min-width:0}
+  .calc{flex:0 0 250px;background:linear-gradient(180deg,#2b3550,#1b2238);border:4px solid #1b0b30;border-radius:20px;padding:10px;box-shadow:0 7px 0 #1b0b30;display:flex;flex-direction:column;gap:8px}
+  .calc.hidden{display:none}
+  .calc-title{position:relative}
+  .calc-hide{position:absolute;right:0;top:-2px;font-family:var(--font);font-weight:700;color:#fff;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.6);border-radius:99px;width:1.8em;height:1.8em;cursor:pointer}
+  .calc-toggle{font-family:var(--font);font-weight:700;font-size:.85rem;color:#1b0b30;background:#c9dcff;border:2px solid #1b0b30;border-radius:99px;padding:.1em .7em;cursor:pointer;box-shadow:0 2px 0 #1b0b30}
+  .calc-toggle.hidden{display:none}
+  .calc-toggle.on{background:#3ddc84}
+  .opt{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;font-size:.92rem;background:rgba(255,255,255,.08);border-radius:12px;padding:.45em .7em;cursor:pointer;text-align:left}
+  .opt input{width:1.2em;height:1.2em;accent-color:#3ddc84;flex:none}
+  .opt.hidden{display:none}
+  .tbar{height:10px;border-radius:99px;background:#eadfcf;border:2px solid #1b0b30;overflow:hidden;margin-top:-4px;visibility:hidden}
+  .tbar.on{visibility:visible}
+  .tbar>div{height:100%;width:100%;background:linear-gradient(90deg,#3ddc84,#ffd23f)}
+  .tbar.low>div{background:#ff4757}
+  .calc-title{font-weight:700;text-align:center}
+  #calcIn{font-family:"Consolas","Courier New",monospace;font-size:max(16px,1.05rem);padding:.4em .5em;border-radius:10px;border:2px solid #1b0b30;background:#eef7e8;color:#1b0b30;width:100%;outline:none}
+  #calcIn:focus{box-shadow:0 0 0 3px rgba(61,220,132,.5)}
+  .calc-out{font-family:"Consolas","Courier New",monospace;font-size:1.15rem;text-align:right;background:#cfe8c0;color:#1b0b30;border-radius:8px;padding:.25em .5em;min-height:1.7em;overflow-wrap:anywhere}
+  .calc-out.err{color:#a1122a;font-size:.85rem;text-align:left}
+  .calc-keys{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+  .ck{font-family:"Consolas","Courier New",monospace;font-weight:700;font-size:1rem;padding:.45em 0;border-radius:9px;border:2px solid #1b0b30;background:#e8ecf5;color:#1b0b30;cursor:pointer;box-shadow:0 3px 0 #0d1020;touch-action:manipulation}
+  .ck:active{transform:translateY(2px);box-shadow:0 1px 0 #0d1020}
+  .ck.op{background:#ffe29a} .ck.fn{background:#c9dcff} .ck.cl{background:#ffb3b3} .ck.eq{background:#3ddc84;grid-column:span 4}
+  .calc-help{font-size:.74rem;opacity:.85;text-align:center;line-height:1.35}
+  @media (max-width:900px){.work{flex-direction:column;align-items:stretch}.calc{flex:none;width:min(100%,820px);margin:0 auto}}
+  @media (max-width:560px){
+    .levels{grid-template-columns:1fr}
+    .classes{grid-template-columns:repeat(2,1fr)}
+    .lvl{flex-direction:row;flex-wrap:wrap;justify-content:center;column-gap:10px}
+    #app{padding:6px 6px 18px;gap:8px}
+    .stage{border-radius:12px;border-width:3px}
+    .panel{padding:10px;border-radius:16px}
+    .keys{grid-template-columns:repeat(5,1fr);gap:4px}
+    .key{font-size:1rem}
+    .track{left:16%;right:16%;bottom:6px;height:9px}
+    .tk{width:22px;height:22px;margin:-11px 0 0 -11px;font-size:12px;border-width:2px}
+    .hud{inset:5px 5px auto 5px}
+    .zone{display:none}
+    .topbar{justify-content:flex-end}
+    .back{font-size:.85rem;padding:.15em .6em}
+    .logo{font-size:1.25rem}
+    .icon{width:1.9em;height:1.9em;border-width:2px}
+    .pill{border-width:2px;padding:.1em .5em}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <a class="back" href="../jeu.html" title="Tous les jeux">← Jeux</a>
+    <div class="logo"><span class="c1">Super</span> <span class="c2">Calcul</span> <span class="c3">Dash</span><span class="two">2</span></div>
+  </header>
+
+  <div class="stage" id="stage">
+    <canvas id="cv" aria-label="Scène du jeu : la Princesse Pi court sur les rails"></canvas>
+    <div class="hud">
+      <div class="hud-left"><div class="pill timer" id="timer">⏱ —</div><div class="pill" id="hearts">❤️❤️❤️</div></div>
+      <div class="pill zone" id="zoneName">Royaume de Fantasmath</div>
+      <div class="hud-right">
+        <div class="pill" id="score">★ 0</div>
+        <button class="icon" id="btnPause" title="Pause" aria-label="Pause">⏸</button>
+        <button class="icon" id="btnMusic" title="Musique" aria-label="Couper la musique">🎵</button>
+        <button class="icon" id="btnMute" title="Tout le son" aria-label="Couper tout le son">🔊</button>
+      </div>
+    </div>
+    <div class="track"><div class="track-fill" id="trackFill"></div><div class="tk hero" id="tkHero">π</div><div class="tk boss">ζ</div></div>
+    <button class="skip hidden" id="btnSkip" type="button">Passer la fin ▶</button>
+  </div>
+
+  <div class="work">
+  <section class="panel" id="panel">
+    <div class="q-head">
+      <div class="consigne" id="consigne">Résous dans ℝ l'équation :</div>
+      <div class="qnum"><button type="button" class="calc-toggle hidden" id="btnCalc">🧮 Calculatrice</button><span id="qnum"></span> <span class="tries" id="tries" title="Essais restants"></span></div>
+    </div>
+    <div class="expr wait" id="expr">Choisis ta classe et ton niveau pour partir !</div>
+    <div class="tbar" id="tbar" aria-hidden="true"><div id="tbarFill"></div></div>
+    <div class="ansrow">
+      <input id="ans" type="text" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+             placeholder="ex : 3 ; −1/2" aria-label="Ta réponse : la ou les solutions">
+      <button class="btn" type="button" id="btnOk">Valider</button>
+      <button class="btn none" type="button" id="btnNone" title="L'équation n'a pas de solution">∅ Aucune solution</button>
+    </div>
+    <div class="preview" id="preview"></div>
+    <div class="keys" id="keys">
+      <button type="button" class="key" data-k=" ; ">;</button>
+      <button type="button" class="key" data-k="/">/</button>
+      <button type="button" class="key" data-k="-">−</button>
+      <button type="button" class="key" data-k="√(">√</button>
+      <button type="button" class="key" data-k="ln(">ln</button>
+      <button type="button" class="key" data-k="e^(">eˣ</button>
+      <button type="button" class="key" data-k="^">^</button>
+      <button type="button" class="key" data-k="(">(</button>
+      <button type="button" class="key" data-k=")">)</button>
+      <button type="button" class="key del" data-k="DEL">⌫</button>
+    </div>
+    <div class="feedback" id="fb"></div>
+    <div class="help">Plusieurs solutions : sépare-les par <code>;</code> · Fraction : <code>-3/2</code> · Racine : <code>√5</code> ou <code>sqrt(5)</code><br>
+      ln et exponentielle : <code>ln(3)/2</code>, <code>e^2</code>, <code>(e^3-1)/2</code> · Donne des <b>valeurs exactes</b> · Entrée pour valider</div>
+  </section>
+  <aside class="calc hidden" id="calc" aria-label="Calculatrice">
+    <div class="calc-title">🧮 Calculatrice <button type="button" class="calc-hide" id="btnCalcHide" title="Masquer la calculatrice">✕</button></div>
+    <input id="calcIn" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="ex : 5^2-4*2*(-3)" aria-label="Calcul">
+    <div class="calc-out" id="calcOut">&nbsp;</div>
+    <div class="calc-keys" id="calcKeys">
+      <button type="button" class="ck cl" data-c="C">C</button><button type="button" class="ck op" data-c="(">(</button><button type="button" class="ck op" data-c=")">)</button><button type="button" class="ck op" data-c="^">^</button><button type="button" class="ck cl" data-c="DEL">⌫</button>
+      <button type="button" class="ck" data-c="7">7</button><button type="button" class="ck" data-c="8">8</button><button type="button" class="ck" data-c="9">9</button><button type="button" class="ck op" data-c="/">÷</button><button type="button" class="ck fn" data-c="√(">√</button>
+      <button type="button" class="ck" data-c="4">4</button><button type="button" class="ck" data-c="5">5</button><button type="button" class="ck" data-c="6">6</button><button type="button" class="ck op" data-c="*">×</button><button type="button" class="ck fn" data-c="^2">x²</button>
+      <button type="button" class="ck" data-c="1">1</button><button type="button" class="ck" data-c="2">2</button><button type="button" class="ck" data-c="3">3</button><button type="button" class="ck op" data-c="-">−</button><button type="button" class="ck fn" data-c="ln(">ln</button>
+      <button type="button" class="ck" data-c="0">0</button><button type="button" class="ck" data-c=",">,</button><button type="button" class="ck fn" data-c="Ans">Ans</button><button type="button" class="ck op" data-c="+">+</button><button type="button" class="ck fn" data-c="e^(">eˣ</button>
+      <button type="button" class="ck fn" data-c="e">e</button><button type="button" class="ck eq" data-c="=">=</button>
+    </div>
+    <div class="calc-help">Clavier : chiffres, + − * / ^ ( ) · Entrée = calculer · Échap = effacer.<br>Les résultats sont <b>approchés</b> : ta réponse, elle, doit être <b>exacte</b> !</div>
+  </aside>
+</div>
+</div>
+
+<!-- Accueil -->
+<div class="overlay" id="startScreen">
+  <div class="card">
+    <div class="logo"><span class="c1">Super</span> <span class="c2">Calcul</span> <span class="c3">Dash</span><span class="two">2</span></div>
+    <p>Catastrophe : l'infâme <b>Zêta</b> a capturé <b>Racine</b>, le poète dramaturge ! Il l'emporte dans sa cage jusqu'au fin fond des Abysses, en lâchant sur ses rails des obstacles… et des équations.</p>
+    <p>Toi, la <b>Princesse Pi</b>, tu fonces à son secours. Résous chaque équation <b>avant que l'obstacle n'arrive</b> et tu l'esquiveras.</p>
+    <ul>
+      <li>⏳ Quand une équation apparaît, le temps ralentit : l'obstacle approche doucement… mais il approche.</li>
+      <li>✅ Bonne réponse : Pi <b>saute</b>, <b>glisse</b> ou <b>change de rail</b>. Plus tu réponds vite, plus tu gagnes de points.</li>
+      <li>🔁 <b>3 essais</b> par équation, avec un rappel du cours après une erreur.</li>
+      <li>💥 Temps écoulé ou 3 erreurs : Pi percute l'obstacle et perd un <b>cœur</b> ❤️ (correction détaillée à lire). <b>3 cœurs</b> en tout.</li>
+      <li>🎯 Passe les <b>20 obstacles</b> des 5 mondes pour libérer Racine !</li>
+      <li>🧮 En 1re et en Terminale, une <b>calculatrice</b> (facultative) peut s'afficher à côté des équations du 2nd degré, exponentielles et logarithmiques.</li>
+      <li>⏱ Le temps laissé pour chaque équation augmente au fil des mondes, quand les calculs deviennent plus costauds.</li>
+    </ul>
+    <p class="choose">1. Choisis ta classe :</p>
+    <div class="classes" id="classes">
+      <button class="cls on" data-cls="3e"><b>3e</b><small>1er degré<br>produit nul</small></button>
+      <button class="cls" data-cls="2de"><b>2de</b><small>+ quotients<br>(fonctions homographiques)</small></button>
+      <button class="cls" data-cls="1re"><b>1re</b><small>+ 2nd degré<br>(discriminant)</small></button>
+      <button class="cls" data-cls="Tle"><b>Tle</b><small>+ exponentielle<br>et logarithme</small></button>
+    </div>
+    <label class="opt" id="optCalcRow"><input type="checkbox" id="optCalc" checked> 🧮 Avoir la calculatrice pour les équations du 2nd degré, exponentielles et logarithmiques</label>
+    <p class="choose">2. Choisis ton niveau pour partir :</p>
+    <div class="levels">
+      <button class="lvl easy" data-lvl="easy"><span class="lv-ico">🌱</span><b>Facile</b><small>calculs simples (tables de 2, 3, 5)<br>beaucoup de temps</small><span class="rec" data-rec="easy"></span></button>
+      <button class="lvl normal" data-lvl="normal"><span class="lv-ico">⚔️</span><b>Intermédiaire</b><small>calculs un peu plus variés<br>points × 1,5</small><span class="rec" data-rec="normal"></span></button>
+      <button class="lvl hard" data-lvl="hard"><span class="lv-ico">🔥</span><b>Hardcore</b><small>développer, factoriser, tables de 7, 8, 9<br>points × 2,5</small><span class="rec" data-rec="hard"></span></button>
+    </div>
+    <p class="credit">Personnages de <b>Super Calcul Bros 2</b>, librement inspirés de <b>Super Mario Bros.</b> · Gameplay librement inspiré de <b>Subway Surfers</b></p>
+    <div class="row"><a class="btn quit" href="../jeu.html">← Retour aux jeux</a></div>
+    <div class="version">Version 3</div>
+  </div>
+</div>
+
+<!-- Pause -->
+<div class="overlay hidden" id="pauseScreen">
+  <div class="card">
+    <h2>⏸ Pause</h2>
+    <p>Zêta reprend son souffle… mais pas longtemps !</p>
+    <div class="row"><button class="btn big" id="btnResume">Reprendre</button></div>
+    <div class="row"><a class="btn quit" href="../jeu.html">← Quitter la partie</a></div>
+  </div>
+</div>
+
+<!-- Correction -->
+<div class="overlay hidden" id="solScreen">
+  <div class="card sol-card">
+    <h2>📖 Correction</h2>
+    <p class="sol-pen" id="solPen"></p>
+    <div class="sol-eq" id="solEq"></div>
+    <div class="hint" id="solHint"></div>
+    <div class="sol" id="solSteps"></div>
+    <div class="row"><button class="btn big" id="btnCont">Reprendre la course ▶</button></div>
+  </div>
+</div>
+
+<!-- Fin -->
+<div class="overlay hidden" id="endScreen">
+  <div class="card">
+    <h2 id="endTitle">Victoire !</h2>
+    <p id="endText"></p>
+    <div class="score-box">
+      <div class="score-lvl" id="scLvl"></div>
+      <div class="score-big" id="scTotal">0</div>
+      <div class="score-rec" id="scRec"></div>
+      <table class="score-detail" id="scDetail"></table>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="stOk">0</b>obstacles esquivés</div>
+      <div class="stat"><b id="stKo">0</b>essais ratés</div>
+      <div class="stat"><b id="stPct">0 %</b>de réussite</div>
+      <div class="stat"><b id="stCoins">0</b>pièces π</div>
+    </div>
+    <div class="row"><button class="btn big" id="btnAgain">↻ Rejouer</button><button class="btn big alt" id="btnLevels">Changer de niveau</button></div>
+    <p class="credit">Personnages de <b>Super Calcul Bros 2</b>, librement inspirés de <b>Super Mario Bros.</b> · Gameplay librement inspiré de <b>Subway Surfers</b></p>
+    <div class="row"><a class="btn quit" href="../jeu.html">← Retour aux jeux</a></div>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* =====================================================================
+   1. OUTILS
+   ===================================================================== */
+const R = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const nz = (min, max) => { let v; do { v = R(-max, max); } while (Math.abs(v) < min); return v; };
+const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) { [a, b] = [b, a % b]; } return a; };
+const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const seeded = i => { const s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/* =====================================================================
+   2. ÉCRITURE MATHÉMATIQUE (HTML)
+   ===================================================================== */
+const MN = "−";
+const N = n => (n < 0 ? MN + Math.abs(n) : "" + n);           // nombre avec vrai signe moins
+const P = n => (n < 0 ? "(" + N(n) + ")" : N(n));               // entre parenthèses si négatif
+const X2 = "x<sup>2</sup>";
+function sumH(terms) {                                          // [[coef, "x"], [coef, ""]] -> "3x − 5"
+  let s = "";
+  for (const [c, v] of terms) {
+    if (!c) continue;
+    const a = Math.abs(c), body = v ? (a === 1 ? "" : a) + v : "" + a;
+    s += s ? (c < 0 ? " − " : " + ") + body : (c < 0 ? MN : "") + body;
+  }
+  return s || "0";
+}
+const lin = (a, b) => sumH([[a, "x"], [b, ""]]);
+const fracH = (a, b) => `<span class="fr"><span>${a}</span><span>${b}</span></span>`;
+function frac(n, d) { if (d < 0) { n = -n; d = -d; } const g = gcd(n, d) || 1; return { n: n / g, d: d / g }; }
+function qH(n, d) { const q = frac(n, d); return q.d === 1 ? N(q.n) : (q.n < 0 ? MN : "") + fracH(Math.abs(q.n), q.d); }
+const solQ = (n, d) => ({ v: n / d, h: qH(n, d) });
+const solI = n => ({ v: n, h: N(n) });
+const isSq = n => n >= 0 && Math.round(Math.sqrt(n)) ** 2 === n;
+function sqrtSimp(n) { let f = 1; for (let k = 2; k * k <= n; k++) while (n % (k * k) === 0) { n /= k * k; f *= k; } return { f, g: n }; }
+const sqH = n => `<span class="sq">√<span>${n}</span></span>`;
+function sqrtH(n) { const { f, g } = sqrtSimp(n); return g === 1 ? "" + f : (f > 1 ? f : "") + sqH(g); }
+/* (p + k√g) / d, avec k signé */
+function surdH(p, k, g, d) {
+  if (d < 0) { p = -p; k = -k; d = -d; }
+  const G = gcd(gcd(p, k), d) || 1; p /= G; k /= G; d /= G;
+  const ka = Math.abs(k), rad = (ka === 1 ? "" : ka) + sqH(g);
+  const num = p ? `${N(p)} ${k < 0 ? "−" : "+"} ${rad}` : (k < 0 ? MN : "") + rad;
+  return d === 1 ? num : fracH(num, d);
+}
+const eH = k => (k === 0 ? "1" : k === 1 ? "e" : `e<sup>${N(k)}</sup>`);
+const expH = inner => `e<sup>${inner}</sup>`;
+const setH = sols => sols.length ? `S = { ${sols.map(s => s.h).join(" ; ")} }` : "S = ∅";
+
+/* =====================================================================
+   3. GÉNÉRATEURS D'ÉQUATIONS
+   Chaque générateur renvoie : eq (HTML), sols [{v,h}], steps [[html, note]], hint, time (s), bad (valeurs piège)
+   ===================================================================== */
+/* Niveau de calcul : Facile = tables de 2, 3, 5 ; Hardcore = jusqu'à la table de 9 */
+const CO = { easy: [2, 3, 5], normal: [2, 3, 4, 5, 6, 10], hard: [2, 3, 4, 5, 6, 7, 8, 9] };
+const isEasy = () => G.diff === "easy", isHard = () => G.diff === "hard";
+const cf = () => pick(CO[G.diff] || CO.normal);
+const sg = () => (Math.random() < .5 ? 1 : -1);
+function quadSteps(a, b, c, rootsH) {
+  const D = b * b - 4 * a * c, st = [];
+  st.push([`Δ = b<sup>2</sup> − 4ac = ${P(b)}<sup>2</sup> − 4 × ${P(a)} × ${P(c)} = ${N(D)}`, `a = ${N(a)}, b = ${N(b)}, c = ${N(c)}`]);
+  if (D < 0) st.push(["Δ < 0 : l'équation n'a pas de solution réelle.", ""]);
+  else if (D === 0) st.push([`Δ = 0 : une seule solution x<sub>0</sub> = ${fracH("−b", "2a")} = ${fracH(N(-b), N(2 * a))} = ${rootsH[0]}`, ""]);
+  else {
+    const r = isSq(D) ? "" + Math.sqrt(D) : sqH(D);
+    st.push([`Δ > 0 : deux solutions`, ""]);
+    st.push([`x<sub>1</sub> = ${fracH("−b − √Δ", "2a")} = ${fracH(N(-b) + " − " + r, N(2 * a))} = ${rootsH[0]}`, ""]);
+    st.push([`x<sub>2</sub> = ${fracH("−b + √Δ", "2a")} = ${fracH(N(-b) + " + " + r, N(2 * a))} = ${rootsH[1]}`, ""]);
+  }
+  return st;
+}
+/* trinôme à racines rationnelles : (m x − p)(n x − q) × s */
+function niceQuad() {
+  let m, n, p, q;
+  do {
+    if (isEasy()) { m = n = 1; p = nz(1, 6); q = nz(1, 6); }
+    else if (!isHard()) { m = pick([1, 1, 1, 2]); n = 1; p = nz(1, 7); q = nz(1, 7); }
+    else { m = pick([1, 1, 2, 3]); n = pick([1, 1, 2, 3]); p = nz(1, 9); q = nz(1, 9); }
+  } while (p * n === q * m || Math.abs(m * n) > 6);
+  const s = isEasy() ? 1 : isHard() ? pick([1, 1, -1]) : pick([1, 1, 1, -1]);
+  const a = s * m * n, b = -s * (m * q + n * p), c = s * p * q;
+  let r = [[p, m], [q, n]].sort((u, v) => u[0] / u[1] - v[0] / v[1]);
+  if (a < 0) r.reverse();                                  // x1 = (−b − √Δ)/(2a)
+  return { a, b, c, sols: r.map(([x, y]) => solQ(x, y)) };
+}
+const vInt = q => ({ v: q.v, why: q.why });
+
+const GEN = {
+  /* ---- 3e ---- */
+  lin0() {                                                       // x + b = c  ou  ax = c (premiers pas)
+    const s = R(-4, 9);
+    if (Math.random() < .5) { const b = nz(1, 10), c = s + b;
+      return { eq: `${lin(1, b)} = ${N(c)}`, sols: [solI(s)], time: 22, hint: "lin",
+        steps: [[`x = ${N(c)} ${b > 0 ? "−" : "+"} ${Math.abs(b)}`, `on ${b > 0 ? "soustrait" : "ajoute"} ${Math.abs(b)} aux deux membres`], [`x = ${N(s)}`, ""]] }; }
+    const a = cf(), c = a * s;
+    return { eq: `${lin(a, 0)} = ${N(c)}`, sols: [solI(s)], time: 22, hint: "lin",
+      steps: [[`x = ${fracH(N(c), a)}`, `on divise les deux membres par ${a}`], [`x = ${N(s)}`, ""]] };
+  },
+  lin1() {
+    const a = isEasy() ? cf() : cf() * (Math.random() < (isHard() ? .4 : .2) ? -1 : 1);
+    const s = isEasy() ? R(-4, 9) : isHard() ? R(-9, 12) : R(-6, 10), b = nz(1, isEasy() ? 10 : isHard() ? 20 : 12), c = a * s + b;
+    return { eq: `${lin(a, b)} = ${N(c)}`, sols: [solI(s)], time: 30, hint: "lin",
+      steps: [[`${lin(a, 0)} = ${N(c)} ${b > 0 ? "−" : "+"} ${Math.abs(b)}`, `on ${b > 0 ? "soustrait" : "ajoute"} ${Math.abs(b)} aux deux membres`],
+              [`${lin(a, 0)} = ${N(c - b)}`, ""], [`x = ${fracH(N(c - b), N(a))}`, `on divise par ${N(a)}`], [`x = ${N(s)}`, ""]] };
+  },
+  lin2() {
+    let a, c; do { a = cf() * (isHard() ? sg() : 1); c = (Math.random() < .3 ? 1 : cf()) * (isHard() ? sg() : 1); } while (a === c);
+    const s = isHard() ? R(-9, 9) : R(-5, 8), b = R(-10, 10), d = (a - c) * s + b;
+    return { eq: `${lin(a, b)} = ${lin(c, d)}`, sols: [solI(s)], time: 40, hint: "lin2",
+      steps: [[`${sumH([[a, "x"], [-c, "x"]])} = ${sumH([[d, ""], [-b, ""]])}`, "les x à gauche, les nombres à droite"],
+              [`${lin(a - c, 0)} = ${N(d - b)}`, ""], [`x = ${fracH(N(d - b), N(a - c))} = ${N(s)}`, `on divise par ${N(a - c)}`]] };
+  },
+  lin3() {
+    const k = nz(2, 5), a = R(1, 3), b = nz(1, 6); let c; do { c = nz(1, 9); } while (c === k * a);
+    const d = nz(1, 15), A = k * a - c, B = d - k * b;
+    return { eq: `${N(k)}(${lin(a, b)}) = ${lin(c, d)}`, sols: [solQ(B, A)], time: 50, hint: "lin3",
+      steps: [[`${lin(k * a, k * b)} = ${lin(c, d)}`, "on développe"],
+              [`${sumH([[k * a, "x"], [-c, "x"]])} = ${sumH([[d, ""], [-k * b, ""]])}`, "les x à gauche, les nombres à droite"],
+              [`${lin(A, 0)} = ${N(B)}`, ""], [`x = ${fracH(N(B), N(A))} = ${qH(B, A)}`, ""]] };
+  },
+  prod() {
+    let a, b, c, d;
+    do {
+      if (isEasy()) { a = c = 1; b = nz(1, 9); d = nz(1, 9); }
+      else if (!isHard()) { a = pick([1, 1, 2, 3, 5]); c = pick([1, 1, 2]); b = nz(1, 9); d = nz(1, 9); }
+      else { a = R(1, 9); c = R(1, 7); b = nz(1, 9); d = nz(1, 9); }
+    } while (b * c === a * d || (a === c && b === d));
+    const s1 = solQ(-b, a), s2 = solQ(-d, c);
+    return { eq: `(${lin(a, b)})(${lin(c, d)}) = 0`, sols: [s1, s2], time: 40, hint: "prod",
+      steps: [["Un produit de facteurs est nul si et seulement si l'un au moins des facteurs est nul :", "txt"],
+              [`${lin(a, b)} = 0 &nbsp;&nbsp;ou&nbsp;&nbsp; ${lin(c, d)} = 0`, ""],
+              [`${lin(a, 0)} = ${N(-b)} &nbsp;&nbsp;ou&nbsp;&nbsp; ${lin(c, 0)} = ${N(-d)}`, ""],
+              [`x = ${s1.h} &nbsp;&nbsp;ou&nbsp;&nbsp; x = ${s2.h}`, ""]] };
+  },
+  prodX() {
+    const dev = isHard(), a = isEasy() ? pick([1, 2, 3, 5]) : cf() * (dev ? sg() : 1), b = isEasy() ? a * nz(1, 5) : nz(1, 9);
+    const s2 = solQ(-b, a), eq = dev ? `${sumH([[a, X2], [b, "x"]])} = 0` : `x(${lin(a, b)}) = 0`;
+    const st = []; if (dev) st.push([`x(${lin(a, b)}) = 0`, "on factorise par x"]);
+    st.push(["Un produit est nul si et seulement si l'un de ses facteurs est nul :", "txt"],
+            [`x = 0 &nbsp;&nbsp;ou&nbsp;&nbsp; ${lin(a, b)} = 0`, ""], [`x = 0 &nbsp;&nbsp;ou&nbsp;&nbsp; x = ${s2.h}`, ""]);
+    return { eq, sols: [solI(0), s2], time: dev ? 45 : 35, hint: "prodX", steps: st };
+  },
+  sq() {
+    const r = Math.random(); let k;
+    if (r < .5) k = R(1, 12) ** 2; else if (r < .78) k = pick([2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 15, 18, 20, 27, 32, 50]); else k = -R(1, 20);
+    const m = Math.random() < .5 ? 0 : nz(1, 9);
+    const eq = m ? `${X2} ${m > 0 ? "+" : "−"} ${Math.abs(m)} = ${N(k + m)}` : `${X2} = ${N(k)}`;
+    const st = []; if (m) st.push([`${X2} = ${N(k)}`, m > 0 ? `on soustrait ${m}` : `on ajoute ${-m}`]);
+    let sols = [];
+    if (k < 0) st.push([`Un carré est toujours positif ou nul : ${X2} = ${N(k)} n'a pas de solution.`, "txt"]);
+    else {
+      const h = sqrtH(k), raw = isSq(k) ? "" : ` = ${sqH(k)}`;
+      st.push([`${N(k)} > 0 : deux solutions, x = √${k} ou x = −√${k}`, "txt"]);
+      st.push([`x = ${MN}${h} &nbsp;&nbsp;ou&nbsp;&nbsp; x = ${h}`, raw && h !== sqH(k) ? "√" + k + " = " + h : ""]);
+      sols = [{ v: -Math.sqrt(k), h: MN + h }, { v: Math.sqrt(k), h }];
+    }
+    return { eq, sols, time: 35, hint: "sq", steps: st };
+  },
+  /* ---- 2de ---- */
+  homo0() {
+    let a, b, c, d;
+    do {
+      if (isEasy()) { a = 1; c = 1; b = nz(1, 9); d = nz(1, 9); }
+      else if (!isHard()) { a = pick([1, 2, 3, 5]); c = pick([1, 1, 2]); const r = nz(1, 6); b = -a * r; d = nz(1, 9); }
+      else { a = nz(1, 7); b = nz(1, 9); c = nz(1, 5); d = nz(1, 9); }
+    } while (b * c === a * d);
+    const f = solQ(-d, c), s = solQ(-b, a);
+    return { eq: `${fracH(lin(a, b), lin(c, d))} = 0`, sols: [s], time: 45, hint: "homo", bad: [{ v: f.v, why: "interdite" }],
+      steps: [[`Valeur interdite : ${lin(c, d)} = 0 ⟺ x = ${f.h}`, "le dénominateur ne doit pas s'annuler"],
+              ["Un quotient est nul si et seulement si son numérateur est nul (et son dénominateur non nul) :", "txt"],
+              [`${lin(a, b)} = 0`, ""], [`x = ${s.h}`, `≠ ${f.h} ✔`]] };
+  },
+  homoK() {
+    let a, b, c, d, k, A, B;
+    if (isHard()) {
+      do { a = nz(1, 6); b = R(-9, 9); c = nz(1, 3); d = nz(1, 9); k = nz(1, 5); A = a - k * c; B = k * d - b; }
+      while (A === 0 || B * c === -d * A || Math.abs(A) > 9);
+    } else {                                                     // solution entière, petits nombres
+      let s;
+      do { s = R(-5, 8); c = isEasy() ? 1 : pick([1, 1, 2]); d = nz(1, 9); k = isEasy() ? pick([2, 3, 5]) : pick([2, 3, 4, 5, -2]);
+        a = isEasy() ? 1 : pick([1, 2, 3, 5]); b = k * (c * s + d) - a * s; A = a - k * c; B = k * d - b; }
+      while (A === 0 || c * s + d === 0 || Math.abs(b) > (isEasy() ? 20 : 30));
+    }
+    const f = solQ(-d, c), s = solQ(B, A);
+    return { eq: `${fracH(lin(a, b), lin(c, d))} = ${N(k)}`, sols: [s], time: 55, hint: "homoK", bad: [{ v: f.v, why: "interdite" }],
+      steps: [[`Valeur interdite : x = ${f.h}`, `car ${lin(c, d)} = 0 pour cette valeur`],
+              [`${lin(a, b)} = ${k === 1 ? lin(c, d) : N(k) + "(" + lin(c, d) + ")"}`, "on multiplie par le dénominateur (non nul)"],
+              [`${lin(a, b)} = ${lin(k * c, k * d)}`, ""], [`${lin(A, 0)} = ${N(B)}`, ""], [`x = ${s.h}`, `≠ ${f.h} ✔`]] };
+  },
+  homoNone() {
+    let a, b, c, d, k; do { c = nz(1, 3); k = nz(1, 4); a = k * c; d = nz(1, 9); b = R(-9, 9); } while (k * d === b || Math.abs(a) > 9);
+    const f = solQ(-d, c);
+    return { eq: `${fracH(lin(a, b), lin(c, d))} = ${N(k)}`, sols: [], time: 60, hint: "homoK", bad: [{ v: f.v, why: "interdite" }],
+      steps: [[`Valeur interdite : x = ${f.h}`, ""], [`${lin(a, b)} = ${lin(k * c, k * d)}`, "on multiplie par le dénominateur (non nul)"],
+              [`${N(b)} = ${N(k * d)}`, "les x s'éliminent !"], ["C'est impossible : l'équation n'a pas de solution.", "txt"]] };
+  },
+  quotProd() {
+    let a, b, c, d; do { a = R(1, 3); b = nz(1, 7); c = R(1, 3); d = nz(1, 7); } while (b * c === a * d);
+    const s1 = solQ(-b, a), s2 = solQ(-d, c), cancel = Math.random() < .5;
+    let e = c, f = d; if (!cancel) { e = 1; do { f = nz(1, 8); } while (-f === s1.v || -f === s2.v); }
+    const fz = solQ(-f, e), sols = cancel ? [s1] : [s1, s2].sort((u, v) => u.v - v.v);
+    const st = [[`Valeur interdite : ${lin(e, f)} = 0 ⟺ x = ${fz.h}`, ""],
+      ["Le quotient est nul si et seulement si le numérateur est nul (et le dénominateur non nul) :", "txt"],
+      [`${lin(a, b)} = 0 &nbsp;&nbsp;ou&nbsp;&nbsp; ${lin(c, d)} = 0`, "produit nul"], [`x = ${s1.h} &nbsp;&nbsp;ou&nbsp;&nbsp; x = ${s2.h}`, ""]];
+    if (cancel) st.push([`Mais ${s2.h} est la valeur interdite : on l'exclut !`, "txt"]);
+    return { eq: `${fracH(`(${lin(a, b)})(${lin(c, d)})`, lin(e, f))} = 0`, sols, time: 60, hint: "quotProd",
+      bad: [{ v: fz.v, why: "interdite" }], steps: st };
+  },
+  /* ---- 1re ---- */
+  quad() {
+    const { a, b, c, sols } = niceQuad();
+    return { eq: `${sumH([[a, X2], [b, "x"], [c, ""]])} = 0`, sols, time: 70, hint: "quad", steps: quadSteps(a, b, c, sols.map(s => s.h)) };
+  },
+  quad0() {
+    const m = isEasy() ? 1 : pick([1, 1, 2, 3]), p = nz(1, 6), s = isEasy() ? 1 : pick([1, -1]); if (gcd(m, p) !== 1) return GEN.quad0();
+    const a = s * m * m, b = -2 * s * m * p, c = s * p * p, r = solQ(p, m);
+    return { eq: `${sumH([[a, X2], [b, "x"], [c, ""]])} = 0`, sols: [r], time: 65, hint: "quad", steps: quadSteps(a, b, c, [r.h]) };
+  },
+  quadNeg() {
+    let a, b, c; do { a = isEasy() ? 1 : nz(1, 3); b = R(-6, 6); c = R(1, 9) * Math.sign(a); } while (b * b - 4 * a * c >= 0);
+    return { eq: `${sumH([[a, X2], [b, "x"], [c, ""]])} = 0`, sols: [], time: 60, hint: "quad", steps: quadSteps(a, b, c, []) };
+  },
+  quadIrr() {
+    let a, b, c, D; do { a = pick([1, 1, -1, 2]); b = R(-7, 7); c = R(-9, 9); D = b * b - 4 * a * c; } while (D <= 0 || isSq(D) || D > 120 || c === 0);
+    const { f, g } = sqrtSimp(D);
+    let r = [{ v: (-b - Math.sqrt(D)) / (2 * a), h: surdH(-b, -f, g, 2 * a) }, { v: (-b + Math.sqrt(D)) / (2 * a), h: surdH(-b, f, g, 2 * a) }];
+    const st = quadSteps(a, b, c, r.map(s => s.h));
+    if (f > 1) st.splice(1, 0, [`√${D} = ${sqrtH(D)}`, "on simplifie la racine"]);
+    return { eq: `${sumH([[a, X2], [b, "x"], [c, ""]])} = 0`, sols: r, time: 85, hint: "quad", steps: st };
+  },
+  quadRHS() {
+    const { a, b, c, sols } = niceQuad(); let d, e; do { d = R(-5, 5); e = R(-9, 9); } while (!d && !e);
+    const st = [[`${sumH([[a, X2], [b, "x"], [c, ""]])} = 0`, "on ramène tout dans le membre de gauche"], ...quadSteps(a, b, c, sols.map(s => s.h))];
+    return { eq: `${sumH([[a, X2], [b + d, "x"], [c + e, ""]])} = ${lin(d, e)}`, sols, time: 85, hint: "quadRHS", steps: st };
+  },
+  /* ---- Terminale ---- */
+  expLin() {
+    const a = isEasy() ? 1 : isHard() ? pick([1, 2, 3, -1, 2, 4]) : pick([1, 1, 2, 3]), b = isEasy() ? R(-3, 3) : R(-4, 4),
+      none = Math.random() < .15, k = none ? -R(0, 5) : isEasy() ? pick([2, 3, 5, 10]) : pick([2, 3, 5, 6, 7, 10, 1, 4]);
+    const eq = `${expH(lin(a, b))} = ${N(k)}`;
+    if (none) return { eq, sols: [], time: 45, hint: "expLin", steps: [[`Pour tout réel X, e<sup>X</sup> > 0 : e<sup>X</sup> = ${N(k)} n'a pas de solution.`, "txt"]] };
+    let h;
+    if (k === 1) h = qH(-b, a);
+    else { const L = `ln ${k}`, num = a > 0 ? (b ? `${L} ${b > 0 ? "−" : "+"} ${Math.abs(b)}` : L) : (b ? `${N(b)} − ${L}` : MN + L); h = Math.abs(a) === 1 ? num : fracH(num, Math.abs(a)); }
+    const st = [[`${lin(a, b)} = ${k === 1 ? "0" : "ln " + k}`, k === 1 ? "e<sup>X</sup> = 1 ⟺ X = 0" : "e<sup>X</sup> = k ⟺ X = ln k (k > 0)"]];
+    if (b) st.push([`${lin(a, 0)} = ${k === 1 ? N(-b) : `ln ${k} ${b > 0 ? "−" : "+"} ${Math.abs(b)}`}`, ""]);
+    st.push([`x = ${h}`, Math.abs(a) !== 1 ? `on divise par ${N(a)}` : a < 0 ? "on multiplie par −1" : ""]);
+    return { eq, sols: [{ v: (Math.log(k) - b) / a, h }], time: 60, hint: "expLin", steps: st };
+  },
+  expEq() {
+    const a = isEasy() ? pick([1, 2, 3]) : nz(1, 5); let c; do { c = isEasy() ? pick([1, 2, 3, 5]) : nz(1, 5); } while (c === a);
+    const s = R(-6, 6), b = R(-6, 6), d = (a - c) * s + b, one = Math.random() < .25 && b % a === 0 && b !== 0;
+    if (one) return { eq: `${expH(lin(a, b))} = 1`, sols: [solQ(-b, a)], time: 40, hint: "expEq",
+      steps: [[`${expH(lin(a, b))} = e<sup>0</sup>`, "1 = e⁰"], [`${lin(a, b)} = 0`, "e<sup>A</sup> = e<sup>B</sup> ⟺ A = B"], [`x = ${qH(-b, a)}`, ""]] };
+    return { eq: `${expH(lin(a, b))} = ${expH(lin(c, d))}`, sols: [solI(s)], time: 50, hint: "expEq",
+      steps: [[`${lin(a, b)} = ${lin(c, d)}`, "e<sup>A</sup> = e<sup>B</sup> ⟺ A = B"], [`${lin(a - c, 0)} = ${N(d - b)}`, ""], [`x = ${N(s)}`, ""]] };
+  },
+  expSq() {
+    const r1 = R(-4, 4); let r2; do { r2 = R(-4, 5); } while (r2 === r1);
+    const p = -(r1 + r2), q = r1 * r2;                       // x² + p x + q = 0  <=>  e^(x² + p x) = e^(−q)
+    const sols = [solI(Math.min(r1, r2)), solI(Math.max(r1, r2))];
+    return { eq: `${expH(sumH([[1, X2], [p, "x"]]))} = ${eH(-q)}`, sols, time: 70, hint: "expEq",
+      steps: [[`${sumH([[1, X2], [p, "x"]])} = ${N(-q)}`, "e<sup>A</sup> = e<sup>B</sup> ⟺ A = B"], [`${sumH([[1, X2], [p, "x"], [q, ""]])} = 0`, ""],
+              ...quadSteps(1, p, q, sols.map(s => s.h))] };
+  },
+  lnLin() {
+    const a = isEasy() ? 1 : isHard() ? pick([1, 2, 3, -1, 2]) : pick([1, 1, 2, 3]), b = R(-5, 5), k = isEasy() ? R(0, 2) : R(-1, 3);
+    let h;
+    if (k === 0) h = qH(1 - b, a);
+    else { const E = eH(k), num = a > 0 ? (b ? `${E} ${b > 0 ? "−" : "+"} ${Math.abs(b)}` : E) : (b ? `${N(b)} − ${E}` : MN + E); h = Math.abs(a) === 1 ? num : fracH(num, Math.abs(a)); }
+    const st = [[`Domaine : ${lin(a, b)} > 0`, "ln n'est défini que sur ]0 ; +∞["], [`${lin(a, b)} = ${eH(k)}`, "ln X = k ⟺ X = e<sup>k</sup>"]];
+    if (b) st.push([`${lin(a, 0)} = ${k === 0 ? N(1 - b) : `${eH(k)} ${b > 0 ? "−" : "+"} ${Math.abs(b)}`}`, ""]);
+    st.push([`x = ${h}`, `et ${lin(a, b)} = ${eH(k)} > 0 ✔`]);
+    return { eq: `ln(${lin(a, b)}) = ${N(k)}`, sols: [{ v: (Math.exp(k) - b) / a, h }], time: 60, hint: "lnLin", steps: st };
+  },
+  lnEq() {
+    let a, b, c, d, x, ok;
+    do { a = R(1, 5); c = R(1, 5); b = R(-8, 8); d = R(-8, 8); } while (a === c || (d - b) % (a - c) !== 0 || (d - b) === 0);
+    x = (d - b) / (a - c); ok = a * x + b > 0;
+    const st = [[`Domaine : ${lin(a, b)} > 0 et ${lin(c, d)} > 0`, ""], [`${lin(a, b)} = ${lin(c, d)}`, "ln A = ln B ⟺ A = B"],
+                [`${lin(a - c, 0)} = ${N(d - b)}`, ""], [`x = ${N(x)}`, ""]];
+    const ev = `${a === 1 ? "" : a + " × "}${P(x)}${b ? (b < 0 ? " − " : " + ") + Math.abs(b) : ""}`;
+    st.push(ok ? [`Vérification : ${ev} = ${a * x + b} > 0 ✔`, ""]
+               : [`Mais pour x = ${N(x)} : ${ev} = ${N(a * x + b)} ≤ 0. Hors du domaine : aucune solution !`, "txt"]);
+    return { eq: `ln(${lin(a, b)}) = ln(${lin(c, d)})`, sols: ok ? [solI(x)] : [], time: 60, hint: "lnEq", bad: ok ? [] : [{ v: x, why: "domaine" }], steps: st };
+  },
+  expProd() {
+    const k = pick([1, 2, 3, 5, 7]), plus = Math.random() < .25, a = R(1, 4), b = nz(1, 8), s2 = solQ(-b, a);
+    const s1 = { v: Math.log(k), h: k === 1 ? "0" : "ln " + k };
+    const sols = plus ? [s2] : [s1, s2].sort((u, v) => u.v - v.v);
+    return { eq: `(${expH("x")} ${plus ? "+" : "−"} ${k})(${lin(a, b)}) = 0`, sols, time: 55, hint: "expProd",
+      steps: [["Un produit est nul si et seulement si l'un de ses facteurs est nul :", "txt"],
+              [`${expH("x")} = ${plus ? MN : ""}${k} &nbsp;&nbsp;ou&nbsp;&nbsp; ${lin(a, b)} = 0`, ""],
+              [plus ? `${expH("x")} = ${MN}${k} : impossible car e<sup>x</sup> > 0 &nbsp;&nbsp;ou&nbsp;&nbsp; x = ${s2.h}` : `x = ${s1.h} &nbsp;&nbsp;ou&nbsp;&nbsp; x = ${s2.h}`, ""]] };
+  },
+  expQuad() {
+    const r1 = R(1, 6); let r2; do { r2 = Math.random() < .6 ? R(1, 6) : -R(1, 5); } while (r2 === r1);
+    const p = -(r1 + r2), q = r1 * r2, roots = [r1, r2].sort((u, v) => u - v);
+    const sols = roots.filter(r => r > 0).map(r => ({ v: Math.log(r), h: r === 1 ? "0" : "ln " + r }));
+    const st = [["On pose X = e<sup>x</sup> (avec X > 0) :", "txt"], [sumH([[1, "X<sup>2</sup>"], [p, "X"], [q, ""]]) + " = 0", "e<sup>2x</sup> = (e<sup>x</sup>)<sup>2</sup>"],
+      ...quadSteps(1, p, q, roots.map(N)).map(([h, n]) => [h.replace(/x<sub>/g, "X<sub>"), n])];
+    roots.forEach(r => st.push(r > 0 ? [`e<sup>x</sup> = ${r} ⟺ x = ${r === 1 ? "0" : "ln " + r}`, ""] : [`e<sup>x</sup> = ${N(r)} : impossible car e<sup>x</sup> > 0`, ""]));
+    return { eq: `${sumH([[1, "e<sup>2x</sup>"], [p, "e<sup>x</sup>"], [q, ""]])} = 0`, sols, time: 85, hint: "expQuad", steps: st };
+  },
+  lnQuad() {
+    const r1 = R(-3, 3); let r2; do { r2 = R(-3, 3); } while (r2 === r1);
+    const p = -(r1 + r2), q = r1 * r2, roots = [r1, r2].sort((u, v) => u - v);
+    const sols = roots.map(r => ({ v: Math.exp(r), h: eH(r) }));
+    const eqH = `(ln x)<sup>2</sup>${p ? ` ${p < 0 ? "−" : "+"} ${Math.abs(p) === 1 ? "" : Math.abs(p)}ln x` : ""}${q ? ` ${q < 0 ? "−" : "+"} ${Math.abs(q)}` : ""} = 0`;
+    const st = [["Domaine : x > 0. On pose X = ln x :", "txt"], [sumH([[1, "X<sup>2</sup>"], [p, "X"], [q, ""]]) + " = 0", ""],
+      ...quadSteps(1, p, q, roots.map(N)).map(([h, n]) => [h.replace(/x<sub>/g, "X<sub>"), n])];
+    roots.forEach(r => st.push([`ln x = ${N(r)} ⟺ x = ${eH(r)}`, ""]));
+    return { eq: eqH, sols, time: 85, hint: "lnQuad", steps: st };
+  },
+  lnSum() {
+    const a = R(1, 6), r = R(1, 6), b = r * (r + a), r2 = -(r + a);
+    return { eq: `ln x + ln(x + ${a}) = ln ${b}`, sols: [solI(r)], time: 85, hint: "lnSum", bad: [{ v: r2, why: "domaine" }],
+      steps: [["Domaine : x > 0 et x + " + a + " > 0, donc x > 0", "txt"], [`ln(x(x + ${a})) = ln ${b}`, "ln A + ln B = ln(AB)"],
+              [`${sumH([[1, X2], [a, "x"]])} = ${b}`, "ln A = ln B ⟺ A = B"], [`${sumH([[1, X2], [a, "x"], [-b, ""]])} = 0`, ""],
+              ...quadSteps(1, a, -b, [N(r2), N(r)]), [`${N(r2)} < 0 n'est pas dans le domaine : on ne garde que x = ${r}.`, "txt"]] };
+  },
+};
+
+const HINTS = {
+  lin: "Pour isoler x : on ajoute (ou soustrait) le même nombre aux deux membres, puis on divise les deux membres par le même nombre non nul.",
+  lin2: "On regroupe les termes en x dans un membre et les nombres dans l'autre, puis on divise.",
+  lin3: "On développe d'abord : k(a + b) = ka + kb. Puis on regroupe les x d'un côté et les nombres de l'autre.",
+  prod: "Un produit de facteurs est nul si et seulement si l'un au moins de ses facteurs est nul. N'oublie aucune solution !",
+  prodX: "Un produit est nul si et seulement si l'un de ses facteurs est nul. Si besoin, factorise d'abord (facteur commun).",
+  sq: "x² = k : si k > 0, deux solutions √k et −√k ; si k = 0, une seule solution 0 ; si k < 0, aucune solution.",
+  homo: "Cherche d'abord la valeur interdite (dénominateur nul). A/B = 0 ⟺ A = 0 et B ≠ 0.",
+  homoK: "A/B = k ⟺ A = k × B, avec B ≠ 0. N'oublie pas de vérifier la valeur interdite !",
+  quotProd: "Valeur interdite d'abord ! Puis le quotient est nul ⟺ le numérateur est nul : c'est un produit nul.",
+  quad: "Δ = b² − 4ac. Si Δ > 0 : x = (−b ± √Δ) / (2a). Si Δ = 0 : x = −b / (2a). Si Δ < 0 : aucune solution réelle.",
+  quadRHS: "Ramène tout dans un seul membre pour obtenir ax² + bx + c = 0, puis calcule Δ = b² − 4ac.",
+  expLin: "eˣ > 0 pour tout x. Si k > 0 : e^X = k ⟺ X = ln k. Si k ≤ 0 : aucune solution.",
+  expEq: "La fonction exponentielle est strictement croissante : e^A = e^B ⟺ A = B.",
+  lnLin: "ln X = k ⟺ X = e^k (avec X > 0).",
+  lnEq: "ln A = ln B ⟺ A = B, avec A > 0 et B > 0 : vérifie que ta solution est dans le domaine !",
+  expProd: "Produit nul : l'un des facteurs est nul. Et eˣ = k ⟺ x = ln k si k > 0 (impossible si k ≤ 0).",
+  expQuad: "Pose X = eˣ (X > 0) : e^(2x) = X². Résous l'équation du 2nd degré en X, puis eˣ = X.",
+  lnQuad: "Pose X = ln x : tu obtiens une équation du 2nd degré en X. Puis ln x = X ⟺ x = e^X.",
+  lnSum: "ln a + ln b = ln(ab). Puis ln A = ln B ⟺ A = B. N'oublie pas le domaine : x > 0 !",
+};
+
+/* Programme par classe : un réservoir de générateurs par monde (4 obstacles par monde) */
+const CLASSES = {
+  "3e": { name: "3e", pools: {
+    easy:   [["lin0"], ["lin0", "lin1"], ["lin1", "prod"], ["prod", "lin1", "prodX"], ["prod", "prodX", "lin1"]],
+    normal: [["lin1"], ["lin1", "lin2"], ["lin2", "prod"], ["prod", "lin2", "prodX"], ["prod", "lin2", "prodX"]],
+    hard:   [["lin1", "lin2"], ["lin2", "prod"], ["lin3", "prod", "prodX"], ["lin3", "prod", "prodX"], ["lin3", "prodX", "prod", "lin2"]] } },
+  "2de": { name: "2de", pools: {
+    easy:   [["lin1", "prod", "homo0"], ["homo0", "prod", "homo0"], ["homo0", "homoK"], ["homoK", "homo0"], ["homoK", "homo0", "homoK", "prod"]],
+    normal: [["lin2", "prod", "homo0"], ["homo0", "homoK"], ["homoK", "homo0", "quotProd"], ["homoK", "quotProd"], ["homoK", "quotProd", "homoNone", "homoK"]],
+    hard:   [["homo0", "homoK", "lin3"], ["homoK", "quotProd"], ["homoK", "quotProd", "homoNone"], ["quotProd", "homoK", "sq"], ["homoK", "quotProd", "homoNone", "quotProd"]] } },
+  "1re": { name: "1re", pools: {
+    easy:   [["lin1", "prod", "quad"], ["quad", "quad0", "quad"], ["quad", "quadNeg", "quad"], ["quad", "quad0", "quadNeg"], ["quad", "quadNeg", "quad0", "homoK"]],
+    normal: [["prod", "homoK", "quad"], ["quad", "quad0", "quad"], ["quad", "quadNeg", "quadIrr"], ["quadIrr", "quad", "quadRHS"], ["quadRHS", "quadIrr", "quadNeg", "quad"]],
+    hard:   [["quad", "homoK", "quad"], ["quad", "quadIrr", "quad0"], ["quadIrr", "quadNeg", "quadRHS"], ["quadIrr", "quadRHS", "quad"], ["quadRHS", "quadIrr", "quadNeg", "quotProd"]] } },
+  "Tle": { name: "Terminale", pools: {
+    easy:   [["expEq", "quad", "expEq"], ["expLin", "lnLin", "expEq"], ["expLin", "lnLin", "expProd"], ["expLin", "lnLin", "lnEq"], ["expProd", "lnEq", "expLin", "lnLin"]],
+    normal: [["expEq", "expLin", "quad"], ["expLin", "lnLin", "expEq"], ["lnEq", "expProd", "lnLin"], ["expQuad", "lnEq", "expLin"], ["expQuad", "lnQuad", "expProd", "lnEq"]],
+    hard:   [["expLin", "lnLin", "expEq"], ["lnEq", "expProd", "expSq"], ["expQuad", "lnQuad", "lnEq"], ["expQuad", "lnQuad", "lnSum"], ["lnSum", "expSq", "lnQuad", "expQuad"]] } },
+};
+const DIFFS = {
+  easy: { name: "Facile", ico: "🌱", f: 1.4, mult: 1 },
+  normal: { name: "Intermédiaire", ico: "⚔️", f: 1.1, mult: 1.5 },
+  hard: { name: "Hardcore", ico: "🔥", f: .85, mult: 2.5 },
+};
+
+/* =====================================================================
+   4. LECTURE ET VÉRIFICATION DE LA RÉPONSE (analyseur maison, sans eval)
+   ===================================================================== */
+function tokenize(src) {
+  let s = src.toLowerCase().replace(/[−–—]/g, "-").replace(/[×·]/g, "*").replace(/÷/g, "/").replace(/,/g, ".")
+    .replace(/²/g, "^2").replace(/³/g, "^3").replace(/racine|sqrt|rac/g, "√").replace(/exp/g, "E");
+  const t = []; let i = 0;
+  while (i < s.length) {
+    const ch = s[i];
+    if (ch === " ") { i++; continue; }
+    if (/[0-9.]/.test(ch)) { let j = i; while (j < s.length && /[0-9.]/.test(s[j])) j++; const str = s.slice(i, j);
+      if (str === "." || (str.match(/\./g) || []).length > 1) throw "nombre mal écrit : « " + str + " »"; t.push({ k: "n", v: parseFloat(str) }); i = j; continue; }
+    if (s.startsWith("ln", i)) { t.push({ k: "f", v: "ln" }); i += 2; continue; }
+    if (ch === "E") { t.push({ k: "f", v: "exp" }); i++; continue; }
+    if (ch === "√") { t.push({ k: "f", v: "sqrt" }); i++; continue; }
+    if (ch === "e") { t.push({ k: "n", v: Math.E }); i++; continue; }
+    if ("+-*/^()".includes(ch)) { t.push({ k: ch }); i++; continue; }
+    if (ch === "x") throw "donne des nombres, sans x (ex : 3 ; −1/2)";
+    throw "symbole inconnu : « " + ch + " »";
+  }
+  return t;
+}
+function evalStr(src) {
+  const t = tokenize(src); let p = 0;
+  const eat = k => (t[p] && t[p].k === k ? (p++, true) : false);
+  const starts = x => x && (x.k === "n" || x.k === "f" || x.k === "(");
+  function expr() { let v = term(); for (;;) { if (eat("+")) v += term(); else if (eat("-")) v -= term(); else return v; } }
+  function term() { let v = unary(); for (;;) { if (eat("*")) v *= unary(); else if (eat("/")) v /= unary(); else if (starts(t[p])) v *= power(); else return v; } }
+  function unary() { if (eat("-")) return -unary(); if (eat("+")) return unary(); return power(); }
+  function power() { const b = primary(); if (eat("^")) return Math.pow(b, unary()); return b; }
+  function primary() {
+    const x = t[p]; if (!x) throw "expression incomplète";
+    if (x.k === "n") { p++; return x.v; }
+    if (x.k === "(") { p++; const v = expr(); if (!eat(")")) throw "parenthèse non fermée"; return v; }
+    if (x.k === "f") { p++; const a = power(); return x.v === "ln" ? Math.log(a) : x.v === "sqrt" ? Math.sqrt(a) : Math.exp(a); }
+    throw "expression mal écrite";
+  }
+  const v = expr(); if (p < t.length) throw "expression mal écrite";
+  if (!isFinite(v)) throw "valeur impossible à calculer (division par 0, ln ou √ d'un négatif ?)";
+  return v;
+}
+const NONE_RE = /^(∅|\{\s*\}|aucune?( solution)?s?|pas de solutions?|rien|impossible|vide|s\s*=\s*∅)$/;
+function readAnswer(raw) {
+  let s = raw.trim().toLowerCase().replace(/^s\s*=\s*/, "").replace(/,\s+/g, " ; ").trim();
+  if (NONE_RE.test(s)) return { none: true, vals: [] };
+  s = s.replace(/[{}\[\]]/g, " ");
+  const parts = s.split(/;|\bou\b|\bet\b/).map(x => x.trim()).filter(Boolean);
+  if (!parts.length) throw "réponse vide";
+  const vals = [];
+  for (let p of parts) { p = p.replace(/^x\s*[₀-₉0-9]?\s*=\s*/, ""); const v = evalStr(p); if (!vals.some(w => same(v, w))) vals.push(v); }
+  return { none: false, vals };
+}
+const same = (a, b) => Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(b));
+const near = (a, b) => Math.abs(a - b) <= 5e-3 * Math.max(1, Math.abs(b));
+
+function checkAnswer(raw, q) {
+  let r; try { r = readAnswer(raw); } catch (e) { return { status: "warn", msg: "Je ne comprends pas ta réponse : " + e + "." }; }
+  const exp = q.sols.map(s => s.v), bad = q.bad || [];
+  if (r.none) return exp.length ? { status: "wrong", msg: "Il y a pourtant au moins une solution…" } : { status: "ok" };
+  const found = exp.filter(e => r.vals.some(v => same(v, e))).length, extras = r.vals.filter(v => !exp.some(e => same(v, e)));
+  if (found === exp.length && !extras.length) return { status: "ok" };
+  if (extras.some(v => exp.some(e => near(v, e))))
+    return { status: "warn", msg: "C'est une valeur approchée ! Donne la valeur exacte (fraction, √, ln, e…)." };
+  const trap = extras.map(v => bad.find(b => same(v, b.v))).find(Boolean);
+  if (trap) return { status: "wrong", msg: trap.why === "interdite" ? "Une de tes valeurs est une valeur interdite : le dénominateur s'y annule !"
+                                                                : "Une de tes valeurs n'est pas dans le domaine de définition !" };
+  if (!exp.length) return { status: "wrong", msg: "Vérifie : tes valeurs sont-elles vraiment solutions ?" };
+  if (extras.some(v => exp.some(e => same(v, -e) && e !== 0))) return { status: "wrong", msg: "Attention au signe !" };
+  if (found && found < exp.length && !extras.length) return { status: "wrong", msg: `Bon début, mais il manque ${exp.length - found > 1 ? "des solutions" : "une solution"}.` };
+  if (found === exp.length) return { status: "wrong", msg: "Tu as trouvé les solutions… mais une de tes valeurs est en trop." };
+  if (found) return { status: "wrong", msg: "Une partie est juste, mais pas tout." };
+  return { status: "wrong", msg: "Ce n'est pas ça…" };
+}
+
+/* ---- Moteur audio repris de Super Calcul Bros 2 ---- */
+const mf = n => 440 * Math.pow(2, (n - 69) / 12);
+const PROG = [
+  [[48, 0], [45, 1], [41, 0], [43, 0]],   // Fantasmath : doux, majeur
+  [[48, 0], [43, 0], [45, 1], [41, 0]],   // Plaines
+  [[45, 1], [41, 0], [48, 0], [43, 0]],   // Forêt
+  [[45, 1], [50, 1], [45, 1], [52, 0]],   // Désert : mineur harmonique
+  [[50, 1], [46, 0], [43, 1], [45, 0]],   // Abysses : ré mineur, lourd
+];
+const TEMPO = [86, 100, 114, 130, 150];
+const SND = {
+  ctx: null, on: true, running: false, zone: 0, pending: 0, step: 0, next: 0, urgent: false,
+  init() {
+    if (this.ctx) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const c = this.ctx = new AC();
+    const comp = c.createDynamicsCompressor(); comp.connect(c.destination);
+    this.master = c.createGain(); this.master.gain.value = this.on ? .8 : 0; this.master.connect(comp);
+    this.music = c.createGain(); this.music.gain.value = .55; this.music.connect(this.master);
+    this.fx = c.createGain(); this.fx.gain.value = .7; this.fx.connect(this.master);
+    const buf = c.createBuffer(1, c.sampleRate, c.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    this.noiseBuf = buf;
+    setInterval(() => this.tick(), 25);
+  },
+  start() { this.init(); if (!this.ctx) return; this.ctx.resume(); this.zone = this.pending = 0; this.step = 0;
+            this.next = this.ctx.currentTime + .1; this.running = true; },
+  stop() { this.running = false; },
+  setZone(z) { this.pending = z; },
+  toggle() { this.on = !this.on; if (this.master) this.master.gain.value = this.on ? .8 : 0; return this.on; },
+  tempo() { return TEMPO[this.zone] * (this.urgent ? 1.12 : 1); },
+  tick() {
+    if (!this.running || !this.ctx) return;
+    while (this.next < this.ctx.currentTime + .15) {
+      if (this.step % 16 === 0) this.zone = this.pending;
+      this.playStep(this.step, this.next);
+      this.next += 60 / this.tempo() / 4;
+      this.step++;
+    }
+  },
+  note(freq, t, dur, type, vol, o = {}) {
+    const c = this.ctx, osc = c.createOscillator(), g = c.createGain();
+    osc.type = type; osc.frequency.setValueAtTime(freq, t);
+    if (o.slide) osc.frequency.exponentialRampToValueAtTime(o.slide, t + dur);
+    const at = o.attack || .008;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(vol, t + at);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + Math.max(dur, at + .02));
+    let node = osc;
+    if (o.cutoff) { const f = c.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = o.cutoff; f.Q.value = o.q || 1; osc.connect(f); node = f; }
+    node.connect(g); g.connect(o.dest || this.music);
+    osc.start(t); osc.stop(t + dur + .05);
+  },
+  noise(t, dur, vol, hp, dest) {
+    const c = this.ctx, s = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
+    s.buffer = this.noiseBuf; f.type = "highpass"; f.frequency.value = hp;
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(dest || this.music); s.start(t); s.stop(t + dur + .02);
+  },
+  kick(t, v = .9) { this.note(150, t, .18, "sine", v, { slide: 40 }); },
+  snare(t, v = .35) { this.noise(t, .16, v, 1400); this.note(190, t, .08, "triangle", v * .5); },
+  hat(t, v = .12) { this.noise(t, .035, v, 7000); },
+  playStep(s, t) {
+    const z = this.zone, st = s % 16, bar = Math.floor(s / 16) % 4, sd = 60 / this.tempo() / 4;
+    const [root, minor] = PROG[z][bar];
+    const ch = [root, root + (minor ? 3 : 4), root + 7];
+    // Nappe
+    if (st === 0) ch.forEach(n => this.note(mf(n + 12), t, sd * 16, z >= 4 ? "sawtooth" : "triangle",
+      z >= 4 ? .022 : .04, { attack: .3, cutoff: z >= 4 ? 900 : 2600 }));
+    // Basse
+    if (z === 0 && st === 0) this.note(mf(root - 12), t, sd * 15, "sine", .09, { attack: .1 });
+    if (z === 1 && (st === 0 || st === 8 || st === 6)) this.note(mf(root - 12 + (st === 6 ? 7 : 0)), t, sd * 5, "triangle", .14);
+    if (z === 2 && st % 4 === 0) this.note(mf(root - 12 + (st === 12 ? 7 : 0)), t, sd * 3, "triangle", .17);
+    if (z === 3 && st % 2 === 0) this.note(mf(root - 12 + (st % 8 === 4 ? 12 : 0)), t, sd * 1.7, "sawtooth", .11, { cutoff: 650 });
+    if (z === 4 && st % 2 === 0) this.note(mf(root - 24 + (st % 4 === 2 ? 12 : 0)), t, sd * 1.8, "sawtooth", .17, { cutoff: 520, q: 4 });
+    // Arpèges / mélodies
+    if (z === 0 && st % 4 === 0) this.note(mf(ch[(st / 4) % 3] + 24), t, .6, "triangle", .05);
+    if (z === 0 && st === 14 && bar % 2) this.note(mf(ch[2] + 36), t, .5, "sine", .03);
+    if (z === 1 && st % 2 === 0) this.note(mf(ch[(st / 2) % 3] + 24), t, sd * 1.8, "triangle", .045);
+    if (z === 2 && st % 2 === 0) this.note(mf(ch[[0, 1, 2, 1][(st / 2) % 4]] + 24 + (st >= 8 ? 12 : 0)), t, sd * 1.6, "square", .022, { cutoff: 1900 });
+    if (z === 3) {
+      const riff = [0, null, 3, null, 7, 8, 7, null, 3, null, 1, null, 0, null, null, -1];
+      const r = riff[st]; if (r !== null) this.note(mf(root + 24 + r), t, sd * 1.7, "square", .03, { cutoff: 2200 });
+    }
+    if (z === 4) {
+      this.note(mf(ch[st % 3] + 24 + (st % 6 === 0 ? 12 : 0)), t, sd * .9, "sawtooth", .018, { cutoff: 1600 });
+      if ([0, 3, 6, 10].includes(st)) this.note(mf(ch[0] + 36), t, sd * 1.4, "square", .028, { cutoff: 2600 });
+    }
+    // Percussions
+    if ((z === 2 && (st === 0 || st === 8)) || (z === 3 && st % 4 === 0) || (z === 4 && [0, 4, 8, 10, 12].includes(st))) this.kick(t);
+    if ((z === 3 || z === 4) && (st === 4 || st === 12)) this.snare(t);
+    if (z === 4 && st === 15) this.snare(t, .15);
+    if (z === 2 && st % 4 === 2) this.hat(t);
+    if (z === 3 && st % 2 === 1) this.hat(t, .09);
+    if (z === 4) this.hat(t, st % 2 ? .07 : .13);
+  },
+  // Bruitages
+  now() { return this.ctx ? this.ctx.currentTime : 0; },
+  sGood() { if (!this.ctx) return; const t = this.now(); [72, 76, 79, 84].forEach((n, i) => this.note(mf(n), t + i * .06, .18, "square", .09, { dest: this.fx, cutoff: 4000 })); },
+  sBad() { if (!this.ctx) return; const t = this.now(); this.note(300, t, .4, "sawtooth", .12, { slide: 80, dest: this.fx, cutoff: 1500 }); },
+  sWarn() { if (!this.ctx) return; const t = this.now(); [0, .12].forEach(d => this.note(mf(69), t + d, .08, "square", .06, { dest: this.fx })); },
+  sZone() { if (!this.ctx) return; const t = this.now(); this.noise(t, .6, .12, 800, this.fx); [60, 67, 72, 79].forEach((n, i) => this.note(mf(n), t + i * .08, .3, "triangle", .08, { dest: this.fx })); },
+  sWin() { if (!this.ctx) return; const t = this.now() + .05; [67, 72, 76, 79, 84, 88, 91].forEach((n, i) => this.note(mf(n), t + i * .11, .3, "square", .08, { dest: this.fx, cutoff: 5000 }));
+           [72, 76, 79, 84].forEach(n => this.note(mf(n), t + .85, 1.4, "triangle", .07, { dest: this.fx })); },
+  sLose() { if (!this.ctx) return; const t = this.now() + .05; [62, 61, 60, 59, 55, 50].forEach((n, i) => this.note(mf(n), t + i * .22, .4, "triangle", .1, { dest: this.fx })); },
+};
+
+/* Ajouts au moteur de Super Calcul Bros 2 : filtre « concentration », musique seule, bruitages de course */
+const PROG_D = [
+  [[48, 0], [45, 1], [41, 0], [43, 0]], [[48, 0], [43, 0], [45, 1], [41, 0]], [[45, 1], [41, 0], [48, 0], [43, 0]],
+  [[45, 1], [50, 1], [45, 1], [52, 0]], [[50, 1], [46, 0], [43, 1], [45, 0]]];
+PROG.splice(0, PROG.length, ...PROG_D);
+TEMPO.splice(0, TEMPO.length, 100, 112, 124, 138, 156);
+Object.assign(SND, {
+  musicOn: true,
+  init() {
+    if (this.ctx) return;
+    const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+    const c = this.ctx = new AC();
+    const comp = c.createDynamicsCompressor(); comp.connect(c.destination);
+    this.master = c.createGain(); this.master.gain.value = this.on ? .8 : 0; this.master.connect(comp);
+    this.musicBus = c.createGain(); this.musicBus.gain.value = this.musicOn ? 1 : 0; this.musicBus.connect(this.master);
+    this.lp = c.createBiquadFilter(); this.lp.type = "lowpass"; this.lp.frequency.value = 16000; this.lp.connect(this.musicBus);
+    this.music = c.createGain(); this.music.gain.value = .5; this.music.connect(this.lp);
+    this.fx = c.createGain(); this.fx.gain.value = .7; this.fx.connect(this.master);
+    const buf = c.createBuffer(1, c.sampleRate, c.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    this.noiseBuf = buf; setInterval(() => this.tick(), 25);
+  },
+  toggleMusic() { this.musicOn = !this.musicOn; if (this.musicBus) this.musicBus.gain.value = this.musicOn ? 1 : 0; return this.musicOn; },
+  focus(on) { if (!this.ctx) return; const t = this.now(); this.lp.frequency.cancelScheduledValues(t); this.lp.frequency.setTargetAtTime(on ? 650 : 16000, t, on ? .35 : .08); },
+  sJump() { if (!this.ctx) return; const t = this.now(); this.note(330, t, .28, "square", .07, { slide: 900, dest: this.fx, cutoff: 3000 }); },
+  sSlide() { if (!this.ctx) return; const t = this.now(); this.noise(t, .45, .16, 900, this.fx); this.note(260, t, .35, "triangle", .06, { slide: 120, dest: this.fx }); },
+  sLane() { if (!this.ctx) return; const t = this.now(); this.noise(t, .22, .14, 2500, this.fx); this.note(500, t, .18, "triangle", .05, { slide: 900, dest: this.fx }); },
+  sCrash() { if (!this.ctx) return; const t = this.now(); this.noise(t, .7, .5, 150, this.fx); this.note(120, t, .5, "sine", .5, { slide: 35, dest: this.fx });
+    this.note(420, t + .05, .6, "sawtooth", .1, { slide: 90, dest: this.fx, cutoff: 1500 }); },
+  sCoin() { if (!this.ctx) return; const t = this.now(); this.note(mf(88), t, .07, "square", .05, { dest: this.fx, cutoff: 6000 }); this.note(mf(93), t + .07, .16, "square", .05, { dest: this.fx, cutoff: 6000 }); },
+  sTick() { if (!this.ctx) return; this.note(mf(84), this.now(), .05, "square", .05, { dest: this.fx }); },
+  tempo() { return TEMPO[this.zone] * (this.half ? 1.07 : 1) * (this.urgent ? 1.12 : 1); },
+  sThunder() { if (!this.ctx) return; const t = this.now(); this.noise(t, 1.8, .55, 40, this.fx); this.noise(t + .05, .35, .4, 1200, this.fx); this.note(60, t, 1.6, "sine", .35, { slide: 30, dest: this.fx }); },
+  sSting() { if (!this.ctx) return; const t = this.now() + .1; [38, 41, 45, 50].forEach(n => this.note(mf(n), t, 3.2, "sawtooth", .05, { attack: .05, cutoff: 900, dest: this.fx }));
+    [0, .3, .6].forEach(d => this.note(70, t + d, .5, "sine", .3, { slide: 40, dest: this.fx })); this.note(mf(74), t + .9, 2.2, "square", .025, { cutoff: 2500, dest: this.fx }); },
+  sLaugh() { if (!this.ctx) return; const t = this.now(); [64, 62, 60, 57, 55].forEach((n, i) => this.note(mf(n), t + i * .17, .14, "square", .06, { slide: mf(n - 2), cutoff: 1800, dest: this.fx })); },
+  sClang() { if (!this.ctx) return; const t = this.now(); [880, 1320, 1980].forEach(f => this.note(f, t, .7, "triangle", .07, { dest: this.fx })); this.noise(t, .25, .3, 400, this.fx); },
+  sPop() { if (!this.ctx) return; const t = this.now(); this.noise(t, .35, .25, 300, this.fx); this.note(mf(84 + R(0, 7)), t + .05, .5, "triangle", .03, { dest: this.fx }); },
+  sBells() { if (!this.ctx) return; const t = this.now(); [76, 79, 84, 88, 84, 91].forEach((n, i) => { this.note(mf(n), t + i * .22, 1.2, "sine", .07, { dest: this.fx }); this.note(mf(n + 12), t + i * .22, .6, "triangle", .02, { dest: this.fx }); }); },
+  sSad() { if (!this.ctx) return; const t = this.now() + .1; [69, 67, 65, 64, 62, 64, 60, 57].forEach((n, i) => this.note(mf(n), t + i * .62, .9, "triangle", .07, { attack: .05, dest: this.fx }));
+    [45, 41, 43, 45].forEach((n, i) => this.note(mf(n), t + i * 1.24, 1.3, "sine", .1, { attack: .1, dest: this.fx })); },
+  sThrow() { if (!this.ctx) return; const t = this.now(); this.note(1200, t, .5, "sine", .06, { slide: 300, dest: this.fx }); this.noise(t + .4, .25, .1, 600, this.fx); },
+});
+
+/* =====================================================================
+   5. DESSIN : rails en pseudo-3D (projection perspective sur un canvas 960×540)
+   ===================================================================== */
+const cv = document.getElementById("cv"), ctx = cv.getContext("2d");
+const W = 960, H = 540, FOC = 420, CH = 1.75, PZ = 3.3, NEAR = .75, ZFAR = 85;
+const LANES = [-1.7, 0, 1.7];
+let scale = 1, camX = 0, HY = 205;                               // HY : ligne d'horizon (plus basse pendant le prologue : contre-plongée)
+function resize() { const r = cv.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+  cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr); scale = cv.width / W; }
+window.addEventListener("resize", resize);
+const prj = (x, y, z) => ({ x: W / 2 + (x - camX) * FOC / z, y: HY + (CH - y) * FOC / z, s: FOC / z });
+const KREF = FOC / PZ;                                            // pixels par unité à la profondeur du héros
+
+/* ---- Outils de dessin et personnages repris de Super Calcul Bros 2 ---- */
+function grad(y0, y1, stops) { const g = ctx.createLinearGradient(0, y0, 0, y1); stops.forEach(([o, c]) => g.addColorStop(o, c)); return g; }
+function circle(x, y, r, fill, stroke, lw = 3) {
+  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke) { ctx.lineWidth = lw; ctx.strokeStyle = stroke; ctx.stroke(); }
+}
+function ellipse(x, y, rx, ry, fill, stroke, lw = 3, rot = 0) {
+  ctx.beginPath(); ctx.ellipse(x, y, rx, ry, rot, 0, Math.PI * 2);
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke) { ctx.lineWidth = lw; ctx.strokeStyle = stroke; ctx.stroke(); }
+}
+function polyline(pts, color, lw) {
+  ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+  ctx.lineWidth = lw; ctx.strokeStyle = color; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.stroke();
+}
+
+/* ---- Racine (le héros) : un radical √, casquette rouge, moustache tombante, plume de dramaturge ---- */
+function drawHero(x, y, ph, o = {}) {
+  ctx.save(); ctx.translate(x, y);
+  ellipse(4, 2, 40, 8, "rgba(0,0,0,.25)");
+  ctx.translate(0, -(o.jump || 0)); ctx.scale(1.4, 1.4); ctx.rotate(o.tilt || 0);
+  const run = o.still ? 0 : 1;
+  const bob = -Math.abs(Math.sin(ph)) * 4 * run;
+  // jambes
+  [Math.sin(ph) * run, -Math.sin(ph) * run].forEach((s, k) => {
+    const hx = -10 + k * 4, hy = -16 + bob, fx = hx + s * 14, fy = -4 + (s > 0 ? -Math.abs(s) * 4 : 0);
+    polyline([[hx, hy], [fx, fy]], "#14204a", 8); polyline([[hx, hy], [fx, fy]], "#2b3f8f", 4);
+    ellipse(fx + 6, fy + 1, 11, 6, "#3a2a1a", "#14204a", 3);
+  });
+  ctx.translate(0, bob);
+  // corps : le symbole √
+  const P = [[-36, -42], [-25, -51], [-10, -16], [10, -84], [56, -84]];
+  polyline(P, "#14204a", 20); polyline(P, "#3d7bff", 13);
+  polyline([[-7, -27], [7, -74]], "#9cc0ff", 3.5);
+  polyline([[16, -86], [52, -86]], "#9cc0ff", 3);
+  // plume d'écrivain glissée sous la casquette
+  ctx.save(); ctx.translate(-2, -96); ctx.rotate(-.9 + Math.sin(ph * .5) * .05);
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(-8, -18, 0, -34); ctx.quadraticCurveTo(8, -18, 0, 0);
+  ctx.fillStyle = "#fff8e6"; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = "#14204a"; ctx.stroke();
+  polyline([[0, 2], [0, -30]], "#14204a", 1.5);
+  ctx.restore();
+  // casquette posée sur le haut du radical
+  ctx.save(); ctx.translate(12, -92); ctx.rotate(-.12);
+  ctx.beginPath(); ctx.arc(0, 0, 15, Math.PI, 0); ctx.closePath();
+  ctx.fillStyle = "#e52521"; ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = "#14204a"; ctx.stroke();
+  ctx.beginPath(); ctx.arc(-3, -4, 6, Math.PI * 1.1, Math.PI * 1.6); ctx.lineWidth = 2.5; ctx.strokeStyle = "rgba(255,255,255,.5)"; ctx.stroke();
+  ellipse(17, 0, 13, 4, "#b8140f", "#14204a", 3);
+  circle(0, -15, 3, "#fff", "#14204a", 1.5);
+  ctx.restore();
+  // yeux dessinés sur le radical
+  if (o.ko) {
+    ctx.lineWidth = 2.5; ctx.strokeStyle = "#14204a";
+    [[5, -73], [15, -73]].forEach(([ex, ey]) => { ctx.beginPath(); ctx.moveTo(ex - 3, ey - 3); ctx.lineTo(ex + 3, ey + 3); ctx.moveTo(ex + 3, ey - 3); ctx.lineTo(ex - 3, ey + 3); ctx.stroke(); });
+  } else {
+    const blink = (Math.sin(ph * .37) > .97) ? .2 : 1;
+    ellipse(5, -73, 4.5, 6.5 * blink, "#fff", "#14204a", 2); ellipse(15, -73, 4.5, 6.5 * blink, "#fff", "#14204a", 2);
+    if (blink === 1) { circle(6.8, -72, 2.3, "#14204a"); circle(16.8, -72, 2.3, "#14204a"); circle(7.5, -73, .8, "#fff"); circle(17.5, -73, .8, "#fff"); }
+  }
+  // moustache qui pendouille
+  const sway = Math.sin(ph) * 1.5 * run;
+  ctx.fillStyle = "#3b2314"; ctx.strokeStyle = "#14204a"; ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(10, -64);
+  ctx.bezierCurveTo(4, -66, -2, -62, -4 + sway, -50);
+  ctx.bezierCurveTo(-5 + sway, -46, -1 + sway, -46, 0 + sway, -50);
+  ctx.bezierCurveTo(2, -56, 6, -60, 10, -59);
+  ctx.bezierCurveTo(14, -60, 18, -56, 20 + sway, -50);
+  ctx.bezierCurveTo(21 + sway, -46, 25 + sway, -46, 24 + sway, -50);
+  ctx.bezierCurveTo(22, -62, 16, -66, 10, -64);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.restore();
+}
+
+/* ---- Princesse Pi ---- */
+function drawPi(x, y, t, o = {}) {
+  ctx.save(); ctx.translate(x, y);
+  if (o.scale) ctx.scale(o.scale, o.scale);
+  const wave = Math.sin(t * 7) * (o.calm ? 3 : 10);
+  // bras qui s'agitent
+  polyline([[-22, -50], [-32, -66 + wave]], "#5a1038", 7); polyline([[-22, -50], [-32, -66 + wave]], "#ffd3a8", 3.5);
+  polyline([[22, -52], [32, -68 - wave]], "#5a1038", 7); polyline([[22, -52], [32, -68 - wave]], "#ffd3a8", 3.5);
+  circle(-32, -66 + wave, 4, "#ffd3a8", "#5a1038", 2); circle(32, -68 - wave, 4, "#ffd3a8", "#5a1038", 2);
+  // cheveux
+  ctx.fillStyle = "#ffcf3f"; ctx.strokeStyle = "#8a5a00"; ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.moveTo(-14, -70); ctx.quadraticCurveTo(-20, -48, -12, -44); ctx.lineTo(12, -44); ctx.quadraticCurveTo(20, -48, 14, -70); ctx.closePath(); ctx.fill(); ctx.stroke();
+  // corps en forme de π
+  const bar = [[-24, -48], [-18, -53], [20, -53], [26, -50]];
+  const l1 = [[-9, -53], [-11, -30], [-13, -8]];
+  const l2 = [[9, -53], [10, -28], [12, -12], [19, -8]];
+  [bar, l1, l2].forEach(p => polyline(p, "#5a1038", 14));
+  [bar, l1, l2].forEach(p => polyline(p, "#ff5fb0", 8));
+  // tête
+  circle(0, -68, 12, "#ffd3a8", "#5a1038", 2.5);
+  ellipse(-4, -69, 2.4, 3.4, "#3a1030"); ellipse(4, -69, 2.4, 3.4, "#3a1030");
+  circle(-8, -64, 2.6, "rgba(255,95,176,.5)"); circle(8, -64, 2.6, "rgba(255,95,176,.5)");
+  if (o.happy) { ctx.beginPath(); ctx.arc(0, -64, 4, .2, Math.PI - .2); ctx.lineWidth = 2; ctx.strokeStyle = "#5a1038"; ctx.stroke(); }
+  else ellipse(0, -62.5, 2.2, 2.8, "#5a1038");
+  // couronne
+  ctx.fillStyle = "#ffd23f"; ctx.strokeStyle = "#8a5a00"; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(-9, -77); ctx.lineTo(-10, -88); ctx.lineTo(-5, -82); ctx.lineTo(0, -91); ctx.lineTo(5, -82); ctx.lineTo(10, -88); ctx.lineTo(9, -77); ctx.closePath(); ctx.fill(); ctx.stroke();
+  circle(0, -82, 2, "#3dd0ff");
+  ctx.restore();
+}
+
+/* ---- Zêta : le corps est le symbole ζ de la fonction de Riemann ---- */
+const ZETA_PATH = new Path2D("M -30 -54 Q -34 -72 -14 -68 L 30 -70 Q -46 -34 -38 6 Q -32 34 8 32 Q 32 32 28 50 Q 24 66 6 70");
+function drawZeta(x, y, t, o = {}) {
+  ctx.save(); ctx.translate(x, y);
+  if (o.rot) ctx.rotate(o.rot);
+  const zs = 1.1 * (o.scale !== undefined ? o.scale : 1); ctx.scale(zs, zs);
+  // zéros non triviaux en orbite, alignés sur la droite critique Re(s) = 1/2
+  ctx.save(); ctx.globalAlpha = .55; ctx.setLineDash([6, 6]);
+  polyline([[0, -120], [0, 110]], "#ff7ae6", 2); ctx.restore();
+  for (let k = 0; k < 5; k++) {
+    const yy = ((k * 46 + t * 40) % 230) - 120, a = 1 - Math.abs(yy) / 125;
+    ctx.globalAlpha = clamp(a, 0, 1); circle(0, yy, 7, "rgba(255,122,230,.35)"); circle(0, yy, 3.5, "#ffd6f5");
+  }
+  ctx.globalAlpha = 1;
+  // ailes
+  const flap = Math.sin(t * 9) * 22;
+  [-1, 1].forEach(s => {
+    ctx.save(); ctx.scale(s, 1); ctx.translate(-4 * s, -20);
+    ctx.beginPath(); ctx.moveTo(20, -10);
+    ctx.quadraticCurveTo(66, -66 - flap, 112, -40 - flap * .8);
+    ctx.quadraticCurveTo(102, -18 - flap * .4, 96, -4 - flap * .3);
+    ctx.quadraticCurveTo(82, -12, 74, 4 - flap * .2);
+    ctx.quadraticCurveTo(60, -6, 50, 10);
+    ctx.quadraticCurveTo(40, 2, 26, 14); ctx.closePath();
+    ctx.fillStyle = "#3b0a4f"; ctx.fill(); ctx.lineWidth = 4; ctx.strokeStyle = "#12001a"; ctx.lineJoin = "round"; ctx.stroke();
+    ctx.restore();
+  });
+  // cornes
+  [[-18, -1], [22, 1]].forEach(([hx, s]) => {
+    ctx.beginPath(); ctx.moveTo(hx - 8, -84); ctx.quadraticCurveTo(hx + s * 18, -100, hx + s * 14, -122); ctx.quadraticCurveTo(hx + s * 4, -100, hx + 8, -86); ctx.closePath();
+    ctx.fillStyle = "#f2e6d8"; ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = "#12001a"; ctx.stroke();
+  });
+  // corps en forme de ζ
+  ctx.lineCap = "round"; ctx.lineJoin = "round";
+  ctx.lineWidth = 46; ctx.strokeStyle = "#12001a"; ctx.stroke(ZETA_PATH);
+  const g = ctx.createLinearGradient(-40, -80, 30, 70); g.addColorStop(0, "#a64ce0"); g.addColorStop(1, "#3a0a52");
+  ctx.lineWidth = 38; ctx.strokeStyle = g; ctx.stroke(ZETA_PATH);
+  ctx.save(); ctx.globalAlpha = .35; ctx.lineWidth = 6; ctx.strokeStyle = "#e3a6ff"; ctx.translate(-5, -5); ctx.stroke(ZETA_PATH); ctx.restore();
+  // pointe de queue de démon
+  ctx.beginPath(); ctx.moveTo(-4, 62); ctx.lineTo(-22, 78); ctx.lineTo(4, 82); ctx.closePath();
+  ctx.fillStyle = "#c40000"; ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = "#12001a"; ctx.stroke();
+  // couronne impériale sur la barre du ζ
+  ctx.fillStyle = "#e0b22e"; ctx.strokeStyle = "#12001a"; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(-8, -88); ctx.lineTo(-12, -106); ctx.lineTo(-2, -97); ctx.lineTo(6, -112); ctx.lineTo(14, -97); ctx.lineTo(24, -106); ctx.lineTo(20, -88); ctx.closePath(); ctx.fill(); ctx.stroke();
+  circle(6, -96, 3.5, "#ff2a5a");
+  // visage sur la barre du haut
+  [[-8, -72], [16, -73]].forEach(([ex, ey], k) => {
+    ellipse(ex, ey, 8, 6.5, "#ffe14d", "#12001a", 2.5);
+    circle(ex + 2, ey + 1, 3, "#c40000");
+    const s = k ? 1 : -1;
+    ctx.beginPath(); ctx.moveTo(ex - s * 9, ey - 13); ctx.lineTo(ex + s * 7, ey - 7); ctx.lineWidth = 4.5; ctx.strokeStyle = "#12001a"; ctx.stroke();
+  });
+  ctx.beginPath(); ctx.moveTo(-16, -60); ctx.quadraticCurveTo(4, o.laugh ? -42 : -50, 24, -61); ctx.quadraticCurveTo(4, o.laugh ? -50 : -55, -16, -60);
+  ctx.fillStyle = "#12001a"; ctx.fill();
+  ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.moveTo(-8, -58); ctx.lineTo(-5, -51); ctx.lineTo(-2, -57); ctx.moveTo(10, -58); ctx.lineTo(13, -51); ctx.lineTo(16, -58); ctx.fill();
+  // la formule gravée sur le ventre
+  ctx.save(); ctx.shadowColor = "#ff4fd8"; ctx.shadowBlur = 10 + Math.sin(t * 4) * 5;
+  ctx.font = "italic 700 13px Georgia, serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillStyle = "#ffd6f5";
+  ctx.translate(-22, -8); ctx.rotate(-1.15); ctx.fillText("Σ 1/nˢ", 0, 0);
+  ctx.restore();
+  ctx.restore();
+}
+function drawCage(x, y, t, withPi, open) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(1.25, 1.25);
+  if (!open) { polyline([[0, -40], [0, 0]], "#777", 4);
+    for (let i = -38; i < 0; i += 8) ellipse(0, i, 3, 5, null, "#aaa", 2); }
+  if (withPi) drawPi(0, 94, t, { scale: .8 });
+  ctx.lineWidth = 4; ctx.strokeStyle = "#8a5a00";
+  ctx.beginPath(); ctx.moveTo(-36, 18); ctx.quadraticCurveTo(0, -8, 36, 18); ctx.stroke();
+  ctx.fillStyle = "#ffd23f"; ctx.fillRect(-38, 96, 76, 8); ctx.strokeRect(-38, 96, 76, 8);
+  if (!open) {
+    for (let i = -32; i <= 32; i += 16) { const top = 18 - (1 - Math.pow(i / 36, 2)) * 13;
+      polyline([[i, top], [i, 96]], "#8a5a00", 6); polyline([[i, top], [i, 96]], "#ffd23f", 3); }
+  }
+  ctx.restore();
+}
+
+const ZONES = [
+  { name: "Royaume de Fantasmath", sky: [[0, "#3c23a0"], [.7, "#c86dd7"], [1, "#ffc2e2"]], fog: "255,194,226", g1: "#7ef0c8", g2: "#67dcb2", bed: "#9b55c9", sleeper: "#5e379e", rail: "#fff0ff", train: "#ff5fb0" },
+  { name: "Plaines des Inconnues", sky: [[0, "#2f96f0"], [1, "#d4f6ff"]], fog: "214,246,255", g1: "#6fd64a", g2: "#5cc23d", bed: "#b07a45", sleeper: "#5c3412", rail: "#e8eef5", train: "#3d7bff" },
+  { name: "Forêt des Facteurs", sky: [[0, "#0d3b2c"], [.65, "#2f7d5a"], [1, "#a6e6b4"]], fog: "166,230,180", g1: "#3fa34d", g2: "#348d40", bed: "#6b4a30", sleeper: "#2e1a0c", rail: "#d8e0d0", train: "#e8352f" },
+  { name: "Désert du Discriminant", sky: [[0, "#ff6a5a"], [.55, "#ffa75e"], [1, "#ffe9b0"]], fog: "255,233,176", g1: "#f7d58b", g2: "#ecc677", bed: "#c98a3a", sleeper: "#7a4a1e", rail: "#fff4dc", train: "#2aa3a3" },
+  { name: "Abysses de Zêta", sky: [[0, "#050006"], [.6, "#3a0012"], [1, "#a3140c"]], fog: "130,20,14", g1: "#2a0b0b", g2: "#200707", bed: "#3a1010", sleeper: "#120505", rail: "#ff7a3d", train: "#6a1b9a" },
+];
+
+function poly(pts, fill, stroke, lw) { ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.closePath();
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); } if (stroke) { ctx.lineWidth = lw || 2; ctx.strokeStyle = stroke; ctx.stroke(); } }
+function quad(x0, x1, y, z0, z1, fill) { poly([prj(x0, y, z0), prj(x1, y, z0), prj(x1, y, z1), prj(x0, y, z1)], fill); }
+const fogA = z => clamp(1 - (z - 38) / 42, 0, 1);
+
+function horizon(amp, freq, seed, color, line, drift, lift = 0) {
+  ctx.beginPath(); ctx.moveTo(-10, HY + 4);
+  for (let x = -10; x <= W + 10; x += 8) {
+    const wx = (x + drift) * freq;
+    ctx.lineTo(x, HY - lift - amp * (.6 + .55 * Math.sin(wx + seed) + .3 * Math.sin(wx * 2.13 + seed * 2) + .15 * Math.sin(wx * 4.7 + 1)));
+  }
+  ctx.lineTo(W + 10, HY + 4); ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+  if (line) { ctx.lineWidth = 3; ctx.strokeStyle = line; ctx.stroke(); }
+}
+function cloud(x, y, s) {
+  ctx.fillStyle = "#fff"; ctx.strokeStyle = "#8ab8d8"; ctx.lineWidth = 3; ctx.beginPath();
+  ctx.arc(x, y, 22 * s, Math.PI * .5, Math.PI * 1.5); ctx.arc(x + 25 * s, y - 18 * s, 26 * s, Math.PI, 0);
+  ctx.arc(x + 58 * s, y - 8 * s, 22 * s, Math.PI * 1.2, Math.PI * .5); ctx.closePath(); ctx.fill(); ctx.stroke();
+}
+function drawSky(z, t) {
+  const Z = ZONES[z], dr = camX * 40;
+  ctx.fillStyle = grad(0, HY + 2, Z.sky); ctx.fillRect(0, 0, W, HY + 4);
+  if (z === 0) {
+    for (let i = 0; i < 40; i++) { ctx.globalAlpha = .4 + .6 * Math.abs(Math.sin(t * 1.5 + i)); circle(seeded(i) * W, seeded(i + 50) * (HY - 40), 1 + seeded(i + 9) * 2, "#fff"); }
+    ctx.globalAlpha = 1;
+    circle(790 - dr * .2, 70, 40, "#ffe6a7", "#c47a2c", 4); circle(776 - dr * .2, 58, 10, "#ffd27a");
+    ctx.save(); ctx.translate(790 - dr * .2, 70); ctx.rotate(-.35); ctx.beginPath(); ctx.ellipse(0, 0, 70, 16, 0, Math.PI * 1.03, Math.PI * 1.97, true);
+    ctx.lineWidth = 7; ctx.strokeStyle = "#ff8fd0"; ctx.stroke(); ctx.restore();
+    const sym = ["π", "∞", "Σ", "√", "÷", "±", "∫", "θ", "≠", "Δ", "e", "φ"];
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    sym.forEach((s, i) => { const x = ((seeded(i * 3) * 1300 - t * 10 - dr) % 1300 + 1300) % 1300 - 170, y = 40 + seeded(i * 5) * 110 + Math.sin(t * 1.2 + i) * 8;
+      ctx.font = `700 ${20 + seeded(i) * 20}px Georgia, serif`; ctx.fillStyle = "rgba(255,255,255,.6)"; ctx.fillText(s, x, y); });
+    horizon(22, .006, 1, "#9b6bd6", "#5e379e", dr * .5, 6); horizon(14, .01, 4, "#ff8ccf", "#b8468e", dr);
+  } else if (z === 1) {
+    ctx.save(); ctx.translate(160 - dr * .1, 70); ctx.rotate(t * .25);
+    for (let i = 0; i < 12; i++) { ctx.rotate(Math.PI / 6); ctx.fillStyle = "rgba(255,230,90,.55)"; ctx.beginPath(); ctx.moveTo(40, -7); ctx.lineTo(68, 0); ctx.lineTo(40, 7); ctx.fill(); }
+    ctx.restore(); circle(160 - dr * .1, 70, 34, "#ffe14d", "#e0a400", 4);
+    ellipse(150 - dr * .1, 64, 3.5, 5, "#7a4a00"); ellipse(170 - dr * .1, 64, 3.5, 5, "#7a4a00");
+    ctx.beginPath(); ctx.arc(160 - dr * .1, 75, 11, .2, Math.PI - .2); ctx.lineWidth = 3; ctx.strokeStyle = "#7a4a00"; ctx.stroke();
+    for (let i = 0; i < 5; i++) cloud(((seeded(i) * 1300 + t * 12 - dr * .3) % 1300) - 150, 40 + seeded(i + 3) * 90, .6 + seeded(i + 2) * .4);
+    horizon(30, .005, 2, "#9ad66b", "#4f9a37", dr * .5, 4); horizon(16, .009, 6, "#5cbf3d", "#2f7d1f", dr);
+  } else if (z === 2) {
+    ctx.save(); ctx.globalAlpha = .12; for (let i = 0; i < 5; i++) { const x = 100 + i * 190 + Math.sin(t * .3 + i) * 20; ctx.fillStyle = "#fffbd0";
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + 40, 0); ctx.lineTo(x + 120, HY); ctx.lineTo(x + 40, HY); ctx.fill(); } ctx.restore();
+    for (let i = -2; i < 34; i++) { const x = i * 32 - ((dr * .5) % 32), h = 50 + seeded(i + Math.floor(dr * .5 / 32)) * 70;
+      ctx.fillStyle = "#123f2f"; ctx.beginPath(); ctx.moveTo(x - 20, HY + 2); ctx.lineTo(x, HY - h); ctx.lineTo(x + 20, HY + 2); ctx.fill(); }
+  } else if (z === 3) {
+    const g = ctx.createRadialGradient(650 - dr * .1, 130, 10, 650 - dr * .1, 130, 180); g.addColorStop(0, "rgba(255,250,200,.9)"); g.addColorStop(1, "rgba(255,250,200,0)");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, HY); circle(650 - dr * .1, 130, 56, "#fff1a8", "#ffbe55", 5);
+    [[120, 70], [300, 50], [760, 80], [880, 45]].forEach(([x, h]) => { x -= dr * .3; ctx.fillStyle = "#e2a35a"; ctx.strokeStyle = "#a8692e"; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(x - h * .8, HY + 2); ctx.lineTo(x, HY - h); ctx.lineTo(x + h * .8, HY + 2); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#c98a3a"; ctx.beginPath(); ctx.moveTo(x, HY - h); ctx.lineTo(x + h * .8, HY + 2); ctx.lineTo(x + h * .3, HY + 2); ctx.closePath(); ctx.fill(); });
+    horizon(10, .008, 3, "#f4c06a", "#c98a3a", dr);
+  } else {
+    ctx.save(); ctx.globalAlpha = .13 + .05 * Math.sin(t * 2); ctx.font = "italic 700 70px Georgia, serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillStyle = "#ff2a2a"; ctx.fillText("ζ(s) = Σ 1/nˢ", 480 - dr * .1, 80); ctx.restore();
+    ctx.beginPath(); ctx.moveTo(-10, HY + 3);
+    for (let i = -1; i < 26; i++) { const x = i * 40 - ((dr * .5) % 40); ctx.lineTo(x, HY); ctx.lineTo(x + 20, HY - 30 - seeded(i + Math.floor(dr * .5 / 40)) * 70); }
+    ctx.lineTo(W + 10, HY + 3); ctx.closePath(); ctx.fillStyle = "#1a0508"; ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = "#ff3b1f"; ctx.stroke();
+    for (let i = 0; i < 30; i++) { const life = (t * (.25 + seeded(i) * .3) + seeded(i + 7)) % 1; ctx.globalAlpha = 1 - life;
+      circle(seeded(i + 3) * W, H - life * (H - 60), 2 + seeded(i) * 2.5, life < .5 ? "#ffd23f" : "#ff4b1f"); }
+    ctx.globalAlpha = 1;
+  }
+}
+function drawGround(z) {
+  const Z = ZONES[z];
+  ctx.fillStyle = Z.g1; ctx.fillRect(0, HY, W, H - HY);
+  const BAND = 3;                                                 // bandes alternées : sensation de vitesse
+  for (let k = Math.floor((G.scroll - PZ) / BAND); k < (G.scroll - PZ + ZFAR) / BAND; k++) {
+    if (k % 2) continue;
+    const z0 = Math.max(NEAR, PZ + k * BAND - G.scroll), z1 = PZ + k * BAND + BAND - G.scroll; if (z1 <= NEAR) continue;
+    const y0 = prj(0, 0, z1).y, y1 = prj(0, 0, z0).y; ctx.fillStyle = Z.g2; ctx.fillRect(0, y0, W, y1 - y0);
+  }
+  LANES.forEach(c => quad(c - .88, c + .88, 0, NEAR, ZFAR, Z.bed));
+  const SP = .9;                                                  // traverses
+  ctx.fillStyle = Z.sleeper;
+  for (let k = Math.ceil((G.scroll - PZ + NEAR) / SP); k < (G.scroll - PZ + 60) / SP; k++) {
+    const z0 = PZ + k * SP - G.scroll; ctx.globalAlpha = fogA(z0 * 1.4);
+    LANES.forEach(c => quad(c - .7, c + .7, 0, z0, z0 + .24, Z.sleeper));
+  }
+  ctx.globalAlpha = 1;
+  LANES.forEach(c => [-.46, .46].forEach(o => { quad(c + o - .05, c + o + .05, .06, NEAR, ZFAR, Z.rail); }));
+  // brume à l'horizon (le décor lointain s'y fond)
+  const fg = ctx.createLinearGradient(0, HY - 50, 0, HY + 70);
+  fg.addColorStop(0, `rgba(${Z.fog},0)`); fg.addColorStop(.42, `rgba(${Z.fog},.85)`); fg.addColorStop(1, `rgba(${Z.fog},0)`);
+  ctx.fillStyle = fg; ctx.fillRect(0, HY - 50, W, 120);
+}
+
+/* ---- Décor sur les bas-côtés (sprites dessinés à l'échelle k = 1 à la profondeur du héros) ---- */
+function decoSprite(z, i, t) {
+  const r = seeded(i * 1.37);
+  if (z === 0) {
+    if (r < .55) { const h = 150 + r * 80; ctx.fillStyle = "#fff"; ctx.fillRect(-5, -h, 10, h); ctx.lineWidth = 3; ctx.strokeStyle = "#5e379e"; ctx.strokeRect(-5, -h, 10, h);
+      const col = ["#ffd23f", "#7ee0ff", "#3ddc84", "#ff5fb0"][i % 4]; circle(0, -h - 30, 36, col, "#5e379e", 5);
+      ctx.beginPath(); for (let a = 0; a < 12; a += .2) ctx.lineTo(Math.cos(a + t) * a * 2.8, -h - 30 + Math.sin(a + t) * a * 2.8); ctx.lineWidth = 4; ctx.strokeStyle = "rgba(255,255,255,.85)"; ctx.stroke(); }
+    else { ctx.fillStyle = "#ffe6ff"; ctx.strokeStyle = "#5e379e"; ctx.lineWidth = 5; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(-45, -90, 90, 90, 14) : ctx.rect(-45, -90, 90, 90); ctx.fill(); ctx.stroke();
+      ctx.font = "700 62px Georgia, serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillStyle = "#7a3fc0"; ctx.fillText(["π", "√", "Σ", "∞", "e"][i % 5], 0, -44); }
+  } else if (z === 1) {
+    if (r < .5) { ctx.fillStyle = "#7a4a22"; ctx.strokeStyle = "#3e2410"; ctx.lineWidth = 4; ctx.fillRect(-10, -110, 20, 110); ctx.strokeRect(-10, -110, 20, 110);
+      [[-40, -130, 46], [38, -136, 44], [0, -176, 56], [-18, -110, 36], [22, -106, 34]].forEach(([x, y, rr]) => circle(x, y, rr, "#3fa52f", "#1e6a17", 5));
+      [[-40, -130, 46], [38, -136, 44], [0, -176, 56]].forEach(([x, y, rr]) => circle(x, y, rr - 4, "#46b535")); circle(-14, -190, 14, "rgba(255,255,255,.2)"); }
+    else { ctx.fillStyle = "#3fa52f"; ctx.strokeStyle = "#1e6a17"; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(-30, 0, 30, Math.PI, 0); ctx.arc(10, -10, 34, Math.PI, 0); ctx.arc(46, 0, 26, Math.PI, 0); ctx.closePath(); ctx.fill(); ctx.stroke();
+      [-30, 8, 40].forEach((x, k) => circle(x, -30 - k * 6, 6, ["#ff5fb0", "#ffd23f", "#fff"][k], "#a0336b", 2)); }
+  } else if (z === 2) {
+    if (r < .65) { const h = 260 + r * 120; ctx.fillStyle = "#5a3820"; ctx.fillRect(-9, -50, 18, 50);
+      for (let k = 0; k < 4; k++) { const y = -40 - k * (h - 40) / 4, w = 80 - k * 16; ctx.fillStyle = k % 2 ? "#2fa565" : "#278f57"; ctx.strokeStyle = "#0f3d24"; ctx.lineWidth = 5;
+        ctx.beginPath(); ctx.moveTo(-w, y); ctx.lineTo(0, y - (h - 40) / 4 - 40); ctx.lineTo(w, y); ctx.closePath(); ctx.fill(); ctx.stroke(); } }
+    else { const s = 1.4; ctx.fillStyle = "#fff2dc"; ctx.strokeStyle = "#5c3412"; ctx.lineWidth = 4; ctx.fillRect(-8 * s, -26 * s, 16 * s, 26 * s); ctx.strokeRect(-8 * s, -26 * s, 16 * s, 26 * s);
+      ctx.beginPath(); ctx.arc(0, -24 * s, 28 * s, Math.PI, 0); ctx.closePath(); ctx.fillStyle = "#e8352f"; ctx.fill(); ctx.stroke();
+      circle(-11 * s, -36 * s, 5 * s, "#fff"); circle(9 * s, -42 * s, 6 * s, "#fff"); circle(17 * s, -30 * s, 4 * s, "#fff"); }
+  } else if (z === 3) {
+    if (r < .6) { const h = 110 + r * 70;
+      const arm = (dir, ay, ah) => { ctx.beginPath(); ctx.moveTo(0, -ay); ctx.lineTo(dir * 32, -ay); ctx.lineTo(dir * 32, -ay - ah); ctx.lineCap = "round"; ctx.lineJoin = "round";
+        ctx.lineWidth = 22; ctx.strokeStyle = "#1f5a2b"; ctx.stroke(); ctx.lineWidth = 13; ctx.strokeStyle = "#3f9b4f"; ctx.stroke(); };
+      arm(-1, h * .45, 36); arm(1, h * .65, 30);
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, -h); ctx.lineWidth = 38; ctx.strokeStyle = "#1f5a2b"; ctx.lineCap = "round"; ctx.stroke(); ctx.lineWidth = 27; ctx.strokeStyle = "#3f9b4f"; ctx.stroke();
+      if (seeded(i + 1) > .5) circle(0, -h - 16, 9, "#ff5fb0", "#a0336b", 2); }
+    else { ellipse(0, -18, 50, 24, "#c98a3a", "#7a4a1e", 4); ellipse(-14, -26, 14, 6, "rgba(255,255,255,.25)"); }
+  } else {
+    if (r < .6) { const h = 140 + r * 120; ctx.fillStyle = "#1a0508"; ctx.strokeStyle = "#ff3b1f"; ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.moveTo(-40, 0); ctx.lineTo(-10, -h); ctx.lineTo(6, -h * .6); ctx.lineTo(20, -h * .8); ctx.lineTo(42, 0); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+    else { ctx.save(); ctx.shadowColor = "#ff5a1f"; ctx.shadowBlur = 20; ctx.fillStyle = "#2a0a0a"; ctx.fillRect(-22, -170, 44, 170); ctx.restore();
+      ctx.lineWidth = 4; ctx.strokeStyle = "#ff3b1f"; ctx.strokeRect(-22, -170, 44, 170);
+      ctx.font = "italic 700 40px Georgia, serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillStyle = `rgba(255,${140 + 60 * Math.sin(t * 3 + i)},60,1)`; ctx.fillText("ζ", 0, -120); }
+  }
+}
+
+/* ---- Boîte en perspective (wagon, barrière, poutre) ---- */
+function box(x0, x1, y0, y1, z0, z1, cf, ct, cs, line) {
+  if (z1 <= NEAR) return null;
+  const zf = Math.max(z0, NEAR), lw = Math.max(1.5, 3 * FOC / zf / KREF);
+  const a = prj(x0, y1, zf), b = prj(x1, y1, zf), c = prj(x1, y0, zf), d = prj(x0, y0, zf);
+  const A = prj(x0, y1, z1), B = prj(x1, y1, z1), C = prj(x1, y0, z1), D = prj(x0, y0, z1);
+  if (y1 < CH) poly([a, b, B, A], ct, line, lw);
+  if (x0 > camX) poly([a, d, D, A], cs, line, lw);
+  if (x1 < camX) poly([b, c, C, B], cs, line, lw);
+  if (z0 >= NEAR) { poly([a, b, c, d], cf, line, lw); return { l: a.x, t: a.y, r: b.x, b: c.y, s: a.s }; }
+  return null;
+}
+function stripes(f, c1, c2, n) {
+  if (!f) return; ctx.save(); ctx.beginPath(); ctx.rect(f.l, f.t, f.r - f.l, f.b - f.t); ctx.clip();
+  const w = (f.r - f.l) / n, h = f.b - f.t; ctx.fillStyle = c1; ctx.fillRect(f.l, f.t, f.r - f.l, h); ctx.fillStyle = c2;
+  for (let i = -1; i < n + 1; i++) { ctx.beginPath(); ctx.moveTo(f.l + i * w, f.b); ctx.lineTo(f.l + i * w + w * .5, f.b); ctx.lineTo(f.l + i * w + w * .5 + h, f.t); ctx.lineTo(f.l + i * w + h, f.t); ctx.fill(); }
+  ctx.restore(); ctx.lineWidth = Math.max(1.5, 3 * f.s / KREF); ctx.strokeStyle = "#1b0b30"; ctx.strokeRect(f.l, f.t, f.r - f.l, f.b - f.t);
+}
+function drawObstacleLane(o, c, z) {
+  const L = "#1b0b30";
+  if (o.type === "jump") {
+    box(c - .66, c - .54, 0, .9, z, z + .12, "#c9c9d6", "#e6e6f0", "#9a9aab", L); box(c + .54, c + .66, 0, .9, z, z + .12, "#c9c9d6", "#e6e6f0", "#9a9aab", L);
+    stripes(box(c - .78, c + .78, .42, .86, z - .02, z + .1, "#fff", "#ffd6dc", "#d9475a", L), "#fff", "#e8253f", 5);
+  } else if (o.type === "slide") {
+    box(c - .82, c - .7, 0, 1.55, z, z + .14, "#555", "#777", "#333", L); box(c + .7, c + .82, 0, 1.55, z, z + .14, "#555", "#777", "#333", L);
+    stripes(box(c - .9, c + .9, .98, 1.42, z - .02, z + .22, "#ffd23f", "#ffe68a", "#c99a00", L), "#ffd23f", "#1b0b30", 6);
+  } else {
+    const col = ZONES[G.zone].train;
+    const f = box(c - .76, c + .76, 0, 2.3, z, z + 8, col, col, shade(col, -.25), L);
+    if (f) {
+      const w = f.r - f.l, h = f.b - f.t, lw = Math.max(1.5, 3 * f.s / KREF);
+      ctx.fillStyle = "#bfe8ff"; ctx.fillRect(f.l + w * .12, f.t + h * .1, w * .76, h * .3); ctx.lineWidth = lw; ctx.strokeStyle = L; ctx.strokeRect(f.l + w * .12, f.t + h * .1, w * .76, h * .3);
+      ctx.fillStyle = "rgba(255,255,255,.55)"; ctx.beginPath(); ctx.moveTo(f.l + w * .18, f.t + h * .36); ctx.lineTo(f.l + w * .3, f.t + h * .13); ctx.lineTo(f.l + w * .38, f.t + h * .13); ctx.lineTo(f.l + w * .26, f.t + h * .36); ctx.fill();
+      circle(f.l + w / 2, f.t + h * .6, w * .13, "#fff", L, lw); ctx.font = `italic 700 ${w * .2}px Georgia, serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillStyle = "#6a1b9a"; ctx.fillText("ζ", f.l + w / 2, f.t + h * .61);
+      [.2, .8].forEach(px => { circle(f.l + w * px, f.t + h * .8, w * .075, "#fff8b0", L, lw); });
+      ctx.fillStyle = L; ctx.fillRect(f.l, f.b - h * .07, w, h * .07);
+    }
+  }
+}
+function shade(hex, k) { const n = parseInt(hex.slice(1), 16); let r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+  const f = v => Math.round(clamp(k < 0 ? v * (1 + k) : v + (255 - v) * k, 0, 255)); return `rgb(${f(r)},${f(g)},${f(b)})`; }
+
+/* ---- Princesse Pi vue de dos (le personnage joué) : corps en π, cheveux d'or, couronne ---- */
+function drawPiBack(x, y, k, ph, o = {}) {
+  ctx.save(); ctx.translate(x, y);
+  ellipse(0, 0, 40 * k * (1 - Math.min(.5, (o.lift || 0) / 400)), 9 * k, "rgba(0,0,0,.28)");
+  ctx.scale(k * 1.45, k * 1.45); ctx.translate(0, -(o.lift || 0) / 1.45);
+  if (o.squash) ctx.scale(1 + o.squash * .25, 1 - o.squash * .55);
+  ctx.rotate(o.tilt || 0);
+  const run = o.still ? 0 : 1, bob = -Math.abs(Math.sin(ph)) * 4 * run;
+  [[-10, -1], [10, 1]].forEach(([lx, s], j) => {                 // les deux pieds du π sont ses jambes
+    const lift = Math.max(0, Math.sin(ph + j * Math.PI)) * 12 * run, fx = lx + s * 3, fy = -6 - lift;
+    const pts = [[lx, -52 + bob], [lx + s, -30 + bob * .5], [fx, fy]];
+    polyline(pts, "#5a1038", 14); polyline(pts, "#ff5fb0", 8);
+    ellipse(fx, fy + 1, 8, 5, "#c2185b", "#5a1038", 2.5); if (lift > 3) ellipse(fx, fy + 2, 6, 2.5, "#ffd3e6");
+  });
+  ctx.translate(0, bob);
+  const sw = Math.sin(ph) * 8 * run;                             // bras qui balancent
+  [[-1, sw], [1, -sw]].forEach(([s, a]) => { polyline([[24 * s, -48], [33 * s, -36 + a]], "#5a1038", 7); polyline([[24 * s, -48], [33 * s, -36 + a]], "#ffd3a8", 3.5); circle(33 * s, -36 + a, 4, "#ffd3a8", "#5a1038", 2); });
+  const bar = [[-24, -48], [-18, -53], [20, -53], [26, -50]];
+  polyline(bar, "#5a1038", 14); polyline(bar, "#ff5fb0", 8);
+  const swing = Math.sin(ph * .5 + 1) * 5 * run;                 // queue-de-cheval
+  ctx.fillStyle = "#ffcf3f"; ctx.strokeStyle = "#8a5a00"; ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.moveTo(-6, -62); ctx.quadraticCurveTo(-11 + swing, -48, -3 + swing, -38); ctx.quadraticCurveTo(3 + swing, -48, 6, -62); ctx.closePath(); ctx.fill(); ctx.stroke();
+  circle(0, -68, 12.5, "#ffcf3f", "#8a5a00", 2.5);
+  ctx.beginPath(); ctx.arc(-4, -72, 6, Math.PI * 1.1, Math.PI * 1.7); ctx.lineWidth = 2; ctx.strokeStyle = "rgba(255,255,255,.6)"; ctx.stroke();
+  circle(0, -58, 3.5, "#ff5fb0", "#5a1038", 1.5);
+  ctx.fillStyle = "#ffd23f"; ctx.strokeStyle = "#8a5a00"; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(-9, -78); ctx.lineTo(-10, -89); ctx.lineTo(-5, -83); ctx.lineTo(0, -92); ctx.lineTo(5, -83); ctx.lineTo(10, -89); ctx.lineTo(9, -78); ctx.closePath(); ctx.fill(); ctx.stroke();
+  circle(0, -83, 2, "#3dd0ff");
+  if (o.ko) for (let i = 0; i < 3; i++) { const a = G.t * 5 + i * 2.1; drawStar(Math.cos(a) * 22, -100 + Math.sin(a) * 7, 5, "#ffd23f"); }
+  ctx.restore();
+}
+/* ---- Cage dorée (d'après Super Calcul Bros 2), avec Racine prisonnier ---- */
+function drawCageR(x, y, t, occupied, open, chain = true) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(1.25, 1.25);
+  if (!open && chain) { polyline([[0, -40], [0, 0]], "#777", 4); for (let i = -38; i < 0; i += 8) ellipse(0, i, 3, 5, null, "#aaa", 2); }
+  if (occupied) { ctx.save(); ctx.translate(-8, 94); ctx.scale(.4, .4); drawHero(0, 0, t * 6, { still: true, tilt: Math.sin(t * 3) * .06 }); ctx.restore(); }
+  ctx.lineWidth = 4; ctx.strokeStyle = "#8a5a00";
+  ctx.beginPath(); ctx.moveTo(-36, 18); ctx.quadraticCurveTo(0, -8, 36, 18); ctx.stroke();
+  ctx.fillStyle = "#ffd23f"; ctx.fillRect(-38, 96, 76, 8); ctx.strokeRect(-38, 96, 76, 8);
+  if (!open) for (let i = -32; i <= 32; i += 16) { const top = 18 - (1 - Math.pow(i / 36, 2)) * 13;
+    polyline([[i, top], [i, 96]], "#8a5a00", 6); polyline([[i, top], [i, 96]], "#ffd23f", 3); }
+  ctx.restore();
+}
+/* Racine debout (côté), tourné vers la gauche si flip */
+function drawRacineStanding(x, z, t, o = {}) {
+  const p = prj(x, 0, z), k = p.s / KREF * (o.size || .8);
+  ctx.save(); ctx.translate(p.x, p.y); ctx.scale(o.flip ? -k : k, k); drawHero(0, 0, t * 6, Object.assign({ still: true }, o)); ctx.restore();
+}
+/* ---- Racine vu de dos (gardé pour une éventuelle suite) ---- */
+function drawHeroBack(x, y, k, ph, o = {}) {
+  ctx.save(); ctx.translate(x, y);
+  ellipse(0, 0, 44 * k * (1 - Math.min(.5, (o.lift || 0) / 400)), 10 * k, "rgba(0,0,0,.28)");
+  ctx.scale(k, k); ctx.translate(0, -(o.lift || 0));
+  if (o.squash) ctx.scale(1 + o.squash * .25, 1 - o.squash * .55);
+  ctx.rotate(o.tilt || 0);
+  const run = o.still ? 0 : 1, bob = -Math.abs(Math.sin(ph)) * 6 * run;
+  [0, 1].forEach(j => {                                            // jambes, vues de dos
+    const s = Math.sin(ph + j * Math.PI), lift = Math.max(0, s) * 18 * run, hx = -20 + j * 16, fx = hx + (j ? 4 : -4), fy = -4 - lift;
+    polyline([[hx, -22 + bob], [fx, fy - 6]], "#14204a", 11); polyline([[hx, -22 + bob], [fx, fy - 6]], "#2b3f8f", 6);
+    ellipse(fx, fy, 12, 8, "#3a2a1a", "#14204a", 3); if (lift > 4) ellipse(fx, fy + 2, 9, 3.5, "#c9b79a");
+  });
+  ctx.translate(0, bob);
+  // pointes de moustache qui dépassent du radical
+  const sw = Math.sin(ph) * 2 * run;
+  [[-1, -2], [1, 24]].forEach(([s, mx]) => { ctx.beginPath(); ctx.moveTo(mx, -66); ctx.quadraticCurveTo(mx + s * 16, -64, mx + s * 18 + sw, -52); ctx.lineWidth = 6; ctx.lineCap = "round"; ctx.strokeStyle = "#14204a"; ctx.stroke(); ctx.lineWidth = 3; ctx.strokeStyle = "#3b2314"; ctx.stroke(); });
+  const PTS = [[-40, -46], [-29, -55], [-14, -20], [6, -88], [52, -88]];
+  polyline(PTS, "#14204a", 22); polyline(PTS, "#3d7bff", 14); polyline([[-11, -31], [3, -78]], "#2a5fd6", 4);
+  // plume
+  ctx.save(); ctx.translate(2, -100); ctx.rotate(-.7 + Math.sin(ph * .5) * .06);
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(-8, -18, 0, -34); ctx.quadraticCurveTo(8, -18, 0, 0); ctx.fillStyle = "#fff8e6"; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = "#14204a"; ctx.stroke(); ctx.restore();
+  // casquette vue de dos : calotte, ouverture réglable et bouton
+  ctx.save(); ctx.translate(14, -94);
+  ellipse(0, 4, 20, 5, "#b8140f", "#14204a", 3);
+  ctx.beginPath(); ctx.arc(0, 2, 18, Math.PI, 0); ctx.closePath(); ctx.fillStyle = "#e52521"; ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = "#14204a"; ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, 2, 6, Math.PI, 0); ctx.fillStyle = "#7a0c09"; ctx.fill(); polyline([[-7, 2], [7, 2]], "#ffd23f", 2.5);
+  circle(0, -16, 3.5, "#fff", "#14204a", 1.5); ctx.restore();
+  if (o.ko) for (let i = 0; i < 3; i++) { const a = G.t * 5 + i * 2.1; drawStar(14 + Math.cos(a) * 30, -120 + Math.sin(a) * 9, 7, "#ffd23f"); }
+  ctx.restore();
+}
+/* ---- Pièce π ---- */
+function drawCoin(x, y, k, t) {
+  const sx = Math.abs(Math.cos(t * 4)) * .8 + .2; ctx.save(); ctx.translate(x, y); ctx.scale(k * sx, k);
+  circle(0, 0, 20, "#ffd23f", "#8a5a00", 4); circle(0, 0, 14, null, "#e0a400", 2);
+  ctx.font = "700 20px Georgia, serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillStyle = "#8a5a00"; ctx.fillText("π", 0, 1); ctx.restore();
+}
+
+/* ---- Bulles de dialogue avec mini-portrait (l'émotion du personnage s'y voit) ---- */
+function portrait(who, x, y, mood) {
+  ctx.save(); ctx.beginPath(); ctx.arc(x, y, 22, 0, Math.PI * 2); ctx.fillStyle = who === "zeta" ? "#2a0a3a" : who === "pi" ? "#ffe0f0" : "#dcecff"; ctx.fill();
+  ctx.lineWidth = 3; ctx.strokeStyle = "#1b0b30"; ctx.stroke(); ctx.clip();
+  if (who === "racine") { ctx.translate(x - 8, y + 42); ctx.scale(.55, .55); drawHero(0, 0, G.t * 8, { still: true, ko: mood === "sad", tilt: mood === "happy" ? Math.sin(G.t * 10) * .08 : 0 }); }
+  else if (who === "zeta") { ctx.translate(x - 2, y + 40); ctx.scale(.42, .42); drawZeta(0, 0, G.t, { laugh: mood !== "sad" }); }
+  else { ctx.translate(x, y + 52); ctx.scale(.75, .75); drawPi(0, 0, G.t, { happy: mood !== "sad", calm: true }); }
+  ctx.restore();
+}
+function talkBubble(x, y, b) {
+  ctx.save(); ctx.font = "700 17px Fredoka, 'Trebuchet MS', sans-serif";
+  const tw = Math.min(ctx.measureText(b.text).width, 380), lines = wrap(b.text, 380), w = tw + 70, h = Math.max(50, lines.length * 21 + 16);
+  const bx = clamp(x - w / 2, 8, W - w - 8), by = clamp(y - h, 50, H - h - 30);
+  ctx.globalAlpha = clamp(b.t * 4, 0, 1) * clamp((b.dur - b.t) * 4, 0, 1);
+  ctx.fillStyle = b.who === "zeta" ? "#ffd6f5" : b.who === "pi" ? "#fff" : "#d9ecff"; ctx.strokeStyle = "#1b0b30"; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.roundRect ? ctx.roundRect(bx, by, w, h, 16) : ctx.rect(bx, by, w, h); ctx.fill(); ctx.stroke();
+  const tx = clamp(x, bx + 20, bx + w - 20); ctx.beginPath(); ctx.moveTo(tx - 8, by + h - 1); ctx.lineTo(tx, by + h + 12); ctx.lineTo(tx + 8, by + h - 1); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(tx - 8, by + h); ctx.lineTo(tx, by + h + 12); ctx.lineTo(tx + 8, by + h); ctx.stroke();
+  portrait(b.who, bx + 30, by + h / 2, b.mood);
+  ctx.fillStyle = "#1b0b30"; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+  lines.forEach((l, i) => ctx.fillText(l, bx + 60, by + h / 2 + (i - (lines.length - 1) / 2) * 21));
+  ctx.restore();
+}
+function wrap(text, max) { const words = text.split(" "), out = []; let cur = "";
+  for (const w of words) { const tst = cur ? cur + " " + w : w; if (ctx.measureText(tst).width > max && cur) { out.push(cur); cur = w; } else cur = tst; }
+  if (cur) out.push(cur); return out; }
+function bigText(text, y, size, fill, alpha = 1) {
+  ctx.save(); ctx.globalAlpha = alpha; ctx.font = `700 ${size}px Fredoka, 'Trebuchet MS', sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.lineWidth = size / 5; ctx.strokeStyle = "#1b0b30"; ctx.lineJoin = "round"; ctx.strokeText(text, W / 2, y); ctx.fillStyle = fill; ctx.fillText(text, W / 2, y); ctx.restore();
+}
+/* ---- Particules (coordonnées écran) ---- */
+const parts = [];
+function spawn(p) { parts.push(Object.assign({ vx: 0, vy: 0, g: 0, life: 1, max: 1, size: 4, color: "#fff", kind: "dot", rot: 0, vr: 0 }, p)); }
+function burst(x, y, n, colors, speed = 260, kind = "star") {
+  for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, v = speed * (.4 + Math.random() * .6);
+    spawn({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 80, g: 500, life: .9 + Math.random() * .5, max: 1.3, size: 5 + Math.random() * 6, color: pick(colors), kind, vr: (Math.random() - .5) * 12 }); }
+}
+function drawStar(x, y, r, c) { ctx.beginPath(); for (let i = 0; i < 10; i++) { const a = i * Math.PI / 5 - Math.PI / 2, rr = i % 2 ? r * .45 : r; ctx.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); }
+  ctx.closePath(); ctx.fillStyle = c; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = "#1b0b30"; ctx.stroke(); }
+function drawHeart(x, y, r, c) { ctx.beginPath(); ctx.moveTo(x, y + r * .9); ctx.bezierCurveTo(x - r * 1.6, y - r * .2, x - r * .6, y - r * 1.4, x, y - r * .4);
+  ctx.bezierCurveTo(x + r * .6, y - r * 1.4, x + r * 1.6, y - r * .2, x, y + r * .9); ctx.fillStyle = c; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = "#1b0b30"; ctx.stroke(); }
+function drawParts() {
+  for (const p of parts) {
+    ctx.globalAlpha = clamp(p.life / (p.max * .5), 0, 1);
+    if (p.kind === "star") drawStar(p.x, p.y, p.size, p.color);
+    else if (p.kind === "heart") drawHeart(p.x, p.y, p.size, p.color);
+    else if (p.kind === "chunk") { ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.fillStyle = p.color; ctx.fillRect(-p.size, -p.size * .6, p.size * 2, p.size * 1.2); ctx.lineWidth = 2; ctx.strokeStyle = "#1b0b30"; ctx.strokeRect(-p.size, -p.size * .6, p.size * 2, p.size * 1.2); ctx.restore(); }
+    else if (p.kind === "text") { ctx.font = `700 ${p.size}px Fredoka, 'Trebuchet MS', sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.lineWidth = 6; ctx.strokeStyle = "#1b0b30"; ctx.strokeText(p.text, p.x, p.y); ctx.fillStyle = p.color; ctx.fillText(p.text, p.x, p.y); }
+    else circle(p.x, p.y, p.size, p.color);
+  }
+  ctx.globalAlpha = 1;
+}
+
+/* =====================================================================
+   6. RÉPLIQUES (grands réservoirs tirés sans remise)
+   ===================================================================== */
+class Bag { constructor(list) { this.src = list; this.bag = []; } next() { if (!this.bag.length) this.bag = shuffle(this.src.slice()); return this.bag.pop(); } }
+const LINES = {
+  zetaThrow: new Bag(["Mwahaha ! Résous ça, si tu peux !", "Attention, inconnue à l'horizon !", "Un obstacle de plus, une chance de moins !",
+    "Tu cours moins vite que ma série ne converge !", "Mon rail ne mène qu'aux Abysses !", "x ? Personne ne le trouvera jamais !",
+    "Isole donc x… si tu l'attrapes !", "Même Riemann ne m'a pas résolu, alors toi…", "Ce wagon porte ton nom… enfin, ta variable.",
+    "Tu crois que l'équation va se résoudre toute seule ?", "Encore toi ? Quelle constante !", "Cadeau ! Un obstacle tout neuf !",
+    "Une princesse sur mes rails ? Quelle audace !", "Mes zéros sont alignés, pas tes idées !", "Tic-tac, princesse ! Tic-tac !",
+    "Tu vas dérailler, je le sens !", "Celle-là, je l'ai fabriquée exprès pour toi.", "Tes décimales ne te sauveront pas !"]),
+  zetaAngry: new Bag(["Grr… pas mal.", "Impossible ! Elle a esquivé !", "Coup de chance !", "Tu ne fais que retarder l'inévitable !",
+    "Mon obstacle préféré…", "Arrête de trouver x !", "Elle se rapproche… plus vite, plus vite !", "Je déteste les bonnes réponses !",
+    "Quoi ? Du premier coup ?", "Tu as triché ! Non ? Grr…", "Ce n'est qu'un obstacle parmi d'autres !", "Raaah ! Mes beaux calculs !"]),
+  zetaHappy: new Bag(["Mwahaha ! En plein dans le mille !", "Bam ! Racine reste avec moi !", "Ouille ! Ça devait faire mal !",
+    "Un cœur de moins !", "Tu as oublié de vérifier, hein ?", "Mwahaha ! Même pas besoin de forcer !", "Hahaha ! Quelle cascade !",
+    "Encore deux ou trois comme ça, et c'est fini !"]),
+  racine: new Bag(["Pi, vite !", "Je crois en toi, Pi !", "Isole x, tu vas y arriver !", "N'oublie aucune solution !",
+    "Pense à vérifier ta réponse !", "Tu y es presque !", "Au secours, il m'emmène aux Abysses !", "Ne lâche rien, Pi !",
+    "Une étape après l'autre !", "Courage, encore un obstacle !", "Acte III : la princesse vole au secours du poète !",
+    "Pour qui sont ces wagons qui sifflent sur vos têtes ?", "J'en ferai une tragédie… qui finit bien !", "Cette cage manque cruellement de rimes."]),
+  racineCheer: new Bag(["Bravo, Pi !", "Quel saut !", "Magnifique !", "Tu te rapproches !", "Superbe esquive !", "Quelle princesse !"]),
+  racineWorried: new Bag(["Ô rage, ô désespoir, ô wagon ennemi !", "Pi ! Ça va ?", "Courage, Pi, relève-toi !", "Non ! Pas ma princesse !"]),
+  pi: new Bag(["3,14… 15… 92… plus vite !", "J'arrive, Racine !", "Tremblez, inconnues !", "Une princesse ne déraille jamais !",
+    "Tiens bon, Racine !", "Je l'ai trouvé, cet x !", "Toujours vérifier : Racine me l'a appris !", "Mes décimales sont infinies, ma patience aussi !",
+    "Un pas de côté, et c'est un succès !", "Zêta, rends-moi mon poète !", "Pas besoin de carrosse : j'ai des rails !", "Être irrationnelle, c'est mon super-pouvoir !"]),
+  piHit: new Bag(["Aïe ! Ça ne se passera pas comme ça !", "Ouille… on recommence.", "Je me relève, Racine, j'arrive !",
+    "Même pas mal… enfin, un peu.", "Ce n'est qu'un petit arrondi !", "Une princesse se relève toujours !"]),
+};
+
+/* =====================================================================
+   7. ÉTAT DU JEU
+   ===================================================================== */
+const GOAL = 20, MAX_TRIES = 3, LIVES = 3, D_END = 2.4, RUN_V = 14, RUSH_V = 19;
+const G = {
+  state: "menu", phase: "", paused: false, solOpen: false, t: 0, pt: 0, scroll: 0, speed: 0, ph: 0,
+  cls: "3e", diff: "normal", lives: LIVES, idx: 0, zone: 0, q: null, lastGen: "", tries: 0, T: 0, rem: 0, lastTick: 0,
+  obs: null, outcome: "", heroX: 0, lane: 1, act: "", actT: 0, fromX: 0, hitT: 0, coins: [], coinsN: 0,
+  pts: 0, streak: 0, correct: 0, wrongTries: 0, hits: 0, zetaD: 20, zetaX: 0, throwT: 0, flash: 0, flashC: "255,255,255",
+  shake: 0, banner: 0, endT: 0, talk: null, queue: [], talkGap: 0, solShown: false, fly: null,
+};
+const $ = id => document.getElementById(id);
+const els = { timer: $("timer"), hearts: $("hearts"), zone: $("zoneName"), score: $("score"), fill: $("trackFill"), tkHero: $("tkHero"),
+  expr: $("expr"), tries: $("tries"), qnum: $("qnum"), ans: $("ans"), fb: $("fb"), preview: $("preview"), btnOk: $("btnOk"), btnNone: $("btnNone") };
+const DIFF = () => DIFFS[G.diff];
+
+function say(who, text, mood = "neutral", prio = false) {
+  const b = { who, text, mood, t: 0, dur: clamp(2.6 + text.length * .065, 4, 6) };
+  if (prio) { G.queue = [b]; if (G.talk) G.talk.t = Math.max(G.talk.t, G.talk.dur - .25); }
+  else if (G.queue.length < 2) G.queue.push(b);
+}
+function setFeedback(html, cls) { els.fb.innerHTML = html; els.fb.className = "feedback " + (cls || ""); }
+function showTries() { els.tries.textContent = "●".repeat(MAX_TRIES - G.tries) + "○".repeat(G.tries); }
+function shake(el) { el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake"); }
+function setInput(on) { els.ans.disabled = !on; els.btnOk.disabled = !on; els.btnNone.disabled = !on; }
+
+function newQuestion() {
+  const pool = CLASSES[G.cls].pools[G.diff][G.zone];
+  let name; do { name = pick(pool); } while (name === G.lastGen && pool.length > 1);
+  G.lastGen = name; const q = GEN[name](); q.gen = name; return q;
+}
+
+function startGame(diff) {
+  if (diff) G.diff = diff;
+  Object.assign(G, { state: "play", paused: false, solOpen: false, pt: 0, lives: LIVES, idx: 0, zone: 0, lastGen: "", obs: null, outcome: "",
+    heroX: 0, lane: 1, act: "", actT: 0, hitT: 0, coins: [], coinsN: 0, pts: 0, streak: 0, correct: 0, wrongTries: 0, hits: 0,
+    zetaD: 20, throwT: 0, flash: 0, shake: 0, banner: 3, endT: 0, talk: null, queue: [], talkGap: 0, fly: null, cage: null, winSpeed: 0 });
+  parts.length = 0; G.phase = G.introSeen ? "start" : "intro"; HY = G.introSeen ? 205 : 330; G.pzOff = G.introSeen ? 0 : 1; G.introT = 0; G.heroX = G.introSeen ? 0 : -.5; showCalc(false);
+  ["startScreen", "endScreen"].forEach(id => $(id).classList.add("hidden")); $("btnSkip").classList.add("hidden");
+  setInput(false); setFeedback("", ""); els.expr.className = "expr wait"; els.qnum.textContent = ""; els.tries.textContent = "";
+  SND.start(); SND.setZone(0); SND.focus(false); SND.half = false;
+  if (G.phase === "intro") { els.expr.textContent = "🎬 Prologue : une belle journée sur les rails…"; $("btnSkip").textContent = "Passer l'intro ▶"; $("btnSkip").classList.remove("hidden"); }
+  else {
+    els.expr.textContent = "🏃 Pi se lance à la poursuite de Zêta…"; spawnCoins(1, 10);
+    say("zeta", "Mwahaha ! Racine est à moi ! Suis-moi sur mes rails, si tu l'oses !", "happy");
+    say("pi", "Tiens bon, Racine ! J'arrive !", "happy");
+  }
+  updateHUD(true);
+}
+function spawnCoins(lane, from) { for (let i = 0; i < 6; i++) G.coins.push({ lane, d: from + i * 1.6 }); }
+
+function beginRun() {
+  G.phase = "run"; G.pt = 0; G.obs = null; G.outcome = ""; SND.focus(false);
+  setInput(false); els.expr.className = "expr wait"; els.expr.textContent = "🏃 En route vers le prochain obstacle…";
+  els.tries.textContent = ""; els.qnum.textContent = `Obstacle ${G.idx + 1} / ${GOAL}`;
+  spawnCoins(R(0, 2), 9);
+  if (Math.random() < .35) { if (Math.random() < .5) say("racine", LINES.racine.next(), "neutral"); else say("pi", LINES.pi.next(), "happy"); }
+}
+function beginThink() {
+  G.q = newQuestion(); G.T = Math.round(G.q.time * DIFF().f * (1 + .1 * G.zone)); G.rem = G.T; G.lastTick = 99; G.tries = 0; G.outcome = "";
+  const others = [0, 1, 2].filter(l => l !== G.lane), free = pick(others);
+  G.obs = { type: pick(["jump", "slide", "lane", "lane"]), d0: G.zetaD - 1.2, d: G.zetaD - 1.2, free, born: 0, acted: false, dead: false };
+  G.obs.lanes = G.obs.type === "lane" ? [0, 1, 2].filter(l => l !== free) : [0, 1, 2];
+  G.phase = "think"; G.pt = 0; G.throwT = 1; SND.sThrow(); SND.focus(true);
+  { const p = prj(0, 1, PZ + G.obs.d0); burst(p.x, p.y, 14, ["#ffd6f5", "#a64ce0", "#fff"], 160); }
+  els.expr.className = "expr"; els.expr.innerHTML = `<span>${G.q.eq}</span>`; els.qnum.textContent = `Obstacle ${G.idx + 1} / ${GOAL}`; showTries();
+  els.ans.value = ""; els.preview.textContent = ""; setFeedback("", ""); setInput(true); els.ans.focus();
+  showCalc(CALC_GENS.has(G.q.gen));
+  if (Math.random() < .55) say("zeta", LINES.zetaThrow.next(), "happy"); else if (Math.random() < .5) say("racine", LINES.racine.next(), "neutral");
+}
+
+function submit(raw) {
+  if (G.state !== "play" || G.phase !== "think" || G.paused) return;
+  raw = (raw !== undefined ? raw : els.ans.value).trim();
+  if (!raw) { els.ans.focus(); return; }
+  const r = checkAnswer(raw, G.q);
+  if (r.status === "ok") onCorrect();
+  else if (r.status === "warn") { SND.sWarn(); setFeedback("🤔 " + esc(r.msg), "warn"); shake(els.ans); }
+  else onWrong(r.msg);
+}
+function onCorrect() {
+  const d = DIFF(), base = [300, 200, 100][G.tries];
+  G.streak = G.tries === 0 ? G.streak + 1 : 0;
+  const bonus = G.tries === 0 && G.streak > 1 ? 50 * (G.streak - 1) : 0, tb = Math.floor(G.rem) * 5;
+  const gain = Math.round((base + bonus + tb) * d.mult); G.pts += gain; G.correct++;
+  G.outcome = "ok"; G.phase = "rush"; G.pt = 0; SND.sGood(); SND.focus(false); setInput(false);
+  spawn({ kind: "text", text: `+${gain}`, x: prj(G.heroX, 0, PZ).x, y: 250, vy: -60, life: 1.4, max: 1.4, size: 38, color: "#3ddc84" });
+  setFeedback(`✅ ${pick(["Bravo !", "Exact !", "Parfait !", "Bien vu !", "Impeccable !", "Excellent !"])} <b>+${gain} points</b>` +
+    (bonus ? ` · série de ${G.streak} 🔥` : ""), "ok");
+  say("zeta", LINES.zetaAngry.next(), "sad", true);
+  if (Math.random() < .4) say("racine", LINES.racineCheer.next(), "happy");
+  updateHUD();
+}
+function onWrong(msg) {
+  G.tries++; G.wrongTries++; G.streak = 0; showTries(); SND.sBad(); shake(els.ans);
+  if (G.tries < MAX_TRIES) {
+    const left = MAX_TRIES - G.tries;
+    setFeedback(`❌ ${esc(msg)} Encore <b>${left} essai${left > 1 ? "s" : ""}</b> !` +
+      `<span class="hint">💡 Rappel du cours : ${esc(HINTS[G.q.hint] || "")}</span>`, "ko");
+    els.ans.select(); if (Math.random() < .5) say("zeta", "Hahaha ! Raté !", "happy", true);
+    return;
+  }
+  fail("tries");
+}
+function fail(reason) {
+  G.outcome = "fail"; G.failReason = reason; G.phase = "rush"; G.pt = 0; setInput(false); SND.focus(false);
+  setFeedback(reason === "time" ? "⏱ Trop tard ! L'obstacle est là…" : "❌ 3 essais ratés… attention à l'obstacle !", "ko");
+}
+function crash() {
+  G.lives--; G.hits++; G.hitT = 1; G.shake = 1; G.flash = .8; G.flashC = "255,60,60"; G.obs.dead = true; SND.sCrash();
+  const p = prj(LANES[G.lane], 1, PZ + Math.max(.9, G.obs.d));
+  for (let i = 0; i < 26; i++) spawn({ kind: "chunk", x: p.x + (Math.random() - .5) * 120, y: p.y + (Math.random() - .5) * 80, vx: (Math.random() - .5) * 700, vy: -200 - Math.random() * 400, g: 900,
+    life: 1.2, max: 1.2, size: 6 + Math.random() * 10, color: pick(G.obs.type === "lane" ? [ZONES[G.zone].train, "#bfe8ff", "#1b0b30"] : G.obs.type === "jump" ? ["#fff", "#e8253f"] : ["#ffd23f", "#1b0b30"]), vr: (Math.random() - .5) * 14 });
+  spawn({ kind: "text", text: "BAM !", x: p.x, y: p.y - 40, vy: -40, life: 1.3, max: 1.3, size: 64, color: "#ff4757" });
+  say("pi", LINES.piHit.next(), "sad", true); say(Math.random() < .5 ? "racine" : "zeta", Math.random() < .5 ? LINES.racineWorried.next() : LINES.zetaHappy.next(), "sad");
+  if (G.queue[1] && G.queue[1].who === "zeta") G.queue[1].mood = "happy";
+  updateHUD();
+}
+function afterObstacle() {
+  G.idx++;
+  if (G.idx >= GOAL) { beginWin(); return; }
+  const z = Math.floor(G.idx / 4);
+  if (z !== G.zone) { G.zone = z; G.flash = 1; G.flashC = "255,255,255"; G.banner = 3; SND.setZone(z); SND.sZone(); }
+  SND.half = G.idx % 4 >= 2;                                       // la musique accélère tous les 2 obstacles
+  beginRun(); updateHUD(true);
+}
+
+/* Correction détaillée (le jeu est en pause pendant la lecture) */
+function showSolution() {
+  const q = G.q; G.solOpen = true; G.paused = true; if (SND.ctx) SND.ctx.suspend();
+  $("solPen").textContent = (G.failReason === "time" ? "⏱ Temps écoulé" : "❌ 3 essais ratés") + ` : Pi a percuté l'obstacle (−1 ❤️). Le jeu est en pause pendant que tu lis.`;
+  $("solEq").innerHTML = "Résoudre : " + q.eq;
+  $("solHint").textContent = "💡 Rappel du cours : " + (HINTS[q.hint] || "");
+  $("solSteps").innerHTML = q.steps.map(([h, n]) => n === "txt" ? `<div class="ln txt">${h}</div>` : `<div class="ln"><span>${h}</span>${n ? `<span class="note">${n}</span>` : ""}</div>`).join("") +
+    `<div class="ln final"><span>${setH(q.sols)}</span></div>`;
+  $("btnCont").textContent = G.lives > 0 ? "Reprendre la course ▶" : "Voir la suite ▶";
+  $("solScreen").classList.remove("hidden"); setTimeout(() => $("btnCont").focus(), 50);
+}
+function closeSolution() {
+  if (!G.solOpen) return;
+  $("solScreen").classList.add("hidden"); G.solOpen = false; G.paused = false; last = performance.now(); if (SND.ctx) SND.ctx.resume();
+  setFeedback("", "");
+  if (G.lives <= 0) beginLose(); else afterObstacle();
+}
+
+function beginWin() {
+  G.phase = "win"; G.state = "end"; G.endT = 0; G.obs = null; setInput(false); SND.stop(); SND.focus(false);
+  els.expr.className = "expr wait"; els.expr.textContent = "🏆 20 obstacles franchis ! Pi fond sur Zêta…"; $("btnSkip").textContent = "Passer la fin ▶"; $("btnSkip").classList.remove("hidden"); showCalc(false);
+  G.zone = 4; updateHUD(true);
+}
+function beginLose() {
+  G.phase = "lose"; G.state = "end"; G.endT = 0; G.obs = null; setInput(false); SND.stop(); SND.sLose();
+  els.expr.className = "expr wait"; els.expr.textContent = "💔 Plus de cœurs…"; $("btnSkip").textContent = "Passer la fin ▶"; $("btnSkip").classList.remove("hidden"); showCalc(false);
+  say("zeta", "Mwahaha ! Racine reste avec moi… jusqu'à la prochaine partie !", "happy", true); updateHUD(true);
+}
+
+/* Score */
+function computeScore(victory) {
+  const tot = G.correct + G.wrongTries, acc = tot ? G.correct / tot : 0, m = DIFF().mult;
+  const coinsB = Math.round(G.coinsN * 10 * m), winB = victory ? Math.round(1000 * m) : 0, heartB = victory ? Math.round(G.lives * 200 * m) : 0;
+  const accF = .5 + .5 * acc;
+  return { pts: G.pts, coinsB, winB, heartB, acc, accF, total: Math.round((G.pts + coinsB + winB + heartB) * accF) };
+}
+const recKey = () => `superCalculDash2_record_${G.cls}_${G.diff}`;
+function getRecord(k) { try { return +localStorage.getItem(k) || 0; } catch (e) { return 0; } }
+function setRecord(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+function refreshRecords() { document.querySelectorAll("[data-rec]").forEach(el => { const r = getRecord(`superCalculDash2_record_${G.cls}_${el.dataset.rec}`); el.textContent = r ? `🏅 Record : ${r.toLocaleString("fr-FR")}` : ""; }); }
+function showEnd(victory) {
+  if (!$("endScreen").classList.contains("hidden")) return;
+  $("btnSkip").classList.add("hidden");
+  const sc = computeScore(victory), k = recKey(), rec = getRecord(k), isNew = sc.total > rec; if (isNew) setRecord(k, sc.total);
+  const d = DIFF();
+  $("scLvl").textContent = `${CLASSES[G.cls].name} · ${d.ico} ${d.name} · Score`;
+  $("scTotal").textContent = sc.total.toLocaleString("fr-FR");
+  $("scRec").textContent = isNew ? "🎉 Nouveau record !" : rec ? `Record : ${rec.toLocaleString("fr-FR")}` : ""; $("scRec").className = "score-rec" + (isNew ? " new" : "");
+  const f = n => n.toLocaleString("fr-FR");
+  $("scDetail").innerHTML = `<tr><td>Esquives (rapidité, séries, niveau)</td><td>${f(sc.pts)}</td></tr><tr><td>Pièces π (${G.coinsN} × 10 × ${String(d.mult).replace(".", ",")})</td><td>+ ${f(sc.coinsB)}</td></tr>` +
+    (victory ? `<tr><td>Princesse Pi libérée</td><td>+ ${f(sc.winB)}</td></tr><tr><td>Cœurs restants (${G.lives})</td><td>+ ${f(sc.heartB)}</td></tr>` : "") +
+    `<tr><td>Précision ${Math.round(sc.acc * 100)} % → × ${sc.accF.toFixed(2).replace(".", ",")}</td><td></td></tr>`;
+  $("endTitle").textContent = victory ? "🏆 Racine est libre !" : "💔 Tragédie…";
+  $("endText").innerHTML = victory ? "Rideau ! <b>Zêta</b> est terrassé et la <b>Princesse Pi</b> a libéré <b>Racine</b>. Pour une fois, c'est la princesse qui sauve le poète… et la pièce finit bien !"
+    : `Zêta s'enfuit avec Racine dans sa cage… Tu as franchi <b>${G.idx} obstacle${G.idx > 1 ? "s" : ""} sur ${GOAL}</b> (${ZONES[G.zone].name}). Retente ta chance !`;
+  $("stOk").textContent = G.correct; $("stKo").textContent = G.wrongTries; $("stPct").textContent = Math.round(sc.acc * 100) + " %"; $("stCoins").textContent = G.coinsN;
+  $("endScreen").classList.remove("hidden"); refreshRecords();
+}
+
+let hud = {};
+function updateHUD(force) {
+  const tt = G.phase === "think" ? `⏱ ${Math.ceil(G.rem)} s` : "⏱ —";
+  if (force || hud.t !== tt) { els.timer.textContent = tt; hud.t = tt; }
+  els.timer.classList.toggle("urgent", G.phase === "think" && G.rem < 6);
+  const tb = $("tbar"), think = G.phase === "think";
+  tb.classList.toggle("on", think); tb.classList.toggle("low", think && G.rem < G.T * .25);
+  if (think) $("tbarFill").style.width = clamp(100 * G.rem / G.T, 0, 100).toFixed(1) + "%";
+  if (force || hud.l !== G.lives) { els.hearts.textContent = "❤️".repeat(Math.max(0, G.lives)) + "🖤".repeat(LIVES - Math.max(0, G.lives)); hud.l = G.lives; }
+  const sc = `★ ${Math.round(G.pts + G.coinsN * 10 * DIFF().mult).toLocaleString("fr-FR")}`;
+  if (force || hud.s !== sc) { els.score.textContent = sc; hud.s = sc; }
+  if (force || hud.i !== G.idx || hud.z !== G.zone) {
+    els.zone.textContent = ZONES[G.zone].name; const p = 100 * G.idx / GOAL; els.fill.style.width = p + "%"; els.tkHero.style.left = p + "%"; hud.i = G.idx; hud.z = G.zone;
+  }
+}
+function setPause(p) {
+  if (G.state !== "play" || G.solOpen) return;
+  G.paused = p; $("pauseScreen").classList.toggle("hidden", !p); els.expr.classList.toggle("blurred", p && G.phase === "think");
+  if (SND.ctx) p ? SND.ctx.suspend() : SND.ctx.resume();
+  if (!p) { last = performance.now(); if (G.phase === "think") els.ans.focus(); }
+}
+
+/* =====================================================================
+   8. BOUCLE PRINCIPALE
+   ===================================================================== */
+let last = performance.now();
+function frame(now) {
+  const dt = Math.min(.05, (now - last) / 1000); last = now;
+  if (!G.paused) update(dt);
+  render();
+  requestAnimationFrame(frame);
+}
+function startAct(kind) {
+  G.act = kind; G.actT = 0; G.obs.acted = true;
+  if (kind === "jump") SND.sJump(); else if (kind === "slide") SND.sSlide();
+  else { G.fromX = G.heroX; G.lane = G.obs.free; SND.sLane(); }
+  if (Math.random() < .3) say("pi", LINES.pi.next(), "happy");
+}
+function update(dt) {
+  G.t += dt; G.pt += dt;
+  G.flash = Math.max(0, G.flash - dt * 1.6); G.shake = Math.max(0, G.shake - dt * 2.5); G.banner = Math.max(0, G.banner - dt);
+  G.throwT = Math.max(0, G.throwT - dt * 1.5); G.hitT = Math.max(0, G.hitT - dt * .9);
+  let target = 0;
+  const ph = G.phase;
+  if (G.state === "menu") target = 8;
+  else if (ph === "start") { target = RUN_V; if (G.pt > 6.2) beginThink(); }
+  else if (ph === "intro") { target = updateIntro(dt); }
+  else if (ph === "run") { target = RUN_V; if (G.pt > 2.4) beginThink(); }
+  else if (ph === "think") {
+    G.rem -= dt; const v = (G.obs.d0 - D_END) / G.T; target = v; G.speed = v;
+    G.obs.d = D_END + (G.obs.d0 - D_END) * Math.max(0, G.rem) / G.T;
+    if (G.rem < 5.5 && Math.ceil(G.rem) !== G.lastTick) { G.lastTick = Math.ceil(G.rem); SND.sTick(); }
+    if (G.rem <= 0) fail("time");
+  } else if (ph === "rush") {
+    target = G.obs.dead ? 0 : RUSH_V;
+    const o = G.obs;
+    if (G.outcome === "ok") {
+      const trig = o.type === "jump" ? 4.6 : o.type === "slide" ? 3.6 : 6.5;
+      if (!o.acted && o.d <= trig) startAct(o.type === "lane" ? "lane" : o.type);
+      if (o.d < -(o.type === "lane" ? 9.5 : 1.5)) { if (Math.random() < .3) say("racine", LINES.racineCheer.next(), "happy"); afterObstacle(); }
+    } else {
+      if (!o.dead && o.d <= .95) crash();
+      if (o.dead && G.pt > 0 && !G.solOpen && G.hitT < .1) showSolution();
+    }
+  }
+  else if (ph === "win") updateWin(dt);
+  else if (ph === "lose") { target = 0; updateLose(dt); }
+  if (ph === "win") target = G.winSpeed;
+  if (ph !== "think") G.speed += (target - G.speed) * Math.min(1, dt * (target < G.speed ? 6 : 2.5));
+  if (G.state === "menu") G.speed = 8;
+  const mv = G.speed * dt;
+  G.scroll += mv;
+  if (G.obs && ph !== "think") G.obs.d -= mv;
+  G.coins.forEach(c => { c.d -= mv; if (!c.got && c.d < .5 && c.d > -.6 && c.lane === G.lane && G.act !== "jump") { c.got = true; G.coinsN++; SND.sCoin();
+    const p = prj(LANES[c.lane], .6, PZ); burst(p.x, p.y - 30, 4, ["#ffd23f", "#fff"], 120); } });
+  G.coins = G.coins.filter(c => c.d > -2 && !c.got);
+  G.ph += dt * (ph === "think" ? 3.2 : 4 + G.speed * .55);
+  // action en cours : saut, glissade, changement de rail
+  if (G.act) { G.actT += dt; const dur = G.act === "jump" ? .75 : G.act === "slide" ? .85 : .28; if (G.actT >= dur) G.act = ""; }
+  const tx = LANES[G.lane];
+  if (G.act === "lane") G.heroX = lerp(G.fromX, tx, clamp(G.actT / .28, 0, 1));
+  else if (ph === "win" && G.endT > 4.5) G.heroX += (-.5 - G.heroX) * Math.min(1, dt * 2);
+  else if (!(ph === "intro" && G.introT < 28)) G.heroX += (tx - G.heroX) * Math.min(1, dt * 4);
+  camX += (G.heroX * .55 - camX) * Math.min(1, dt * 5);
+  // Zêta : il se rapproche au fil des obstacles
+  if (ph !== "win" && ph !== "lose") G.zetaD += ((20 - 11 * G.idx / GOAL) - G.zetaD) * Math.min(1, dt * .8);
+  G.zetaX += ((G.phase === "think" ? LANES[G.obs.lanes[0]] * .3 : Math.sin(G.t * .5) * 1.4) - G.zetaX) * Math.min(1, dt * 1.5);
+  // dialogues : une réplique à la fois, petite pause entre deux
+  if (G.talk) { G.talk.t += dt; if (G.talk.t >= G.talk.dur) { G.talk = null; G.talkGap = .6; } }
+  else { G.talkGap -= dt; if (G.talkGap <= 0 && G.queue.length) G.talk = G.queue.shift(); }
+  for (let i = parts.length - 1; i >= 0; i--) { const p = parts[i]; p.life -= dt; if (p.life <= 0) { parts.splice(i, 1); continue; }
+    p.vy += p.g * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.rot += p.vr * dt; }
+  if (G.state !== "menu") updateHUD();
+}
+/* Scène finale : Pi bondit sur Zêta, la cage tombe, Racine est libéré */
+function updateWin(dt) {
+  const e0 = G.endT; G.endT += dt; const e = G.endT, at = x => e0 < x && e >= x;
+  G.winSpeed = e < 2.2 ? 22 : 0;
+  if (e < 2.2) G.zetaD += (8 - G.zetaD) * Math.min(1, dt * 2.2);
+  if (at(1.6)) { SND.sJump(); say("pi", "À l'abordage ! Rends-moi mon poète !", "happy", true); }
+  if (at(2.25)) {
+    G.flash = 1; G.flashC = "255,255,255"; G.shake = .8; SND.sCrash();
+    const p = zetaScreen(PZ + G.zetaD); burst(p.x, p.y, 40, ["#ffd23f", "#ff5fb0", "#7ee0ff", "#fff"], 420);
+    spawn({ kind: "text", text: "POUF !", x: p.x, y: p.y - 60, vy: -30, life: 1.5, max: 1.5, size: 70, color: "#ffd23f" });
+    G.fly = { x: p.x, y: p.y, t: 0 }; G.cage = { x: G.zetaX, y: .7, d: G.zetaD, vy: 0, open: false };
+  }
+  if (G.fly) G.fly.t += dt;
+  if (G.cage) { const c = G.cage, m = Math.min(1, dt * 1.2);
+    if (c.y > 0) { c.vy -= 14 * dt; c.y = Math.max(0, c.y + c.vy * dt); if (c.y === 0) { G.shake = .4; SND.sClang(); } }
+    else { c.d += (RD - c.d) * m; c.x += (RX + .9 - c.x) * m; } }
+  if (at(3.6) && G.cage) { G.cage.open = true; SND.sWin(); const p = prj(G.cage.x, 1, PZ + G.cage.d); burst(p.x, p.y, 30, ["#ff5fb0", "#ffd23f", "#fff"], 300, "heart"); }
+  const u = smooth((e - 4.5) / 1.5); HY = lerp(205, 330, u); G.pzOff = u;    // la caméra se pose, comme au prologue
+  if (at(4)) say("racine", "Merci, Pi ! Je t'écrirai la plus belle des pièces !", "happy", true);
+  if (at(6.2)) { G.flash = 1; G.flashC = "255,255,255"; G.zone = 0; SND.sBells(); updateHUD(true); }   // les Abysses se dissipent
+  if (at(7)) { SND.start(); SND.setZone(0); SND.half = true; }
+  if (at(9.9)) say("pi", "Rideau ! Cette fois, c'est la princesse qui sauve le poète.", "happy", true);
+  if (at(16)) say("racine", "Acte V, scène dernière : la princesse et le poète rentrent à la maison !", "happy", true);
+  if (at(22.4)) say("zeta", "Grr… La prochaine fois, je capturerai… une parenthèse !", "sad", true);
+  if (at(28.4)) say("racine", "Il nous faudra une suite… Super Calcul Dash 3, peut-être ?", "happy", true);
+  if (at(33.6)) SND.sBells();
+  if (e > 4 && Math.random() < dt * 5 && G.cage) { const p = prj(G.cage.x - .9, 1.2, PZ + G.cage.d); spawn({ kind: "heart", x: p.x + (Math.random() - .5) * 80, y: p.y, vx: (Math.random() - .5) * 60, vy: -110, life: 1.6, max: 1.6, size: 9, color: "#ff5fb0" }); }
+  if (e > 6.5 && Math.random() < dt * 2.2) { const x = 80 + Math.random() * 800, y = 40 + Math.random() * 130; burst(x, y, 26, ["#ffd23f", "#ff5fb0", "#7ee0ff", "#3ddc84"], 230, "dot"); if (Math.random() < .6) SND.sPop(); }
+  if (e > 37.5) showEnd(true);
+}
+/* Zêta, au loin, qui fulmine avant de s'enfuir */
+function zetaFar(e) {
+  if (e < 21.8 || e > 31) return null;
+  const f = Math.max(0, e - 27.8);
+  return { x: -2.4 - f * 1.5, h: 3.2 + Math.sin(G.t * 2.1) * .12 + f * 2.5, d: 15 + f * 6, a: clamp((e - 21.8) * 2, 0, 1) * clamp(31 - e, 0, 1) };
+}
+/* Scène de défaite : Zêta emporte Racine, Pi se relève */
+function updateLose(dt) {
+  const e0 = G.endT; G.endT += dt; const e = G.endT, at = x => e0 < x && e >= x;
+  if (e > 5) G.zetaD += dt * (e < 12 ? 2.5 : 5);
+  if (at(.1)) SND.sThunder();
+  if (at(.6)) SND.sLaugh();
+  if (at(6.2)) say("racine", "Pi ! Ne m'oublie pas ! Reviens avec tes calculs !", "sad", true);
+  if (at(7)) SND.sSad();
+  if (at(12.4)) say("pi", "Je reviendrai, Racine. Et cette fois, je vérifierai toutes mes solutions !", "neutral", true);
+  if (e > 21) showEnd(false);
+}
+
+/* =====================================================================
+   8 bis. PROLOGUE : Zêta capture Racine sous les yeux de Pi (~31 s)
+   ===================================================================== */
+const RX = 1.3, RD = 2.4, ZKI = 1.2, HANG = 2.81;                // Racine, taille de Zêta et longueur de la chaîne pendant le prologue                                        // position de Racine pendant le prologue
+const smooth = x => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
+function introZeta(T) {
+  if (T < 9.5 || T > 27.5) return null;
+  let x, h, d, hang = "empty";
+  if (T < 11.5) { const u = smooth((T - 9.5) / 2); x = lerp(7, RX, u); h = lerp(8, 4.35, u); d = lerp(14, RD, u); }
+  else if (T < 13) { x = RX; h = 4.35; d = RD; }
+  else if (T < 15.6) { const u = smooth((T - 13.7) / 1.8); x = RX; h = lerp(4.35, HANG + .05, u); d = RD; hang = "none"; }
+  else if (T < 18.5) { x = RX; h = HANG + .05; d = RD; hang = "full"; }
+  else { const u = smooth((T - 18.5) / 9); x = lerp(RX, 0, u); h = lerp(HANG + .05, 4.6, u); d = lerp(RD, 30, u); hang = "full"; }
+  return { x, h: h + Math.sin(G.t * 2.1) * .12, d, hang };
+}
+const INTRO_LINES = [
+  [.6, "racine", "Acte I, scène 1 : quelle belle journée pour écrire une pièce sur les rails !", "happy"],
+  [5.4, "pi", "Tu me la liras ce soir, Racine ? J'adore tes tragédies… quand elles finissent bien !", "happy"],
+  [11.6, "zeta", "Mwahaha ! Un dramaturge… voilà qui manquait à ma collection !", "happy"],
+  [17.2, "racine", "Au secours, Pi ! Je suis pris au piège !", "sad"],
+  [21.7, "zeta", "J'ai capturé Racine ! Rattrape-moi jusqu'aux Abysses… si tu l'oses !", "happy"],
+  [27.6, "pi", "Tiens bon, Racine ! J'arrive !", "happy"],
+];
+function updateIntro(dt) {
+  const T0 = G.introT; G.introT += dt; const T = G.introT, at = x => T0 < x && T >= x;
+  const u = smooth((T - 27.6) / 1.9); HY = lerp(330, 205, u); G.pzOff = 1 - u; G.banner = 0;
+  INTRO_LINES.forEach(([tt, who, txt, mood]) => { if (at(tt)) say(who, txt, mood, true); });
+  if (at(9.5)) { SND.stop(); SND.sThunder(); SND.sSting(); G.flash = .9; G.flashC = "255,255,255"; els.expr.textContent = "🎬 Prologue : Zêta surgit des Abysses !"; }
+  if (at(11.8) || at(22)) SND.sLaugh();
+  if (at(13.7)) { SND.sClang(); G.shake = .6; const p = prj(RX, .3, PZ + RD); burst(p.x, p.y, 18, ["#ffd23f", "#fff"], 220); }
+  if (at(18.4)) SND.sThunder();
+  if (at(27.6)) els.expr.textContent = "🏃 Pi s'élance au secours de Racine !";
+  if (at(29.2)) { SND.start(); SND.setZone(0); }
+  if (T >= 31.5) endIntro();
+  return T < 29.2 ? 0 : RUN_V;
+}
+function endIntro() { G.introSeen = true; HY = 205; G.pzOff = 0; G.banner = 3; $("btnSkip").classList.add("hidden"); if (!SND.running) { SND.start(); SND.setZone(0); } G.talk = null; G.queue = []; beginRun(); }
+function introItems(items, t) {
+  const T = G.introT, zi = introZeta(T), rz = PZ + RD;
+  // Racine : debout, puis en cage
+  if (T < 13.7) items.push({ z: rz, f: () => drawRacineStanding(RX, rz, t, { flip: true, size: .6, tilt: T > 9.5 ? Math.sin(G.t * 40) * .03 : 0 }) });
+  // cage qui tombe (13 → 13.7), puis posée au sol avec Racine dedans (jusqu'à ce que Zêta la reprenne)
+  if (T >= 13 && T < 15.6) {
+    const u = clamp((T - 13) / .7, 0, 1), cy = 1.5 * (1 - u * u);
+    items.push({ z: rz - .01, f: () => { const p = prj(RX, cy, rz), k = p.s / KREF * ZKI; ctx.save(); ctx.translate(p.x, p.y); ctx.scale(k, k); drawCageR(0, -130, t, T >= 13.7, false, false); ctx.restore(); } });
+  }
+  // Zêta
+  if (zi) items.push({ z: PZ + zi.d, f: () => {
+    const zz = PZ + zi.d, p = prj(zi.x, zi.h, zz), k = p.s / KREF * ZKI;
+    ctx.save(); ctx.globalAlpha = fogA(zz) * clamp((27.5 - T) * 2, 0, 1); ctx.translate(p.x, p.y); ctx.scale(k, k);
+    if (zi.hang === "empty" && T < 13) { polyline([[6, 86], [6, 118]], "#777", 3); drawCageR(6, 168, t, false, false); }
+    if (zi.hang === "full") { polyline([[6, 86], [6, 118]], "#777", 3); drawCageR(6, 168, t, true, false); }
+    drawZeta(0, 0, t, { laugh: (G.talk && G.talk.who === "zeta") || (T > 13.7 && T < 17) });
+    ctx.restore(); } });
+  // Pi de face (avant de se retourner pour courir)
+  if (T < 27.6) items.push({ z: PZ + 1, f: () => { const p = prj(G.heroX, 0, PZ + 1), k = p.s / KREF * .95 * 1.45;
+    ctx.save(); ctx.translate(p.x, p.y); ellipse(0, 0, 40 * k / 1.45, 9 * k / 1.45, "rgba(0,0,0,.28)"); ctx.scale(k, k);
+    if (T > 9.5 && T < 27.6) ctx.translate(Math.sin(G.t * 30) * .6, 0);
+    drawPi(0, 0, G.t, { happy: T < 9.5, calm: T < 9.5 }); ctx.restore(); } });
+}
+function skipIntro() { if (G.phase !== "intro") return; G.introT = 32; endIntro(); }
+
+/* =====================================================================
+   8 ter. CALCULATRICE (2nd degré, exponentielle, logarithme)
+   ===================================================================== */
+const CALC_GENS = new Set(["quad", "quad0", "quadNeg", "quadIrr", "quadRHS", "expLin", "expEq", "expSq", "lnLin", "lnEq", "expProd", "expQuad", "lnQuad", "lnSum"]);
+const calc = { el: $("calc"), inp: $("calcIn"), out: $("calcOut"), ans: 0 };
+let calcOn = true; try { calcOn = localStorage.getItem("superCalculDash2_calc") !== "0"; } catch (e) {}
+let calcAllowed = false;
+function setCalcPref(on) { calcOn = on; try { localStorage.setItem("superCalculDash2_calc", on ? "1" : "0"); } catch (e) {} $("optCalc").checked = on; showCalc(calcAllowed); }
+function showCalc(allowed) { calcAllowed = allowed; const on = allowed && calcOn;
+  const bt = $("btnCalc"); bt.classList.toggle("hidden", !allowed); bt.classList.toggle("on", on); bt.textContent = on ? "🧮 Masquer la calculatrice" : "🧮 Afficher la calculatrice";
+  calc.el.classList.toggle("hidden", !on); calc.inp.value = ""; calc.out.textContent = "\u00a0"; calc.out.className = "calc-out"; }
+function calcRun() {
+  const src = calc.inp.value.trim(); if (!src) return;
+  try {
+    const v = evalStr(src.replace(/ans/gi, "(" + calc.ans + ")"));
+    calc.ans = v; calc.out.className = "calc-out";
+    calc.out.textContent = "= " + (Math.abs(v) < 1e-12 ? "0" : v.toLocaleString("fr-FR", { maximumSignificantDigits: 10 }));
+  } catch (e) { calc.out.className = "calc-out err"; calc.out.textContent = "Erreur : " + String(e).replace("donne des nombres, sans x (ex : 3 ; −1/2)", "pas de x dans la calculatrice"); }
+}
+document.querySelectorAll(".ck").forEach(b => b.addEventListener("click", () => {
+  const c = b.dataset.c, el = calc.inp;
+  if (c === "=") { calcRun(); return; }
+  if (c === "C") { el.value = ""; calc.out.textContent = "\u00a0"; calc.out.className = "calc-out"; el.focus(); return; }
+  const s = el.selectionStart ?? el.value.length, e = el.selectionEnd ?? s;
+  if (c === "DEL") { const a = s === e ? Math.max(0, s - 1) : s; el.value = el.value.slice(0, a) + el.value.slice(e); el.setSelectionRange(a, a); }
+  else { el.value = el.value.slice(0, s) + c + el.value.slice(e); el.setSelectionRange(s + c.length, s + c.length); }
+  el.focus();
+}));
+$("optCalc").checked = calcOn;
+$("optCalc").addEventListener("change", e => setCalcPref(e.target.checked));
+$("btnCalc").addEventListener("click", () => setCalcPref(!calcOn));
+$("btnCalcHide").addEventListener("click", () => setCalcPref(false));
+calc.inp.addEventListener("keydown", e => {
+  if (e.key === "Enter") { e.preventDefault(); calcRun(); }
+  if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); calc.inp.value = ""; calc.out.textContent = "\u00a0"; calc.out.className = "calc-out"; }
+});
+
+/* =====================================================================
+   9. RENDU
+   ===================================================================== */
+function render() {
+  ctx.setTransform(scale, 0, 0, scale, 0, 0);
+  if (G.shake > 0) ctx.translate((Math.random() - .5) * 18 * G.shake, (Math.random() - .5) * 12 * G.shake);
+  const t = G.t, z = G.zone;
+  drawSky(z, t); drawGround(z);
+  const items = [];
+  // décor des bas-côtés
+  const SP = 2.8;
+  for (let k = Math.floor((G.scroll - PZ + NEAR) / SP); k < (G.scroll - PZ + 70) / SP; k++) {
+    const zz = PZ + k * SP - G.scroll; if (zz < NEAR + .2) continue;
+    [-1, 1].forEach(side => { const i = k * 2 + (side > 0 ? 1 : 0); if (seeded(i * 3.3) < .25) return;
+      const x = side * (3.4 + seeded(i * 7.1) * 3.6); items.push({ z: zz, f: () => { const p = prj(x, 0, zz); ctx.save(); ctx.globalAlpha = fogA(zz); ctx.translate(p.x, p.y); ctx.scale(p.s / KREF, p.s / KREF); decoSprite(z, Math.abs(i), t); ctx.restore(); } }); });
+  }
+  // obstacle
+  if (G.obs && !G.obs.dead) {
+    const o = G.obs, zz = PZ + o.d;
+    o.lanes.forEach(l => items.push({ z: zz + (o.type === "lane" ? 4 : 0) + Math.abs(LANES[l] - camX) * .01, f: () => {
+      ctx.save(); ctx.globalAlpha = clamp(G.phase === "think" ? G.pt * 2.5 : 1, 0, 1) * fogA(zz); drawObstacleLane(o, LANES[l], zz); ctx.restore(); } }));
+  }
+  // pièces π
+  G.coins.forEach(c => { const zz = PZ + c.d; if (zz > NEAR + .3 && zz < 60) items.push({ z: zz, f: () => { const p = prj(LANES[c.lane], .55, zz); ctx.save(); ctx.globalAlpha = fogA(zz); drawCoin(p.x, p.y, p.s / KREF, t + c.d); ctx.restore(); } }); });
+  // Zêta et la cage
+  const zz = PZ + G.zetaD;
+  if (G.phase === "intro") introItems(items, t);
+  else if (!G.fly) items.push({ z: zz, f: () => drawZetaGroup(zz, t) });
+  else items.push({ z: zz, f: () => { const f = G.fly, k = Math.max(0, 1 - f.t * .45); if (k <= 0) return;
+    ctx.save(); ctx.translate(f.x + f.t * 380, f.y - f.t * 300); ctx.rotate(f.t * 8); ctx.scale(k * .5, k * .5); drawZeta(0, 0, t, { laugh: false }); ctx.restore(); } });
+  if (G.cage) { const c = G.cage, cz = PZ + c.d; items.push({ z: cz, f: () => { const p = prj(c.x, c.y, cz), k = p.s / KREF * ZKI; ctx.save(); ctx.translate(p.x, p.y); ctx.scale(k, k);
+    drawCageR(0, -130, t, !c.open, c.open, false); ctx.restore();
+    if (c.open) { const hop = G.endT > 6.5 ? Math.abs(Math.sin(G.t * 5)) * .15 : 0, q = prj(c.x - .9, hop, cz), kk = q.s / KREF * .6;
+      ctx.save(); ctx.translate(q.x, q.y); ctx.scale(-kk, kk); drawHero(0, 0, t * 6, { still: true, tilt: Math.sin(G.t * 6) * .08 }); ctx.restore(); } } }); }
+  if (G.phase === "win") { const zf = zetaFar(G.endT); if (zf) items.push({ z: PZ + zf.d, f: () => { const p = prj(zf.x, zf.h, PZ + zf.d), k = p.s / KREF * ZKI;
+    ctx.save(); ctx.globalAlpha = zf.a; ctx.translate(p.x, p.y); ctx.scale(k, k); ctx.rotate(Math.sin(G.t * 25) * .05); drawZeta(0, 0, t, { laugh: false }); ctx.restore(); } }); }
+  // Pi (le personnage joué)
+  if (G.phase !== "intro" || G.introT >= 27.6) items.push({ z: PZ, f: drawRacine });
+  items.sort((a, b) => b.z - a.z).forEach(it => it.f());
+  drawParts();
+  if (G.phase === "lose") { ctx.fillStyle = `rgba(10,0,25,${Math.min(.5, G.endT * .06)})`; ctx.fillRect(0, 0, W, H); }
+  if (G.phase === "intro") { const T = G.introT, dk = T < 9.5 ? 0 : T < 27.5 ? clamp((T - 9.5) * 2, 0, .45) : clamp(.45 - (T - 27.5) * .3, 0, .45);
+    if (dk > 0) { ctx.fillStyle = `rgba(25,0,45,${dk})`; ctx.fillRect(0, 0, W, H); } }
+  // effets d'ambiance
+  if (G.phase === "think") {
+    const a = .35 + .1 * Math.sin(t * 3), vg = ctx.createRadialGradient(W / 2, H / 2, 180, W / 2, H / 2, 620);
+    vg.addColorStop(0, "rgba(40,60,180,0)"); vg.addColorStop(1, `rgba(30,40,140,${a})`); ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+  }
+  if (G.speed > 16) { ctx.save(); ctx.globalAlpha = clamp((G.speed - 16) / 6, 0, .6); ctx.strokeStyle = "#fff"; ctx.lineWidth = 2;
+    for (let i = 0; i < 14; i++) { const a = seeded(i + Math.floor(t * 20)) * Math.PI * 2, r0 = 260 + seeded(i * 3 + Math.floor(t * 20)) * 200;
+      ctx.beginPath(); ctx.moveTo(W / 2 + Math.cos(a) * r0, HY + Math.sin(a) * r0 * .7); ctx.lineTo(W / 2 + Math.cos(a) * (r0 + 120), HY + Math.sin(a) * (r0 + 120) * .7); ctx.stroke(); } ctx.restore(); }
+  if (G.talk) { const b = G.talk, pos = talkPos(b.who); talkBubble(pos.x, pos.y, b); }
+  if (G.banner > 0 && G.state === "play") bigText(`Monde ${G.zone + 1} : ${ZONES[G.zone].name}`, 268, 40, "#ffd23f", clamp(G.banner, 0, 1));
+  if (G.phase === "win" && G.endT > 3.8 && G.endT < 10.5) bigText("Racine est libre !", 95, 54, "#ffd23f", clamp((G.endT - 3.8) * 2, 0, 1) * clamp(10.5 - G.endT, 0, 1));
+  if (G.phase === "win" && G.endT > 33.6) bigText("FIN… ou presque !", 95, 60, "#ffd23f", clamp((G.endT - 33.6) * 1.5, 0, 1));
+  if (G.phase === "lose" && G.endT > 1 && G.endT < 9) bigText("Tragédie…", 300, 60, "#ff4757", clamp(G.endT - 1, 0, 1) * clamp(9 - G.endT, 0, 1));
+  if (G.phase === "lose" && G.endT > 18.2) bigText("À suivre…", 300, 56, "#ffd23f", clamp(G.endT - 18.2, 0, 1));
+  if (G.flash > 0) { ctx.fillStyle = `rgba(${G.flashC},${Math.min(.85, G.flash)})`; ctx.fillRect(-20, -20, W + 40, H + 40); }
+}
+function heroLiftPx() {
+  if (G.phase === "win") { const e = G.endT; if (e < 1.6) return 0; if (e < 2.25) return Math.sin((e - 1.6) / .65 * Math.PI / 2) * 330; return Math.max(0, 330 - (e - 2.25) ** 2 * 1400); }
+  if (G.act === "jump") return Math.sin(Math.PI * G.actT / .75) * 175;
+  return 0;
+}
+function drawRacine() {
+  const p = prj(G.heroX, 0, PZ + (G.pzOff || 0)), k = p.s / KREF * .95;
+  const squash = G.act === "slide" ? clamp(Math.min(G.actT, .85 - G.actT) * 8, 0, 1) : 0;
+  let tilt = G.act === "lane" ? Math.sin(G.actT / .28 * Math.PI) * .25 * Math.sign(LANES[G.lane] - G.fromX) : 0, still = false;
+  if (G.hitT > 0) tilt = Math.sin(G.hitT * Math.PI * 3) * .5;
+  if (G.phase === "win" && G.endT > 4.5) { drawPiFront(PZ + (G.pzOff || 0), G.endT > 6.5 ? Math.abs(Math.sin(G.t * 5 + 1)) * 18 : 0); return; }
+  if (G.phase === "lose") { tilt = lerp(-1.3, 0, smooth((G.endT - 12) / 1.2)); still = true; }
+  if (G.phase === "intro" && G.introT < 29.2) still = true;
+  drawPiBack(p.x, p.y, k, G.ph, { lift: heroLiftPx(), squash, tilt, still: still || (G.phase === "rush" && G.obs && G.obs.dead), ko: G.hitT > .2 || (G.phase === "lose" && G.endT < 12) });
+}
+function drawPiFront(z, hop = 0) {
+  const p = prj(G.heroX, 0, z), k = p.s / KREF * .95 * 1.45;
+  ctx.save(); ctx.translate(p.x, p.y); ellipse(0, 0, 40 * k / 1.45, 9 * k / 1.45, "rgba(0,0,0,.28)"); ctx.scale(k, k); ctx.translate(0, -hop);
+  drawPi(0, 0, G.t, { happy: true, calm: false }); ctx.restore();
+}
+const ZK = 2;                                                   // taille de Zêta (c'est un géant !)
+function zetaScreen(zz) { const bob = Math.sin(G.t * 2.1) * .15; return prj(G.zetaX, 5.2 + bob + (G.phase === "lose" ? Math.min(G.endT, 14) * .25 : 0), zz); }
+function drawZetaGroup(zz, t) {
+  const p = zetaScreen(zz), k = p.s / KREF * ZK;
+  ctx.save(); ctx.globalAlpha = fogA(zz); ctx.translate(p.x, p.y); ctx.scale(k, k);
+  if (G.throwT > 0) ctx.rotate(Math.sin(G.throwT * Math.PI * 2) * .25);
+  polyline([[6, 86], [6, 118]], "#777", 3); drawCageR(6, 168, t, true, false);
+  drawZeta(0, 0, t, { laugh: G.phase === "lose" || (G.talk && G.talk.who === "zeta" && G.talk.mood === "happy") || G.hitT > 0 });
+  ctx.restore();
+}
+function talkPos(who) {
+  const zz = PZ + G.zetaD;
+  if (G.phase === "intro") {
+    const T = G.introT, zi = introZeta(T);
+    if (who === "zeta") { if (zi) { const p = prj(zi.x, zi.h, PZ + zi.d); return { x: p.x - 230, y: p.y + 20 }; } return { x: 640, y: 130 }; }
+    if (who === "racine") { if (zi && zi.hang === "full" && T > 18.5) { const p = prj(zi.x, zi.h - 2.2, PZ + zi.d); return { x: p.x + 220, y: p.y }; }
+      const p = prj(RX, 1.6, PZ + RD); return { x: p.x + 170, y: p.y }; }
+    const p = prj(G.heroX, 0, PZ + (G.pzOff || 0)); return { x: p.x - 40, y: p.y - 175 };
+  }
+  if (G.phase === "win") {
+    if (who === "zeta") { const zf = zetaFar(G.endT); if (zf) { const p = prj(zf.x, zf.h, PZ + zf.d); return { x: p.x + 230, y: p.y + 10 }; } return { x: 700, y: 150 }; }
+    if (who === "racine" && G.cage) { const c = G.cage, p = prj(c.x - .9, 1.5, PZ + c.d); return { x: p.x + 170, y: p.y }; }
+    if (who === "pi" && G.endT > 4.5) { const p = prj(G.heroX, 0, PZ + (G.pzOff || 0)); return { x: p.x - 40, y: p.y - 175 }; }
+  }
+  if (who === "zeta") { if (G.fly) return { x: 700, y: 150 }; const p = zetaScreen(zz); return { x: p.x - 230, y: p.y + 10 }; }
+  if (who === "racine") { if (G.cage) { const c = G.cage, p = prj(c.x + 1, 1.6, PZ + c.d); return { x: p.x + 200, y: p.y + 10 }; }
+    const p = zetaScreen(zz), k = p.s / KREF * ZK; return { x: p.x + 240, y: p.y + 230 * k }; }
+  const p = prj(G.heroX, 0, PZ); return { x: p.x + (p.x > W / 2 + 40 ? -250 : 250), y: p.y - 70 - heroLiftPx() };
+}
+
+/* =====================================================================
+   10. INTERFACE
+   ===================================================================== */
+els.btnOk.addEventListener("click", () => submit());
+els.btnNone.addEventListener("click", () => submit("aucune solution"));
+els.ans.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); submit(); } });
+els.ans.addEventListener("input", () => {
+  const v = els.ans.value.trim(); if (!v) { els.preview.textContent = ""; return; }
+  try { const r = readAnswer(v); els.preview.textContent = r.none ? "Tu proposes : aucune solution (S = ∅)" : `Tu proposes ${r.vals.length} valeur${r.vals.length > 1 ? "s" : ""}.`; }
+  catch (e) { els.preview.textContent = "✍️ …"; }
+});
+document.querySelectorAll(".key").forEach(b => b.addEventListener("click", () => {
+  if (els.ans.disabled) return; const k = b.dataset.k, el = els.ans, s = el.selectionStart ?? el.value.length, e = el.selectionEnd ?? s;
+  if (k === "DEL") { const a = s === e ? Math.max(0, s - 1) : s; el.value = el.value.slice(0, a) + el.value.slice(e); el.setSelectionRange(a, a); }
+  else { el.value = el.value.slice(0, s) + k + el.value.slice(e); el.setSelectionRange(s + k.length, s + k.length); }
+  el.focus(); el.dispatchEvent(new Event("input"));
+}));
+function syncCalcOpt() { $("optCalcRow").classList.toggle("hidden", !(G.cls === "1re" || G.cls === "Tle")); }
+document.querySelectorAll(".cls").forEach(b => b.addEventListener("click", () => {
+  G.cls = b.dataset.cls; document.querySelectorAll(".cls").forEach(c => c.classList.toggle("on", c === b)); refreshRecords(); syncCalcOpt(); }));
+syncCalcOpt();
+document.querySelectorAll(".lvl").forEach(b => b.addEventListener("click", () => startGame(b.dataset.lvl)));
+$("btnPause").addEventListener("click", () => setPause(!G.paused));
+$("btnResume").addEventListener("click", () => setPause(false));
+$("btnMute").addEventListener("click", () => { const on = SND.toggle(); $("btnMute").textContent = on ? "🔊" : "🔇"; $("btnMute").classList.toggle("off", !on); });
+$("btnMusic").addEventListener("click", () => { const on = SND.toggleMusic(); $("btnMusic").classList.toggle("off", !on); });
+$("btnCont").addEventListener("click", closeSolution);
+$("btnAgain").addEventListener("click", () => startGame());
+$("btnLevels").addEventListener("click", () => { $("endScreen").classList.add("hidden"); showCalc(false); HY = 205; G.pzOff = 0; G.state = "menu"; G.phase = ""; G.cage = null; G.fly = null; G.talk = null; G.queue = [];
+  $("startScreen").classList.remove("hidden"); refreshRecords(); });
+$("btnSkip").addEventListener("click", () => { if (G.phase === "intro") skipIntro(); else showEnd(G.phase === "win"); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") { if (G.solOpen) closeSolution(); else setPause(!G.paused); } });
+document.addEventListener("visibilitychange", () => { if (document.hidden && G.state === "play" && !G.paused && !G.solOpen) setPause(true); });
+
+/* Démo directe de la fin : index.html#fin */
+resize(); refreshRecords(); requestAnimationFrame(frame);
+if (location.hash === "#intro") startGame("normal");
+if (location.hash === "#perdu") { G.introSeen = true; startGame("normal"); Object.assign(G, { idx: 9, zone: 2, lives: 0, correct: 6, wrongTries: 7, pts: 2500 }); beginLose(); }
+if (location.hash === "#fin") { G.introSeen = true; startGame("normal"); G.idx = GOAL; G.correct = 18; G.wrongTries = 3; G.pts = 6000; beginWin(); }
+</script>
+</body>
+</html>
