@@ -193,7 +193,7 @@
       <div class="hud-left"><div class="pill timer" id="timer">⏱ —</div><div class="pill" id="hearts">❤️❤️❤️</div></div>
       <div class="pill zone" id="zoneName">Royaume de Fantasmath</div>
       <div class="hud-right">
-        <div class="pill" id="score">★ 0</div>
+        <div class="pill" id="score" title="Pièces π ramassées (50 points chacune)">🪙 0</div>
         <button class="icon" id="btnPause" title="Pause" aria-label="Pause">⏸</button>
         <button class="icon" id="btnMusic" title="Musique" aria-label="Couper la musique">🎵</button>
         <button class="icon" id="btnMute" title="Tout le son" aria-label="Couper tout le son">🔊</button>
@@ -246,7 +246,7 @@
       <button type="button" class="ck" data-c="0">0</button><button type="button" class="ck" data-c=",">,</button><button type="button" class="ck fn" data-c="Ans">Ans</button><button type="button" class="ck op" data-c="+">+</button><button type="button" class="ck fn" data-c="e^(">eˣ</button>
       <button type="button" class="ck fn" data-c="e">e</button><button type="button" class="ck eq" data-c="=">=</button>
     </div>
-    <div class="calc-help">Clavier : chiffres, + − * / ^ ( ) · Entrée = calculer · Échap = effacer.<br>Les résultats sont <b>approchés</b> : ta réponse, elle, doit être <b>exacte</b> !</div>
+    <div class="calc-help">Clavier : chiffres, + − * / ^ ( ) , · R = √ · L = ln · E = eˣ · Maj+E = e · A = Ans · Entrée = calculer · Échap = effacer.<br>Les résultats sont <b>approchés</b> : ta réponse, elle, doit être <b>exacte</b> !</div>
   </aside>
 </div>
 </div>
@@ -255,15 +255,16 @@
 <div class="overlay" id="startScreen">
   <div class="card">
     <div class="logo"><span class="c1">Super</span> <span class="c2">Calcul</span> <span class="c3">Dash</span><span class="two">2</span></div>
-    <p>Catastrophe : l'infâme <b>Zêta</b> a capturé <b>Racine</b>, le poète dramaturge ! Il l'emporte dans sa cage jusqu'au fin fond des Abysses, en lâchant sur ses rails des obstacles… et des équations.</p>
+    <p>Catastrophe : l'infâme <b>Zêta</b> a capturé <b>Racine</b>, le poète dramaturge ! Il l'emporte dans sa cage jusqu'au fin fond des Abysses. Sur ses rails, il a posé des obstacles… et des équations.</p>
     <p>Toi, la <b>Princesse Pi</b>, tu fonces à son secours. Résous chaque équation <b>avant que l'obstacle n'arrive</b> et tu l'esquiveras.</p>
     <ul>
       <li>⏳ Quand une équation apparaît, le temps ralentit : l'obstacle approche doucement… mais il approche.</li>
       <li>✅ Bonne réponse : Pi <b>saute</b>, <b>glisse</b> ou <b>change de rail</b>. Plus tu réponds vite, plus tu gagnes de points.</li>
+      <li>🪙 Chaque bonne réponse fait apparaître des <b>pièces π</b> sur ton rail : <b>du premier coup</b> et <b>vite</b>, il y en a plus ! Chaque pièce vaut 50 points.</li>
       <li>🔁 <b>3 essais</b> par équation, avec un rappel du cours après une erreur.</li>
       <li>💥 Temps écoulé ou 3 erreurs : Pi percute l'obstacle et perd un <b>cœur</b> ❤️ (correction détaillée à lire). <b>3 cœurs</b> en tout.</li>
       <li>🎯 Passe les <b>20 obstacles</b> des 5 mondes pour libérer Racine !</li>
-      <li>🧮 En 1re et en Terminale, une <b>calculatrice</b> (facultative) peut s'afficher à côté des équations du 2nd degré, exponentielles et logarithmiques.</li>
+      <li>🧮 Pour le 2nd degré, l'exponentielle et le logarithme, une <b>calculatrice</b> s'affiche automatiquement. Pour les autres équations, tu peux l'activer si tu en as besoin (case ci-dessous ou bouton 🧮 en jeu).</li>
       <li>⏱ Le temps laissé pour chaque équation augmente au fil des mondes, quand les calculs deviennent plus costauds.</li>
     </ul>
     <p class="choose">1. Choisis ta classe :</p>
@@ -273,7 +274,7 @@
       <button class="cls" data-cls="1re"><b>1re</b><small>+ 2nd degré<br>(discriminant)</small></button>
       <button class="cls" data-cls="Tle"><b>Tle</b><small>+ exponentielle<br>et logarithme</small></button>
     </div>
-    <label class="opt" id="optCalcRow"><input type="checkbox" id="optCalc" checked> 🧮 Avoir la calculatrice pour les équations du 2nd degré, exponentielles et logarithmiques</label>
+    <label class="opt" id="optCalcRow"><input type="checkbox" id="optCalc"> 🧮 Afficher la calculatrice pour toutes les équations (aide au calcul)</label>
     <p class="choose">2. Choisis ton niveau pour partir :</p>
     <div class="levels">
       <button class="lvl easy" data-lvl="easy"><span class="lv-ico">🌱</span><b>Facile</b><small>calculs simples (tables de 2, 3, 5)<br>beaucoup de temps</small><span class="rec" data-rec="easy"></span></button>
@@ -282,7 +283,7 @@
     </div>
     <p class="credit">Personnages de <b>Super Calcul Bros 2</b>, librement inspirés de <b>Super Mario Bros.</b> · Gameplay librement inspiré de <b>Subway Surfers</b></p>
     <div class="row"><a class="btn quit" href="../jeu.html">← Retour aux jeux</a></div>
-    <div class="version">Version 3</div>
+    <div class="version">Version 4</div>
   </div>
 </div>
 
@@ -1509,7 +1510,7 @@ function newQuestion() {
 function startGame(diff) {
   if (diff) G.diff = diff;
   Object.assign(G, { state: "play", paused: false, solOpen: false, pt: 0, lives: LIVES, idx: 0, zone: 0, lastGen: "", obs: null, outcome: "",
-    heroX: 0, lane: 1, act: "", actT: 0, hitT: 0, coins: [], coinsN: 0, pts: 0, streak: 0, correct: 0, wrongTries: 0, hits: 0,
+    heroX: 0, lane: 1, act: "", actT: 0, hitT: 0, coins: [], coinsN: 0, pendingCoins: 0, pts: 0, streak: 0, correct: 0, wrongTries: 0, hits: 0,
     zetaD: 20, throwT: 0, flash: 0, shake: 0, banner: 3, endT: 0, talk: null, queue: [], talkGap: 0, fly: null, cage: null, winSpeed: 0 });
   parts.length = 0; G.phase = G.introSeen ? "start" : "intro"; HY = G.introSeen ? 205 : 330; G.pzOff = G.introSeen ? 0 : 1; G.introT = 0; G.heroX = G.introSeen ? 0 : -.5; showCalc(false);
   ["startScreen", "endScreen"].forEach(id => $(id).classList.add("hidden")); $("btnSkip").classList.add("hidden");
@@ -1517,31 +1518,29 @@ function startGame(diff) {
   SND.start(); SND.setZone(0); SND.focus(false); SND.half = false;
   if (G.phase === "intro") { els.expr.textContent = "🎬 Prologue : une belle journée sur les rails…"; $("btnSkip").textContent = "Passer l'intro ▶"; $("btnSkip").classList.remove("hidden"); }
   else {
-    els.expr.textContent = "🏃 Pi se lance à la poursuite de Zêta…"; spawnCoins(1, 10);
+    els.expr.textContent = "🏃 Pi se lance à la poursuite de Zêta…";
     say("zeta", "Mwahaha ! Racine est à moi ! Suis-moi sur mes rails, si tu l'oses !", "happy");
     say("pi", "Tiens bon, Racine ! J'arrive !", "happy");
   }
   updateHUD(true);
 }
-function spawnCoins(lane, from) { for (let i = 0; i < 6; i++) G.coins.push({ lane, d: from + i * 1.6 }); }
+function spawnCoins(lane, from, n) { for (let i = 0; i < n; i++) G.coins.push({ lane, d: from + i * 1.25 }); }
 
 function beginRun() {
   G.phase = "run"; G.pt = 0; G.obs = null; G.outcome = ""; SND.focus(false);
   setInput(false); els.expr.className = "expr wait"; els.expr.textContent = "🏃 En route vers le prochain obstacle…";
   els.tries.textContent = ""; els.qnum.textContent = `Obstacle ${G.idx + 1} / ${GOAL}`;
-  spawnCoins(R(0, 2), 9);
   if (Math.random() < .35) { if (Math.random() < .5) say("racine", LINES.racine.next(), "neutral"); else say("pi", LINES.pi.next(), "happy"); }
 }
 function beginThink() {
   G.q = newQuestion(); G.T = Math.round(G.q.time * DIFF().f * (1 + .1 * G.zone)); G.rem = G.T; G.lastTick = 99; G.tries = 0; G.outcome = "";
   const others = [0, 1, 2].filter(l => l !== G.lane), free = pick(others);
-  G.obs = { type: pick(["jump", "slide", "lane", "lane"]), d0: G.zetaD - 1.2, d: G.zetaD - 1.2, free, born: 0, acted: false, dead: false };
+  G.obs = { type: pick(["jump", "slide", "lane", "lane"]), d0: 22, d: 22, free, born: 0, acted: false, dead: false };   // déjà posé sur les rails, il sort de la brume
   G.obs.lanes = G.obs.type === "lane" ? [0, 1, 2].filter(l => l !== free) : [0, 1, 2];
-  G.phase = "think"; G.pt = 0; G.throwT = 1; SND.sThrow(); SND.focus(true);
-  { const p = prj(0, 1, PZ + G.obs.d0); burst(p.x, p.y, 14, ["#ffd6f5", "#a64ce0", "#fff"], 160); }
+  G.phase = "think"; G.pt = 0; SND.sWarn(); SND.focus(true);
   els.expr.className = "expr"; els.expr.innerHTML = `<span>${G.q.eq}</span>`; els.qnum.textContent = `Obstacle ${G.idx + 1} / ${GOAL}`; showTries();
   els.ans.value = ""; els.preview.textContent = ""; setFeedback("", ""); setInput(true); els.ans.focus();
-  showCalc(CALC_GENS.has(G.q.gen));
+  showCalc(CALC_GENS.has(G.q.gen) ? "forced" : "optional");
   if (Math.random() < .55) say("zeta", LINES.zetaThrow.next(), "happy"); else if (Math.random() < .5) say("racine", LINES.racine.next(), "neutral");
 }
 
@@ -1554,15 +1553,15 @@ function submit(raw) {
   else if (r.status === "warn") { SND.sWarn(); setFeedback("🤔 " + esc(r.msg), "warn"); shake(els.ans); }
   else onWrong(r.msg);
 }
+/* Pièces gagnées : 5 / 3 / 2 selon l'essai, +2 si réponse en moins de la moitié du temps, +1 dès 3 réussites du 1er coup d'affilée */
 function onCorrect() {
-  const d = DIFF(), base = [300, 200, 100][G.tries];
   G.streak = G.tries === 0 ? G.streak + 1 : 0;
-  const bonus = G.tries === 0 && G.streak > 1 ? 50 * (G.streak - 1) : 0, tb = Math.floor(G.rem) * 5;
-  const gain = Math.round((base + bonus + tb) * d.mult); G.pts += gain; G.correct++;
+  const fast = G.rem >= G.T / 2, serie = G.streak >= 3, n = [5, 3, 2][G.tries] + (fast ? 2 : 0) + (serie ? 1 : 0);
+  G.pendingCoins = n; G.correct++;
   G.outcome = "ok"; G.phase = "rush"; G.pt = 0; SND.sGood(); SND.focus(false); setInput(false);
-  spawn({ kind: "text", text: `+${gain}`, x: prj(G.heroX, 0, PZ).x, y: 250, vy: -60, life: 1.4, max: 1.4, size: 38, color: "#3ddc84" });
-  setFeedback(`✅ ${pick(["Bravo !", "Exact !", "Parfait !", "Bien vu !", "Impeccable !", "Excellent !"])} <b>+${gain} points</b>` +
-    (bonus ? ` · série de ${G.streak} 🔥` : ""), "ok");
+  spawn({ kind: "text", text: `+${n} π`, x: prj(G.heroX, 0, PZ).x, y: 250, vy: -60, life: 1.4, max: 1.4, size: 38, color: "#ffd23f" });
+  setFeedback(`✅ ${pick(["Bravo !", "Exact !", "Parfait !", "Bien vu !", "Impeccable !", "Excellent !"])} <b>${n} pièces π</b> t'attendent sur ton rail` +
+    (fast ? " · ⚡ rapide" : "") + (serie ? ` · 🔥 série de ${G.streak}` : ""), "ok");
   say("zeta", LINES.zetaAngry.next(), "sad", true);
   if (Math.random() < .4) say("racine", LINES.racineCheer.next(), "happy");
   updateHUD();
@@ -1593,6 +1592,7 @@ function crash() {
   updateHUD();
 }
 function afterObstacle() {
+  if (G.outcome === "ok" && G.pendingCoins) { spawnCoins(G.lane, 1.4, G.pendingCoins); G.pendingCoins = 0; }
   G.idx++;
   if (G.idx >= GOAL) { beginWin(); return; }
   const z = Math.floor(G.idx / 4);
@@ -1631,11 +1631,11 @@ function beginLose() {
 }
 
 /* Score */
+/* Score = (pièces × 50 + 1 000 si victoire + cœurs restants × 200) × coefficient du niveau × (0,5 + 0,5 × précision) */
 function computeScore(victory) {
   const tot = G.correct + G.wrongTries, acc = tot ? G.correct / tot : 0, m = DIFF().mult;
-  const coinsB = Math.round(G.coinsN * 10 * m), winB = victory ? Math.round(1000 * m) : 0, heartB = victory ? Math.round(G.lives * 200 * m) : 0;
-  const accF = .5 + .5 * acc;
-  return { pts: G.pts, coinsB, winB, heartB, acc, accF, total: Math.round((G.pts + coinsB + winB + heartB) * accF) };
+  const coinsB = G.coinsN * 50, winB = victory ? 1000 : 0, heartB = victory ? G.lives * 200 : 0, accF = .5 + .5 * acc;
+  return { coinsB, winB, heartB, m, acc, accF, total: Math.round((coinsB + winB + heartB) * m * accF) };
 }
 const recKey = () => `superCalculDash2_record_${G.cls}_${G.diff}`;
 function getRecord(k) { try { return +localStorage.getItem(k) || 0; } catch (e) { return 0; } }
@@ -1650,9 +1650,10 @@ function showEnd(victory) {
   $("scTotal").textContent = sc.total.toLocaleString("fr-FR");
   $("scRec").textContent = isNew ? "🎉 Nouveau record !" : rec ? `Record : ${rec.toLocaleString("fr-FR")}` : ""; $("scRec").className = "score-rec" + (isNew ? " new" : "");
   const f = n => n.toLocaleString("fr-FR");
-  $("scDetail").innerHTML = `<tr><td>Esquives (rapidité, séries, niveau)</td><td>${f(sc.pts)}</td></tr><tr><td>Pièces π (${G.coinsN} × 10 × ${String(d.mult).replace(".", ",")})</td><td>+ ${f(sc.coinsB)}</td></tr>` +
-    (victory ? `<tr><td>Princesse Pi libérée</td><td>+ ${f(sc.winB)}</td></tr><tr><td>Cœurs restants (${G.lives})</td><td>+ ${f(sc.heartB)}</td></tr>` : "") +
-    `<tr><td>Précision ${Math.round(sc.acc * 100)} % → × ${sc.accF.toFixed(2).replace(".", ",")}</td><td></td></tr>`;
+  $("scDetail").innerHTML = `<tr><td>🪙 Pièces π (${G.coinsN} × 50)</td><td>${f(sc.coinsB)}</td></tr>` +
+    (victory ? `<tr><td>Racine libéré</td><td>+ ${f(sc.winB)}</td></tr><tr><td>Cœurs restants (${G.lives} × 200)</td><td>+ ${f(sc.heartB)}</td></tr>` : "") +
+    `<tr><td>Niveau ${d.name}</td><td>× ${String(d.mult).replace(".", ",")}</td></tr>` +
+    `<tr><td>Précision ${Math.round(sc.acc * 100)} %</td><td>× ${sc.accF.toFixed(2).replace(".", ",")}</td></tr>`;
   $("endTitle").textContent = victory ? "🏆 Racine est libre !" : "💔 Tragédie…";
   $("endText").innerHTML = victory ? "Rideau ! <b>Zêta</b> est terrassé et la <b>Princesse Pi</b> a libéré <b>Racine</b>. Pour une fois, c'est la princesse qui sauve le poète… et la pièce finit bien !"
     : `Zêta s'enfuit avec Racine dans sa cage… Tu as franchi <b>${G.idx} obstacle${G.idx > 1 ? "s" : ""} sur ${GOAL}</b> (${ZONES[G.zone].name}). Retente ta chance !`;
@@ -1669,7 +1670,7 @@ function updateHUD(force) {
   tb.classList.toggle("on", think); tb.classList.toggle("low", think && G.rem < G.T * .25);
   if (think) $("tbarFill").style.width = clamp(100 * G.rem / G.T, 0, 100).toFixed(1) + "%";
   if (force || hud.l !== G.lives) { els.hearts.textContent = "❤️".repeat(Math.max(0, G.lives)) + "🖤".repeat(LIVES - Math.max(0, G.lives)); hud.l = G.lives; }
-  const sc = `★ ${Math.round(G.pts + G.coinsN * 10 * DIFF().mult).toLocaleString("fr-FR")}`;
+  const sc = `🪙 ${G.coinsN}`;
   if (force || hud.s !== sc) { els.score.textContent = sc; hud.s = sc; }
   if (force || hud.i !== G.idx || hud.z !== G.zone) {
     els.zone.textContent = ZONES[G.zone].name; const p = 100 * G.idx / GOAL; els.fill.style.width = p + "%"; els.tkHero.style.left = p + "%"; hud.i = G.idx; hud.z = G.zone;
@@ -1733,7 +1734,7 @@ function update(dt) {
   const mv = G.speed * dt;
   G.scroll += mv;
   if (G.obs && ph !== "think") G.obs.d -= mv;
-  G.coins.forEach(c => { c.d -= mv; if (!c.got && c.d < .5 && c.d > -.6 && c.lane === G.lane && G.act !== "jump") { c.got = true; G.coinsN++; SND.sCoin();
+  G.coins.forEach(c => { c.d -= mv; if (!c.got && c.d < .5 && c.lane === G.lane) { c.got = true; G.coinsN++; SND.sCoin();
     const p = prj(LANES[c.lane], .6, PZ); burst(p.x, p.y - 30, 4, ["#ffd23f", "#fff"], 120); } });
   G.coins = G.coins.filter(c => c.d > -2 && !c.got);
   G.ph += dt * (ph === "think" ? 3.2 : 4 + G.speed * .55);
@@ -1869,14 +1870,17 @@ function skipIntro() { if (G.phase !== "intro") return; G.introT = 32; endIntro(
    ===================================================================== */
 const CALC_GENS = new Set(["quad", "quad0", "quadNeg", "quadIrr", "quadRHS", "expLin", "expEq", "expSq", "lnLin", "lnEq", "expProd", "expQuad", "lnQuad", "lnSum"]);
 const calc = { el: $("calc"), inp: $("calcIn"), out: $("calcOut"), ans: 0 };
-let calcOn = true; try { calcOn = localStorage.getItem("superCalculDash2_calc") !== "0"; } catch (e) {}
-let calcAllowed = false;
-function setCalcPref(on) { calcOn = on; try { localStorage.setItem("superCalculDash2_calc", on ? "1" : "0"); } catch (e) {} $("optCalc").checked = on; showCalc(calcAllowed); }
-function showCalc(allowed) { calcAllowed = allowed; const on = allowed && calcOn;
-  const bt = $("btnCalc"); bt.classList.toggle("hidden", !allowed); bt.classList.toggle("on", on); bt.textContent = on ? "🧮 Masquer la calculatrice" : "🧮 Afficher la calculatrice";
-  calc.el.classList.toggle("hidden", !on); calc.inp.value = ""; calc.out.textContent = "\u00a0"; calc.out.className = "calc-out"; }
+let calcOn = false; try { calcOn = localStorage.getItem("superCalculDash2_calcAide") === "1"; } catch (e) {}
+let calcMode = false;                                            // false : rien · "forced" : 2nd degré, exp, ln · "optional" : au choix de l'élève
+function setCalcPref(on) { calcOn = on; try { localStorage.setItem("superCalculDash2_calcAide", on ? "1" : "0"); } catch (e) {} $("optCalc").checked = on; showCalc(calcMode, true); }
+function showCalc(mode, keep) { calcMode = mode; const on = mode === "forced" || (mode === "optional" && calcOn);
+  const bt = $("btnCalc"); bt.classList.toggle("hidden", mode !== "optional"); bt.classList.toggle("on", on); bt.textContent = on ? "🧮 Masquer la calculatrice" : "🧮 Calculatrice";
+  $("btnCalcHide").style.display = mode === "optional" ? "" : "none";
+  calc.el.classList.toggle("hidden", !on); if (keep) return; calc.inp.value = ""; calc.out.textContent = "\u00a0"; calc.out.className = "calc-out"; }
 function calcRun() {
-  const src = calc.inp.value.trim(); if (!src) return;
+  let src = calc.inp.value.trim(); if (!src) return;
+  const open = (src.match(/\(/g) || []).length - (src.match(/\)/g) || []).length;
+  if (open > 0) { src += ")".repeat(open); calc.inp.value = src; }   // parenthèses fermées automatiquement
   try {
     const v = evalStr(src.replace(/ans/gi, "(" + calc.ans + ")"));
     calc.ans = v; calc.out.className = "calc-out";
@@ -1896,7 +1900,12 @@ $("optCalc").checked = calcOn;
 $("optCalc").addEventListener("change", e => setCalcPref(e.target.checked));
 $("btnCalc").addEventListener("click", () => setCalcPref(!calcOn));
 $("btnCalcHide").addEventListener("click", () => setCalcPref(false));
+const CALC_KEYS = { r: "√(", l: "ln(", e: "e^(", E: "e", a: "Ans", "²": "^2" };
 calc.inp.addEventListener("keydown", e => {
+  if (!e.ctrlKey && !e.metaKey && !e.altKey && CALC_KEYS[e.key]) {
+    e.preventDefault(); const el = calc.inp, k = CALC_KEYS[e.key], s0 = el.selectionStart ?? el.value.length, s1 = el.selectionEnd ?? s0;
+    el.value = el.value.slice(0, s0) + k + el.value.slice(s1); el.setSelectionRange(s0 + k.length, s0 + k.length); return;
+  }
   if (e.key === "Enter") { e.preventDefault(); calcRun(); }
   if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); calc.inp.value = ""; calc.out.textContent = "\u00a0"; calc.out.className = "calc-out"; }
 });
@@ -1921,7 +1930,7 @@ function render() {
   if (G.obs && !G.obs.dead) {
     const o = G.obs, zz = PZ + o.d;
     o.lanes.forEach(l => items.push({ z: zz + (o.type === "lane" ? 4 : 0) + Math.abs(LANES[l] - camX) * .01, f: () => {
-      ctx.save(); ctx.globalAlpha = clamp(G.phase === "think" ? G.pt * 2.5 : 1, 0, 1) * fogA(zz); drawObstacleLane(o, LANES[l], zz); ctx.restore(); } }));
+      ctx.save(); ctx.globalAlpha = clamp(G.phase === "think" ? G.pt * 1.2 : 1, 0, 1) * fogA(zz); drawObstacleLane(o, LANES[l], zz); ctx.restore(); } }));
   }
   // pièces π
   G.coins.forEach(c => { const zz = PZ + c.d; if (zz > NEAR + .3 && zz < 60) items.push({ z: zz, f: () => { const p = prj(LANES[c.lane], .55, zz); ctx.save(); ctx.globalAlpha = fogA(zz); drawCoin(p.x, p.y, p.s / KREF, t + c.d); ctx.restore(); } }); });
@@ -2027,7 +2036,7 @@ document.querySelectorAll(".key").forEach(b => b.addEventListener("click", () =>
   else { el.value = el.value.slice(0, s) + k + el.value.slice(e); el.setSelectionRange(s + k.length, s + k.length); }
   el.focus(); el.dispatchEvent(new Event("input"));
 }));
-function syncCalcOpt() { $("optCalcRow").classList.toggle("hidden", !(G.cls === "1re" || G.cls === "Tle")); }
+function syncCalcOpt() {}
 document.querySelectorAll(".cls").forEach(b => b.addEventListener("click", () => {
   G.cls = b.dataset.cls; document.querySelectorAll(".cls").forEach(c => c.classList.toggle("on", c === b)); refreshRecords(); syncCalcOpt(); }));
 syncCalcOpt();
@@ -2048,7 +2057,7 @@ document.addEventListener("visibilitychange", () => { if (document.hidden && G.s
 resize(); refreshRecords(); requestAnimationFrame(frame);
 if (location.hash === "#intro") startGame("normal");
 if (location.hash === "#perdu") { G.introSeen = true; startGame("normal"); Object.assign(G, { idx: 9, zone: 2, lives: 0, correct: 6, wrongTries: 7, pts: 2500 }); beginLose(); }
-if (location.hash === "#fin") { G.introSeen = true; startGame("normal"); G.idx = GOAL; G.correct = 18; G.wrongTries = 3; G.pts = 6000; beginWin(); }
+if (location.hash === "#fin") { G.introSeen = true; startGame("normal"); G.idx = GOAL; G.correct = 18; G.wrongTries = 3; G.coinsN = 112; beginWin(); }
 </script>
 </body>
 </html>
