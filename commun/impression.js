@@ -51,7 +51,7 @@
     document.querySelectorAll('iframe').forEach(function (f) {
       var p = document.createElement('p');
       p.className = 'impr-seulement';
-      p.textContent = (/withcode/.test(f.src) ? 'Éditeur Python' : 'Contenu interactif') + ' : à utiliser sur la page web.';
+      p.textContent = (/withcode/.test(f.src || f.getAttribute('data-src') || '') ? 'Éditeur Python' : 'Contenu interactif') + ' : à utiliser sur la page web.';
       f.insertAdjacentElement('afterend', p);
     });
 

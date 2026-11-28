@@ -12,6 +12,8 @@
   <script src="commun/impression.js"></script>
   <link rel="stylesheet" href="commun/fond.css">
   <script src="commun/fond.js" defer></script>
+  <script src="commun/externe.js" defer></script>
+  <style>.btn-retirer{font:inherit;font-size:.88rem;margin-top:.4rem;cursor:pointer;border:1px solid var(--border,#ccc);border-radius:8px;padding:.25rem .7rem;background:var(--surface,#fff);color:inherit}</style>
   <style>
     .card h2 { font-size: 1.15rem; }
     .card p, .card li { margin: .35rem 0; }
@@ -51,20 +53,28 @@
     <section class="card">
       <h2>Données personnelles et cookies</h2>
       <ul>
-        <li>Le site ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d'audience ou de publicité.</li>
-        <li>Tes préférences et tes réponses (thème clair ou sombre, QCM, séances terminées, accès au site, fiche d'orientation) restent enregistrées uniquement dans ton navigateur. Tu peux les effacer en vidant les données du site dans ton navigateur.</li>
+        <li>Le site ne collecte aucune donnée personnelle : pas de compte, pas de formulaire envoyé, pas de mesure d'audience, pas de publicité, aucun cookie.</li>
+        <li>Tes préférences et tes réponses restent enregistrées <strong>uniquement dans ton navigateur</strong> (stockage local, ce ne sont pas des cookies) : thème clair ou sombre, réponses aux QCM, séances terminées, accès au site, fiche d'orientation, scores et réglages des jeux (records, calculatrice), choix de charger l'éditeur Python. Ces informations ne sont envoyées nulle part ; elles servent seulement au fonctionnement des pages que tu utilises. Tu peux les effacer à tout moment en vidant les données du site dans ton navigateur.</li>
         <li>La fiche d'orientation de 3e est transformée en PDF sur ton appareil : elle n'est envoyée nulle part.</li>
-        <li>Comme tout hébergeur, GitHub peut enregistrer des données techniques de connexion (comme l'adresse IP) pour assurer la sécurité du service.</li>
+        <li>Les polices, les sons, les musiques et les images du site sont hébergés sur le site lui-même ou fabriqués dans ton navigateur : les pages ne font appel à aucun service extérieur (pas de Google Fonts, pas de bibliothèque en ligne).</li>
+        <li>Comme tout hébergeur, GitHub (États-Unis) enregistre des données techniques de connexion (comme l'adresse IP) pour faire fonctionner et sécuriser le service : voir la <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">déclaration de confidentialité de GitHub</a>.</li>
+        <li>Pour toute question sur tes données, écris à <a href="mailto:mrllefaou@gmail.com">mrllefaou@gmail.com</a>. Tu peux aussi t'adresser à la <a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a>.</li>
       </ul>
     </section>
 
     <section class="card">
       <h2>Liens et services extérieurs</h2>
-      <p>Certaines pages intègrent l'éditeur Python de withcode.uk ou renvoient vers d'autres sites (Onisep, Région Bretagne, vidéos YouTube…). Ces services sont soumis à leurs propres conditions d'utilisation et de confidentialité.</p>
+      <ul>
+        <li><strong>Éditeur Python (create.withcode.uk, Royaume-Uni).</strong> Les séances de programmation de SNT proposent cet éditeur gratuit, utilisable sans compte. Il <strong>ne se charge que si tu cliques</strong> sur « Charger l'éditeur Python » : avant ce clic, aucune donnée n'est envoyée à ce service. Une fois chargé, ton navigateur s'y connecte et le service reçoit ton adresse IP ; ton code n'est enregistré sur ses serveurs que si tu choisis de le sauvegarder. Voir sa <a href="https://blog.withcode.uk/about/privacy-and-personal-data/" target="_blank" rel="noopener">page sur les données personnelles</a> (en anglais).
+          <br><span id="choix-withcode">Ton choix est retenu dans ce navigateur pour les autres éditeurs du site.</span>
+          <button type="button" id="retirer-withcode" class="btn-retirer" hidden>Ne plus charger l'éditeur automatiquement</button></li>
+        <li><strong>Liens vers d'autres sites</strong> (Onisep, Région Bretagne, vidéos YouTube, Wikipédia…). Ce sont de simples liens : rien n'est transmis à ces sites tant que tu ne cliques pas. Une fois sur leurs pages, ils appliquent leurs propres conditions d'utilisation et de confidentialité.</li>
+      </ul>
     </section>
 
     <section class="card">
       <h2>Contenus et droits</h2>
+      <p>Les jeux du site s'inspirent librement d'œuvres existantes, citées dans chaque jeu (par exemple <em>Super Mario Bros.</em>, <em>Subway Surfers</em>, <em>Monty Python : Sacré Graal !</em>, <em>Advance Wars</em>). Ces noms appartiennent à leurs propriétaires respectifs ; les jeux, leurs personnages, graphismes, musiques et textes sont des créations originales, sans lien avec ces œuvres ni avec leurs éditeurs. La police Fredoka utilisée dans certains jeux est distribuée sous licence libre <a href="commun/polices/OFL-Fredoka.txt">SIL Open Font License</a>.</p>
       <p>Les cours et activités sont rédigés par l'enseignant pour un usage en classe. Les documents et ressources d'autres auteurs sont cités avec leur source. Merci de ne pas reproduire les contenus en dehors d'un usage personnel ou pédagogique sans demander l'accord de l'auteur.</p>
       <p><strong>Signaler un contenu.</strong> Malgré le soin apporté à la rédaction, une partie des contenus a été préparée avec l'aide d'une intelligence artificielle, et une source a pu être oubliée ou un passage trop proche d'une œuvre existante a pu échapper à la vigilance de l'enseignant. Si vous êtes titulaire de droits et estimez qu'un contenu reproduit votre travail sans autorisation ou sans citation, écrivez à <a href="mailto:mrllefaou@gmail.com?subject=Signalement%20d%27un%20contenu%20du%20site">mrllefaou@gmail.com</a> en indiquant la page concernée : le contenu sera corrigé ou retiré dans les plus brefs délais.</p>
     </section>
@@ -75,5 +85,21 @@
     </section>
   </main>
 
+<script>
+  (function () {
+    function maj() {
+      var ok = window.ContenusExterieurs && window.ContenusExterieurs.autorise();
+      var b = document.getElementById('retirer-withcode'), t = document.getElementById('choix-withcode');
+      if (!b || !t) return;
+      b.hidden = !ok;
+      t.textContent = ok ? 'Tu as choisi de charger l’éditeur : il se charge désormais directement sur toutes les séances.'
+                         : 'Pour l’instant, l’éditeur ne se charge pas automatiquement sur ce navigateur.';
+    }
+    window.addEventListener('DOMContentLoaded', function () {
+      maj();
+      document.getElementById('retirer-withcode').addEventListener('click', function () { window.ContenusExterieurs.retirer(); maj(); });
+    });
+  })();
+</script>
 </body>
 </html>
