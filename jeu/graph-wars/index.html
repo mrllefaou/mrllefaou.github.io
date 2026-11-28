@@ -195,7 +195,7 @@ details.meth summary{cursor:pointer;font-weight:800;color:#9cc3ff}
       <p class="story">L'<b>Amiral Asymptote</b> et sa flotte rouge menacent l'Archipel du Repère. Général, vos espions ont intercepté les routes ennemies : ce sont des <b>courbes</b>.<br>
       ⚔ <b>Phase alliée</b> : lisez des <b>images</b> pour guider vos bombardiers.<br>
       🛡 <b>Phase ennemie</b> : lisez des <b>antécédents</b> pour mettre vos navires à l'abri.<br>
-      8 jours pour sauver l'archipel. Choisissez votre grade :</p>
+      8 jours pour sauver l'archipel. Une défense ratée trois fois coûte un navire : si toute la flotte coule, c'est la défaite. Choisissez votre grade :</p>
       <div class="levels" id="levels"></div>
       <label class="chk"><input type="checkbox" id="chkIntro" checked> Voir l'introduction</label>
       <div class="row" id="demoRow"></div>
@@ -229,7 +229,7 @@ details.meth summary{cursor:pointer;font-weight:800;color:#9cc3ff}
 
 <script>
 "use strict";
-const VERSION = "v4";
+const VERSION = "v6";
 /* ================= Outils ================= */
 const $ = s => document.querySelector(s);
 const cv = $('#cv'), ctx = cv.getContext('2d');
@@ -718,21 +718,21 @@ const DLG = {
 
 /* ================= Niveaux, théâtres ================= */
 const LEVELS = {
-  recrue: { id: 'recrue', name: 'Recrue', coef: 1, icon: '🎖️', desc: "Pointillés d'aide sur la carte, graduations de 1 en 1. Une ou deux réponses à trouver.", counts: [1, 1, 2, 2, 2] },
-  officier: { id: 'officier', name: 'Officier', coef: 1.5, icon: '⭐', desc: "Sans pointillés d'aide, formulations variées (f(x) = k). Parfois aucun antécédent… ou trois !", counts: [0, 1, 2, 2, 3, 3] },
-  etat: { id: 'etat', name: 'État-major', coef: 2.5, icon: '🏅', desc: "Graduations de 0,5 ou de 2, axes peu légendés, valeurs décimales. Aucune aide visuelle.", counts: [0, 1, 2, 3, 3] }
+  recrue: { id: 'recrue', name: 'Recrue', coef: 1, icon: '🎖️', desc: "Pointillés d'aide sur la carte, graduations de 1 en 1. Une ou deux réponses à trouver. Flotte : 3 navires.", counts: [1, 1, 2, 2, 2], fleet: 3 },
+  officier: { id: 'officier', name: 'Officier', coef: 1.5, icon: '⭐', desc: "Sans pointillés d'aide, formulations variées (f(x) = k). Parfois aucun antécédent… ou trois ! Flotte : 2 navires.", counts: [0, 1, 2, 2, 3, 3], fleet: 2 },
+  etat: { id: 'etat', name: 'État-major', coef: 2.5, icon: '🏅', desc: "Graduations de 0,5 ou de 2, axes peu légendés, valeurs décimales. Aucune aide visuelle. Flotte : 1 seul navire !", counts: [0, 1, 2, 3, 3], fleet: 1 }
 };
 const SCALES = [{ sx: 1, sy: 2 }, { sx: 2, sy: 1 }, { sx: .5, sy: 1 }, { sx: 1, sy: .5 }, { sx: .5, sy: 2 }, { sx: 2, sy: .5 }];
 const DAYS = 8;
 const THEATERS = [
-  { name: "Baie de l'Origine", sea: '#3f93e2', sea2: '#3889d8', tint: null, rain: 0, fog: 0, gulls: true, wind: false, storm: false, towers: 1 },
-  { name: "Détroit des Abscisses", sea: '#3a87d3', sea2: '#347fca', tint: 'rgba(255,190,110,0.12)', rain: 0, fog: .5, gulls: true, wind: true, storm: false, towers: 2 },
-  { name: "Mer des Ordonnées", sea: '#2f70ae', sea2: '#2b69a4', tint: 'rgba(255,110,60,0.22)', rain: .5, fog: .8, gulls: false, wind: true, storm: false, towers: 4 },
-  { name: "Forteresse Asymptote", sea: '#22507f', sea2: '#1f4a77', tint: 'rgba(8,14,48,0.5)', rain: 1, fog: 1, gulls: false, wind: true, storm: true, towers: 6 }
+  { name: "Baie de l'Origine", sea: '#3f93e2', sea2: '#3889d8', tint: null, rain: 0, fog: 1, gulls: true, wind: false, storm: false, towers: 1 },
+  { name: "Détroit des Abscisses", sea: '#3a87d3', sea2: '#347fca', tint: 'rgba(255,190,110,0.12)', rain: 0, fog: 1, gulls: true, wind: true, storm: false, towers: 2 },
+  { name: "Mer des Ordonnées", sea: '#2f70ae', sea2: '#2b69a4', tint: 'rgba(255,110,60,0.22)', rain: .5, fog: 1, gulls: false, wind: true, storm: false, towers: 4 },
+  { name: "Forteresse Asymptote", sea: '#22507f', sea2: '#1f4a77', tint: 'rgba(8,14,48,0.5)', rain: 1, fog: .8, gulls: false, wind: true, storm: true, towers: 6 }
 ];
 
 /* ================= État ================= */
-const G = { run: 0, lv: LEVELS.recrue, day: 0, theater: 0, score: 0, fleet: 5, sunk: 0, streak: 0, attempts: 0, correct: 0, firstTry: 0, escaped: 0, lost: 0, q: null, mode: 'map', questions: 0 };
+const G = { run: 0, lv: LEVELS.recrue, day: 0, theater: 0, score: 0, fleet: 3, sunk: 0, streak: 0, attempts: 0, correct: 0, firstTry: 0, escaped: 0, lost: 0, q: null, mode: 'map', questions: 0 };
 const MAP = { curve: null, color: '#ff5a3c', letter: 'f', sc: { sx: 1, sy: 1, every: 1 }, aidX: null, aidY: null, markX: null, markY: null, guides: [], corr: null, ships: [], showGrid: true };
 let ents = [], parts = [], tweens = [];
 const live = tok => { if (tok !== G.run) throw 'abort'; };
@@ -1037,7 +1037,7 @@ function buildTerrain(th, tIdx) {
 
 const glints = Array.from({ length: 60 }, (_, k) => ({ x: T + Math.random() * 14 * T, y: T + Math.random() * 10 * T, ph: Math.random() * 6 }));
 const rain = Array.from({ length: 140 }, () => ({ x: Math.random() * W, y: Math.random() * H, s: rnd(600, 900) }));
-const fogs = Array.from({ length: 7 }, () => ({ x: Math.random() * W, y: rnd(80, 640), r: rnd(110, 200), v: rnd(6, 16) }));
+const fogs = Array.from({ length: 12 }, (_, k) => ({ x: Math.random() * W, y: 80 + (k % 9) * 68 + rnd(-20, 20), r: rnd(100, 160), v: rnd(5, 13), parts: Array.from({ length: 6 }, () => ({ dx: rnd(-1, 1), dy: rnd(-.25, .25), s: rnd(.35, .6) })) }));
 let flash = 0, nextBolt = 8, time = 0;
 
 /* ================= Dessin ================= */
@@ -1172,7 +1172,7 @@ function render() {
   for (const g of glints) { const a = Math.sin(time * 1.3 + g.ph); if (a < .2) continue; ctx.globalAlpha = a * .8; ctx.beginPath(); ctx.arc(g.x + Math.sin(time * .5 + g.ph) * 6, g.y, 7, Math.PI * 1.15, Math.PI * 1.85); ctx.stroke(); }
   ctx.globalAlpha = 1;
   if (th.tint) { ctx.fillStyle = th.tint; ctx.fillRect(0, 0, W, H); }
-  if (th.fog) for (const f of fogs) { const gr = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r); gr.addColorStop(0, `rgba(225,232,245,${.2 * th.fog})`); gr.addColorStop(1, 'rgba(225,232,245,0)'); ctx.fillStyle = gr; ctx.fillRect(f.x - f.r, f.y - f.r, f.r * 2, f.r * 2); }
+  if (th.fog) { ctx.save(); ctx.beginPath(); ctx.rect(T, T, 14 * T, 10 * T); ctx.clip(); const col = VIEW.theater >= 3 ? '200,210,235' : '240,245,252'; for (const f of fogs) for (const q of f.parts) { const x = f.x + q.dx * f.r, y = f.y + q.dy * f.r, r = q.s * f.r; const gr = ctx.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, `rgba(${col},${.72 * th.fog})`); gr.addColorStop(.6, `rgba(${col},${.38 * th.fog})`); gr.addColorStop(1, `rgba(${col},0)`); ctx.fillStyle = gr; ctx.fillRect(x - r, y - r, r * 2, r * 2); } ctx.restore(); }
   if (VIEW.theater === 3) { for (let k = 0; k < 2; k++) { const a = Math.sin(time * .5 + k * 2.2) * .5 + (k ? 3.6 : 2.5); const ox = k ? 900 : 780, oy = k ? 120 : 40; ctx.save(); ctx.translate(ox, oy); ctx.rotate(a); const gr = ctx.createLinearGradient(0, 0, 520, 0); gr.addColorStop(0, 'rgba(255,250,200,.28)'); gr.addColorStop(1, 'rgba(255,250,200,0)'); ctx.fillStyle = gr; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(520, -60); ctx.lineTo(520, 60); ctx.closePath(); ctx.fill(); ctx.restore(); } }
   if (G.mode === 'map') { drawGrid(); drawAids(); drawCurve(); drawGuides(); drawCorr(); }
   const ships = ents.filter(e => e.kind === 'ship' || e.kind === 'dinghy').sort((a, b) => a.y - b.y);
@@ -1231,7 +1231,7 @@ function frame(now) {
     for (const e of ents) { if (e.update) e.update(dt); if (e.kind === 'ship' && e.hp != null && e.hp < 10 && !e.sink && Math.random() < dt * 4) parts.push({ t: 'smoke', x: e.x + rnd(-8, 8), y: e.y + (e.oy || 0) - 6, vx: rnd(-6, 6), vy: rnd(-30, -15), r: rnd(6, 10), life: 1.3, age: 0 }); }
     const th = THEATERS[VIEW.theater];
     if (th.rain) for (const d of rain) { d.y += d.s * dt; d.x -= d.s * dt * .35; if (d.y > H) { d.y = -20; d.x = Math.random() * (W + 200); } }
-    for (const f of fogs) { f.x += f.v * dt; if (f.x - f.r > W) f.x = -f.r; }
+    for (const f of fogs) { f.x += f.v * dt; if (f.x - 2 * f.r > W) f.x = -2 * f.r; }
     if (flash > 0) flash -= dt * 2.5;
     if (th.storm) { nextBolt -= dt; if (nextBolt <= 0) { flash = 1; nextBolt = rnd(7, 14); setTimeout(() => SFX.thunder(), 400); } }
     if (th.gulls) { gullT -= dt; if (gullT <= 0) { gullT = rnd(6, 12); const y0 = rnd(40, 300), g = { kind: 'gull', x: -30, y: y0, ph: Math.random() * 6, update(d) { this.x += 90 * d; this.y = y0 + Math.sin(this.x / 60) * 12; if (this.x > W + 40) removeEnt(this); } }; ents.push(g); } }
@@ -1245,7 +1245,7 @@ function frame(now) {
 function updateHud() {
   $('#hDay').textContent = `Jour ${Math.max(1, G.day)}/${DAYS}`;
   $('#hTheater').textContent = THEATERS[VIEW.theater].name;
-  $('#hFleet').innerHTML = Array.from({ length: 5 }, (_, k) => `<span class="${k < G.fleet ? '' : 'lost'}">🚢</span>`).join('');
+  $('#hFleet').innerHTML = Array.from({ length: G.lv.fleet }, (_, k) => `<span class="${k < G.fleet ? '' : 'lost'}">🚢</span>`).join('');
   $('#hSunk').textContent = '🎯 ' + G.sunk;
   $('#hScore').textContent = G.score.toLocaleString('fr-FR') + ' pts';
 }
@@ -1402,7 +1402,7 @@ function after(q, ok, parsed, hits) {
       if (att) G.escaped++; else { G.fleet = Math.max(0, G.fleet - 1); G.lost++; }
       setFb(`❌ <b>Trois essais manqués.</b> Correction : ${corrText(q)}`, 'bad'); $('#meth').open = true;
       MAP.corr = att ? { type: 'img', i: q.i, j: q.j, p: 0 } : { type: 'ant', kj: q.kj, is: q.solI, p: 0 }; tween(.8, k => MAP.corr && (MAP.corr.p = k));
-      DLG.push([fillLine((att ? P.escaped : P.shipLost).draw(), q), fillLine(P.correction.draw(), q)], true);
+      DLG.push([(!att && G.fleet === 0) ? { c: 'abscisse', t: "C'était notre dernier navire, mon général…", m: 'sad' } : fillLine((att ? P.escaped : P.shipLost).draw(), q), fillLine(P.correction.draw(), q)], true);
       q.done = true; $('#btnContinue').classList.remove('hidden');
     }
   }
@@ -1499,10 +1499,10 @@ function hideOverlays() { ['#ovHome', '#ovPause', '#ovEnd'].forEach(s => $(s).cl
 async function startGame(id, demo) {
   AU.init(); abortAll(); await new Promise(r => setTimeout(r, 30));
   SC.skip = false; paused = false;
-  Object.assign(G, { lv: LEVELS[id], day: 0, score: 0, fleet: 5, sunk: 0, streak: 0, attempts: 0, correct: 0, firstTry: 0, escaped: 0, lost: 0, q: null, questions: 0 });
+  Object.assign(G, { lv: LEVELS[id], day: 0, score: 0, fleet: LEVELS[id].fleet, sunk: 0, streak: 0, attempts: 0, correct: 0, firstTry: 0, escaped: 0, lost: 0, q: null, questions: 0 });
   resetPools(); hideOverlays(); lastAns = null; const tok = G.run; updateHud();
   try {
-    if (demo === 'fin') { Object.assign(G, { day: 8, score: 4800, sunk: 7, attempts: 19, correct: 16, firstTry: 13, fleet: 4, lost: 1, escaped: 1 }); await playVictory(tok); live(tok); return showEnd(true, true); }
+    if (demo === 'fin') { Object.assign(G, { day: 8, score: 4800, sunk: 7, attempts: 19, correct: 16, firstTry: 13, fleet: 2, lost: 1, escaped: 1 }); await playVictory(tok); live(tok); return showEnd(true, true); }
     if (demo === 'intro') { await playIntro(tok); live(tok); return showHome(); }
     if ($('#chkIntro').checked) { await playIntro(tok); live(tok); }
     $('#chkIntro').checked = false; firstGame = false;
@@ -1529,7 +1529,7 @@ function showEnd(win, demo) {
   $('#endRecord').textContent = isRec ? '🎉 Nouveau record pour ce grade !' : `Record (${G.lv.name}) : ${rec.toLocaleString('fr-FR')} pts`;
   $('#endStats').innerHTML = [
     ['Bonnes lectures', `${G.correct} / ${G.questions || 16}`], ['Du premier coup', G.firstTry], ['Précision', Math.round(prec * 100) + ' %'],
-    ['Navires ennemis coulés', G.sunk], ['Navires alliés restants', `${G.fleet} / 5`]
+    ['Navires ennemis coulés', G.sunk], ['Navires alliés restants', `${G.fleet} / ${G.lv.fleet}`]
   ].map(([a, b]) => `<div>${a}<b>${b}</b></div>`).join('');
   $('#ovEnd').classList.remove('hidden'); MUS.stop(); if (AU.ctx) MUS.start(0);
 }
