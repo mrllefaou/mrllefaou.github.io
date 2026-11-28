@@ -101,6 +101,9 @@
   .btn.alt{background:var(--bleu)}
   .btn.quit{display:inline-block;text-decoration:none;background:#7a6a8f;font-size:clamp(.9rem,2.4vw,1.05rem)}
   .btn.quit:hover{background:#8d7da3}
+  .credit{font-size:.85rem;line-height:1.4;opacity:.8;margin-top:14px}
+  .credit i{font-style:italic;font-weight:600}
+  .ver{font-size:.8rem;opacity:.55;margin-top:4px}
   .preview{font-size:.95rem;min-height:1.3em;color:#5b4a6b}
   .preview b{font-family:"Cambria Math","Times New Roman",Georgia,serif;font-size:1.2em;color:var(--encre)}
   .keys{display:grid;grid-template-columns:repeat(9,1fr);gap:6px}
@@ -257,6 +260,8 @@
         <small>1 min 30 · +20 s<br>calculs costauds d'emblée</small><span class="rec" data-rec="hard"></span></button>
     </div>
     <div class="row"><a class="btn quit" href="../jeu.html">← Retour aux jeux</a></div>
+    <p class="credit">🍄 Ambiance librement inspirée de la série <i>Super Mario Bros.</i> (Nintendo). Personnages, histoire et dialogues originaux.</p>
+    <p class="ver">Version <span id="ver"></span></p>
   </div>
 </div>
 
@@ -301,11 +306,13 @@
     </div>
     <div class="row"><button class="btn big" id="btnAgain">↻ Rejouer</button><button class="btn big alt" id="btnLevels">Changer de niveau</button></div>
     <div class="row"><a class="btn quit" href="../jeu.html">← Retour aux jeux</a></div>
+    <p class="credit">🍄 Ambiance librement inspirée de la série <i>Super Mario Bros.</i> (Nintendo). Personnages, histoire et dialogues originaux.</p>
   </div>
 </div>
 
 <script>
 "use strict";
+const VERSION = "7 · 28/11/2026";   // à incrémenter à chaque mise à jour du jeu
 /* =====================================================================
    1. OUTILS
    ===================================================================== */
@@ -1651,6 +1658,7 @@ document.addEventListener("keydown", e => {
 document.addEventListener("visibilitychange", () => { if (document.hidden && G.state === "play" && !G.paused) setPause(true); });
 
 resize();
+$("ver").textContent = VERSION;
 refreshRecords();
 newQuestion(); G.asked = 0; els.qnum.textContent = "";
 requestAnimationFrame(frame);
