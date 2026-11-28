@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<title>Gandlem et le Château des Formules</title>
+<title>Wizard Memories</title>
 <link rel="icon" href="../../favicon.ico">
 <script src="../../commun/acces.js"></script>
 <style>
@@ -150,7 +150,7 @@ sup,sub{font-size:.68em;line-height:0}
 <body>
 <header class="top">
   <a class="back" href="../jeu.html">← Retour aux jeux</a>
-  <span class="ttl">🧙 Gandlem et le Château des Formules</span>
+  <span class="ttl">🧙 Wizard Memories</span>
 </header>
 <main id="app">
   <div id="view">
@@ -173,7 +173,7 @@ sup,sub{font-size:.68em;line-height:0}
   <!-- ACCUEIL -->
   <section id="menu" class="ov">
     <div class="box">
-      <h1><span class="t1">Gandlem</span><span class="t2">et le Château des Formules</span></h1>
+      <h1><span class="t1">Wizard Memories</span><span class="t2">Gandlem et le Château des Formules</span></h1>
       <p class="pitch">Incarne <b>Gandlem</b>, mage des lemmes, et traverse le Château Ténébreux de Zêta. Chaque monstre ne cède qu'à la <b>bonne formule du cours</b> : apprends-les par cœur pour atteindre le trésor du dragon ! 3 cœurs · 20 monstres · 5 étages.</p>
       <h2>1. Ta classe</h2>
       <div id="classes"></div>
@@ -1976,9 +1976,9 @@ function sceneNext() { if (!SC) return; SFX.clic(); const nx = SC.S.texts.find(t
 function sceneSkip() { if (!SC) return; const d = SC.done; SC = null; stopTrack(); phase = "menu"; if (d) d(); }
 
 // ====================================================================
-//  JEU — Gandlem et le Château des Formules
+//  JEU — Wizard Memories
 // ====================================================================
-const VERSION = "1", VDATE = "28/11/2026";
+const VERSION = "2", VDATE = "28/11/2026";
 const $ = s => document.querySelector(s);
 const LS = { get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } } };
 const rand = a => a[Math.floor(Math.random() * a.length)];
