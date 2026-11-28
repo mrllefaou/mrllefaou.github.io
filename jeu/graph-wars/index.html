@@ -195,7 +195,7 @@ details.meth summary{cursor:pointer;font-weight:800;color:#9cc3ff}
       <p class="story">L'<b>Amiral Asymptote</b> et sa flotte rouge menacent l'Archipel du Repère. Général, vos espions ont intercepté les routes ennemies : ce sont des <b>courbes</b>.<br>
       ⚔ <b>Phase alliée</b> : lisez des <b>images</b> pour guider vos bombardiers.<br>
       🛡 <b>Phase ennemie</b> : lisez des <b>antécédents</b> pour mettre vos navires à l'abri.<br>
-      8 jours pour sauver l'archipel. Une défense ratée trois fois coûte un navire : si toute la flotte coule, c'est la défaite. Choisissez votre grade :</p>
+      8 jours pour sauver l'archipel. Une mission ratée trois fois (attaque ou défense) coûte un navire : si toute la flotte coule, c'est la défaite. Choisissez votre grade :</p>
       <div class="levels" id="levels"></div>
       <label class="chk"><input type="checkbox" id="chkIntro" checked> Voir l'introduction</label>
       <div class="row" id="demoRow"></div>
@@ -229,7 +229,7 @@ details.meth summary{cursor:pointer;font-weight:800;color:#9cc3ff}
 
 <script>
 "use strict";
-const VERSION = "v6";
+const VERSION = "v7";
 /* ================= Outils ================= */
 const $ = s => document.querySelector(s);
 const cv = $('#cv'), ctx = cv.getContext('2d');
@@ -1315,7 +1315,8 @@ async function animAttack(q, v, ok, tok) {
     await wait(.6); live(tok); await tween(1.3, k => { e.sink = k; e.alpha = 1 - k; }); removeEnt(e); G.sunk++;
   } else {
     splashFx(tx, ty); SFX.splash(); floatText('PLOUF !', tx, ty - 40, '#bfe6ff'); await wait(.7); live(tok);
-    if (q.tries >= 3) { const e = { kind: 'ship', team: 'red', x: PX(q.i), y: PY(q.j), alpha: 0, flip: true }; ents.push(e); await tween(.5, k => e.alpha = k); live(tok); await tween(2, k => { e.x = PX(q.i) + k * 140; e.alpha = 1 - k; }); removeEnt(e); }
+    if (q.tries >= 3) { const e = { kind: 'ship', team: 'red', x: PX(q.i), y: PY(q.j), alpha: 0, flip: true }; ents.push(e); await tween(.5, k => e.alpha = k); live(tok); await tween(2, k => { e.x = PX(q.i) + k * 140; e.alpha = 1 - k; }); removeEnt(e); live(tok);
+      const v = ents.find(x => x.kind === 'ship' && x.team === 'blue' && !x.sink); if (v) { await wait(.3); explode(v.x, v.y, .9); SFX.boom(.8); floatText('CONTRE-ATTAQUE !', clamp(v.x + 90, 120, 840), v.y - 40, '#ff6b5b'); await tween(1.3, k => { v.sink = k; v.alpha = 1 - k; }); removeEnt(v); } }
   }
 }
 async function animDefense(q, vals, ok, tok) {
@@ -1399,10 +1400,10 @@ function after(q, ok, parsed, hits) {
       DLG.push([fillLine(pool.draw(), q)], true);
       enableInput(true); $('#ans').select(); if (matchMedia('(pointer:fine)').matches) $('#ans').focus();
     } else {
-      if (att) G.escaped++; else { G.fleet = Math.max(0, G.fleet - 1); G.lost++; }
+      if (att) G.escaped++; G.fleet = Math.max(0, G.fleet - 1); G.lost++;
       setFb(`❌ <b>Trois essais manqués.</b> Correction : ${corrText(q)}`, 'bad'); $('#meth').open = true;
       MAP.corr = att ? { type: 'img', i: q.i, j: q.j, p: 0 } : { type: 'ant', kj: q.kj, is: q.solI, p: 0 }; tween(.8, k => MAP.corr && (MAP.corr.p = k));
-      DLG.push([(!att && G.fleet === 0) ? { c: 'abscisse', t: "C'était notre dernier navire, mon général…", m: 'sad' } : fillLine((att ? P.escaped : P.shipLost).draw(), q), fillLine(P.correction.draw(), q)], true);
+      DLG.push(att ? [fillLine(P.escaped.draw(), q), G.fleet === 0 ? { c: 'abscisse', t: "Leur contre-attaque a coulé notre dernier navire, mon général…", m: 'sad' } : { c: 'abscisse', t: `Le navire ennemi a riposté : un de nos navires est coulé ! Il nous en reste ${G.fleet}.`, m: 'sad' }, fillLine(P.correction.draw(), q)] : [G.fleet === 0 ? { c: 'abscisse', t: "C'était notre dernier navire, mon général…", m: 'sad' } : fillLine(P.shipLost.draw(), q), fillLine(P.correction.draw(), q)], true);
       q.done = true; $('#btnContinue').classList.remove('hidden');
     }
   }
@@ -1511,6 +1512,7 @@ async function startGame(id, demo) {
       await banner(`JOUR ${d}`, THEATERS[t].name, 'day', 1.8); live(tok);
       DLG.push(DAY_LINES[d], true);
       await runQuestion('attack', tok); live(tok);
+      if (G.fleet <= 0) { await playDefeat(tok); live(tok); return showEnd(false); }
       await runQuestion('defense', tok); live(tok);
       if (G.fleet <= 0) { await playDefeat(tok); live(tok); return showEnd(false); }
     }
