@@ -43,12 +43,12 @@ button{font:inherit;cursor:pointer}
 .band span{font-weight:800;font-size:clamp(13px,2vw,22px)}
 @keyframes bin{from{transform:skewY(-5deg) translateX(-110%)}to{transform:skewY(-5deg) translateX(0)}}
 @keyframes bout{to{transform:skewY(-5deg) translateX(110%)}}
-#caption{position:absolute;left:0;right:0;top:0;padding:14px 18px;background:linear-gradient(rgba(4,10,22,.88),rgba(4,10,22,.6));font-size:clamp(13px,1.9vw,20px);line-height:1.4;display:none;z-index:5;font-style:italic;text-align:center}
+#caption{position:absolute;left:2.5%;right:2.5%;top:clamp(50px,8%,60px);padding:12px 18px;border-radius:12px;border:2px solid rgba(255,255,255,.5);background:rgba(4,10,22,.85);font-size:clamp(13px,1.9vw,20px);line-height:1.4;display:none;z-index:5;font-style:italic;text-align:center}
 #caption.show{display:block}
 #sceneDlgSlot{position:absolute;left:2.5%;right:2.5%;bottom:3%;z-index:5}
 #sceneBtns{position:absolute;right:10px;top:10px;z-index:7;display:none;gap:8px}
 #sceneBtns.show{display:flex}
-#sceneBtns button{background:rgba(10,20,40,.8);color:#fff;border:2px solid #9cc3ff;border-radius:8px;padding:6px 12px;font-weight:700}
+#sceneBtns button{background:rgba(10,20,40,.8);color:#fff;border:2px solid #9cc3ff;border-radius:8px;padding:5px 12px;font-weight:700;font-size:clamp(12px,1.6vw,15px)}
 #titleCard{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;background:radial-gradient(circle,rgba(10,25,60,.75),rgba(3,8,20,.95));z-index:6;text-align:center}
 #titleCard.show{display:flex;animation:fadein .6s both}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
@@ -229,7 +229,7 @@ details.meth summary{cursor:pointer;font-weight:800;color:#9cc3ff}
 
 <script>
 "use strict";
-const VERSION = "v3";
+const VERSION = "v4";
 /* ================= Outils ================= */
 const $ = s => document.querySelector(s);
 const cv = $('#cv'), ctx = cv.getContext('2d');
